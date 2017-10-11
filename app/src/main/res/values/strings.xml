@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BeWarned Video Call</string>
+    <string name="main_call_to_action">Press to connect with interpreter</string>
+    <string name="main_minutes_left">Minutes left for today:</string>
+    <string name="current_call">Current call</string>
+    <string name="left_for_today">Left for today</string>
+    <string name="cancel">Cancel</string>
+    <string name="video_call_waiting_title">Waiting for answer...</string>
+    <string name="video_call_waiting_text">Please, hold the line while we are connecting you with the interpreter. It could take till 5 minutes</string>
+    <string name="permission_rationale_call">Audio and video record permission is required for the call to translator.</string>
+    <string name="error_call_failed">Failed to call</string>
+    <string name="err_call_try_later">Something happens while trying to call. Please try again later</string>
+    <string name="ok">Ok</string>
+</resources>

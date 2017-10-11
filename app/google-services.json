@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "560358885582",
+    "firebase_url": "https://connectpro-bb346.firebaseio.com",
+    "project_id": "connectpro-bb346",
+    "storage_bucket": "connectpro-bb346.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560358885582:android:d9f18bc3b5f4ceeb",
+        "android_client_info": {
+          "package_name": "com.getbewarned.connectpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560358885582-pihi49a1d10pltspf39t271gpb9s4f61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXlAGEUzIu47VJgjsre-jEECCykjaeKso"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560358885582:android:da78804dc7d6be3b",
+        "android_client_info": {
+          "package_name": "com.artycake.bewarnedandroidsimplevideocall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560358885582-qcgu7hsuqt8bc8cc8eqahb00evin8qoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.artycake.bewarnedandroidsimplevideocall",
+            "certificate_hash": "d4b172844e84f64ba561da2fcfd6bc43a925f458"
+          }
+        },
+        {
+          "client_id": "560358885582-pihi49a1d10pltspf39t271gpb9s4f61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXlAGEUzIu47VJgjsre-jEECCykjaeKso"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560358885582-pihi49a1d10pltspf39t271gpb9s4f61.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560358885582-0mqsd3jaqt1nn19mrhesf5sf9t5afc5l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "bewarned.connectforbusiness"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
