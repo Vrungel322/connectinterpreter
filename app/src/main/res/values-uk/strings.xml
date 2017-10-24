@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Connect Перекладач</string>
+    <string name="cancel">Відміна</string>
+    <string name="current_call">Поточний виклик</string>
+    <string name="err_call_try_later">Під час виклику виникла помилка. Спробуйте пізніше</string>
+    <string name="error_call_failed">Виклик не вдався</string>
+    <string name="left_for_today">Залишилось на сьогодні</string>
+    <string name="main_call_to_action">Натисніть для зв\'язку з перекладачем</string>
+    <string name="main_minutes_left">Хвилин залашилось на сьогодні</string>
+    <string name="ok">Ок</string>
+    <string name="permission_rationale_call">Для спілкування з перекладачем необхідно надати доступ до камери та мікрофону</string>
+    <string name="video_call_waiting_text">Будь ласка, дочекайтесь доки ми з\'єднаємо вас з перекладачем. Це може зайняти до 5 хвилин</string>
+    <string name="video_call_waiting_title">Чекайте на відповідь…</string>
+    <string name="no_minutes_left">Ви вичерпали щоденні хвилини.\nНові хвилини будут доступні завтра</string>
+    <string name="main_wait_minutes_loading">Будь ласка зачекайте…\nПеревіряється залишок хвилин</string>
+    <string name="internet_failure">Ошибка соедиения с сервером. Проверьте ваше интернет соединение</string>
+    <string name="name_hint">Ваше ім\'я</string>
+    <string name="proceed">Продовжити</string>
+    <string name="user_name">Привіт, <u>%s</u></string>
+    <string name="user_name_dialog_title">Як Вас звати?</string>
+    <string name="test_mode_notification">Сервіс надається у тестовому режимі\nв робочі дні з 10:00 до 18:00</string>
+</resources>

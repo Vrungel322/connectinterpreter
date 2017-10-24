@@ -39,20 +39,12 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:560358885582:android:da78804dc7d6be3b",
+        "mobilesdk_app_id": "1:560358885582:android:9a386ec6f19df604",
         "android_client_info": {
-          "package_name": "com.artycake.bewarnedandroidsimplevideocall"
+          "package_name": "com.getbewarned.connectinterpreter"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "560358885582-qcgu7hsuqt8bc8cc8eqahb00evin8qoh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.artycake.bewarnedandroidsimplevideocall",
-            "certificate_hash": "d4b172844e84f64ba561da2fcfd6bc43a925f458"
-          }
-        },
         {
           "client_id": "560358885582-pihi49a1d10pltspf39t271gpb9s4f61.apps.googleusercontent.com",
           "client_type": 3
@@ -68,20 +60,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "560358885582-pihi49a1d10pltspf39t271gpb9s4f61.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "560358885582-0mqsd3jaqt1nn19mrhesf5sf9t5afc5l.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "bewarned.connectforbusiness"
-              }
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
