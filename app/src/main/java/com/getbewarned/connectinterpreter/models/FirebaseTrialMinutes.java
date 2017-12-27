@@ -12,6 +12,8 @@ public class FirebaseTrialMinutes {
     private long date;
     private long extra = 0;
     private String platform = "android";
+    private String name = "";
+    private String deviceModel = "";
 
     public String getKey() {
         return key;
@@ -59,5 +61,21 @@ public class FirebaseTrialMinutes {
 
     public void setExtra(long extra) {
         this.extra = extra;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDeviceModel() {
+        return deviceModel;
+    }
+
+    public void setDeviceModel(String deviceModel) {
+        this.deviceModel = deviceModel;
     }
 }

@@ -2,6 +2,7 @@ package com.getbewarned.connectinterpreter.presenters;
 
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.AuthStateChanged;
@@ -13,8 +14,14 @@ import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.FirebaseTrialMinutes;
 import com.getbewarned.connectinterpreter.models.HumanTime;
 import com.google.firebase.database.DataSnapshot;
+import com.jaredrummler.android.device.DeviceName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by artycake on 10/11/17.
@@ -66,6 +73,7 @@ public class MainPresenter implements Presenter {
                 trialMinutes.setDeviceId(deviceId);
                 trialMinutes.setMinutes(maxMinutesPerDay);
                 trialMinutes.setDate(cal.getTimeInMillis());
+                trialMinutes.setDeviceModel(DeviceName.getDeviceName());
                 firebaseManager.updateLeftMinutes(trialMinutes);
                 return;
             }
@@ -76,6 +84,12 @@ public class MainPresenter implements Presenter {
                 trialMinutes.setDate(cal.getTimeInMillis());
                 firebaseManager.updateLeftMinutes(trialMinutes);
                 return;
+            }
+            if (trialMinutes.getName() == null || trialMinutes.getName().isEmpty()) {
+                nameChanged(userManager.getUserName());
+            } else {
+                userManager.updateUserName(trialMinutes.getName());
+                view.updateUserName(trialMinutes.getName());
             }
 
             processTrial(trialMinutes);
@@ -119,7 +133,37 @@ public class MainPresenter implements Presenter {
     }
 
     public void onStartCallPressed() {
-        view.navigateToCall();
+
+        if (isWorkTime()) {
+            view.askForReason();
+        } else {
+            view.showError(view.getContext().getString(R.string.not_work_time));
+            String date = (new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())).format(new Date());
+            String reason = "Звонок в нерабочее время";
+            String callName = String.format(
+                    Locale.getDefault(),
+                    "%s - %s - %s - %s",
+                    userManager.getUserName(),
+                    reason,
+                    DeviceName.getDeviceName(),
+                    date
+            );
+            firebaseManager.makeMissedCall(callName, reason);
+        }
+    }
+
+    public void reasonSelected(String reason) {
+        view.navigateToCallFor(reason);
+    }
+
+    private boolean isWorkTime() {
+        Calendar nowDate = Calendar.getInstance();
+        Calendar fromDate = Calendar.getInstance(TimeZone.getTimeZone("Europe/Kiev"));
+        fromDate.set(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH), nowDate.get(Calendar.DATE), 9, 0);
+        Calendar tillDate = Calendar.getInstance(TimeZone.getTimeZone("Europe/Kiev"));
+        tillDate.set(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH), nowDate.get(Calendar.DATE), 18, 0);
+
+        return nowDate.getTime().after(fromDate.getTime()) && nowDate.getTime().before(tillDate.getTime());
     }
 
     public void nameChanged(String name) {

@@ -25,6 +25,7 @@ import com.getbewarned.connectinterpreter.models.FirebaseVideoCall;
 import com.getbewarned.connectinterpreter.models.HumanTime;
 import com.getbewarned.connectinterpreter.models.OpenTokTokenResponse;
 import com.google.firebase.database.DataSnapshot;
+import com.jaredrummler.android.device.DeviceName;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Publisher;
 import com.opentok.android.PublisherKit;
@@ -44,6 +45,7 @@ import java.util.Locale;
 
 public class CallPresenter implements Presenter, Session.SessionListener, PublisherKit.PublisherListener {
     private static final String TAG = CallPresenter.class.getSimpleName();
+    public static final String REASON_EXTRA = "CallPresenter.reason";
 
     private CallView view;
     private FirebaseManager firebaseManager;
@@ -59,9 +61,10 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     private boolean ended = false;
 
     private String deviceId;
+    private String callReason;
 
     private long leftMinutesOnStart;
-    private FirebaseTrialMinutes trialMinutes;
+    private long lastLeftMinutes;
 
     public CallPresenter(CallView view) {
         this.view = view;
@@ -75,13 +78,15 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
         this.deviceId = Settings.Secure.getString(view.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        trialMinutes = dataSnapshot.getValue(FirebaseTrialMinutes.class);
+        FirebaseTrialMinutes trialMinutes = dataSnapshot.getValue(FirebaseTrialMinutes.class);
         trialMinutes.setKey(dataSnapshot.getKey());
         leftMinutesOnStart = trialMinutes.getMinutes() + trialMinutes.getExtra();
+        lastLeftMinutes = leftMinutesOnStart;
     }
 
     @Override
     public void onCreate(Bundle extras) {
+        callReason = extras.getString(REASON_EXTRA);
         view.toggleEndCallButtonVisibility(false);
         view.updateLeftTime(new HumanTime(leftMinutesOnStart).getTime());
         view.updateCurrentCallDuration("00:00");
@@ -161,7 +166,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
         session.publish(publisher);
 
-        call = firebaseManager.makeCall(session.getSessionId(), getNewCallName(), deviceId);
+        call = firebaseManager.makeCall(session.getSessionId(), getNewCallName(), callReason);
 
     }
 
@@ -229,12 +234,8 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
                 long timePassed = leftMinutesOnStart - millisUntilFinished;
                 view.updateLeftTime(new HumanTime(millisUntilFinished).getTime());
                 view.updateCurrentCallDuration(new HumanTime(timePassed).getTime());
-                if (trialMinutes.getMinutes() == 0) {
-                    trialMinutes.setExtra(millisUntilFinished);
-                } else {
-                    trialMinutes.setMinutes(millisUntilFinished - trialMinutes.getExtra());
-                }
-                firebaseManager.updateLeftMinutes(trialMinutes);
+                firebaseManager.reduceMinutes(deviceId, lastLeftMinutes - millisUntilFinished);
+                lastLeftMinutes = millisUntilFinished;
             }
 
             public void onFinish() {
@@ -282,11 +283,17 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     private String getNewCallName() {
         String date = (new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())).format(new Date());
+        String reason = this.callReason;
+        if (reason == null) {
+            reason = view.getContext().getString(R.string.call_reason_other);
+        }
+
         return String.format(
                 Locale.getDefault(),
-                "%s (%s) - %s",
+                "%s - %s - %s - %s",
                 new UserManager(view.getContext()).getUserName(),
-                view.getContext().getString(R.string.app_name),
+                reason,
+                DeviceName.getDeviceName(),
                 date
         );
     }

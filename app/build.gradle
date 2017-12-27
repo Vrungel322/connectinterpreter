@@ -7,8 +7,8 @@ android {
         applicationId "com.getbewarned.connectinterpreter"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 3
-        versionName "1.2"
+        versionCode 7
+        versionName "1.4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -31,12 +31,22 @@ dependencies {
     compile 'com.google.firebase:firebase-core:10.0.1'
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.google.firebase:firebase-config:10.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.opentok.android:opentok-android-sdk:2.12.0'
     compile 'pub.devrel:easypermissions:1.0.1'
+    compile 'com.jaredrummler:android-device-names:1.1.5'
     testCompile 'junit:junit:4.12'
+    compile 'com.facebook.android:facebook-core:[4,5)'
+    compile 'com.facebook.android:facebook-login:[4,5)'
+    compile 'com.facebook.android:facebook-share:[4,5)'
+    compile 'com.facebook.android:facebook-places:[4,5)'
+    compile 'com.facebook.android:facebook-messenger:[4,5)'
+    compile 'com.facebook.android:facebook-applinks:[4,5)'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 }
 
 

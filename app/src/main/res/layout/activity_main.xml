@@ -36,9 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/call_to_action"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:orientation="vertical"
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
@@ -47,24 +47,26 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="20sp" />
+
         <View
-            android:layerType="software"
             android:layout_width="match_parent"
+            android:layout_height="5dp"
             android:background="@drawable/user_name_background"
-            android:layout_height="5dp"/>
+            android:layerType="software" />
     </LinearLayout>
 
     <TextView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/test_mode_notification"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/user_name_holder"
         android:layout_marginBottom="20dp"
-        android:textColor="@android:color/holo_red_dark"
+        android:background="@android:color/holo_red_dark"
+        android:gravity="center"
+        android:padding="5dp"
         android:shadowColor="@android:color/white"
+        android:text="@string/test_mode_notification"
+        app:layout_constraintBottom_toTopOf="@+id/user_name_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="8dp" />
 
 

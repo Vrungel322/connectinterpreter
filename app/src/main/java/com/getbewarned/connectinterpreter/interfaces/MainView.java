@@ -25,4 +25,9 @@ public interface MainView {
     void askForName(String name);
 
     void updateUserName(String name);
+
+    void askForReason();
+
+    void navigateToCallFor(String reason);
+
 }

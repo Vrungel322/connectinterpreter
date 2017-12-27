@@ -36,6 +36,10 @@ public class FirebaseVideoCall {
     private long timestampEnd;
     private String status;
     private String sessionId;
+    private Object timestampStartUTC;
+    private Object timestampAnswerUTC;
+    private Object timestampEndUTC;
+    private String reason;
 
     public String getKey() {
         return key;
@@ -107,5 +111,37 @@ public class FirebaseVideoCall {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public Object getTimestampStartUTC() {
+        return timestampStartUTC;
+    }
+
+    public void setTimestampStartUTC(Object timestampStartUTC) {
+        this.timestampStartUTC = timestampStartUTC;
+    }
+
+    public Object getTimestampAnswerUTC() {
+        return timestampAnswerUTC;
+    }
+
+    public void setTimestampAnswerUTC(Object timestampAnswerUTC) {
+        this.timestampAnswerUTC = timestampAnswerUTC;
+    }
+
+    public Object getTimestampEndUTC() {
+        return timestampEndUTC;
+    }
+
+    public void setTimestampEndUTC(Object timestampEndUTC) {
+        this.timestampEndUTC = timestampEndUTC;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

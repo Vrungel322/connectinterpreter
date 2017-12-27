@@ -16,6 +16,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
@@ -106,13 +109,31 @@ public class FirebaseManager {
         node.setValue(trialMinutes);
     }
 
-    public FirebaseVideoCall makeCall(String sessionId, String callName, String deviceId) {
+    public FirebaseVideoCall makeCall(String sessionId, String callName, String reason) {
         FirebaseVideoCall call = new FirebaseVideoCall();
         call.setCallerId(this.callerId);
         call.setCallName(callName);
         call.setStatus(FirebaseVideoCall.Status.NEW.toString());
-        call.setTimestampStart(new Date().getTime());
+        call.setTimestampStartUTC(ServerValue.TIMESTAMP);
         call.setSessionId(sessionId);
+        call.setReason(reason);
+
+        DatabaseReference newCallNode = videoCallsReference.push();
+        newCallNode.setValue(call);
+
+        call.setKey(newCallNode.getKey());
+
+        return call;
+    }
+
+    public FirebaseVideoCall makeMissedCall(String callName, String reason) {
+        FirebaseVideoCall call = new FirebaseVideoCall();
+        call.setCallerId(this.callerId);
+        call.setCallName(callName);
+        call.setStatus(FirebaseVideoCall.Status.CANCELED.toString());
+        call.setTimestampStartUTC(ServerValue.TIMESTAMP);
+        call.setTimestampEndUTC(ServerValue.TIMESTAMP);
+        call.setReason(reason);
 
         DatabaseReference newCallNode = videoCallsReference.push();
         newCallNode.setValue(call);
@@ -123,17 +144,64 @@ public class FirebaseManager {
     }
 
 
-    public void cancelCall(FirebaseVideoCall call) {
-        DatabaseReference callNode = videoCallsReference.child(call.getKey());
+    public void cancelCall(final FirebaseVideoCall call) {
+        final DatabaseReference callNode = videoCallsReference.child(call.getKey());
 
-        call.setStatus(FirebaseVideoCall.Status.CANCELED.toString());
-        call.setTimestampEnd(new Date().getTime());
+        callNode.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                if (mutableData.getValue() == null) {
+                    call.setStatus(FirebaseVideoCall.Status.CANCELED.toString());
+                    call.setTimestampEndUTC(ServerValue.TIMESTAMP);
+                    mutableData.setValue(call);
+                    return Transaction.success(mutableData);
+                }
+                FirebaseVideoCall videoCall = mutableData.getValue(FirebaseVideoCall.class);
+                if (!videoCall.getStatus().equals(FirebaseVideoCall.Status.NEW.toString())) {
+                    return Transaction.abort();
+                }
+                videoCall.setStatus(FirebaseVideoCall.Status.CANCELED.toString());
+                videoCall.setTimestampEndUTC(ServerValue.TIMESTAMP);
+                mutableData.setValue(videoCall);
+                return Transaction.success(mutableData);
+            }
 
-        callNode.setValue(call);
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+            }
+
+        });
     }
 
-    public DataSnapshot
-    getCurrentSnapshot() {
+    public DataSnapshot getCurrentSnapshot() {
         return currentSnapshot;
+    }
+
+    public void reduceMinutes(String deviceId, final long milliseconds) {
+        trialMinutesReference.child(deviceId).runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                FirebaseTrialMinutes trialMinutes = mutableData.getValue(FirebaseTrialMinutes.class);
+                if (trialMinutes == null) {
+                    return Transaction.abort();
+                }
+                if (trialMinutes.getMinutes() <= 0) {
+                    trialMinutes.setMinutes(0);
+                    trialMinutes.setExtra(Math.max(trialMinutes.getExtra() - milliseconds, 0));
+                } else {
+                    trialMinutes.setMinutes(Math.max(trialMinutes.getMinutes() - milliseconds, 0));
+                }
+                mutableData.setValue(trialMinutes);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                if (databaseError != null) {
+                    databaseError.toException().printStackTrace();
+                }
+            }
+        });
     }
 }

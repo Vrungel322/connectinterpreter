@@ -19,5 +19,19 @@
     <string name="proceed">Продовжити</string>
     <string name="user_name">Привіт, <u>%s</u></string>
     <string name="user_name_dialog_title">Як Вас звати?</string>
-    <string name="test_mode_notification">Сервіс надається у тестовому режимі\nв робочі дні з 10:00 до 18:00</string>
+    <string name="test_mode_notification">Сервіс надається у тестовому режимі\nв робочі дні з 09:00 до 18:00</string>
+    <string name="app_outdated">Додаток застарілий. Будь ласка, оновіть додаток, щоб продовжити</string>
+    <string name="not_work_time">На даний момент перекладачі не доступні</string>
+    <string name="reason_alert_title">Оберіть причину дзвінка</string>
+    <string name="call_reason_emergency">Виклик швидкої</string>
+    <string name="call_reason_police">Виклик поліції</string>
+    <string name="call_reason_doctor">Прийом у лікаря</string>
+    <string name="call_reason_estore">Допомога з інтернет магазином</string>
+    <string name="call_reason_call">Дзвінок за телефоном</string>
+    <string name="call_reason_bank">Спілкування у банку</string>
+    <string name="call_reason_work">Спілкування по роботі</string>
+    <string name="call_reason_test">Тестовий дзвінок</string>
+    <string name="call_reason_talk">Поговорити</string>
+    <string name="call_reason_other">Інше</string>
+    <string name="error_global">Помилка</string>
 </resources>

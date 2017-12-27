@@ -19,4 +19,33 @@
     <string name="user_name">Hello, <u>%s</u></string>
     <string name="user_name_dialog_title">What is your name?</string>
     <string name="test_mode_notification">Сервис предоставляется в тестовом режиме</string>
+    <string name="facebook_app_id" translatable="false">1134966689967629</string>
+    <string name="app_outdated">App is outdated. Please update the app to continue</string>
+    <string name="not_work_time">Interpreters are not available right now</string>
+    <string name="reason_alert_title">Choose call reason</string>
+    <string name="call_reason_emergency">Call to emergency</string>
+    <string name="call_reason_police">Call to police</string>
+    <string name="call_reason_doctor">Doctor\'s appointment</string>
+    <string name="call_reason_estore">Help with online store</string>
+    <string name="call_reason_call">Phone call</string>
+    <string name="call_reason_bank">Conversation at bank</string>
+    <string name="call_reason_work">Conversation at work</string>
+    <string name="call_reason_test">Test call</string>
+    <string name="call_reason_talk">Small talk</string>
+    <string name="call_reason_other">Other</string>
+    <string name="error_global">Error</string>
+
+
+    <string-array name="call_reasons">
+        <item>@string/call_reason_emergency</item>
+        <item>@string/call_reason_police</item>
+        <item>@string/call_reason_doctor</item>
+        <item>@string/call_reason_estore</item>
+        <item>@string/call_reason_call</item>
+        <item>@string/call_reason_bank</item>
+        <item>@string/call_reason_work</item>
+        <item>@string/call_reason_test</item>
+        <item>@string/call_reason_talk</item>
+        <item>@string/call_reason_other</item>
+    </string-array>
 </resources>

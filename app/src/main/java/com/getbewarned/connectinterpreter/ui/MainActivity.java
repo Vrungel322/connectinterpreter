@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
+import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -109,7 +111,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.error_global)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
     }
 
     @Override
@@ -179,4 +192,41 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void updateUserName(String name) {
         userName.setText(getString(R.string.user_name, name));
     }
+
+
+    @Override
+    public void askForReason() {
+        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        builderSingle.setTitle(getString(R.string.reason_alert_title));
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.addAll(getResources().getStringArray(R.array.call_reasons));
+
+        builderSingle.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String reason = arrayAdapter.getItem(which);
+                presenter.reasonSelected(reason);
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.show();
+
+    }
+
+    @Override
+    public void navigateToCallFor(String reason) {
+        Intent intent = new Intent(this, CallActivity.class);
+        intent.putExtra(CallPresenter.REASON_EXTRA, reason);
+        startActivity(intent);
+    }
+
 }

@@ -19,5 +19,19 @@
     <string name="proceed">Продолжить</string>
     <string name="user_name">Привет, <u>%s</u></string>
     <string name="user_name_dialog_title">Как Вас зовут?</string>
-    <string name="test_mode_notification">Сервис предоставляется в тестовом режиме\nв рабочие дни с 10:00 до 18:00</string>
+    <string name="test_mode_notification">Сервис предоставляется в тестовом режиме\nв рабочие дни с 09:00 до 18:00</string>
+    <string name="app_outdated">Приложение устарело. Пожалуйста, обновите приложение, чтобы продолжить</string>
+    <string name="not_work_time">На данный момент переводчики не доступны</string>
+    <string name="reason_alert_title">Выберите причину звонка</string>
+    <string name="call_reason_emergency">Вызов скорой</string>
+    <string name="call_reason_police">Вызов полиции</string>
+    <string name="call_reason_doctor">Прием у врача</string>
+    <string name="call_reason_estore">Помощь с интернет магазином</string>
+    <string name="call_reason_call">Звонок по телефону</string>
+    <string name="call_reason_bank">Общение в банке</string>
+    <string name="call_reason_work">Общение по работе</string>
+    <string name="call_reason_test">Тестовый звонок</string>
+    <string name="call_reason_talk">Поболтать</string>
+    <string name="call_reason_other">Другое</string>
+    <string name="error_global">Ошибка</string>
 </resources>
