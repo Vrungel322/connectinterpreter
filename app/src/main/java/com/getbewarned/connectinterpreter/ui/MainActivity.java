@@ -196,29 +196,27 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void askForReason() {
-        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        builderSingle.setTitle(getString(R.string.reason_alert_title));
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_LoaderDialog);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
         arrayAdapter.addAll(getResources().getStringArray(R.array.call_reasons));
 
-        builderSingle.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String reason = arrayAdapter.getItem(which);
-                presenter.reasonSelected(reason);
-                dialog.dismiss();
-            }
-        });
-
-        builderSingle.show();
+        builder.setTitle(getString(R.string.reason_alert_title))
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String reason = arrayAdapter.getItem(which);
+                        presenter.reasonSelected(reason);
+                        dialog.dismiss();
+                    }
+                })
+                .show();
 
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Connect Переводчик</string>
+    <string name="app_name">Переводчик ЖЯ</string>
     <string name="cancel">Отмена</string>
     <string name="current_call">Текущий вызов</string>
     <string name="err_call_try_later">Во время вызова произогла ошибка. Пожалуйста, попробуйте позже</string>
@@ -21,7 +21,7 @@
     <string name="user_name_dialog_title">Как Вас зовут?</string>
     <string name="test_mode_notification">Сервис предоставляется в тестовом режиме\nв рабочие дни с 09:00 до 18:00</string>
     <string name="app_outdated">Приложение устарело. Пожалуйста, обновите приложение, чтобы продолжить</string>
-    <string name="not_work_time">На данный момент переводчики не доступны</string>
+    <string name="not_work_time">К сожалению, вы звоните в нерабочее время</string>
     <string name="reason_alert_title">Выберите причину звонка</string>
     <string name="call_reason_emergency">Вызов скорой</string>
     <string name="call_reason_police">Вызов полиции</string>

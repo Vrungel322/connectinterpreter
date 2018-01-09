@@ -7,7 +7,7 @@ android {
         applicationId "com.getbewarned.connectinterpreter"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 7
+        versionCode 11
         versionName "1.4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

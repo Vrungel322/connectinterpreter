@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Connect Interpreter</string>
+    <string name="app_name">SL Interpreter</string>
     <string name="main_call_to_action">Press to connect with interpreter</string>
     <string name="main_minutes_left">Minutes left for today:</string>
     <string name="current_call">Current call</string>
@@ -21,7 +21,7 @@
     <string name="test_mode_notification">Сервис предоставляется в тестовом режиме</string>
     <string name="facebook_app_id" translatable="false">1134966689967629</string>
     <string name="app_outdated">App is outdated. Please update the app to continue</string>
-    <string name="not_work_time">Interpreters are not available right now</string>
+    <string name="not_work_time">Unfortunately, you are calling outside office hours</string>
     <string name="reason_alert_title">Choose call reason</string>
     <string name="call_reason_emergency">Call to emergency</string>
     <string name="call_reason_police">Call to police</string>
