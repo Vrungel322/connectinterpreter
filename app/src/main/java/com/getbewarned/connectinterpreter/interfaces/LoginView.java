@@ -21,4 +21,6 @@ public interface LoginView {
     void toggleEnabledLoginBtn(boolean enabled);
 
     void navigateToApp();
+
+    void showError(String message);
 }

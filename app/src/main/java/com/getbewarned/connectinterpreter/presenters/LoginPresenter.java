@@ -37,12 +37,13 @@ public class LoginPresenter {
 
     public void getCode(String phone) {
         if (phone.isEmpty()) {
-            // show error
+            view.showError(view.getContext().getString(R.string.fields_required));
             return;
         }
         Pattern pattern = Pattern.compile("^\\+[0-9]{10,15}$");
         Matcher matcher = pattern.matcher(phone);
         if (!matcher.matches()) {
+            view.showError(view.getContext().getString(R.string.invalid_phone_format));
             return;
         }
         view.toggleEnabledRequestBtn(false);
@@ -75,7 +76,7 @@ public class LoginPresenter {
 
             @Override
             public void onErrorReceived(Error error) {
-                Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                view.showError(error.getMessage());
                 view.toggleEnabledRequestBtn(true);
             }
         });
@@ -83,7 +84,7 @@ public class LoginPresenter {
 
     public void login(String phone, String code) {
         if (phone.isEmpty() || code.isEmpty()) {
-            // show error
+            view.showError(view.getContext().getString(R.string.fields_required));
             return;
         }
         view.toggleEnabledLoginBtn(true);
@@ -97,14 +98,14 @@ public class LoginPresenter {
                     userManager.updateUserSeconds(response.getMilliseconds());
                     view.navigateToApp();
                 } else {
-                    Toast.makeText(view.getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                    view.showError(response.getMessage());
                     view.toggleEnabledRequestBtn(true);
                 }
             }
 
             @Override
             public void onErrorReceived(Error error) {
-                Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                view.showError(error.getMessage());
                 view.toggleEnabledRequestBtn(true);
             }
         });

@@ -72,4 +72,6 @@
     <string name="permission_rationale_liqpay">You have to grant access to calls to complete payment process</string>
     <string name="call_chat_hint">Type your message</string>
     <string name="message_enter_label">Send</string>
+    <string name="invalid_phone_format">Invalid phone format</string>
+    <string name="fields_required">All fields are required</string>
 </resources>

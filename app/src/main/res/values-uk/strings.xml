@@ -54,4 +54,6 @@
     <string name="permission_rationale_liqpay">Необхідно надати доступ до дзвінків для завершення процессу придбання</string>
     <string name="call_chat_hint">Введіть ваше повідомлення</string>
     <string name="message_enter_label">Надіслати</string>
+    <string name="invalid_phone_format">Невірний формат телефону</string>
+    <string name="fields_required">Всі поля обов\'язкові для заповнення</string>
 </resources>
