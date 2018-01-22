@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
  * Created by artycake on 10/4/17.
  */
 
-public class OpenTokTokenResponse {
+public class TokenResponse extends ApiResponseBase {
     @Expose
     String token;
 
@@ -17,7 +17,8 @@ public class OpenTokTokenResponse {
     String api_key;
 
     @Expose
-    int http_status;
+    long max_seconds;
+
 
     public String getToken() {
         return token;
@@ -31,7 +32,7 @@ public class OpenTokTokenResponse {
         return api_key;
     }
 
-    public int getHttpStatus() {
-        return http_status;
+    public long getMaxSeconds() {
+        return max_seconds;
     }
 }

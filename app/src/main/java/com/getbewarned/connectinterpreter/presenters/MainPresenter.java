@@ -1,27 +1,32 @@
 package com.getbewarned.connectinterpreter.presenters;
 
 import android.os.Bundle;
-import android.provider.Settings;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.getbewarned.connectinterpreter.R;
-import com.getbewarned.connectinterpreter.interfaces.AuthStateChanged;
-import com.getbewarned.connectinterpreter.interfaces.FirebaseValueListener;
+import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
+import com.getbewarned.connectinterpreter.interfaces.LogoutComplete;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
+import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
+import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
-import com.getbewarned.connectinterpreter.managers.FirebaseManager;
+import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
+import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
+import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
+import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
-import com.getbewarned.connectinterpreter.models.FirebaseTrialMinutes;
+import com.getbewarned.connectinterpreter.models.ApiResponseBase;
+import com.getbewarned.connectinterpreter.models.HumanDate;
 import com.getbewarned.connectinterpreter.models.HumanTime;
-import com.google.firebase.database.DataSnapshot;
-import com.jaredrummler.android.device.DeviceName;
+import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
+import com.getbewarned.connectinterpreter.models.LiqPayResponse;
+import com.getbewarned.connectinterpreter.models.NameResponse;
+import com.getbewarned.connectinterpreter.models.TariffsResponse;
+import com.getbewarned.connectinterpreter.models.TokenResponse;
+import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import ua.privatbank.paylibliqpay.ErrorCode;
+import ua.privatbank.paylibliqpay.LiqPay;
+import ua.privatbank.paylibliqpay.LiqPayCallBack;
 
 /**
  * Created by artycake on 10/11/17.
@@ -29,96 +34,42 @@ import java.util.TimeZone;
 
 public class MainPresenter implements Presenter {
     private MainView view;
-    private FirebaseManager firebaseManager;
     private UserManager userManager;
-    private String deviceId;
+    private NetworkManager networkManager;
+    private String selectedTariff;
 
-    private FirebaseTrialMinutes trialMinutes;
-
-    private long maxMinutesPerDay = 10 * 60 * 1000; // in miliseconds
-
-    private boolean hasAccess = false;
-
-    public MainPresenter(MainView view) {
+    public MainPresenter(final MainView view) {
         this.view = view;
-        this.deviceId = Settings.Secure.getString(view.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         this.userManager = new UserManager(view.getContext());
-        this.firebaseManager = FirebaseManager.getInstance();
-    }
-
-    private AuthStateChanged authStateChanged = new AuthStateChanged() {
-        @Override
-        public void onAuthStateChanged(String userId) {
-            userManager.updateUserId(userId);
-            if (userId != null) {
-                firebaseManager.checkLeftMinutes(deviceId, firebaseValueListener);
-            } else {
-                view.showError(view.getContext().getString(R.string.internet_failure));
+        this.networkManager = new NetworkManager(view.getContext());
+        this.networkManager.setAuthToken(userManager.getUserToken());
+        this.networkManager.setUnauthRequestHandler(new UnauthRequestHandler() {
+            @Override
+            public void onUnathRequest() {
+                view.navigateToLogin();
             }
-        }
-    };
-
-    private FirebaseValueListener firebaseValueListener = new FirebaseValueListener() {
-        @Override
-        public void onDataChanged(DataSnapshot dataSnapshot) {
-            FirebaseTrialMinutes trialMinutes = dataSnapshot.getValue(FirebaseTrialMinutes.class);
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.HOUR_OF_DAY, 0);
-            cal.set(Calendar.MINUTE, 0);
-            cal.set(Calendar.SECOND, 0);
-            cal.set(Calendar.MILLISECOND, 0);
-
-            if (trialMinutes == null) {
-                trialMinutes = new FirebaseTrialMinutes();
-                trialMinutes.setDeviceId(deviceId);
-                trialMinutes.setMinutes(maxMinutesPerDay);
-                trialMinutes.setDate(cal.getTimeInMillis());
-                trialMinutes.setDeviceModel(DeviceName.getDeviceName());
-                firebaseManager.updateLeftMinutes(trialMinutes);
-                return;
-            }
-
-            trialMinutes.setKey(dataSnapshot.getKey());
-            if (trialMinutes.getDate() < cal.getTimeInMillis()) {
-                trialMinutes.setMinutes(maxMinutesPerDay);
-                trialMinutes.setDate(cal.getTimeInMillis());
-                firebaseManager.updateLeftMinutes(trialMinutes);
-                return;
-            }
-            if (trialMinutes.getName() == null || trialMinutes.getName().isEmpty()) {
-                nameChanged(userManager.getUserName());
-            } else {
-                userManager.updateUserName(trialMinutes.getName());
-                view.updateUserName(trialMinutes.getName());
-            }
-
-            processTrial(trialMinutes);
-        }
-    };
-
-    private void processTrial(FirebaseTrialMinutes trialMinutes) {
-        this.trialMinutes = trialMinutes;
-        HumanTime humanTime = new HumanTime(trialMinutes.getMinutes() + trialMinutes.getExtra());
-        view.toggleCallAvailability(humanTime.getMinutes() > 0 || humanTime.getSeconds() > 0);
-        view.showLeftTime(humanTime.getTime());
+        });
     }
 
     @Override
     public void onCreate(Bundle extras) {
         view.showChecking();
         view.showLeftTime("00:00");
+        view.requestPermissions();
+        String fbToken = FirebaseInstanceId.getInstance().getToken();
+        if (fbToken != null) {
+            Log.d("FB_TOKEN", fbToken);
+            networkManager.sendNotificationToken(fbToken);
+        }
+    }
+
+    public void onPermissionsGranted() {
         String name = userManager.getUserName();
         if (name.isEmpty()) {
             view.askForName(null);
         } else {
             view.updateUserName(name);
-            view.requestPermissions();
         }
-    }
-
-    public void onPermissionsGranted() {
-        this.firebaseManager.setAuthStateChanged(this.authStateChanged);
-        firebaseManager.login();
     }
 
     public void onPause() {
@@ -126,7 +77,40 @@ public class MainPresenter implements Presenter {
 
     public void onResume() {
         view.showChecking();
-        firebaseManager.checkLeftMinutes(deviceId, firebaseValueListener);
+        updateAvailability();
+    }
+
+    private void updateAvailability() {
+        networkManager.updateAvailability(new AvailabilityReceived() {
+            @Override
+            public void onAvailabilityReceived(AvailabilityResponse response) {
+                if (response.isSuccess()) {
+                    userManager.updateUserSeconds(response.getSeconds());
+                    userManager.updateUserUnlim(response.isUnlim());
+                    userManager.updateUserActiveTill(response.getActiveTill());
+                    if (response.isUnlim()) {
+                        HumanDate humanDate = new HumanDate(view.getContext(), response.getActiveTill());
+                        view.toggleCallAvailability(true);
+                        view.showDateTill(humanDate.getDate());
+                    } else {
+                        HumanTime humanTime = new HumanTime(response.getSeconds() * 1000);
+                        if (response.getSeconds() > 0) {
+                            view.toggleCallAvailability(true);
+                            view.showLeftTime(humanTime.getTime());
+                        } else {
+                            view.toggleCallAvailability(false);
+                        }
+                    }
+                } else {
+                    view.showError(response.getMessage());
+                }
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage());
+            }
+        });
     }
 
     public void onDestroy() {
@@ -134,47 +118,116 @@ public class MainPresenter implements Presenter {
 
     public void onStartCallPressed() {
 
-        if (isWorkTime()) {
-            view.askForReason();
-        } else {
-            view.showError(view.getContext().getString(R.string.not_work_time));
-            String date = (new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())).format(new Date());
-            String reason = "Звонок в нерабочее время";
-            String callName = String.format(
-                    Locale.getDefault(),
-                    "%s - %s - %s - %s",
-                    userManager.getUserName(),
-                    reason,
-                    DeviceName.getDeviceName(),
-                    date
-            );
-            firebaseManager.makeMissedCall(callName, reason);
-        }
+        view.askForReason();
     }
 
-    public void reasonSelected(String reason) {
-        view.navigateToCallFor(reason);
-    }
+    public void reasonSelected(final String reason) {
+        networkManager.makeCall(reason, new TokenReceived() {
+            @Override
+            public void onTokenReceived(TokenResponse response) {
+                view.navigateToCallWith(response.getToken(), response.getSessionId(), response.getApiKey(), response.getMaxSeconds());
+            }
 
-    private boolean isWorkTime() {
-        Calendar nowDate = Calendar.getInstance();
-        Calendar fromDate = Calendar.getInstance(TimeZone.getTimeZone("Europe/Kiev"));
-        fromDate.set(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH), nowDate.get(Calendar.DATE), 9, 0);
-        Calendar tillDate = Calendar.getInstance(TimeZone.getTimeZone("Europe/Kiev"));
-        tillDate.set(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH), nowDate.get(Calendar.DATE), 18, 0);
-
-        return nowDate.getTime().after(fromDate.getTime()) && nowDate.getTime().before(tillDate.getTime());
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage());
+            }
+        });
     }
 
     public void nameChanged(String name) {
-        userManager.updateUserName(name);
+        final String oldName = userManager.getUserName();
         view.updateUserName(name);
-        if (!this.hasAccess) {
-            view.requestPermissions();
-        }
+        networkManager.updateName(name, new NameChanged() {
+            @Override
+            public void onNameChanged(NameResponse response) {
+                if (response.isSuccess()) {
+                    userManager.updateUserName(response.getName());
+                    view.updateUserName(response.getName());
+                } else {
+                    view.showError(response.getMessage());
+                    view.updateUserName(oldName);
+                }
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage());
+                view.updateUserName(oldName);
+            }
+        });
     }
 
     public void userNamePressed() {
         view.askForName(userManager.getUserName());
+    }
+
+    public void logout() {
+        networkManager.logout(new LogoutComplete() {
+            @Override
+            public void onLogoutComplete(ApiResponseBase response) {
+                if (response.isSuccess()) {
+                    view.navigateToLogin();
+                } else {
+                    view.showError(response.getMessage());
+                }
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage());
+            }
+        });
+    }
+
+    public void buyUnlimPressed() {
+        view.toggleBuyUnlimEnabled(false);
+        networkManager.getTariffs(new TariffsReceived() {
+            @Override
+            public void onTariffsReceived(TariffsResponse response) {
+                view.showTariffsSelector(response.getTariffs());
+                view.toggleBuyUnlimEnabled(true);
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.toggleBuyUnlimEnabled(true);
+            }
+        });
+    }
+
+    public void tariffSelected(String tariff) {
+        selectedTariff = tariff;
+        view.requestLiqPayPermissions();
+    }
+
+    public void onLiqPayPermissionsGranted() {
+        // show preloader
+        view.toggleBuyUnlimEnabled(false);
+        networkManager.buyUnlim(selectedTariff, new LiqPayDataReceived() {
+            @Override
+            public void onDataReceived(LiqPayResponse response) {
+                LiqPay.checkout(view.getContext(), response.getData(), response.getSignature(), new LiqPayCallBack() {
+                    @Override
+                    public void onResponseSuccess(String s) {
+                        Log.i("PAYMENT SUCCESS", s);
+                        view.toggleBuyUnlimEnabled(true);
+                    }
+
+                    @Override
+                    public void onResponceError(ErrorCode errorCode) {
+                        Log.i("PAYMENT FAIL", errorCode.toString());
+                        view.toggleBuyUnlimEnabled(true);
+                    }
+                });
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                Log.i("PAYMENT FAIL", error.getMessage());
+                view.toggleBuyUnlimEnabled(true);
+            }
+        });
+        selectedTariff = null;
     }
 }

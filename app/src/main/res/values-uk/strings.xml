@@ -7,7 +7,7 @@
     <string name="error_call_failed">Виклик не вдався</string>
     <string name="left_for_today">Залишилось на сьогодні</string>
     <string name="main_call_to_action">Натисніть для зв\'язку з перекладачем</string>
-    <string name="main_minutes_left">Хвилин залашилось на сьогодні</string>
+    <string name="main_minutes_left">Хвилин залишилось:</string>
     <string name="ok">Ок</string>
     <string name="permission_rationale_call">Для спілкування з перекладачем необхідно надати доступ до камери та мікрофону</string>
     <string name="video_call_waiting_text">Будь ласка, дочекайтесь доки ми з\'єднаємо вас з перекладачем. Це може зайняти до 5 хвилин</string>
@@ -21,7 +21,6 @@
     <string name="user_name_dialog_title">Як Вас звати?</string>
     <string name="test_mode_notification">Сервіс надається у тестовому режимі\nв робочі дні з 09:00 до 18:00</string>
     <string name="app_outdated">Додаток застарілий. Будь ласка, оновіть додаток, щоб продовжити</string>
-    <string name="not_work_time">На жаль, ви телефонуєте в неробочий час</string>
     <string name="reason_alert_title">Оберіть причину дзвінка</string>
     <string name="call_reason_emergency">Виклик швидкої</string>
     <string name="call_reason_police">Виклик поліції</string>
@@ -34,4 +33,25 @@
     <string name="call_reason_talk">Поговорити</string>
     <string name="call_reason_other">Інше</string>
     <string name="error_global">Помилка</string>
+    <string name="prompt_phone">Номер телефону</string>
+    <string name="action_request_code">Надіслати код</string>
+    <string name="action_login">Увійти</string>
+    <string name="login_code_helper">Ви отримаєте смс із кодом підтверждення</string>
+    <string name="login_code_delay">Наступна спроба буде доступна через %d сек</string>
+    <string name="menu_logout">Вийти</string>
+    <string name="error_server_base">На жаль, сталася помилка. Спробуйте пізніше</string>
+    <string name="error_validation">Будь ласка, введіть коректні данні</string>
+    <string name="error_login">Помилка входу</string>
+    <string name="error_outside_working_time">На жаль, ви телефонуєте в неробочий час</string>
+    <string name="error_in_call">Ви вже спілкуєтесь на іншому пристрої</string>
+    <string name="error_no_right">Ви не маєте прав на здійснення цієї дії</string>
+    <string name="login_accept"><![CDATA[Я прочитав та згоден з <a href=\'https://getbewarned.com\'>політикою конфеденційності</a>]]></string>
+    <string name="main_active_till">Безлімітні дзвінки до</string>
+    <string name="date_format">dd.MM.yy</string>
+    <string name="buy_unlim_btn">Придбати безліміт</string>
+    <string name="not_available_desc">У вас не залишилось хвилин для використання сервісу.\nВи можете зачекати до завтра щоб отримати безкоштовні хвилини або прибати безлімітне використання</string>
+    <string name="tariff_pattern">%s - %sгрн</string>
+    <string name="permission_rationale_liqpay">Необхідно надати доступ до дзвінків для завершення процессу придбання</string>
+    <string name="call_chat_hint">Введіть ваше повідомлення</string>
+    <string name="message_enter_label">Надіслати</string>
 </resources>

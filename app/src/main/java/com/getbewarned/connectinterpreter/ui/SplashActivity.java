@@ -11,8 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 
@@ -21,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
     }
 
     @Override
@@ -71,8 +75,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startApp() {
-        // if first time show info
-        Intent intent = new Intent(this, MainActivity.class);
+        UserManager userManager = new UserManager(this);
+        Intent intent;
+        if (userManager.getUserToken() == null) {
+            intent = new Intent(this, LoginActivity.class);
+        } else {
+             intent = new Intent(this, MainActivity.class);
+
+        }
         startActivity(intent);
         finish();
     }

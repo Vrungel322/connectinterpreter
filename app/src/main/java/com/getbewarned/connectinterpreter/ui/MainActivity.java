@@ -9,9 +9,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,8 +24,15 @@ import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
+import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -28,11 +40,19 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
+    private static final int RC_PHONE_STATE_PERM = 483;
 
     private ImageButton callBtn;
     private TextView minutesLeft;
     private TextView callToAction;
-    private TextView userName;
+    private TextView leftLabel;
+    private View availableHolder;
+    private View notAvailableHolder;
+
+    private Button buyUnlimButton;
+
+    private Menu menu;
+    private String userName;
 
     private MainPresenter presenter;
 
@@ -40,11 +60,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         callBtn = findViewById(R.id.call_button);
         minutesLeft = findViewById(R.id.left_value_label);
         callToAction = findViewById(R.id.call_to_action);
-        userName = findViewById(R.id.user_name);
+        leftLabel = findViewById(R.id.left_label);
+        buyUnlimButton = findViewById(R.id.buy_unlim);
+
+        availableHolder = findViewById(R.id.available_holder);
+        notAvailableHolder = findViewById(R.id.not_available_holder);
 
         presenter = new MainPresenter(this);
 
@@ -55,10 +80,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 presenter.onStartCallPressed();
             }
         });
-        userName.setOnClickListener(new View.OnClickListener() {
+
+        buyUnlimButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.userNamePressed();
+                presenter.buyUnlimPressed();
             }
         });
 
@@ -67,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showLeftTime(String leftTime) {
+        leftLabel.setText(R.string.main_minutes_left);
         minutesLeft.setText(leftTime);
     }
 
@@ -74,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void toggleCallAvailability(boolean available) {
         callBtn.setEnabled(available);
         if (available) {
+            availableHolder.setVisibility(View.VISIBLE);
+            notAvailableHolder.setVisibility(View.GONE);
             callBtn.setBackgroundResource(R.drawable.call_button_background);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 callBtn.setImageDrawable(getDrawable(R.drawable.ic_telephone));
@@ -82,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
             callToAction.setText(R.string.main_call_to_action);
         } else {
+            availableHolder.setVisibility(View.GONE);
+            notAvailableHolder.setVisibility(View.VISIBLE);
             callBtn.setBackgroundResource(R.drawable.no_call_button_background);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 callBtn.setImageDrawable(getDrawable(R.drawable.ic_hourglass));
@@ -165,6 +196,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
     }
 
+    @AfterPermissionGranted(RC_PHONE_STATE_PERM)
+    public void requestLiqPayPermissions() {
+        String[] perms = {Manifest.permission.READ_PHONE_STATE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            presenter.onLiqPayPermissionsGranted();
+        } else {
+            EasyPermissions.requestPermissions(this, getString(R.string.permission_rationale_liqpay), RC_PHONE_STATE_PERM, perms);
+        }
+    }
+
     @Override
     public void askForName(String name) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -190,7 +231,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void updateUserName(String name) {
-        userName.setText(getString(R.string.user_name, name));
+        if (this.menu == null) {
+            userName = name;
+            return;
+        }
+        this.menu.findItem(R.id.item_user_name).setTitle(name);
     }
 
 
@@ -198,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void askForReason() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_LoaderDialog);
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item);
         arrayAdapter.addAll(getResources().getStringArray(R.array.call_reasons));
 
         builder.setTitle(getString(R.string.reason_alert_title))
@@ -221,10 +266,80 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void navigateToCallFor(String reason) {
+    public void navigateToCallWith(String token, String sessionId, String apiKey, long maxSeconds) {
         Intent intent = new Intent(this, CallActivity.class);
-        intent.putExtra(CallPresenter.REASON_EXTRA, reason);
+        intent.putExtra(CallPresenter.TOKEN_EXTRA, token);
+        intent.putExtra(CallPresenter.SESSION_EXTRA, sessionId);
+        intent.putExtra(CallPresenter.KEY_EXTRA, apiKey);
+        intent.putExtra(CallPresenter.SECONDS_EXTRA, maxSeconds);
         startActivity(intent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        this.menu = menu;
+        updateUserName(userName);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_user_name) {
+            presenter.userNamePressed();
+            return true;
+        }
+        if (item.getItemId() == R.id.item_logout) {
+            presenter.logout();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void navigateToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void showDateTill(String dateTill) {
+        leftLabel.setText(R.string.main_active_till);
+        minutesLeft.setText(dateTill);
+    }
+
+    @Override
+    public void toggleBuyUnlimEnabled(boolean enabled) {
+        buyUnlimButton.setEnabled(enabled);
+    }
+
+    @Override
+    public void showTariffsSelector(final List<TariffResponse> tariffs) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_item);
+        final List<String> tariffNames = new ArrayList<>();
+        for (TariffResponse response : tariffs) {
+            tariffNames.add(getString(R.string.tariff_pattern, response.getName(), response.getPrice()));
+        }
+        arrayAdapter.addAll(tariffNames);
+        builder.setTitle(getString(R.string.reason_alert_title))
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String tariff = tariffs.get(which).getId();
+                        presenter.tariffSelected(tariff);
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 }

@@ -28,4 +28,6 @@ public interface CallView {
     void showSelfView(View view);
 
     void showInterpreterView(View view);
+
+    void showOneMoreMessage(String message);
 }
