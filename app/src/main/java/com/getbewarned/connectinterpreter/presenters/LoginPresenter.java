@@ -40,9 +40,7 @@ public class LoginPresenter {
             view.showError(view.getContext().getString(R.string.fields_required));
             return;
         }
-        Pattern pattern = Pattern.compile("^\\+[0-9]{10,15}$");
-        Matcher matcher = pattern.matcher(phone);
-        if (!matcher.matches()) {
+        if (!isValidPhone(phone)) {
             view.showError(view.getContext().getString(R.string.invalid_phone_format));
             return;
         }
@@ -82,11 +80,20 @@ public class LoginPresenter {
         });
     }
 
-    public void login(String phone, String code) {
+    public void login(String phone, String code, boolean accepted) {
         if (phone.isEmpty() || code.isEmpty()) {
             view.showError(view.getContext().getString(R.string.fields_required));
             return;
         }
+        if (!isValidPhone(phone)) {
+            view.showError(view.getContext().getString(R.string.invalid_phone_format));
+            return;
+        }
+        if (!accepted) {
+            view.showError(view.getContext().getString(R.string.should_accept_privacy_policy));
+            return;
+        }
+
         view.toggleEnabledLoginBtn(true);
         String deviceId = Settings.Secure.getString(view.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         networkManager.login(phone, code, deviceId, DeviceName.getDeviceName(), new LoginComplete() {
@@ -109,7 +116,12 @@ public class LoginPresenter {
                 view.toggleEnabledRequestBtn(true);
             }
         });
+    }
 
+    private boolean isValidPhone(String phone) {
+        Pattern pattern = Pattern.compile("^\\+[0-9]{10,15}$");
+        Matcher matcher = pattern.matcher(phone);
+        return matcher.matches();
     }
 
 }

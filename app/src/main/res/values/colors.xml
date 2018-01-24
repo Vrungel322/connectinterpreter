@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#01579b</color>
     <color name="colorCallToolbar">#7b1e1e1e</color>
-    <color name="colorFieldHint">#f9f9f9</color>
+    <color name="colorFieldHint">#01579b</color>
 </resources>

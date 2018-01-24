@@ -12,19 +12,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.getbewarned.connectinterpreter.ui.LoginActivity">
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/connect_interpreter_icon_blank" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/login_title" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/phone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_example"
                 android:textColorHint="@color/colorFieldHint">
 
                 <android.support.v7.widget.AppCompatEditText
@@ -32,7 +51,6 @@
                     style="@style/AppTheme.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_phone"
                     android:inputType="phone"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -75,8 +93,8 @@
                     android:id="@+id/accept_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:padding="5dp" />
             </LinearLayout>
 
             <Button
@@ -96,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_request_code"
+                android:text="@string/action_continue"
                 android:theme="@style/AppTheme.BlueButton" />
 
             <TextView

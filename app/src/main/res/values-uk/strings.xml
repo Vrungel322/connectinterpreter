@@ -56,4 +56,7 @@
     <string name="message_enter_label">Надіслати</string>
     <string name="invalid_phone_format">Невірний формат телефону</string>
     <string name="fields_required">Всі поля обов\'язкові для заповнення</string>
+    <string name="login_title">Вхід/Регістрація</string>
+    <string name="action_continue">Продовжити</string>
+    <string name="should_accept_privacy_policy">Необхідно погодитися з політикою конфеденційності</string>
 </resources>

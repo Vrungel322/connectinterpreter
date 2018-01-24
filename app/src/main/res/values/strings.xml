@@ -74,4 +74,8 @@
     <string name="message_enter_label">Send</string>
     <string name="invalid_phone_format">Invalid phone format</string>
     <string name="fields_required">All fields are required</string>
+    <string name="login_title">Sign in/Sign up</string>
+    <string name="phone_example" translatable="false">+380501234567</string>
+    <string name="action_continue">Continue</string>
+    <string name="should_accept_privacy_policy">You should accept privacy policy</string>
 </resources>

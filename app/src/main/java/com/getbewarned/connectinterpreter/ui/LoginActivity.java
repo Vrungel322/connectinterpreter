@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private CheckBox acceptCheck;
     private TextView acceptText;
     private View accept;
+    private TextInputLayout phoneLayout;
 
     private LoginPresenter presenter;
 
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         acceptCheck = findViewById(R.id.accept_check);
         acceptText = findViewById(R.id.accept_text);
         accept = findViewById(R.id.accept);
+        phoneLayout = findViewById(R.id.phone_layout);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             acceptText.setText(Html.fromHtml(getString(R.string.login_accept), Html.FROM_HTML_MODE_LEGACY));
         } else {
@@ -61,16 +63,31 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             @Override
             public void onClick(View view) {
                 presenter.getCode(phoneField.getText().toString());
+                getCodeBtn.setText(R.string.action_request_code);
             }
         });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!acceptCheck.isChecked()) {
-                    return;
+                presenter.login(phoneField.getText().toString(), codeField.getText().toString(), acceptCheck.isChecked());
+            }
+        });
+
+        phoneField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    phoneLayout.setHint(getString(R.string.prompt_phone));
+                    if (phoneField.getText().toString().isEmpty()) {
+                        phoneField.setText("+");
+                    }
+                } else {
+                    phoneLayout.setHint(getString(R.string.phone_example));
+                    if (phoneField.getText().toString().equals("+")) {
+                        phoneField.setText("");
+                    }
                 }
-                presenter.login(phoneField.getText().toString(), codeField.getText().toString());
             }
         });
     }
