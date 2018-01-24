@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ApiService;
+import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
@@ -15,6 +16,7 @@ import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
 import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
+import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
@@ -329,6 +331,30 @@ public class NetworkManager {
             @Override
             public void onFailure(Call<ApiResponseBase> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void getAppVersion(final AppVersionReceived appVersionReceived) {
+        Call<AppVersionResponse> call = api.getAppVersion("android", getLanguage());
+        call.enqueue(new Callback<AppVersionResponse>() {
+            @Override
+            public void onResponse(Call<AppVersionResponse> call, Response<AppVersionResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        appVersionReceived.onAppVersionReceived(response.body());
+                    } else {
+                        appVersionReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    appVersionReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AppVersionResponse> call, Throwable t) {
+                t.printStackTrace();
+                appVersionReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }

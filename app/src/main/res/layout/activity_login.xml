@@ -28,8 +28,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/connect_interpreter_icon_blank" />
 
@@ -39,74 +39,39 @@
                 android:gravity="center"
                 android:text="@string/login_title" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/phone_layout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phone_example"
-                android:textColorHint="@color/colorFieldHint">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/country_code"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="phone"
+                    android:maxLength="5"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="+380"
+                    android:theme="@style/AppTheme.EditText" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/phone"
                     style="@style/AppTheme.EditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:theme="@style/AppTheme.EditText" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/password_input_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/colorFieldHint"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/code"
-                    style="@style/AppTheme.EditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:theme="@style/AppTheme.EditText" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <LinearLayout
-                android:id="@+id/accept"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/accept_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/accept_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="5dp" />
+                    android:layout_weight="3"
+                    android:hint="@string/prompt_phone"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:theme="@style/AppTheme.EditText" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/login_button"
-                style="@style/AppTheme.BlueButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_login"
-                android:textStyle="bold"
-                android:theme="@style/AppTheme.BlueButton"
-                android:visibility="gone" />
 
             <Button
                 android:id="@+id/get_code_button"

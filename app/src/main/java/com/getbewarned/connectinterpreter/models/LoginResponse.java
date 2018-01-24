@@ -12,7 +12,13 @@ public class LoginResponse extends ApiResponseBase {
     String name;
 
     @Expose
-    long milliseconds;
+    long seconds;
+
+    @Expose
+    boolean unlim;
+
+    @Expose
+    long active_till;
 
     @Expose
     String auth_token;
@@ -21,8 +27,16 @@ public class LoginResponse extends ApiResponseBase {
         return name;
     }
 
-    public long getMilliseconds() {
-        return milliseconds;
+    public long getSeconds() {
+        return seconds;
+    }
+
+    public boolean isUnlim() {
+        return unlim;
+    }
+
+    public long getActiveTill() {
+        return active_till;
     }
 
     public String getAuthToken() {

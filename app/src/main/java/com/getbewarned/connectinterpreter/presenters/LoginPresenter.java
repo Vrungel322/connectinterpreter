@@ -35,7 +35,7 @@ public class LoginPresenter {
         userManager = new UserManager(view.getContext());
     }
 
-    public void getCode(String phone) {
+    public void continuePressed(String phone) {
         if (phone.isEmpty()) {
             view.showError(view.getContext().getString(R.string.fields_required));
             return;
@@ -44,79 +44,9 @@ public class LoginPresenter {
             view.showError(view.getContext().getString(R.string.invalid_phone_format));
             return;
         }
-        view.toggleEnabledRequestBtn(false);
-        networkManager.getCode(phone, new CodeReceived() {
-            @Override
-            public void onCodeReceived(ApiResponseBase response) {
-                if (response.isSuccess()) {
-                    view.showPasswordAndLoginBtn();
-                    view.setCode(String.valueOf(response.getCode()));
-                    view.updateHint(view.getContext().getString(R.string.login_code_delay, 30));
-                    countDownTimer = new CountDownTimer(30 * 1000, 1000) {
-                        @Override
-                        public void onTick(long l) {
-                            view.updateHint(view.getContext().getString(R.string.login_code_delay, l / 1000));
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            view.toggleEnabledRequestBtn(true);
-                            view.updateHint(view.getContext().getString(R.string.login_code_helper));
-                            countDownTimer = null;
-                        }
-                    };
-                    countDownTimer.start();
-                } else {
-                    Toast.makeText(view.getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
-                    view.toggleEnabledRequestBtn(true);
-                }
-            }
-
-            @Override
-            public void onErrorReceived(Error error) {
-                view.showError(error.getMessage());
-                view.toggleEnabledRequestBtn(true);
-            }
-        });
+        view.navigateToConfirmation(phone);
     }
 
-    public void login(String phone, String code, boolean accepted) {
-        if (phone.isEmpty() || code.isEmpty()) {
-            view.showError(view.getContext().getString(R.string.fields_required));
-            return;
-        }
-        if (!isValidPhone(phone)) {
-            view.showError(view.getContext().getString(R.string.invalid_phone_format));
-            return;
-        }
-        if (!accepted) {
-            view.showError(view.getContext().getString(R.string.should_accept_privacy_policy));
-            return;
-        }
-
-        view.toggleEnabledLoginBtn(true);
-        String deviceId = Settings.Secure.getString(view.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        networkManager.login(phone, code, deviceId, DeviceName.getDeviceName(), new LoginComplete() {
-            @Override
-            public void onLoginComplete(LoginResponse response) {
-                if (response.isSuccess()) {
-                    userManager.updateUserName(response.getName());
-                    userManager.updateUserToken(response.getAuthToken());
-                    userManager.updateUserSeconds(response.getMilliseconds());
-                    view.navigateToApp();
-                } else {
-                    view.showError(response.getMessage());
-                    view.toggleEnabledRequestBtn(true);
-                }
-            }
-
-            @Override
-            public void onErrorReceived(Error error) {
-                view.showError(error.getMessage());
-                view.toggleEnabledRequestBtn(true);
-            }
-        });
-    }
 
     private boolean isValidPhone(String phone) {
         Pattern pattern = Pattern.compile("^\\+[0-9]{10,15}$");

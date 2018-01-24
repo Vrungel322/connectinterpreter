@@ -8,19 +8,11 @@ import android.content.Context;
 
 public interface LoginView {
 
-    void showPasswordAndLoginBtn();
-
-    void updateHint(String message);
-
-    void toggleEnabledRequestBtn(boolean enabled);
-
     Context getContext();
-
-    void setCode(String code);
 
     void toggleEnabledLoginBtn(boolean enabled);
 
-    void navigateToApp();
-
     void showError(String message);
+
+    void navigateToConfirmation(String phone);
 }

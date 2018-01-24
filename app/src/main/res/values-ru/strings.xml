@@ -20,7 +20,6 @@
     <string name="user_name">Привет, <u>%s</u></string>
     <string name="user_name_dialog_title">Как Вас зовут?</string>
     <string name="test_mode_notification">Сервис предоставляется в тестовом режиме\nв рабочие дни с 09:00 до 18:00</string>
-    <string name="app_outdated">Приложение устарело. Пожалуйста, обновите приложение, чтобы продолжить</string>
     <string name="reason_alert_title">Выберите причину звонка</string>
     <string name="call_reason_emergency">Вызов скорой</string>
     <string name="call_reason_police">Вызов полиции</string>
@@ -34,6 +33,7 @@
     <string name="call_reason_other">Другое</string>
     <string name="error_global">Ошибка</string>
     <string name="prompt_phone">Номер телефона</string>
+    <string name="prompt_password">Код подтверждения</string>
     <string name="action_request_code">Отправить код</string>
     <string name="action_login">Войти</string>
     <string name="login_code_helper">Вы получите смс с кодом подтверждения</string>
@@ -59,4 +59,9 @@
     <string name="login_title">Вход/Регистрация</string>
     <string name="action_continue">Продолжить</string>
     <string name="should_accept_privacy_policy">Необходимо согласиться с политикой конфиденциальности</string>
+    <string name="new_app_version">Вышла версия %s</string>
+    <string name="update_required">Пожалуйста, обновите приложение, чтобы продолжить</string>
+    <string name="update_recommended">Рекомендуем обновить приложение для более комфортного использования</string>
+    <string name="confirmation_desc">СМС с кодом подтверждения было отправлено на номер %s</string>
+    <string name="wrong_number">Неправильный номер?</string>
 </resources>

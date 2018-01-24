@@ -5,4 +5,8 @@
     <color name="colorAccent">#01579b</color>
     <color name="colorCallToolbar">#7b1e1e1e</color>
     <color name="colorFieldHint">#01579b</color>
+
+
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
 </resources>

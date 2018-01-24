@@ -20,7 +20,6 @@
     <string name="user_name_dialog_title">What is your name?</string>
     <string name="test_mode_notification">Сервис предоставляется в тестовом режиме</string>
     <string name="facebook_app_id" translatable="false">1134966689967629</string>
-    <string name="app_outdated">App is outdated. Please update the app to continue</string>
     <string name="reason_alert_title">Choose call reason</string>
     <string name="call_reason_emergency">Call to emergency</string>
     <string name="call_reason_police">Call to police</string>
@@ -51,7 +50,7 @@
 
     <!-- Strings related to login -->
     <string name="prompt_phone">Phone</string>
-    <string name="prompt_password">Code</string>
+    <string name="prompt_password">Confirmation code</string>
     <string name="action_request_code">Request code</string>
     <string name="action_login">Login</string>
     <string name="login_code_helper">You will receive sms with confirmation code</string>
@@ -78,4 +77,9 @@
     <string name="phone_example" translatable="false">+380501234567</string>
     <string name="action_continue">Continue</string>
     <string name="should_accept_privacy_policy">You should accept privacy policy</string>
+    <string name="new_app_version">Version %s is available</string>
+    <string name="update_required">Please update the app to continue</string>
+    <string name="update_recommended">We recommend to update app for more comfortable use</string>
+    <string name="confirmation_desc">SMS with confirmation code was sent to %s</string>
+    <string name="wrong_number">Wrong number?</string>
 </resources>

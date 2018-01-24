@@ -20,7 +20,6 @@
     <string name="user_name">Привіт, <u>%s</u></string>
     <string name="user_name_dialog_title">Як Вас звати?</string>
     <string name="test_mode_notification">Сервіс надається у тестовому режимі\nв робочі дні з 09:00 до 18:00</string>
-    <string name="app_outdated">Додаток застарілий. Будь ласка, оновіть додаток, щоб продовжити</string>
     <string name="reason_alert_title">Оберіть причину дзвінка</string>
     <string name="call_reason_emergency">Виклик швидкої</string>
     <string name="call_reason_police">Виклик поліції</string>
@@ -34,6 +33,7 @@
     <string name="call_reason_other">Інше</string>
     <string name="error_global">Помилка</string>
     <string name="prompt_phone">Номер телефону</string>
+    <string name="prompt_password">Код підтверждення</string>
     <string name="action_request_code">Надіслати код</string>
     <string name="action_login">Увійти</string>
     <string name="login_code_helper">Ви отримаєте смс із кодом підтверждення</string>
@@ -59,4 +59,9 @@
     <string name="login_title">Вхід/Регістрація</string>
     <string name="action_continue">Продовжити</string>
     <string name="should_accept_privacy_policy">Необхідно погодитися з політикою конфеденційності</string>
+    <string name="new_app_version">Вийшла версія %s</string>
+    <string name="update_required">Будь ласка, оновіть додаток, щоб продовжити</string>
+    <string name="update_recommended">Рекомендуємо оновити додаток для більш комфортного використання</string>
+    <string name="confirmation_desc">СМС із кодом підтверждення було відправлено на номер %s</string>
+    <string name="wrong_number">Невірний номер?</string>
 </resources>

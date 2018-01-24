@@ -1,6 +1,7 @@
 package com.getbewarned.connectinterpreter.interfaces;
 
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
+import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
@@ -82,4 +83,8 @@ public interface ApiService {
     Call<ApiResponseBase> sendMessageToCall(@Header("X-Interpreter-Client-Token") String authorization,
                                             @Field("session_id") String sessionId,
                                             @Field("message") String message);
+
+    @GET("/api/client/version")
+    Call<AppVersionResponse> getAppVersion(@Query("platform") String platform, @Query("lang") String language);
+
 }

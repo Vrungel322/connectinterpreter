@@ -46,6 +46,7 @@ public class MainPresenter implements Presenter {
         this.networkManager.setUnauthRequestHandler(new UnauthRequestHandler() {
             @Override
             public void onUnathRequest() {
+                userManager.updateUserToken("");
                 view.navigateToLogin();
             }
         });
