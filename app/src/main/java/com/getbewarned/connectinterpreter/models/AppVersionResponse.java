@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
  * Created by artycake on 1/24/18.
  */
 
-public class AppVersionResponse extends  ApiResponseBase{
+public class AppVersionResponse extends ApiResponseBase {
 
     @Expose
     String version;
@@ -14,6 +14,8 @@ public class AppVersionResponse extends  ApiResponseBase{
     int build_number;
     @Expose
     boolean update_required;
+    @Expose
+    String description;
 
 
     public String getVersion() {
@@ -26,5 +28,9 @@ public class AppVersionResponse extends  ApiResponseBase{
 
     public boolean isUpdateRequired() {
         return update_required;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

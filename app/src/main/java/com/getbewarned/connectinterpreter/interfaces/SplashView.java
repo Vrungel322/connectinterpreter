@@ -8,7 +8,12 @@ import android.content.Context;
 
 public interface SplashView {
     void navigateToLogin();
+
     void navigateToApp();
+
     Context getContext();
+
     void showUpdateAlert(String version, boolean required);
+
+    void showNewVersionInfo(String description);
 }

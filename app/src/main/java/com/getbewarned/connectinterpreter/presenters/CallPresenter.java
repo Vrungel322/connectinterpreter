@@ -42,10 +42,13 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     private CountDownTimer countDownTimer;
     private boolean ended = false;
 
-    private String deviceId;
-    private String callReason;
-
     private long leftMinutesOnStart;
+
+    private int publishTries = 0;
+
+    private String apiKey;
+    private String sessionId;
+    private String token;
 
 
     public CallPresenter(CallView view) {
@@ -60,9 +63,9 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         view.toggleEndCallButtonVisibility(false);
         view.updateCurrentCallDuration("00:00");
         view.showIndicator();
-        String apiKey = extras.getString(KEY_EXTRA);
-        String sessionId = extras.getString(SESSION_EXTRA);
-        String token = extras.getString(TOKEN_EXTRA);
+        apiKey = extras.getString(KEY_EXTRA);
+        sessionId = extras.getString(SESSION_EXTRA);
+        token = extras.getString(TOKEN_EXTRA);
         leftMinutesOnStart = extras.getLong(SECONDS_EXTRA) * 1000;
 
         view.updateLeftTime(new HumanTime(leftMinutesOnStart).getTime());
@@ -78,16 +81,23 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     @Override
     public void onPause() {
-
+        if (session != null) {
+            session.onPause();
+        }
+        Log.d("TAG", "onPause");
     }
 
     @Override
     public void onResume() {
-
+        if (session != null) {
+            session.onResume();
+        }
+        Log.d("TAG", "onResume");
     }
 
     @Override
     public void onDestroy() {
+
         endCall();
     }
 
@@ -147,6 +157,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         runTimer();
         view.hideIndicator();
         view.toggleEndCallButtonVisibility(true);
+        userManager.updateLastCallSessionId(session.getSessionId());
     }
 
     private void runTimer() {
@@ -196,6 +207,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     @Override
     public void onError(PublisherKit publisherKit, OpentokError opentokError) {
+
         Log.d(TAG, opentokError.getMessage());
         if (ended) {
             return;

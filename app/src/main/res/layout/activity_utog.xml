@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.getbewarned.connectinterpreter.ui.UtogActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/utog_title"
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/utog_last_name"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/first_name"
+            android:singleLine="true"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/utog_first_name"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/patronymic"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/patronymic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/member_id"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:hint="@string/utog_patronymic"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/member_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:hint="@string/utog_member_id"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/utog_cancel"
+            style="@style/AppTheme.BlueButton.Borderless"
+            android:theme="@style/AppTheme.BlueButton.Borderless"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/continue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/utog_continue"
+            style="@style/AppTheme.BlueButton.Borderless"
+            android:theme="@style/AppTheme.BlueButton.Borderless"
+            />
+    </LinearLayout>
+</LinearLayout>
+
+</ScrollView>

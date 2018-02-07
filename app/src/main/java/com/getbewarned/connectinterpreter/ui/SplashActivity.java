@@ -93,4 +93,18 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
         builder.create().show();
     }
+
+    @Override
+    public void showNewVersionInfo(String description) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.whats_new)
+                .setMessage(description)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        presenter.infoAccepted();
+                    }
+                });
+        builder.create().show();
+    }
 }

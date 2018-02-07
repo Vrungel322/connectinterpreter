@@ -22,7 +22,11 @@ import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
+import com.getbewarned.connectinterpreter.models.UtogAsk;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import ua.privatbank.paylibliqpay.ErrorCode;
 import ua.privatbank.paylibliqpay.LiqPay;
@@ -37,6 +41,8 @@ public class MainPresenter implements Presenter {
     private UserManager userManager;
     private NetworkManager networkManager;
     private String selectedTariff;
+
+    private boolean callInitiated = false;
 
     public MainPresenter(final MainView view) {
         this.view = view;
@@ -57,6 +63,7 @@ public class MainPresenter implements Presenter {
         view.showChecking();
         view.showLeftTime("00:00");
         view.requestPermissions();
+        view.showWorkTime(userManager.getUserUkrainian());
         String fbToken = FirebaseInstanceId.getInstance().getToken();
         if (fbToken != null) {
             Log.d("FB_TOKEN", fbToken);
@@ -79,6 +86,44 @@ public class MainPresenter implements Presenter {
     public void onResume() {
         view.showChecking();
         updateAvailability();
+        checkUtog();
+
+        if (userManager.getLastCallSessionId() != null) {
+            view.askAboutLastCall();
+        }
+    }
+
+    private void checkUtog() {
+        if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
+            return;
+        }
+
+        switch (userManager.getUtogAsk().getStatus()) {
+            case NEVER:
+                return;
+            case LATER:
+                if (new Date().before(userManager.getUtogAsk().getDate())) {
+                    return;
+                }
+            case SHOUD_ASK:
+            default:
+                view.askAboutUtog();
+        }
+    }
+
+    public void utogConfirmed() {
+        utogLater();
+        view.navigateToUtog();
+    }
+
+    public void utogLater() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        userManager.updateUtogAsk(new UtogAsk(UtogAsk.STATUS.LATER, calendar.getTime()));
+    }
+
+    public void utogNever() {
+        userManager.updateUtogAsk(new UtogAsk(UtogAsk.STATUS.NEVER, null));
     }
 
     private void updateAvailability() {
@@ -89,17 +134,24 @@ public class MainPresenter implements Presenter {
                     userManager.updateUserSeconds(response.getSeconds());
                     userManager.updateUserUnlim(response.isUnlim());
                     userManager.updateUserActiveTill(response.getActiveTill());
+                    userManager.updateUserUtog(response.isUtog());
+                    if (userManager.getUserUnlim()) {
+                        view.hideUnlim();
+                    }
+                    if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
+                        view.hideUtog();
+                    }
                     if (response.isUnlim()) {
                         HumanDate humanDate = new HumanDate(view.getContext(), response.getActiveTill());
-                        view.toggleCallAvailability(true);
+                        view.toggleCallAvailability(true, userManager.getUserUtog());
                         view.showDateTill(humanDate.getDate());
                     } else {
                         HumanTime humanTime = new HumanTime(response.getSeconds() * 1000);
                         if (response.getSeconds() > 0) {
-                            view.toggleCallAvailability(true);
+                            view.toggleCallAvailability(true, userManager.getUserUtog());
                             view.showLeftTime(humanTime.getTime());
                         } else {
-                            view.toggleCallAvailability(false);
+                            view.toggleCallAvailability(false, userManager.getUserUtog());
                         }
                     }
                 } else {
@@ -123,14 +175,21 @@ public class MainPresenter implements Presenter {
     }
 
     public void reasonSelected(final String reason) {
+
+        if (callInitiated) {
+            return;
+        }
+        callInitiated = true;
         networkManager.makeCall(reason, new TokenReceived() {
             @Override
             public void onTokenReceived(TokenResponse response) {
                 view.navigateToCallWith(response.getToken(), response.getSessionId(), response.getApiKey(), response.getMaxSeconds());
+                callInitiated = false;
             }
 
             @Override
             public void onErrorReceived(Error error) {
+                callInitiated = false;
                 view.showError(error.getMessage());
             }
         });
@@ -230,5 +289,16 @@ public class MainPresenter implements Presenter {
             }
         });
         selectedTariff = null;
+    }
+
+    public void onReview(int rating, String review) {
+        String sessionId = userManager.getLastCallSessionId();
+        networkManager.leaveReview(sessionId, rating, review);
+
+        userManager.updateLastCallSessionId(null);
+    }
+
+    public void onReviewSkipped() {
+        userManager.updateLastCallSessionId(null);
     }
 }

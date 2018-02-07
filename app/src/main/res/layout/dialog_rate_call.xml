@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="1"
+        android:isIndicator="false"
+        android:clickable="true"
+        android:focusable="true"
+        />
+
+    <EditText
+        android:id="@+id/review"
+        android:hint="@string/review_hint"
+        android:gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+</LinearLayout>

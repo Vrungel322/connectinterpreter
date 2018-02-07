@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/drawer_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_unlim"
+            android:title="@string/drawer_unlim" />
+        <item
+            android:id="@+id/drawer_utog"
+            android:title="@string/drawer_utog" />
+        <item
+            android:id="@+id/drawer_exit"
+            android:title="@string/drawer_exit" />
+    </group>
+
+    <group
+        android:id="@+id/drawer_middle"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/drawer_support"
+            android:title="@string/drawer_support" />
+    </group>
+
+
+    <group
+        android:id="@+id/drawer_bottom"
+        android:checkableBehavior="none">
+        <item
+            android:title="@string/drawer_facebook"
+            android:id="@+id/drawer_facebook"
+            android:icon="@drawable/facebook"/>
+        <item
+            android:title="@string/drawer_instagram"
+            android:id="@+id/drawer_instagram"
+            android:icon="@drawable/instagram"/>
+        <item
+            android:title="@string/drawer_telegram"
+            android:id="@+id/drawer_telegram"
+            android:icon="@drawable/telegram"/>
+    </group>
+
+
+
+
+</menu>

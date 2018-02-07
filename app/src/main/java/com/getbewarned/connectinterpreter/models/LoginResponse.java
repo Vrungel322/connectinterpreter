@@ -23,6 +23,12 @@ public class LoginResponse extends ApiResponseBase {
     @Expose
     String auth_token;
 
+    @Expose
+    Boolean is_utog;
+
+    @Expose
+    Boolean is_ukrainian;
+
     public String getName() {
         return name;
     }
@@ -41,5 +47,13 @@ public class LoginResponse extends ApiResponseBase {
 
     public String getAuthToken() {
         return auth_token;
+    }
+
+    public Boolean isUtog() {
+        return is_utog;
+    }
+
+    public Boolean isUkrainian() {
+        return is_ukrainian;
     }
 }

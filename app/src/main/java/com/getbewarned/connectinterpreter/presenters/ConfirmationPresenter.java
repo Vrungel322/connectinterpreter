@@ -60,15 +60,12 @@ public class ConfirmationPresenter implements Presenter {
 
     }
 
-    public void loginPressed(String code, boolean accepted) {
+    public void loginPressed(String code) {
         if (code.isEmpty()) {
             view.showError(view.getContext().getString(R.string.fields_required));
             return;
         }
-        if (!accepted) {
-            view.showError(view.getContext().getString(R.string.should_accept_privacy_policy));
-            return;
-        }
+
 
         view.toggleEnabledLoginBtn(true);
         String deviceId = Settings.Secure.getString(view.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -81,6 +78,8 @@ public class ConfirmationPresenter implements Presenter {
                     userManager.updateUserSeconds(response.getSeconds());
                     userManager.updateUserActiveTill(response.getActiveTill());
                     userManager.updateUserUnlim(response.isUnlim());
+                    userManager.updateUserUtog(response.isUtog());
+                    userManager.updateUserUkrainian(response.isUkrainian());
                     view.navigateToApp();
                 } else {
                     view.showError(response.getMessage());
@@ -100,7 +99,9 @@ public class ConfirmationPresenter implements Presenter {
         networkManager.getCode(phone, new CodeReceived() {
             @Override
             public void onCodeReceived(ApiResponseBase response) {
-                view.setCode(String.valueOf(response.getCode()));
+                if (response.getCode() != 0) {
+                    view.setCode(String.valueOf(response.getCode()));
+                }
             }
 
             @Override

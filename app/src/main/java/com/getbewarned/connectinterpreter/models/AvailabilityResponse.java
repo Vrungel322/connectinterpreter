@@ -17,6 +17,9 @@ public class AvailabilityResponse extends ApiResponseBase {
     @Expose
     long active_till;
 
+    @Expose
+    boolean is_utog;
+
 
     public long getSeconds() {
         return seconds;
@@ -28,6 +31,10 @@ public class AvailabilityResponse extends ApiResponseBase {
 
     public long getActiveTill() {
         return active_till;
+    }
+
+    public boolean isUtog() {
+        return is_utog;
     }
 }
 

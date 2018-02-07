@@ -14,7 +14,7 @@ public interface MainView {
 
     void showLeftTime(String leftTime);
 
-    void toggleCallAvailability(boolean available);
+    void toggleCallAvailability(boolean available, boolean isUtog);
 
     void showChecking();
 
@@ -43,4 +43,17 @@ public interface MainView {
     void toggleBuyUnlimEnabled(boolean enabled);
 
     void showTariffsSelector(List<TariffResponse> tariffs);
+
+    void hideUtog();
+
+    void hideUnlim();
+
+    void askAboutUtog();
+
+    void navigateToUtog();
+
+    void showWorkTime(boolean ukraine);
+
+    void askAboutLastCall();
+
 }

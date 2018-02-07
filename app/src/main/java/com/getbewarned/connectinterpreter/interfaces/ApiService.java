@@ -2,12 +2,14 @@ package com.getbewarned.connectinterpreter.interfaces;
 
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
+import com.getbewarned.connectinterpreter.models.CountriesResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
+import com.getbewarned.connectinterpreter.models.UtogResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -86,5 +88,26 @@ public interface ApiService {
 
     @GET("/api/client/version")
     Call<AppVersionResponse> getAppVersion(@Query("platform") String platform, @Query("lang") String language);
+
+
+    @POST("/api/client/utog_info")
+    @FormUrlEncoded
+    Call<UtogResponse> sendUtogInfo(@Header("X-Interpreter-Client-Token") String authorization,
+                                    @Field("first_name") String firstName,
+                                    @Field("last_name") String lastName,
+                                    @Field("patronymic") String patronymic,
+                                    @Field("member_id") String memberId,
+                                    @Query("lang") String language);
+
+    @GET("/api/client/countries")
+    Call<CountriesResponse> getCountries(@Query("lang") String language);
+
+    @POST("/api/client/call_review")
+    @FormUrlEncoded
+    Call<ApiResponseBase> leaveReview(@Header("X-Interpreter-Client-Token") String authorization,
+                                      @Field("session_id") String sessionId,
+                                      @Field("rate") int rate,
+                                      @Field("review") String review);
+
 
 }

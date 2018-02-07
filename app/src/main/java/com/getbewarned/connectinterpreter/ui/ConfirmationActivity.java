@@ -21,11 +21,9 @@ import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 
 public class ConfirmationActivity extends AppCompatActivity implements ConfirmationView {
 
-    private TextInputLayout passwordContainer;
     private EditText codeField;
     private Button loginBtn;
-    private CheckBox acceptCheck;
-    private TextView acceptText;
+
     private TextView wrongNumber;
     //    private Button getCodeBtn;
     private TextView confirmationDesc;
@@ -38,25 +36,14 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
         setContentView(R.layout.activity_confirmation);
 
         codeField = findViewById(R.id.code);
-        passwordContainer = findViewById(R.id.password_input_container);
         loginBtn = findViewById(R.id.login_button);
-        acceptCheck = findViewById(R.id.accept_check);
-        acceptText = findViewById(R.id.accept_text);
         confirmationDesc = findViewById(R.id.confirmation_description);
         wrongNumber = findViewById(R.id.wrong_number);
-//        getCodeBtn = findViewById(R.id.get_code_button);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            acceptText.setText(Html.fromHtml(getString(R.string.login_accept), Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            acceptText.setText(Html.fromHtml(getString(R.string.login_accept)));
-        }
-        acceptText.setClickable(true);
-        acceptText.setMovementMethod(LinkMovementMethod.getInstance());
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.loginPressed(codeField.getText().toString(), acceptCheck.isChecked());
+                presenter.loginPressed(codeField.getText().toString());
             }
         });
 

@@ -6,6 +6,7 @@ import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ApiService;
 import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
+import com.getbewarned.connectinterpreter.interfaces.CountriesReceived;
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
 import com.getbewarned.connectinterpreter.interfaces.LogoutComplete;
@@ -15,14 +16,17 @@ import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
 import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
+import com.getbewarned.connectinterpreter.interfaces.UtogResponseReceived;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
+import com.getbewarned.connectinterpreter.models.CountriesResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
+import com.getbewarned.connectinterpreter.models.UtogResponse;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -359,11 +363,76 @@ public class NetworkManager {
         });
     }
 
+    public void sendUtogInfo(String firstName, String lastName, String patronymic, String memberId, final UtogResponseReceived utogResponseReceived) {
+        Call<UtogResponse> call = api.sendUtogInfo(this.authToken, firstName, lastName, patronymic, memberId, getLanguage());
+        call.enqueue(new Callback<UtogResponse>() {
+            @Override
+            public void onResponse(Call<UtogResponse> call, Response<UtogResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        utogResponseReceived.onInfoReceived(response.body());
+                    } else {
+                        utogResponseReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    utogResponseReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UtogResponse> call, Throwable t) {
+                t.printStackTrace();
+                utogResponseReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void getCountries(final CountriesReceived countriesReceived) {
+        Call<CountriesResponse> call = api.getCountries(getLanguage());
+        call.enqueue(new Callback<CountriesResponse>() {
+            @Override
+            public void onResponse(Call<CountriesResponse> call, Response<CountriesResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        countriesReceived.onCountriesReceived(response.body());
+                    } else {
+                        countriesReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    countriesReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CountriesResponse> call, Throwable t) {
+                t.printStackTrace();
+                countriesReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void leaveReview(String sessionId, int rate, String review) {
+        Call<ApiResponseBase> call = api.leaveReview(authToken, sessionId, rate, review);
+        call.enqueue(new Callback<ApiResponseBase>() {
+            @Override
+            public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseBase> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+
     private Error getErrorFromResponse(ResponseBody errorBody) {
         Converter<ResponseBody, ApiResponseBase> converter = retrofit.responseBodyConverter(ApiResponseBase.class, new Annotation[0]);
         try {
             ApiResponseBase responseBase = converter.convert(errorBody);
-            return getErrorByCode(responseBase.getCode());
+            return new Error(responseBase.getMessage());
         } catch (IOException e) {
         }
         return new Error(context.getString(R.string.error_server_base));
@@ -384,6 +453,7 @@ public class NetworkManager {
                 return new Error(context.getString(R.string.error_in_call));
             case 8008:
                 return new Error(context.getString(R.string.error_no_right));
+
             default:
                 return new Error(context.getString(R.string.error_server_base));
         }

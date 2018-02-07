@@ -3,77 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_gradient"
+    android:background="@android:color/white"
     tools:context="com.getbewarned.connectinterpreter.ui.ConfirmationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical">
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/confirmation_title"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
+
+
+        <EditText
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:id="@+id/code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="1234"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:maxLength="4"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true" />
+
 
         <TextView
             android:id="@+id/confirmation_description"
             android:layout_width="match_parent"
+            tools:text="@string/confirmation_desc"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textSize="12sp"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/password_input_container"
+        <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/colorFieldHint">
-
-            <EditText
-                android:id="@+id/code"
-                style="@style/AppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
-                android:inputType="number"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:theme="@style/AppTheme.EditText" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:id="@+id/accept"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/accept_check"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/accept_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp" />
-        </LinearLayout>
+            android:text="@string/confirmation_wait"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/login_button"
-            style="@style/AppTheme.BlueButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:text="@string/action_login"
             android:textStyle="bold"
-            android:theme="@style/AppTheme.BlueButton" />
+            style="@style/AppTheme.BlueButton.Borderless"
+            android:theme="@style/AppTheme.BlueButton.Borderless" />
 
         <TextView
             android:id="@+id/wrong_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/wrong_number"
-            />
+            android:textColor="@android:color/darker_gray"
+            android:text="@string/wrong_number" />
     </LinearLayout>
 </ScrollView>

@@ -11,6 +11,7 @@ import com.getbewarned.connectinterpreter.interfaces.LoginView;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
+import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.jaredrummler.android.device.DeviceName;
@@ -28,14 +29,16 @@ public class LoginPresenter {
     private NetworkManager networkManager;
     private CountDownTimer countDownTimer;
     private UserManager userManager;
+    private String phone;
 
     public LoginPresenter(LoginView view) {
         this.view = view;
         networkManager = new NetworkManager(view.getContext());
         userManager = new UserManager(view.getContext());
+        view.setCountry(new Country(view.getContext().getString(R.string.ukraine), "+380"));
     }
 
-    public void continuePressed(String phone) {
+    public void continuePressed(String phone, boolean accepted) {
         if (phone.isEmpty()) {
             view.showError(view.getContext().getString(R.string.fields_required));
             return;
@@ -44,7 +47,22 @@ public class LoginPresenter {
             view.showError(view.getContext().getString(R.string.invalid_phone_format));
             return;
         }
+        if (!accepted) {
+            view.showError(view.getContext().getString(R.string.should_accept_privacy_policy));
+            return;
+        }
+
+        this.phone = phone;
+        view.confirmPhone(phone);
+
+    }
+
+    public void confirmedPressed() {
         view.navigateToConfirmation(phone);
+    }
+
+    public void countrySelected(Country country) {
+        view.setCountry(country);
     }
 
 

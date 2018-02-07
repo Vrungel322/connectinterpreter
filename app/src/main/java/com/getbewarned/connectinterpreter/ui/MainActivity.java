@@ -1,11 +1,19 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,15 +38,19 @@ import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends AppCompatActivity implements MainView, NavigationView.OnNavigationItemSelectedListener {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
@@ -48,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private TextView leftLabel;
     private View availableHolder;
     private View notAvailableHolder;
+    private TextView notAvailableDesc;
+    private TextView userNameLabel;
+    private ImageButton editUserNameBtn;
+    private TextView workTime;
 
     private Button buyUnlimButton;
 
@@ -59,17 +76,34 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_drawer);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        this.menu = navigationView.getMenu();
+
         callBtn = findViewById(R.id.call_button);
         minutesLeft = findViewById(R.id.left_value_label);
         callToAction = findViewById(R.id.call_to_action);
         leftLabel = findViewById(R.id.left_label);
         buyUnlimButton = findViewById(R.id.buy_unlim);
+        View headerLayout = navigationView.getHeaderView(0);
+        userNameLabel = headerLayout.findViewById(R.id.drawer_username);
+        editUserNameBtn = headerLayout.findViewById(R.id.edit_user_name);
 
         availableHolder = findViewById(R.id.available_holder);
         notAvailableHolder = findViewById(R.id.not_available_holder);
+
+        notAvailableDesc = findViewById(R.id.not_available_desc);
+        workTime = findViewById(R.id.work_time);
 
         presenter = new MainPresenter(this);
 
@@ -88,6 +122,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
         });
 
+        editUserNameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.closeDrawer(GravityCompat.START);
+                presenter.userNamePressed();
+            }
+        });
+
         presenter.onCreate(getIntent().getExtras());
     }
 
@@ -98,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void toggleCallAvailability(boolean available) {
+    public void toggleCallAvailability(boolean available, boolean isUtog) {
         callBtn.setEnabled(available);
         if (available) {
             availableHolder.setVisibility(View.VISIBLE);
@@ -113,13 +155,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
         } else {
             availableHolder.setVisibility(View.GONE);
             notAvailableHolder.setVisibility(View.VISIBLE);
-            callBtn.setBackgroundResource(R.drawable.no_call_button_background);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                callBtn.setImageDrawable(getDrawable(R.drawable.ic_hourglass));
+            if (isUtog) {
+                notAvailableDesc.setText(R.string.not_available_desc_utog);
             } else {
-                callBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_hourglass));
+                notAvailableDesc.setText(R.string.not_available_desc);
             }
-            callToAction.setText(R.string.no_minutes_left);
         }
     }
 
@@ -159,6 +199,43 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void navigateToCall() {
         Intent intent = new Intent(this, CallActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void askAboutUtog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.utog_alert_title)
+                .setMessage(R.string.utog_alert_text)
+                .setCancelable(false)
+                .setNegativeButton(R.string.utog_never, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        presenter.utogNever();
+                    }
+                })
+                .setNeutralButton(R.string.utog_later, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        presenter.utogLater();
+                    }
+                })
+                .setPositiveButton(R.string.utog_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        presenter.utogConfirmed();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    @Override
+    public void navigateToUtog() {
+        Intent intent = new Intent(this, UtogActivity.class);
         startActivity(intent);
     }
 
@@ -231,11 +308,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void updateUserName(String name) {
-        if (this.menu == null) {
-            userName = name;
-            return;
-        }
-        this.menu.findItem(R.id.item_user_name).setTitle(name);
+        userNameLabel.setText(name);
+    }
+
+
+    @Override
+    public void hideUnlim() {
+        menu.findItem(R.id.drawer_unlim).setVisible(false);
+    }
+
+    @Override
+    public void hideUtog() {
+        menu.findItem(R.id.drawer_utog).setVisible(false);
     }
 
 
@@ -275,28 +359,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        this.menu = menu;
-        updateUserName(userName);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.item_user_name) {
-            presenter.userNamePressed();
-            return true;
-        }
-        if (item.getItemId() == R.id.item_logout) {
-            presenter.logout();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void navigateToLogin() {
@@ -312,6 +374,24 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public void showWorkTime(boolean ukraine) {
+        Calendar mCalendar = new GregorianCalendar(TimeZone.getTimeZone("Europe/Kiev"));
+        mCalendar.set(Calendar.HOUR_OF_DAY, 9);
+        String timeZone = getString(R.string.timezone_ukraine);
+        if (!ukraine) {
+            long timestamp = mCalendar.getTimeInMillis();
+            mCalendar = new GregorianCalendar(TimeZone.getTimeZone("Europe/Moscow"));
+            mCalendar.setTimeInMillis(timestamp);
+            timeZone = getString(R.string.timezone);
+        }
+        String from = String.format(Locale.getDefault(), "%02d:00", mCalendar.get(Calendar.HOUR_OF_DAY));
+        mCalendar.add(Calendar.HOUR_OF_DAY, 9);
+        String till = String.format(Locale.getDefault(), "%02d:00", mCalendar.get(Calendar.HOUR_OF_DAY));
+        workTime.setText(getString(R.string.work_time_info, from, till, timeZone));
+
+    }
+
+    @Override
     public void toggleBuyUnlimEnabled(boolean enabled) {
         buyUnlimButton.setEnabled(enabled);
     }
@@ -322,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_item);
         final List<String> tariffNames = new ArrayList<>();
         for (TariffResponse response : tariffs) {
-            tariffNames.add(getString(R.string.tariff_pattern, response.getName(), response.getPrice()));
+            tariffNames.add(getString(R.string.tariff_pattern, response.getName(), String.valueOf(response.getPrice())));
         }
         arrayAdapter.addAll(tariffNames);
         builder.setTitle(getString(R.string.reason_alert_title))
@@ -340,6 +420,103 @@ public class MainActivity extends AppCompatActivity implements MainView {
                         dialog.dismiss();
                     }
                 })
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.drawer_utog) {
+            presenter.utogConfirmed();
+        } else if (id == R.id.drawer_unlim) {
+            presenter.buyUnlimPressed();
+        } else if (id == R.id.drawer_exit) {
+            presenter.logout();
+        } else if (id == R.id.drawer_support) {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("message/rfc822");
+            i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"info@getbewarned.com"});
+            try {
+                startActivity(Intent.createChooser(i, getString(R.string.drawer_support)));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this, getString(R.string.no_emial_client), Toast.LENGTH_SHORT).show();
+            }
+
+        } else if (id == R.id.drawer_facebook) {
+            String url = "https://www.facebook.com/GetBeWarned";
+            Uri uri = Uri.parse(url);
+            try {
+                ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("com.facebook.katana", 0);
+                if (applicationInfo.enabled) {
+                    uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+                }
+            } catch (PackageManager.NameNotFoundException ignored) {
+            }
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        } else if (id == R.id.drawer_instagram) {
+
+            Uri uri = Uri.parse("http://instagram.com/_u/get_bewarned");
+            Intent instagramIntent = new Intent(Intent.ACTION_VIEW, uri);
+
+            instagramIntent.setPackage("com.instagram.android");
+
+            try {
+                startActivity(instagramIntent);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/get_bewarned")));
+            }
+
+        } else if (id == R.id.drawer_telegram) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=BeWarned"));
+            intent.setPackage("org.telegram.messenger");
+
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/BeWarned")));
+            }
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    @Override
+    public void askAboutLastCall() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_LoaderDialog);
+        builder.setTitle(R.string.review_title)
+                .setView(R.layout.dialog_rate_call)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        RatingBar ratingBar = ((AlertDialog) dialogInterface).findViewById(R.id.rating);
+                        EditText review = ((AlertDialog) dialogInterface).findViewById(R.id.review);
+                        presenter.onReview((int) ratingBar.getRating(), review.getText().toString());
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
                 .show();
     }
 }

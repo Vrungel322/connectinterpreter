@@ -1,39 +1,99 @@
 <resources>
+
+
     <string name="app_name">SL Interpreter</string>
     <string name="main_call_to_action">Press to connect with interpreter</string>
     <string name="main_minutes_left">Minutes left:</string>
     <string name="current_call">Current call</string>
     <string name="left_for_today">Left for today</string>
     <string name="cancel">Cancel</string>
-    <string name="video_call_waiting_title">Waiting for answer…</string>
-    <string name="video_call_waiting_text">Please, hold the line while we are connecting you with the interpreter. It could take till 5 minutes</string>
-    <string name="permission_rationale_call">Audio and video record permission is required for the call to translator.</string>
+    <string name="video_call_waiting_title">Waiting for the answer…</string>
+    <string name="video_call_waiting_text">Please, hold the line while we are connecting you with the interpreter. It could take up till 5 minutes</string>
+    <string name="permission_rationale_call">Audio and video record permission is required for the call to interpreter.</string>
     <string name="error_call_failed">Failed to call</string>
-    <string name="err_call_try_later">Something happens while trying to call. Please try again later</string>
+    <string name="err_call_try_later">Something happened while trying to call. Please try again later</string>
     <string name="ok">OK</string>
     <string name="no_minutes_left">You have exhausted daily minutes.\nNew minutes will be available tomorrow</string>
     <string name="main_wait_minutes_loading">Please wait…\nChecking your remaining minutes</string>
     <string name="internet_failure">Server connection error. Check your internet connection</string>
     <string name="name_hint">Your name</string>
     <string name="proceed">Proceed</string>
-    <string name="user_name">Hello, <u>%s</u></string>
     <string name="user_name_dialog_title">What is your name?</string>
-    <string name="test_mode_notification">Сервис предоставляется в тестовом режиме</string>
-    <string name="facebook_app_id" translatable="false">1134966689967629</string>
+    <string name="work_time_info">Service works at workdays\nfrom %s till %s %s</string>
+    <string name="timezone_ukraine">Kiev time</string>
+    <string name="timezone">Moscow time</string>
     <string name="reason_alert_title">Choose call reason</string>
-    <string name="call_reason_emergency">Call to emergency</string>
-    <string name="call_reason_police">Call to police</string>
+    <string name="call_reason_emergency">Call the emergency</string>
+    <string name="call_reason_police">Call the police</string>
     <string name="call_reason_doctor">Doctor\'s appointment</string>
-    <string name="call_reason_estore">Help with online store</string>
+    <string name="call_reason_estore">Help with an online store</string>
     <string name="call_reason_call">Phone call</string>
-    <string name="call_reason_bank">Conversation at bank</string>
+    <string name="call_reason_bank">Conversation in a bank</string>
     <string name="call_reason_work">Conversation at work</string>
     <string name="call_reason_test">Test call</string>
     <string name="call_reason_talk">Small talk</string>
     <string name="call_reason_other">Other</string>
     <string name="error_global">Error</string>
+    <string name="prompt_phone">Phone</string>
+    <string name="prompt_password">Confirmation code</string>
+    <string name="action_request_code">Request code</string>
+    <string name="action_login">Continue</string>
+    <string name="login_code_helper">You will receive sms with confirmation code</string>
+    <string name="login_code_delay">Next request will be available in %d sec</string>
+    <string name="menu_logout">Logout</string>
+    <string name="error_server_base">Sorry, error occurred. Please try later</string>
+    <string name="error_validation">Please enter correct data</string>
+    <string name="error_login">Login failed</string>
+    <string name="error_outside_working_time">Unfortunately you are calling outside office hours</string>
+    <string name="error_in_call">You\'ve already calling from other device</string>
+    <string name="error_no_right">You have no right to complete this operation</string>
+    <string name="login_accept"><![CDATA[I have read and agree to the <a href=\'https://interpreter.getbw.me/docs/terms_of_use\'>terms of use</a> and <a href=\'https://interpreter.getbw.me/docs/privacy_policy\'>privacy policy</a>]]></string>
+    <string name="date_format">MM/dd/yy</string>
+    <string name="main_active_till">Unlimited calls till</string>
+    <string name="buy_unlim_btn">Buy unlim</string>
+    <string name="not_available_desc_utog">You have no minutes to continue using service.\nYou can wait till tomorrow to get another free minutes or you can buy unlimited usage</string>
+    <string name="not_available_desc">You have no minutes to continue using service.\nYou can buy unlimited usage</string>
+    <string name="tariff_pattern">%s - $%s</string>
+    <string name="permission_rationale_liqpay">You have to grant access to calls to complete payment process</string>
+    <string name="call_chat_hint">Type your message</string>
+    <string name="message_enter_label">Send</string>
+    <string name="invalid_phone_format">Invalid phone format</string>
+    <string name="fields_required">All fields are required</string>
+    <string name="login_title">Sign in/Sign up</string>
+    <string name="action_continue">Continue</string>
+    <string name="should_accept_privacy_policy">You should agree to the privacy policy and terms of use</string>
+    <string name="new_app_version">Version %s is available</string>
+    <string name="update_required">Please update the app to continue</string>
+    <string name="update_recommended">We recommend to update app for more comfortable use</string>
+    <string name="confirmation_desc">SMS with confirmation code was sent to %s</string>
+    <string name="wrong_number">Wrong number?</string>
+    <string name="whats_new">What\'s new</string>
 
 
+    <string name="confirmation_wait">If you have not received it yet, please wait.\nIt might take up to few minutes. Thank you!</string>
+    <string name="confirmation_title">Have you received a verification code?</string>
+    <string name="drawer_unlim">Buy unlim</string>
+    <string name="drawer_utog">I\'m member of UTOG</string>
+    <string name="drawer_exit">Exit</string>
+    <string name="drawer_support">Support</string>
+
+    <string name="utog_alert_title">Are you a member of UTOG?</string>
+    <string name="utog_alert_text">UTOG provides its members with favorable conditions for the use of the service by SL interpreters. You need to specify your data to confirm membership in UTOG</string>
+    <string name="utog_never">Don\'t ask anymore</string>
+    <string name="utog_later">Ask later</string>
+    <string name="utog_ok">Provide data</string>
+    <string name="utog_title">Are you a member of Ukrainian association of the deaf (UTOG)?</string>
+    <string name="utog_last_name">Last name</string>
+    <string name="utog_first_name">First name</string>
+    <string name="utog_patronymic">Patronymic</string>
+    <string name="utog_member_id">Number of member card</string>
+    <string name="utog_cancel">Cancel</string>
+    <string name="utog_continue">Continue</string>
+    <string name="utog_success">Success</string>
+    <string name="no_emial_client">There are no email clients on device</string>
+
+
+    <string name="facebook_app_id" translatable="false">1134966689967629</string>
     <string-array name="call_reasons">
         <item>@string/call_reason_emergency</item>
         <item>@string/call_reason_police</item>
@@ -46,40 +106,16 @@
         <item>@string/call_reason_talk</item>
         <item>@string/call_reason_other</item>
     </string-array>
-    <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_phone">Phone</string>
-    <string name="prompt_password">Confirmation code</string>
-    <string name="action_request_code">Request code</string>
-    <string name="action_login">Login</string>
-    <string name="login_code_helper">You will receive sms with confirmation code</string>
-    <string name="login_code_delay">Next request will be available in %d sec</string>
-    <string name="menu_logout">Logout</string>
-    <string name="error_server_base">Sorry, error occurred. Please try later</string>
-    <string name="error_validation">Please enter correct data</string>
-    <string name="error_login">Login failed</string>
-    <string name="error_outside_working_time">Unfortunately, you are calling outside office hours</string>
-    <string name="error_in_call">You\'ve already calling from other device</string>
-    <string name="error_no_right">You have no right to complete this operation</string>
-    <string name="login_accept"><![CDATA[I have read and agree to the <a href=\'https://getbewarned.com\'>privacy policy</a>]]></string>
-    <string name="date_format">MM/dd/yy</string>
-    <string name="main_active_till">Unlimited calls till</string>
-    <string name="buy_unlim_btn">Buy unlim</string>
-    <string name="not_available_desc">You have no minutes to continue using service.\nYou can wait till tomorrow to get another free minutes or you can buy unlimited usage</string>
-    <string name="tariff_pattern">%s - %sUAH</string>
-    <string name="permission_rationale_liqpay">You have to grant access to calls to complete payment process</string>
-    <string name="call_chat_hint">Type your message</string>
-    <string name="message_enter_label">Send</string>
-    <string name="invalid_phone_format">Invalid phone format</string>
-    <string name="fields_required">All fields are required</string>
-    <string name="login_title">Sign in/Sign up</string>
-    <string name="phone_example" translatable="false">+380501234567</string>
-    <string name="action_continue">Continue</string>
-    <string name="should_accept_privacy_policy">You should accept privacy policy</string>
-    <string name="new_app_version">Version %s is available</string>
-    <string name="update_required">Please update the app to continue</string>
-    <string name="update_recommended">We recommend to update app for more comfortable use</string>
-    <string name="confirmation_desc">SMS with confirmation code was sent to %s</string>
-    <string name="wrong_number">Wrong number?</string>
+    <string name="drawer_facebook" translatable="false">Facebook</string>
+    <string name="drawer_instagram" translatable="false">Instagram</string>
+    <string name="drawer_telegram" translatable="false">Telegram</string>
+    <string name="navigation_drawer_open" translatable="false">Open</string>
+    <string name="navigation_drawer_close" translatable="false">Close</string>
+    <string name="search_title">Search</string>
+    <string name="ukraine">Ukraine</string>
+    <string name="confirm_phone">Check phone number</string>
+    <string name="change_number">Change number</string>
+    <string name="review_title">Please assess the interpreter’s performance</string>
+    <string name="review_hint">Why was it good or bad?</string>
 </resources>

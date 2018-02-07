@@ -62,6 +62,9 @@ public class SplashPresenter implements Presenter {
             public void onAppVersionReceived(AppVersionResponse response) {
                 if (currentAppVersionCode < response.getBuildNumber()) {
                     view.showUpdateAlert(response.getVersion(), response.isUpdateRequired());
+                } else if (userManager.getLastAppVersion() != response.getBuildNumber() && response.getDescription() != null) {
+                    userManager.updateLastAppVersion(response.getBuildNumber());
+                    view.showNewVersionInfo(response.getDescription());
                 } else {
                     navigateNext();
                 }
@@ -75,6 +78,10 @@ public class SplashPresenter implements Presenter {
     }
 
     public void updateSkipped() {
+        navigateNext();
+    }
+
+    public void infoAccepted() {
         navigateNext();
     }
 
