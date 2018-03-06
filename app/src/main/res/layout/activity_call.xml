@@ -32,14 +32,14 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_weight="1"
             android:gravity="center">
 
             <FrameLayout
                 android:id="@+id/self_container"
-                android:layout_width="70dp"
-                android:layout_height="70dp" />
+                android:layout_width="130dp"
+                android:layout_height="130dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="20sp"
+                android:visibility="gone"
                 tools:text="10:00" />
 
             <TextView
@@ -61,18 +62,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:visibility="gone"
                 tools:text="10:00" />
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/end_call_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="25dp"
             android:background="@drawable/end_call_button_background"
             android:src="@drawable/ic_end_call_button"
             android:tint="@android:color/white" />
+    </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

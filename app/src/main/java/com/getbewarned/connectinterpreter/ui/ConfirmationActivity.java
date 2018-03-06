@@ -1,9 +1,11 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -25,7 +27,7 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
     private Button loginBtn;
 
     private TextView wrongNumber;
-    //    private Button getCodeBtn;
+    private TextView needHelp;
     private TextView confirmationDesc;
 
     private ConfirmationPresenter presenter;
@@ -39,6 +41,7 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
         loginBtn = findViewById(R.id.login_button);
         confirmationDesc = findViewById(R.id.confirmation_description);
         wrongNumber = findViewById(R.id.wrong_number);
+        needHelp = findViewById(R.id.need_help);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,13 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
             @Override
             public void onClick(View view) {
                 presenter.wrongNumberPressed();
+            }
+        });
+
+        needHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.requestLoginHelp();
             }
         });
 
@@ -112,5 +122,21 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
     public void showNumber(String phone) {
         String message = getString(R.string.confirmation_desc, phone);
         confirmationDesc.setText(message);
+    }
+
+    @Override
+    public void showHelpRequested() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.help_requested_title)
+                .setMessage(R.string.help_requested_text)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
     }
 }

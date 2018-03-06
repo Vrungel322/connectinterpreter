@@ -10,6 +10,7 @@
         android:layout_gravity="center"
         android:numStars="5"
         android:stepSize="1"
+        android:rating="3"
         android:isIndicator="false"
         android:clickable="true"
         android:focusable="true"

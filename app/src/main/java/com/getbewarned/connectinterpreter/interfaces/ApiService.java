@@ -110,4 +110,8 @@ public interface ApiService {
                                       @Field("review") String review);
 
 
+    @POST("/api/client/login_help")
+    @FormUrlEncoded
+    Call<ApiResponseBase> loginHelp(@Field("phone") String phone);
+
 }

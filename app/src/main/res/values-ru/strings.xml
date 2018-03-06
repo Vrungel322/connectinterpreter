@@ -18,7 +18,7 @@
     <string name="name_hint">Ваше имя</string>
     <string name="proceed">Продолжить</string>
     <string name="user_name_dialog_title">Как Вас зовут?</string>
-    <string name="work_time_info">Сервис предоставляется в рабочие дни\nс %s до %s %s</string>
+    <string name="work_time_info">Сервис доступен 24/7</string>
     <string name="timezone_ukraine">по Киевскому времени</string>
     <string name="timezone">по Московскому времени</string>
     <string name="reason_alert_title">Выберите причину звонка</string>
@@ -72,7 +72,7 @@
     <string name="drawer_unlim">Купить безлимит</string>
     <string name="drawer_utog">Я - член УТОГ</string>
     <string name="drawer_exit">Выйти</string>
-    <string name="drawer_support">Поддержка</string>
+    <string name="drawer_support">Не получается?</string>
     <string name="utog_alert_title">Вы состоите в УТОГ?</string>
     <string name="utog_alert_text">УТОГ предоставляет своим членам выгодные условия использования сервисом переводчиков ЖЯ. Вам необходимо указать свои данные для подтверждения членства в УТОГ</string>
     <string name="utog_never">Не спрашивать больше</string>
@@ -93,5 +93,10 @@
     <string name="change_number">Изменить номер</string>
     <string name="review_title">Оцените работу переводчика</string>
     <string name="review_hint">Что понравилось/не понравилось?</string>
+    <string name="menu_help">Help</string>
+    <string name="drawer_subscribe_title">Подписывайтесь на нас:</string>
+    <string name="help_requested_title">Ваша заявка принята</string>
+    <string name="help_requested_text">Ожидайте. В скором времени с вами свяжется наш специалист</string>
+    <string name="need_help">Не получили код?</string>
 </resources>
 

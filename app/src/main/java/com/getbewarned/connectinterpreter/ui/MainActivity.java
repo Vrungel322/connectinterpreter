@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -445,15 +446,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
         } else if (id == R.id.drawer_exit) {
             presenter.logout();
         } else if (id == R.id.drawer_support) {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("message/rfc822");
-            i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"info@getbewarned.com"});
-            try {
-                startActivity(Intent.createChooser(i, getString(R.string.drawer_support)));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this, getString(R.string.no_emial_client), Toast.LENGTH_SHORT).show();
-            }
-
+            openHelpPage();
         } else if (id == R.id.drawer_facebook) {
             String url = "https://www.facebook.com/GetBeWarned";
             Uri uri = Uri.parse(url);
@@ -513,10 +506,33 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.onReviewSkipped();
                         dialogInterface.dismiss();
                     }
                 })
                 .create()
                 .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_help) {
+            openHelpPage();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openHelpPage() {
+        Uri uri = Uri.parse("https://interpreter.getbw.me/help");
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 }

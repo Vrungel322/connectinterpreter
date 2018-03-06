@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#01579b</color>
-    <color name="colorPrimaryDark">#000</color>
+    <color name="colorPrimaryDark">#00a8f9</color>
     <color name="colorAccent">#01579b</color>
     <color name="colorCallToolbar">#7b1e1e1e</color>
     <color name="colorFieldHint">#01579b</color>

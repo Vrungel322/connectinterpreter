@@ -19,7 +19,7 @@
     <string name="name_hint">Ваше ім\'я</string>
     <string name="proceed">Продовжити</string>
     <string name="user_name_dialog_title">Як Вас звати?</string>
-    <string name="work_time_info">Сервіс надається в робочі дні\nз %s до %s %s</string>
+    <string name="work_time_info">Сервіс доступний 24/7</string>
     <string name="timezone_ukraine">за Київським часом</string>
     <string name="timezone">за Московським часом</string>
     <string name="reason_alert_title">Оберіть причину дзвінка</string>
@@ -73,7 +73,7 @@
     <string name="drawer_unlim">Придбати безліміт</string>
     <string name="drawer_utog">Я - член УТОГ</string>
     <string name="drawer_exit">Вийти</string>
-    <string name="drawer_support">Підтримка</string>
+    <string name="drawer_support">Не виходить?</string>
     <string name="utog_alert_title">Ви - член УТОГ?</string>
     <string name="utog_alert_text">УТОГ надає своїм членам вигідні умови використання сервісом перекладачів ЖМ. Вам необхідно вказати свої дані для подтвердження членства в УТОГ</string>
     <string name="utog_never">Більше не питати</string>
@@ -94,4 +94,9 @@
     <string name="change_number">Змінити номер</string>
     <string name="review_title">Будь ласка оцініть роботу перекладача</string>
     <string name="review_hint">Що сподобалося/не сподобалося?</string>
+    <string name="menu_help">Help</string>
+    <string name="drawer_subscribe_title">Підписуйтесь на нас:</string>
+    <string name="help_requested_title">Ваша заявка прийнята</string>
+    <string name="help_requested_text">Зачекайте. Незабаром з вами зв\'яжеться наш фахівець</string>
+    <string name="need_help">Не отримали код?</string>
 </resources>

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:id="@+id/drawer_top"
+    <group
+        android:id="@+id/drawer_top"
         android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_unlim"
@@ -28,21 +29,23 @@
     <group
         android:id="@+id/drawer_bottom"
         android:checkableBehavior="none">
-        <item
-            android:title="@string/drawer_facebook"
-            android:id="@+id/drawer_facebook"
-            android:icon="@drawable/facebook"/>
-        <item
-            android:title="@string/drawer_instagram"
-            android:id="@+id/drawer_instagram"
-            android:icon="@drawable/instagram"/>
-        <item
-            android:title="@string/drawer_telegram"
-            android:id="@+id/drawer_telegram"
-            android:icon="@drawable/telegram"/>
+        <item android:title="@string/drawer_subscribe_title">
+            <menu>
+                <item
+                    android:id="@+id/drawer_facebook"
+                    android:icon="@drawable/facebook"
+                    android:title="@string/drawer_facebook" />
+                <item
+                    android:id="@+id/drawer_instagram"
+                    android:icon="@drawable/instagram"
+                    android:title="@string/drawer_instagram" />
+                <item
+                    android:id="@+id/drawer_telegram"
+                    android:icon="@drawable/telegram"
+                    android:title="@string/drawer_telegram" />
+            </menu>
+        </item>
     </group>
-
-
 
 
 </menu>

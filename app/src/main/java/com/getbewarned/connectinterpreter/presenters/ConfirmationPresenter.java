@@ -6,6 +6,7 @@ import android.provider.Settings;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
 import com.getbewarned.connectinterpreter.interfaces.ConfirmationView;
+import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
@@ -102,6 +103,20 @@ public class ConfirmationPresenter implements Presenter {
                 if (response.getCode() != 0) {
                     view.setCode(String.valueOf(response.getCode()));
                 }
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage());
+            }
+        });
+    }
+
+    public void requestLoginHelp() {
+        networkManager.loginHelp(phone, new HelpRequested() {
+            @Override
+            public void onHelpRequested() {
+                view.showHelpRequested();
             }
 
             @Override

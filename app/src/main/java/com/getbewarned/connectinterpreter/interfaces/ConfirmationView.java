@@ -22,4 +22,6 @@ public interface ConfirmationView {
     void toggleEnabledLoginBtn(boolean enabled);
 
     void showNumber(String phone);
+
+    void showHelpRequested();
 }

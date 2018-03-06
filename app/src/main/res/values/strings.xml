@@ -19,7 +19,7 @@
     <string name="name_hint">Your name</string>
     <string name="proceed">Proceed</string>
     <string name="user_name_dialog_title">What is your name?</string>
-    <string name="work_time_info">Service works at workdays\nfrom %s till %s %s</string>
+    <string name="work_time_info">Service is available 24/7</string>
     <string name="timezone_ukraine">Kiev time</string>
     <string name="timezone">Moscow time</string>
     <string name="reason_alert_title">Choose call reason</string>
@@ -75,7 +75,7 @@
     <string name="drawer_unlim">Buy unlim</string>
     <string name="drawer_utog">I\'m member of UTOG</string>
     <string name="drawer_exit">Exit</string>
-    <string name="drawer_support">Support</string>
+    <string name="drawer_support">Does not work?</string>
 
     <string name="utog_alert_title">Are you a member of UTOG?</string>
     <string name="utog_alert_text">UTOG provides its members with favorable conditions for the use of the service by SL interpreters. You need to specify your data to confirm membership in UTOG</string>
@@ -118,4 +118,9 @@
     <string name="change_number">Change number</string>
     <string name="review_title">Please assess the interpreter’s performance</string>
     <string name="review_hint">Why was it good or bad?</string>
+    <string name="menu_help">Help</string>
+    <string name="drawer_subscribe_title">Follow us:</string>
+    <string name="help_requested_title">Your application is accepted</string>
+    <string name="help_requested_text">Please wait. A specialist will contact you shortly</string>
+    <string name="need_help">Didn\'t receive code?</string>
 </resources>

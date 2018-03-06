@@ -44,7 +44,6 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     private long leftMinutesOnStart;
 
-    private int publishTries = 0;
 
     private String apiKey;
     private String sessionId;
@@ -97,7 +96,6 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     @Override
     public void onDestroy() {
-
         endCall();
     }
 

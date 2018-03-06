@@ -7,6 +7,7 @@ import com.getbewarned.connectinterpreter.interfaces.ApiService;
 import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
 import com.getbewarned.connectinterpreter.interfaces.CountriesReceived;
+import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
 import com.getbewarned.connectinterpreter.interfaces.LogoutComplete;
@@ -422,6 +423,30 @@ public class NetworkManager {
             @Override
             public void onFailure(Call<ApiResponseBase> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void loginHelp(String phone, final HelpRequested helpRequested) {
+        Call<ApiResponseBase> call = api.loginHelp(phone);
+        call.enqueue(new Callback<ApiResponseBase>() {
+            @Override
+            public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        helpRequested.onHelpRequested();
+                    } else {
+                        helpRequested.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    helpRequested.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseBase> call, Throwable t) {
+                t.printStackTrace();
+                helpRequested.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }
