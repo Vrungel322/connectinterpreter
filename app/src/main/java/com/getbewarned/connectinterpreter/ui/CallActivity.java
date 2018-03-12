@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.media.AudioManager;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
@@ -39,6 +42,11 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
     private MessagesAdapter messagesAdapter;
     private ProgressDialog loadingDialog;
+
+    private AudioManager audioManager;
+    private int volume;
+    private int streamType = AudioManager.STREAM_VOICE_CALL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +87,8 @@ public class CallActivity extends AppCompatActivity implements CallView {
                 return true;
             }
         });
+
+        this.audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 
         messagesAdapter = new MessagesAdapter();
@@ -205,5 +215,17 @@ public class CallActivity extends AppCompatActivity implements CallView {
     @Override
     public void showOneMoreMessage(String message) {
         messagesAdapter.addMessage(message);
+    }
+
+
+    @Override
+    public void setMaxVolume() {
+        volume = audioManager.getStreamVolume(streamType);
+        audioManager.setStreamVolume(streamType, audioManager.getStreamMaxVolume(streamType), 0);
+    }
+
+    @Override
+    public void resetVolume() {
+        audioManager.setStreamVolume(streamType, volume, 0);
     }
 }

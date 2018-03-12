@@ -30,4 +30,8 @@ public interface CallView {
     void showInterpreterView(View view);
 
     void showOneMoreMessage(String message);
+
+    void setMaxVolume();
+
+    void resetVolume();
 }

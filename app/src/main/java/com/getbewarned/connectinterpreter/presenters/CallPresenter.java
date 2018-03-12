@@ -1,7 +1,10 @@
 package com.getbewarned.connectinterpreter.presenters;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 
 import com.getbewarned.connectinterpreter.interfaces.CallView;
@@ -11,12 +14,14 @@ import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.HumanTime;
+import com.opentok.android.AudioDeviceManager;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Publisher;
 import com.opentok.android.PublisherKit;
 import com.opentok.android.Session;
 import com.opentok.android.Stream;
 import com.opentok.android.Subscriber;
+import com.opentok.android.SubscriberKit;
 
 
 /**
@@ -69,6 +74,8 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
         view.updateLeftTime(new HumanTime(leftMinutesOnStart).getTime());
         createSession(apiKey, sessionId, token);
+
+
     }
 
 
@@ -103,6 +110,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         if (ended) {
             return;
         }
+
         ended = true;
         if (session != null) {
             session.disconnect();
@@ -110,6 +118,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
             if (subscriber != null) {
                 subscriber.setSubscriberListener(null);
                 session.unsubscribe(subscriber);
+                view.resetVolume();
             }
             if (publisher != null) {
                 publisher.setPublisherListener(null);
@@ -147,6 +156,13 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
             session.subscribe(subscriber);
             view.showInterpreterView(subscriber.getView());
             connectionEstablished();
+            subscriber.setAudioStatsListener(new SubscriberKit.AudioStatsListener() {
+                @Override
+                public void onAudioStats(SubscriberKit subscriberKit, SubscriberKit.SubscriberAudioStats subscriberAudioStats) {
+                    view.setMaxVolume();
+                    subscriber.setAudioStatsListener(null);
+                }
+            });
         }
     }
 
@@ -156,6 +172,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         view.hideIndicator();
         view.toggleEndCallButtonVisibility(true);
         userManager.updateLastCallSessionId(session.getSessionId());
+
     }
 
     private void runTimer() {
@@ -232,6 +249,6 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
                 // show failed to send
             }
         });
-
     }
+
 }

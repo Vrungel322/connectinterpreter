@@ -447,6 +447,12 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
             presenter.logout();
         } else if (id == R.id.drawer_support) {
             openHelpPage();
+        } else if (id == R.id.drawer_share) {
+            String share = getString(R.string.share_text);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, share);
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.drawer_share)));
         } else if (id == R.id.drawer_facebook) {
             String url = "https://www.facebook.com/GetBeWarned";
             Uri uri = Uri.parse(url);

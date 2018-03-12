@@ -13,6 +13,9 @@
             android:id="@+id/drawer_utog"
             android:title="@string/drawer_utog" />
         <item
+            android:id="@+id/drawer_share"
+            android:title="@string/drawer_share" />
+        <item
             android:id="@+id/drawer_exit"
             android:title="@string/drawer_exit" />
     </group>

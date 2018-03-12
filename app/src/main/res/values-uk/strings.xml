@@ -99,4 +99,6 @@
     <string name="help_requested_title">Ваша заявка прийнята</string>
     <string name="help_requested_text">Зачекайте. Незабаром з вами зв\'яжеться наш фахівець</string>
     <string name="need_help">Не отримали код?</string>
+    <string name="drawer_share">Розповісти другу</string>
+    <string name="share_text">Раджу встановити Перекладач ЖМ. Допомагає мені вирішувати проблеми. Мені дуже подобається. https://interpreter.getbw.me</string>
 </resources>

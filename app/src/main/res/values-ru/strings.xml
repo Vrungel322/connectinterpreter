@@ -98,5 +98,7 @@
     <string name="help_requested_title">Ваша заявка принята</string>
     <string name="help_requested_text">Ожидайте. В скором времени с вами свяжется наш специалист</string>
     <string name="need_help">Не получили код?</string>
+    <string name="drawer_share">Рассказать другу</string>
+    <string name="share_text">Советую установить Переводчик ЖЯ. Помогает мне решать проблемы. Мне очень нравится. https://interpreter.getbw.me</string>
 </resources>
 

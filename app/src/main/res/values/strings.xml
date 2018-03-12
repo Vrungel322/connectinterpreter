@@ -123,4 +123,6 @@
     <string name="help_requested_title">Your application is accepted</string>
     <string name="help_requested_text">Please wait. A specialist will contact you shortly</string>
     <string name="need_help">Didn\'t receive code?</string>
+    <string name="drawer_share">Tell a friend</string>
+    <string name="share_text">I advise you to install a SL Interpreter. It helps me to solve problems. I like it. https://interpreter.getbw.me</string>
 </resources>
