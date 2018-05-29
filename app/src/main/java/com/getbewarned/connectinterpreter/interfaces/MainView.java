@@ -2,6 +2,7 @@ package com.getbewarned.connectinterpreter.interfaces;
 
 import android.content.Context;
 
+import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface MainView {
 
     void updateUserName(String name);
 
-    void askForReason();
+    void askForReason(List<Reason> reasons);
 
     void navigateToCallWith(String token, String sessionId, String apiKey, long maxSeconds);
 

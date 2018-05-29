@@ -9,6 +9,7 @@ import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
+import com.getbewarned.connectinterpreter.interfaces.ReasonsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
 import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
@@ -20,13 +21,18 @@ import com.getbewarned.connectinterpreter.models.HumanTime;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
+import com.getbewarned.connectinterpreter.models.Reason;
+import com.getbewarned.connectinterpreter.models.ReasonResponse;
+import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogAsk;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 import ua.privatbank.paylibliqpay.ErrorCode;
@@ -169,17 +175,31 @@ public class MainPresenter implements Presenter {
     }
 
     public void onStartCallPressed() {
+        networkManager.getReasons(new ReasonsReceived() {
+            @Override
+            public void onReasonsReceived(ReasonsResponse response) {
+                List<Reason> reasons = new ArrayList<>();
+                for (ReasonResponse reasonResponse : response.getReasons()) {
+                    reasons.add(new Reason(reasonResponse.getSlug(), reasonResponse.getLabel()));
+                }
+                view.askForReason(reasons);
+            }
 
-        view.askForReason();
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage());
+            }
+        });
+
     }
 
-    public void reasonSelected(final String reason) {
+    public void reasonSelected(final Reason reason) {
 
         if (callInitiated) {
             return;
         }
         callInitiated = true;
-        networkManager.makeCall(reason, new TokenReceived() {
+        networkManager.makeCall(reason.getSlug(), new TokenReceived() {
             @Override
             public void onTokenReceived(TokenResponse response) {
                 view.navigateToCallWith(response.getToken(), response.getSessionId(), response.getApiKey(), response.getMaxSeconds());

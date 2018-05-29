@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
+import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
@@ -41,7 +42,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -323,11 +327,15 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
 
 
     @Override
-    public void askForReason() {
+    public void askForReason(final List<Reason> reasons) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_LoaderDialog);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item);
-        arrayAdapter.addAll(getResources().getStringArray(R.array.call_reasons));
+        List<String> values = new ArrayList<String>();
+        for (Reason reason : reasons) {
+            values.add(reason.getLabel());
+        }
+        arrayAdapter.addAll(values);
 
         builder.setTitle(getString(R.string.reason_alert_title))
                 .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -339,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
                 .setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String reason = arrayAdapter.getItem(which);
+                        Reason reason = reasons.get(which);
                         presenter.reasonSelected(reason);
                         dialog.dismiss();
                     }

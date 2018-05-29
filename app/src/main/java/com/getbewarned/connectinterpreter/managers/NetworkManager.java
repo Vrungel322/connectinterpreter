@@ -18,6 +18,7 @@ import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestCreated;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestMessageCreated;
+import com.getbewarned.connectinterpreter.interfaces.ReasonsReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestMessagesReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
@@ -35,6 +36,7 @@ import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.NewRequestResponse;
+import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
@@ -424,6 +426,30 @@ public class NetworkManager {
             public void onFailure(Call<CountriesResponse> call, Throwable t) {
                 t.printStackTrace();
                 countriesReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void getReasons(final ReasonsReceived reasonsReceived) {
+        Call<ReasonsResponse> call = api.getReasons(getLanguage());
+        call.enqueue(new Callback<ReasonsResponse>() {
+            @Override
+            public void onResponse(Call<ReasonsResponse> call, Response<ReasonsResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        reasonsReceived.onReasonsReceived(response.body());
+                    } else {
+                        reasonsReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    reasonsReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReasonsResponse> call, Throwable t) {
+                t.printStackTrace();
+                reasonsReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }

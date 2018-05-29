@@ -11,6 +11,7 @@ import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.NewRequestResponse;
+import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
@@ -112,6 +113,9 @@ public interface ApiService {
 
     @GET("/api/client/countries")
     Call<CountriesResponse> getCountries(@Query("lang") String language);
+
+    @GET("/api/client/reasons")
+    Call<ReasonsResponse> getReasons(@Query("lang") String language);
 
     @POST("/api/client/call_review")
     @FormUrlEncoded
