@@ -293,6 +293,10 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
 
     @Override
     public void onStreamDestroyed(PublisherKit publisherKit, Stream stream) {
+        if (publisher != null && asker == null) {
+            view.updateAskerView(null);
+            publisher = null;
+        }
     }
 
     @Override
