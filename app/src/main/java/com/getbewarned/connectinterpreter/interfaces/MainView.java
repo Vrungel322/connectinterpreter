@@ -46,7 +46,7 @@ public interface MainView {
 
     void hideUtog();
 
-    void hideUnlim();
+    void toggleUnlim(boolean isUnlim);
 
     void askAboutUtog();
 

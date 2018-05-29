@@ -3,20 +3,31 @@ package com.getbewarned.connectinterpreter.interfaces;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.getbewarned.connectinterpreter.models.CountriesResponse;
+import com.getbewarned.connectinterpreter.models.GroupSessionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
+import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
+import com.getbewarned.connectinterpreter.models.NewMessageResponse;
+import com.getbewarned.connectinterpreter.models.NewRequestResponse;
+import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -114,4 +125,34 @@ public interface ApiService {
     @FormUrlEncoded
     Call<ApiResponseBase> loginHelp(@Field("phone") String phone);
 
+    @GET("/api/client/requests")
+    Call<RequestsResponse> getRequests(@Header("X-Interpreter-Client-Token") String authorization);
+
+    @POST("/api/client/requests")
+    @Multipart
+    Call<NewRequestResponse> newRequest(@Header("X-Interpreter-Client-Token") String authorization,
+                                        @Part MultipartBody.Part media);
+
+    @GET("/api/client/requests/{request}")
+    Call<MessagesResponse> getRequestMessages(@Header("X-Interpreter-Client-Token") String authorization,
+                                              @Path("request") long requestId);
+
+    @POST("/api/client/requests/{request}")
+    @Multipart
+    Call<NewMessageResponse> newRequestMessage(@Header("X-Interpreter-Client-Token") String authorization,
+                                               @Path("request") long requestId,
+                                               @Part MultipartBody.Part media,
+                                               @Part("type") RequestBody type);
+
+    @GET("/api/client/group/{session}")
+    Call<GroupSessionResponse> connectToGroupSession(@Header("X-Interpreter-Client-Token") String authorization,
+                                                     @Path("session") String sessionId);
+
+    @POST("/api/client/group/{session}/askers")
+    Call<ApiResponseBase> askQuestion(@Header("X-Interpreter-Client-Token") String authorization,
+                                      @Path("session") String sessionId);
+
+    @DELETE("/api/client/group/{session}/askers")
+    Call<ApiResponseBase> stopAsking(@Header("X-Interpreter-Client-Token") String authorization,
+                                     @Path("session") String sessionId);
 }

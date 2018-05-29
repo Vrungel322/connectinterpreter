@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
-import com.getbewarned.connectinterpreter.interfaces.LogoutComplete;
+import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
@@ -28,6 +28,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.realm.Realm;
 import ua.privatbank.paylibliqpay.ErrorCode;
 import ua.privatbank.paylibliqpay.LiqPay;
 import ua.privatbank.paylibliqpay.LiqPayCallBack;
@@ -135,9 +136,7 @@ public class MainPresenter implements Presenter {
                     userManager.updateUserUnlim(response.isUnlim());
                     userManager.updateUserActiveTill(response.getActiveTill());
                     userManager.updateUserUtog(response.isUtog());
-                    if (userManager.getUserUnlim()) {
-                        view.hideUnlim();
-                    }
+                    view.toggleUnlim(userManager.getUserUnlim());
                     if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
                         view.hideUtog();
                     }
@@ -223,11 +222,18 @@ public class MainPresenter implements Presenter {
     }
 
     public void logout() {
-        networkManager.logout(new LogoutComplete() {
+        networkManager.logout(new BaseRequestCompleted() {
             @Override
-            public void onLogoutComplete(ApiResponseBase response) {
+            public void onComplete(ApiResponseBase response) {
                 if (response.isSuccess()) {
                     view.navigateToLogin();
+                    Realm realm = Realm.getDefaultInstance();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.deleteAll();
+                        }
+                    });
                 } else {
                     view.showError(response.getMessage());
                 }

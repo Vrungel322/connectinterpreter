@@ -101,4 +101,25 @@
     <string name="need_help">Не отримали код?</string>
     <string name="drawer_share">Розповісти другу</string>
     <string name="share_text">Раджу встановити Перекладач ЖМ. Допомагає мені вирішувати проблеми. Мені дуже подобається. https://interpreter.getbw.me</string>
+    <string name="drawer_requests">Текст-Відео-Переклад</string>
+    <string name="request_send_photo">Надіслати файл</string>
+    <string name="media_image_gallery">Обрати фото</string>
+    <string name="media_image_camera">Зробити фото</string>
+    <string name="media_selector_title">Обрати зображення</string>
+    <string name="file_uploading">Завантаження файлу. Зачекайте</string>
+    <string name="no_requests_desc">Ви можете попросити наших перекладачів пояснити за домогою ЖМ незрозумілий вам документ. Сфотографуйте його або оберіть з пристрою</string>
+    <!--Вы можете попросить наших переводчиков обьяснить на РЖЯ документ или перевести ваше видео на РЖЯ в текст для слышаших-->
+    <string name="no_requests_title">У вас щє не має заявок</string>
+    <string name="status_new">Нова</string>
+    <string name="status_assigned">У роботі</string>
+    <string name="status_closed">Закрита</string>
+    <string name="drawer_scan_qr">Сканер QR коду</string>
+    <string name="btn_reconnect">Перепідключитися</string>
+    <string name="btn_close">Закрити</string>
+    <string name="waiting_for_interpreter">Чекаємо на перекладача…</string>
+    <string name="ask_a_question">Запитати</string>
+    <string name="asking_a_question">Відміна</string>
+    <string name="group_session_leave">Відключитися</string>
+    <string name="group_waiting_title">Зачекайте на з\'єднання…</string>
+    <string name="group_waiting_text">Будь ласка, зачекайте. Це може зайняти кілька секунд</string>
 </resources>

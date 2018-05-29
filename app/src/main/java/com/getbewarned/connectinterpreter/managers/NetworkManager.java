@@ -1,19 +1,25 @@
 package com.getbewarned.connectinterpreter.managers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ApiService;
 import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
 import com.getbewarned.connectinterpreter.interfaces.CountriesReceived;
+import com.getbewarned.connectinterpreter.interfaces.GroupSessionReceived;
 import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
-import com.getbewarned.connectinterpreter.interfaces.LogoutComplete;
+import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
 import com.getbewarned.connectinterpreter.interfaces.MessageSent;
 import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
+import com.getbewarned.connectinterpreter.interfaces.NewRequestCreated;
+import com.getbewarned.connectinterpreter.interfaces.NewRequestMessageCreated;
+import com.getbewarned.connectinterpreter.interfaces.RequestMessagesReceived;
+import com.getbewarned.connectinterpreter.interfaces.RequestsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
 import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
@@ -21,20 +27,30 @@ import com.getbewarned.connectinterpreter.interfaces.UtogResponseReceived;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.getbewarned.connectinterpreter.models.CountriesResponse;
+import com.getbewarned.connectinterpreter.models.GroupSessionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
+import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
+import com.getbewarned.connectinterpreter.models.NewMessageResponse;
+import com.getbewarned.connectinterpreter.models.NewRequestResponse;
+import com.getbewarned.connectinterpreter.models.Request;
+import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.Locale;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -192,7 +208,7 @@ public class NetworkManager {
         });
     }
 
-    public void logout(final LogoutComplete logoutComplete) {
+    public void logout(final BaseRequestCompleted baseRequestCompleted) {
         Call<ApiResponseBase> call = api.logout(this.authToken, getLanguage());
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
@@ -203,19 +219,19 @@ public class NetworkManager {
                 }
                 if (response.isSuccessful()) {
                     if (response.body().isSuccess()) {
-                        logoutComplete.onLogoutComplete(response.body());
+                        baseRequestCompleted.onComplete(response.body());
                     } else {
-                        logoutComplete.onErrorReceived(getErrorByCode(response.body().getCode()));
+                        baseRequestCompleted.onErrorReceived(getErrorByCode(response.body().getCode()));
                     }
                 } else {
-                    logoutComplete.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                    baseRequestCompleted.onErrorReceived(getErrorFromResponse(response.errorBody()));
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponseBase> call, Throwable t) {
                 t.printStackTrace();
-                logoutComplete.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+                baseRequestCompleted.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }
@@ -451,6 +467,178 @@ public class NetworkManager {
         });
     }
 
+    public void loadRequests(final RequestsReceived requestsReceived) {
+        Call<RequestsResponse> call = api.getRequests(authToken);
+        call.enqueue(new Callback<RequestsResponse>() {
+            @Override
+            public void onResponse(Call<RequestsResponse> call, Response<RequestsResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        requestsReceived.onRequestsReceived(response.body());
+                    } else {
+                        requestsReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    requestsReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestsResponse> call, Throwable t) {
+                requestsReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void newRequest(Bitmap image, final NewRequestCreated newRequestCreated) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), byteArray);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("media", "image", reqFile);
+
+        Call<NewRequestResponse> call = api.newRequest(authToken, part);
+        call.enqueue(new Callback<NewRequestResponse>() {
+            @Override
+            public void onResponse(Call<NewRequestResponse> call, Response<NewRequestResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        newRequestCreated.onRequestCreated(response.body());
+                    } else {
+                        newRequestCreated.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    newRequestCreated.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewRequestResponse> call, Throwable t) {
+                newRequestCreated.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void loadRequestMessages(Request request, final RequestMessagesReceived messagesReceived) {
+        Call<MessagesResponse> call = api.getRequestMessages(authToken, request.getId());
+        call.enqueue(new Callback<MessagesResponse>() {
+            @Override
+            public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        messagesReceived.onMessagesReceived(response.body());
+                    } else {
+                        messagesReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    messagesReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessagesResponse> call, Throwable t) {
+                messagesReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void newRequestMessage(Bitmap image, Request request, final NewRequestMessageCreated newMessageCreated) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), byteArray);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("media", "image", reqFile);
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "media");
+        Call<NewMessageResponse> call = api.newRequestMessage(authToken, request.getId(), part, type);
+        call.enqueue(new Callback<NewMessageResponse>() {
+            @Override
+            public void onResponse(Call<NewMessageResponse> call, Response<NewMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        newMessageCreated.onMessageCreated(response.body());
+                    } else {
+                        newMessageCreated.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    newMessageCreated.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewMessageResponse> call, Throwable t) {
+                newMessageCreated.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void connectToGroupSession(String sessionId, final GroupSessionReceived received) {
+        Call<GroupSessionResponse> call = api.connectToGroupSession(authToken, sessionId);
+        call.enqueue(new Callback<GroupSessionResponse>() {
+            @Override
+            public void onResponse(Call<GroupSessionResponse> call, Response<GroupSessionResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        received.onDataReceived(response.body());
+                    } else {
+                        received.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    received.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupSessionResponse> call, Throwable t) {
+                received.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void askQuestion(String sessionId, final BaseRequestCompleted baseRequestCompleted) {
+        Call<ApiResponseBase> call = api.askQuestion(authToken, sessionId);
+        call.enqueue(new Callback<ApiResponseBase>() {
+            @Override
+            public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        baseRequestCompleted.onComplete(response.body());
+                    } else {
+                        baseRequestCompleted.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    baseRequestCompleted.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseBase> call, Throwable t) {
+                baseRequestCompleted.onErrorReceived(new Error(t));
+            }
+        });
+    }
+
+    public void stopAsking(String sessionId, final BaseRequestCompleted baseRequestCompleted) {
+        Call<ApiResponseBase> call = api.stopAsking(authToken, sessionId);
+        call.enqueue(new Callback<ApiResponseBase>() {
+            @Override
+            public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        baseRequestCompleted.onComplete(response.body());
+                    } else {
+                        baseRequestCompleted.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    baseRequestCompleted.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseBase> call, Throwable t) {
+                baseRequestCompleted.onErrorReceived(new Error(t));
+            }
+        });
+    }
 
 
     private Error getErrorFromResponse(ResponseBody errorBody) {

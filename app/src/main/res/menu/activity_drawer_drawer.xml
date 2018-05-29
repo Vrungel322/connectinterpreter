@@ -16,6 +16,16 @@
             android:id="@+id/drawer_share"
             android:title="@string/drawer_share" />
         <item
+            android:id="@+id/drawer_requests"
+            android:checkable="false"
+            android:title="@string/drawer_requests"
+            android:visible="false"
+            />
+        <item
+            android:id="@+id/drawer_scan_qr"
+            android:checkable="false"
+            android:title="@string/drawer_scan_qr"/>
+        <item
             android:id="@+id/drawer_exit"
             android:title="@string/drawer_exit" />
     </group>

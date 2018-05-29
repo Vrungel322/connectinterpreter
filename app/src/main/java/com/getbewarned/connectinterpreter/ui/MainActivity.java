@@ -29,7 +29,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
@@ -39,13 +38,10 @@ import com.getbewarned.connectinterpreter.presenters.MainPresenter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -54,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
+    private static final int REQUEST_SCAN_QR = 923;
 
     private ImageButton callBtn;
     private TextView minutesLeft;
@@ -314,8 +311,9 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
 
 
     @Override
-    public void hideUnlim() {
-        menu.findItem(R.id.drawer_unlim).setVisible(false);
+    public void toggleUnlim(boolean isUnlim) {
+        menu.findItem(R.id.drawer_unlim).setVisible(!isUnlim);
+        menu.findItem(R.id.drawer_requests).setVisible(isUnlim);
     }
 
     @Override
@@ -447,6 +445,9 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
             presenter.logout();
         } else if (id == R.id.drawer_support) {
             openHelpPage();
+        } else if (id == R.id.drawer_requests) {
+            Intent intent = new Intent(this, RequestsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.drawer_share) {
             String share = getString(R.string.share_text);
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -486,6 +487,9 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/BeWarned")));
             }
+        } else if (id == R.id.drawer_scan_qr) {
+            Intent intent = new Intent(MainActivity.this, QrScannerActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

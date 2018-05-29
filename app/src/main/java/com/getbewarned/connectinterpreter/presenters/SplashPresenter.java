@@ -1,8 +1,11 @@
 package com.getbewarned.connectinterpreter.presenters;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
@@ -11,6 +14,8 @@ import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import io.realm.Realm;
 
 /**
  * Created by artycake on 1/24/18.
@@ -21,15 +26,23 @@ public class SplashPresenter implements Presenter {
     private SplashView view;
     private NetworkManager networkManager;
     private UserManager userManager;
+    private boolean linkOpening = false;
 
     public SplashPresenter(SplashView view) {
         this.view = view;
         networkManager = new NetworkManager(view.getContext());
         userManager = new UserManager(view.getContext());
+        Realm.init(view.getContext());
     }
 
     @Override
     public void onCreate(Bundle extras) {
+        if (extras.getString("link") != null) {
+            linkOpening = true;
+            Intent linkIntent = new Intent(Intent.ACTION_VIEW);
+            linkIntent.setData(Uri.parse(extras.getString("link")));
+            view.getContext().startActivity(linkIntent);
+        }
         FirebaseMessaging.getInstance().subscribeToTopic("news");
     }
 
@@ -39,6 +52,10 @@ public class SplashPresenter implements Presenter {
 
     @Override
     public void onResume() {
+        if (linkOpening) {
+            linkOpening = false;
+            return;
+        }
         checkVersion();
     }
 
