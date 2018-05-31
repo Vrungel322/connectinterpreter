@@ -81,6 +81,7 @@ public class ConfirmationPresenter implements Presenter {
                     userManager.updateUserUnlim(response.isUnlim());
                     userManager.updateUserUtog(response.isUtog());
                     userManager.updateUserUkrainian(response.isUkrainian());
+                    userManager.updateFirstTime(response.getFirstTime());
                     view.navigateToApp();
                 } else {
                     view.showError(response.getMessage());

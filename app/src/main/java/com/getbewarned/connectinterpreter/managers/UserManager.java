@@ -13,6 +13,7 @@ import java.util.Date;
 
 public class UserManager {
 
+    private static final String FIRST_TIME = "first_time";
     private static final String USER_TOKEN = "user_token";
     private static final String USER_NAME = "user_name";
     private static final String USER_SECONDS = "user_seconds";
@@ -99,6 +100,12 @@ public class UserManager {
         editor.apply();
     }
 
+    public void updateFirstTime(boolean firstTime) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(FIRST_TIME, firstTime);
+        editor.apply();
+    }
+
     public String getUserName() {
         return sharedPreferences.getString(USER_NAME, "");
     }
@@ -143,5 +150,9 @@ public class UserManager {
 
     public String getLastCallSessionId() {
         return sharedPreferences.getString(LAST_CALL_SESSION_ID, null);
+    }
+
+    public boolean isFirstTime() {
+        return sharedPreferences.getBoolean(FIRST_TIME, false);
     }
 }

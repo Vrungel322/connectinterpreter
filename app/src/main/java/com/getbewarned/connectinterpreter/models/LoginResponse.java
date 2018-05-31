@@ -29,6 +29,9 @@ public class LoginResponse extends ApiResponseBase {
     @Expose
     Boolean is_ukrainian;
 
+    @Expose
+    Boolean first_time;
+
     public String getName() {
         return name;
     }
@@ -55,5 +58,9 @@ public class LoginResponse extends ApiResponseBase {
 
     public Boolean isUkrainian() {
         return is_ukrainian;
+    }
+
+    public Boolean getFirstTime() {
+        return first_time;
     }
 }
