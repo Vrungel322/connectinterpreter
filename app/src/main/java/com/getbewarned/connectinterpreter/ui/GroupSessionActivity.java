@@ -155,7 +155,7 @@ public class GroupSessionActivity extends AppCompatActivity implements GroupSess
                 .setNegativeButton(R.string.btn_close, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+                        presenter.leave();
                     }
                 })
                 .create()

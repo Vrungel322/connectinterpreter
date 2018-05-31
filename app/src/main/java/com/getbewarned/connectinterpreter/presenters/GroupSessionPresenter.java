@@ -237,7 +237,11 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
             return;
         }
         leaving = true;
-        session.disconnect();
+        if (session != null) {
+            session.disconnect();
+        } else {
+            view.leave();
+        }
     }
 
     public void toggleAsking() {
