@@ -42,10 +42,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -54,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
-    private static final int REQUEST_SCAN_QR = 923;
 
     private ImageButton callBtn;
     private TextView minutesLeft;
@@ -91,11 +87,10 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         this.menu = navigationView.getMenu();
-
         callBtn = findViewById(R.id.call_button);
         minutesLeft = findViewById(R.id.left_value_label);
         callToAction = findViewById(R.id.call_to_action);
-        leftLabel = findViewById(R.id.left_label);
+        leftLabel = findViewById(R.id.availability_desc);
         buyUnlimButton = findViewById(R.id.buy_unlim);
         View headerLayout = navigationView.getHeaderView(0);
         userNameLabel = headerLayout.findViewById(R.id.drawer_username);
@@ -107,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
         notAvailableDesc = findViewById(R.id.not_available_desc);
         workTime = findViewById(R.id.work_time);
 
-        presenter = new MainPresenter(this);
+        presenter = new MainPresenter(this, this);
 
 
         callBtn.setOnClickListener(new View.OnClickListener() {
@@ -178,12 +173,10 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
     }
 
     @Override
-    public Context getContext() {
-        return this;
-    }
-
-    @Override
     public void showError(String message) {
+        if (isFinishing()) {
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error_global)
                 .setMessage(message)
@@ -196,12 +189,6 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
                 })
                 .create()
                 .show();
-    }
-
-    @Override
-    public void navigateToCall() {
-        Intent intent = new Intent(this, CallActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -314,16 +301,6 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
     }
 
 
-    @Override
-    public void toggleUnlim(boolean isUnlim) {
-        menu.findItem(R.id.drawer_unlim).setVisible(!isUnlim);
-        menu.findItem(R.id.drawer_requests).setVisible(isUnlim);
-    }
-
-    @Override
-    public void hideUtog() {
-        menu.findItem(R.id.drawer_utog).setVisible(false);
-    }
 
 
     @Override
@@ -380,23 +357,6 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
         minutesLeft.setText(dateTill);
     }
 
-    @Override
-    public void showWorkTime(boolean ukraine) {
-        Calendar mCalendar = new GregorianCalendar(TimeZone.getTimeZone("Europe/Kiev"));
-        mCalendar.set(Calendar.HOUR_OF_DAY, 9);
-        String timeZone = getString(R.string.timezone_ukraine);
-        if (!ukraine) {
-            long timestamp = mCalendar.getTimeInMillis();
-            mCalendar = new GregorianCalendar(TimeZone.getTimeZone("Europe/Moscow"));
-            mCalendar.setTimeInMillis(timestamp);
-            timeZone = getString(R.string.timezone);
-        }
-        String from = String.format(Locale.getDefault(), "%02d:00", mCalendar.get(Calendar.HOUR_OF_DAY));
-        mCalendar.add(Calendar.HOUR_OF_DAY, 9);
-        String till = String.format(Locale.getDefault(), "%02d:00", mCalendar.get(Calendar.HOUR_OF_DAY));
-        workTime.setText(getString(R.string.work_time_info, from, till, timeZone));
-
-    }
 
     @Override
     public void toggleBuyUnlimEnabled(boolean enabled) {
@@ -504,7 +464,6 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     @Override
     public void askAboutLastCall() {

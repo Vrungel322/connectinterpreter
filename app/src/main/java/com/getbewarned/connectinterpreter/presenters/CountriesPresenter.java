@@ -8,10 +8,12 @@ import com.getbewarned.connectinterpreter.interfaces.CountriesView;
 import com.getbewarned.connectinterpreter.interfaces.OnCountryClicked;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
+import com.getbewarned.connectinterpreter.managers.ProxyManager;
 import com.getbewarned.connectinterpreter.models.CountriesResponse;
 import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.models.CountryResponse;
 
+import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -26,11 +28,13 @@ public class CountriesPresenter implements Presenter {
     private CountriesAdapter adapter;
     private CountriesView view;
     private NetworkManager networkManager;
+    private ProxyManager proxyManager;
 
     public CountriesPresenter(final CountriesView view) {
         this.view = view;
         adapter = new CountriesAdapter();
         networkManager = new NetworkManager(view.getContext());
+        proxyManager = (ProxyManager) ProxySelector.getDefault();
 
         adapter.setOnCountryClicked(new OnCountryClicked() {
             @Override

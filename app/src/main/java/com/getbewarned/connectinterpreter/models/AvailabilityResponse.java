@@ -20,6 +20,18 @@ public class AvailabilityResponse extends ApiResponseBase {
     @Expose
     boolean is_utog;
 
+    @Expose
+    boolean is_utog_available;
+
+    @Expose
+    String region;
+
+    @Expose
+    String name;
+
+    @Expose
+    String phone;
+
 
     public long getSeconds() {
         return seconds;
@@ -35,6 +47,22 @@ public class AvailabilityResponse extends ApiResponseBase {
 
     public boolean isUtog() {
         return is_utog;
+    }
+
+    public boolean isUtogAvailable() {
+        return is_utog_available;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 }
 

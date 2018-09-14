@@ -31,7 +31,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/connect_interpreter_icon_blank" />
+                android:src="@drawable/logo_blank" />
 
             <TextView
                 android:layout_width="match_parent"

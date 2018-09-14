@@ -73,6 +73,9 @@ public class RequestsActivity extends AppCompatActivity implements RequestsView 
 
     @Override
     public void showError(String message) {
+        if (isFinishing()) {
+            return;
+        }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 

@@ -45,15 +45,13 @@ public class UtogPresenter {
                 sending = false;
                 if (response.isSuccess()) {
                     view.showSuccess(response.getMessage());
-                } else {
-                    view.showError(response.getMessage());
                 }
             }
 
             @Override
             public void onErrorReceived(Error error) {
                 sending = false;
-                view.showError(view.getContext().getString(R.string.internet_failure));
+                view.showError(error.getMessage());
             }
         });
 

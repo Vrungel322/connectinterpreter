@@ -19,10 +19,6 @@ public interface MainView {
 
     void showChecking();
 
-    Context getContext();
-
-    void navigateToCall();
-
     void showError(String message);
 
     void requestPermissions();
@@ -45,15 +41,9 @@ public interface MainView {
 
     void showTariffsSelector(List<TariffResponse> tariffs);
 
-    void hideUtog();
-
-    void toggleUnlim(boolean isUnlim);
-
     void askAboutUtog();
 
     void navigateToUtog();
-
-    void showWorkTime(boolean ukraine);
 
     void askAboutLastCall();
 

@@ -3,9 +3,10 @@ package com.getbewarned.connectinterpreter.ui;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.media.AudioManager;
-import android.os.Build;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,13 +15,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
@@ -42,6 +42,7 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
     private MessagesAdapter messagesAdapter;
     private ProgressDialog loadingDialog;
+    private AlertDialog videoDialog;
 
     private AudioManager audioManager;
     private int volume;
@@ -53,10 +54,14 @@ public class CallActivity extends AppCompatActivity implements CallView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         selfContainer = findViewById(R.id.self_container);
         interpreterContainer = findViewById(R.id.interpreter_container);
         endCallButton = findViewById(R.id.end_call_button);
-        timeLeft = findViewById(R.id.time_left);
+        timeLeft = findViewById(R.id.availability_title);
         duration = findViewById(R.id.duration);
         messagesList = findViewById(R.id.messages);
         messageField = findViewById(R.id.message_field);
@@ -80,6 +85,9 @@ public class CallActivity extends AppCompatActivity implements CallView {
         messageField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (keyEvent == null) {
+                    return false;
+                }
                 if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER &&
                         keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
                     sendMessage();
@@ -164,6 +172,9 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
     @Override
     public void showError(String message) {
+        if (isFinishing()) {
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error_call_failed)
                 .setMessage(R.string.err_call_try_later)
@@ -217,6 +228,61 @@ public class CallActivity extends AppCompatActivity implements CallView {
         messagesAdapter.addMessage(message);
     }
 
+
+    @Override
+    public void showWaitVideo() {
+        if (isFinishing()) {
+            return;
+        }
+        if (videoDialog == null) {
+            final VideoView videoView = new VideoView(this);
+            videoView.setMediaController(new MediaController(this));
+            final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
+            videoDialog = new AlertDialog.Builder(this)
+                    .setView(videoView)
+                    .setCancelable(false)
+                    .setNegativeButton(
+                            getResources().getString(R.string.cancel),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    presenter.endCall();
+                                    dialog.dismiss();
+                                }
+                            }
+                    )
+                    .create();
+            videoDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    videoView.setVideoURI(video);
+                    videoView.start();
+                }
+            });
+
+            videoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    videoView.stopPlayback();
+                }
+            });
+            videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    videoDialog.dismiss();
+                    showIndicator();
+                }
+            });
+        }
+        videoDialog.show();
+    }
+
+    @Override
+    public void hideWaitVideo() {
+        if (videoDialog != null) {
+            videoDialog.dismiss();
+        }
+    }
 
     @Override
     public void setMaxVolume() {

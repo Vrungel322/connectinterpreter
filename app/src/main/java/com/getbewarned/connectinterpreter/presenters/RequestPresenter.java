@@ -20,7 +20,14 @@ import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestMessage;
 import com.getbewarned.connectinterpreter.models.RequestMessageResponse;
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.Date;
 
 import io.realm.Realm;
@@ -37,6 +44,7 @@ public class RequestPresenter implements Presenter {
 
     private RequestMessagesAdapter adapter;
     private Request request;
+    private Socket socket;
 
     BroadcastReceiver newMessageReceiver;
     boolean receiverRegistered = false;
@@ -57,6 +65,13 @@ public class RequestPresenter implements Presenter {
                 }
             }
         };
+
+        try {
+            this.socket = IO.socket("http://node58416-env-6191050.mircloud.ru:11017");
+            this.socket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

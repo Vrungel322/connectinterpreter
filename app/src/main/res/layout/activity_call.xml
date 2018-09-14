@@ -58,26 +58,27 @@
                 tools:text="10:00" />
 
             <TextView
-                android:id="@+id/time_left"
+                android:id="@+id/availability_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 tools:text="10:00" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
 
-        <android.support.v7.widget.AppCompatImageButton
-            android:id="@+id/end_call_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/end_call_button_background"
-            android:src="@drawable/ic_end_call_button"
-            android:tint="@android:color/white" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/end_call_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/end_call_button_background"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_end_call_button" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -104,8 +105,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_send"
-            android:tint="@android:color/white" />
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/ic_send" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -113,9 +114,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:paddingBottom="5dp"
-        android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:paddingStart="10dp"
         app:layout_constraintBottom_toTopOf="@id/send_layout" />
-
 
 </android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.getbewarned.connectinterpreter.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ConfirmationView;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
+
+import javax.annotation.Nullable;
 
 public class ConfirmationActivity extends AppCompatActivity implements ConfirmationView {
 
@@ -82,7 +85,7 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
 
     @Override
     public void navigateToApp() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NewMainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
@@ -91,11 +94,6 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
     @Override
     public Context getContext() {
         return this;
-    }
-
-    @Override
-    public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -137,6 +135,45 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
                     }
                 })
                 .create()
+                .show();
+    }
+
+    @Override
+    public void showError(String message, @Nullable final Throwable throwable) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.error_global)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        navigateBack();
+                    }
+                });
+        if (throwable != null) {
+            builder.setNeutralButton(R.string.send_error, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    StringBuilder bodyStringBuilder = new StringBuilder();
+                    bodyStringBuilder.append(throwable.getMessage());
+                    for (StackTraceElement e : throwable.getStackTrace()) {
+                        bodyStringBuilder.append("\n");
+                        bodyStringBuilder.append(e.getClassName() + "." + e.getMethodName() + "(" + e.getFileName() + ":" + e.getLineNumber() + ")");
+                    }
+
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setData(Uri.parse("mailto:"));
+                    intent.setType("text/html");
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"developers@getbewarned.com"});
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Ошибка");
+                    intent.putExtra(Intent.EXTRA_TEXT, bodyStringBuilder.toString());
+
+                    startActivity(Intent.createChooser(intent, "Отправить ошибку"));
+                }
+            });
+        }
+        builder.create()
                 .show();
     }
 }

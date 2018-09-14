@@ -90,6 +90,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showError(String message) {
+        if (isFinishing()) {
+            return;
+        }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 

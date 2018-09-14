@@ -10,10 +10,13 @@ import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
+import com.getbewarned.connectinterpreter.managers.ProxyManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
 import com.jaredrummler.android.device.DeviceName;
+
+import java.net.ProxySelector;
 
 /**
  * Created by artycake on 1/24/18.
@@ -63,7 +66,7 @@ public class ConfirmationPresenter implements Presenter {
 
     public void loginPressed(String code) {
         if (code.isEmpty()) {
-            view.showError(view.getContext().getString(R.string.fields_required));
+            view.showError(view.getContext().getString(R.string.fields_required), null);
             return;
         }
 
@@ -80,18 +83,19 @@ public class ConfirmationPresenter implements Presenter {
                     userManager.updateUserActiveTill(response.getActiveTill());
                     userManager.updateUserUnlim(response.isUnlim());
                     userManager.updateUserUtog(response.isUtog());
-                    userManager.updateUserUkrainian(response.isUkrainian());
                     userManager.updateFirstTime(response.getFirstTime());
+                    userManager.updateUserPhone(response.getUserPhone());
+                    userManager.updateUserRegion(response.getRegion());
                     view.navigateToApp();
                 } else {
-                    view.showError(response.getMessage());
+                    view.showError(response.getMessage(), null);
                     view.toggleEnabledRequestBtn(true);
                 }
             }
 
             @Override
             public void onErrorReceived(Error error) {
-                view.showError(error.getMessage());
+                view.showError(error.getMessage(), error.getCause());
                 view.toggleEnabledRequestBtn(true);
             }
         });
@@ -108,7 +112,7 @@ public class ConfirmationPresenter implements Presenter {
 
             @Override
             public void onErrorReceived(Error error) {
-                view.showError(error.getMessage());
+                view.showError(error.getMessage(), error.getCause());
             }
         });
     }
@@ -122,7 +126,7 @@ public class ConfirmationPresenter implements Presenter {
 
             @Override
             public void onErrorReceived(Error error) {
-                view.showError(error.getMessage());
+                view.showError(error.getMessage(), error.getCause());
             }
         });
     }

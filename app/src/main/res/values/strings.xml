@@ -51,9 +51,9 @@
     <string name="date_format">MM/dd/yy</string>
     <string name="main_active_till">Unlimited calls till</string>
     <string name="buy_unlim_btn">Buy unlim</string>
-    <string name="not_available_desc_utog">You have no minutes to continue using service.\nYou can wait till tomorrow to get another free minutes or you can buy unlimited usage</string>
-    <string name="not_available_desc">You have no minutes to continue using service.\nYou can buy unlimited usage</string>
-    <string name="tariff_pattern">%s - $%s</string>
+    <string name="not_available_desc_utog">You can make free call tomorrow. Or you can buy more minutes by clicking button below</string>
+    <string name="not_available_desc">You can buy more minutes by clicking button below</string>
+    <string name="tariff_pattern">%s - %s</string>
     <string name="permission_rationale_liqpay">You have to grant access to calls to complete payment process</string>
     <string name="call_chat_hint">Type your message</string>
     <string name="message_enter_label">Send</string>
@@ -146,4 +146,41 @@
     <string name="group_session_leave">Leave</string>
     <string name="group_waiting_title">Waiting for connection</string>
     <string name="group_waiting_text">Please wait. It can take a few seconds</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="connected">Connected</string>
+    <string name="drawer_vpn">VPN</string>
+    <string name="drawer_proxy">VPN</string>
+    <string name="send_error">Send error</string>
+    <string name="make_call">Make call</string>
+    <string name="drawer_news">News</string>
+    <string name="drawer_profile">My info</string>
+    <string name="connecting_btn">Connecting…</string>
+    <string name="buy_btn">Buy</string>
+    <string name="till_text">till %s</string>
+    <string name="empty_news">There is no news yet\nAll important information for you will appear here</string>
+    <string name="minutes_check_title">Please wait</string>
+    <string name="minutes_check_desc">Your account data is synchronizing</string>
+    <string name="not_available_title">You have no minutes left</string>
+    <string name="utog_free_call_title">You have a free call</string>
+    <string name="utog_free_call_desc">UTOG gives free call every day</string>
+    <string name="personal_name">Name</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="personal_phone">Phone number</string>
+    <string name="personal_utog">UTOG</string>
+    <string name="utog_assigned">Assigned</string>
+    <string name="press_to_fill_utog">Press to fill data</string>
+    <plurals name="minutes">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+    <plurals name="seconds">
+        <item quantity="one">%d second</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
+    <string name="profile_other">Other</string>
+    <string name="personal_buy">Buy more minutes</string>
+    <string name="help">Help</string>
+    <string name="group_later">Event will begin later</string>
+    <string name="group_later_desc">%1$s will begin %2$s at %3$s</string>
+
 </resources>

@@ -19,6 +19,10 @@ public interface CallView {
 
     void showIndicator();
 
+    void showWaitVideo();
+
+    void hideWaitVideo();
+
     void hideIndicator();
 
     void showError(String message);

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.preference.PreferenceCategory
+        android:key="pref_key_storage_personal"
+        android:title="@string/personal_info">
+        <android.support.v7.preference.Preference
+            android:key="user_phone"
+            android:title="@string/personal_phone" />
+        <android.support.v7.preference.EditTextPreference
+            android:key="user_name"
+            android:title="@string/personal_name" />
+        <android.support.v7.preference.Preference
+            android:key="user_utog"
+            android:title="@string/personal_utog" />
+    </android.support.v7.preference.PreferenceCategory>
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/profile_other"
+        >
+        <android.support.v7.preference.Preference
+            android:key="user_buy"
+            android:title="@string/personal_buy" />
+        <android.support.v7.preference.Preference
+            android:key="user_exit"
+            android:title="@string/drawer_exit" />
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

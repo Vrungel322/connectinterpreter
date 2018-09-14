@@ -32,6 +32,12 @@ public class LoginResponse extends ApiResponseBase {
     @Expose
     Boolean first_time;
 
+    @Expose
+    String phone;
+
+    @Expose
+    String region;
+
     public String getName() {
         return name;
     }
@@ -62,5 +68,13 @@ public class LoginResponse extends ApiResponseBase {
 
     public Boolean getFirstTime() {
         return first_time;
+    }
+
+    public String getUserPhone() {
+        return  phone;
+    }
+
+    public String getRegion() {
+        return region;
     }
 }

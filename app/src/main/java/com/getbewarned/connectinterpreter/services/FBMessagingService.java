@@ -28,7 +28,7 @@ public class FBMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d("NOTIF", "From: " + remoteMessage.getFrom());
         NotificationCompat.Builder notif = new NotificationCompat.Builder(this);
-        notif.setSmallIcon(R.drawable.connect_interpreter_icon_blank);
+        notif.setSmallIcon(R.drawable.logo_blank);
         notif.setAutoCancel(true);
         if (remoteMessage.getData().size() > 0) {
             Log.d("NOTIF", "Message data payload: " + remoteMessage.getData());

@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.NewMainActivity"
             android:label=""
             android:screenOrientation="portrait" />
         <activity
@@ -70,11 +70,11 @@
         </activity>
         <activity
             android:name=".ui.RequestsActivity"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName=".ui.NewMainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+                android:value=".ui.NewMainActivity" />
         </activity>
         <activity
             android:name=".ui.RequestActivity"
@@ -99,8 +99,29 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.QrScannerActivity" />
-        <activity android:name=".ui.GroupSessionActivity"></activity>
+        <activity
+            android:name=".ui.QrScannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.GroupSessionActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.NewsActivity"
+            android:parentActivityName=".ui.NewMainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.RequestsActivity" />
+        </activity>
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:parentActivityName=".ui.NewMainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PreferencesTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.getbewarned.connectinterpreter.ui.NewMainActivity" />
+        </activity>
     </application>
 
 </manifest>

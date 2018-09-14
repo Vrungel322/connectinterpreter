@@ -58,7 +58,7 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
         UserManager userManager = new UserManager(context);
         networkManager.setAuthToken(userManager.getUserToken());
         try {
-            this.socket = IO.socket("http://ec2-52-29-109-171.eu-central-1.compute.amazonaws.com:3000");
+            this.socket = IO.socket("http://node58416-env-6191050.mircloud.ru:11017");
             this.socket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -92,6 +92,25 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
                     }
                 }
             });
+            this.socket.on("interpreter-group." + sessionId + ":asker.stop", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    JSONObject data = (JSONObject) args[0];
+                    try {
+                        int answeringId = data.getInt("client_id");
+                        if (answeringId == clientId) {
+                            view.runOnUi(new Runnable() {
+                                @Override
+                                public void run() {
+                                    toggleAsking();
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             this.socket.on("interpreter-group." + sessionId + ":group.closed", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
@@ -110,7 +129,10 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
     }
 
     private void publishSelfVideo() {
-        publisher = new Publisher.Builder(context).build();
+        publisher = new Publisher.Builder(context)
+                .resolution(Publisher.CameraCaptureResolution.LOW)
+                .frameRate(Publisher.CameraCaptureFrameRate.FPS_30)
+                .build();
         publisher.setPublisherListener(this);
         view.updateAskerView(publisher.getView());
 
@@ -202,6 +224,9 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
             }
         }
         if (getStreamType(stream).equals("listener")) {
+            if (asker != null) {
+                session.unsubscribe(asker);
+            }
             asker = new Subscriber.Builder(context, stream).build();
             session.subscribe(asker);
             asker.setSubscribeToAudio(false);
@@ -217,9 +242,11 @@ public class GroupSessionPresenter implements Presenter, Session.SessionListener
             view.updateInterpreterView(null);
         }
         if (getStreamType(stream).equals("listener")) {
-            session.unsubscribe(asker);
-            asker = null;
-            view.updateAskerView(null);
+            if (asker != null) {
+                session.unsubscribe(asker);
+                asker = null;
+                view.updateAskerView(null);
+            }
         }
     }
 

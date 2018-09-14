@@ -50,9 +50,9 @@
     <string name="main_active_till">Безлимитные звонки до</string>
     <string name="date_format">dd.MM.yy</string>
     <string name="buy_unlim_btn">Купить безлимит</string>
-    <string name="not_available_desc_utog">У вас не осталось минут для использования сервиса.\nВы можете дождаться завтра для получения бесплатных минут либо купить безлимитное использование</string>
-    <string name="not_available_desc">У вас не осталось минут для использования сервиса.\nВы можете купить безлимитное использование</string>
-    <string name="tariff_pattern">%s - $%s</string>
+    <string name="not_available_desc_utog">Бесплатно позвонить сможете завтра. Или можете купить еще минут нажав кнопку ниже</string>
+    <string name="not_available_desc">Вы можете купить еще минут нажав кнопку ниже</string>
+    <string name="tariff_pattern">%s - %s</string>
     <string name="permission_rationale_liqpay">Необходимо предоставить доступ к звонкам для завершения процесса покупки</string>
     <string name="call_chat_hint">Введите ваше сообщение</string>
     <string name="message_enter_label">Отправить</string>
@@ -121,5 +121,43 @@
     <string name="group_session_leave">Отключиться</string>
     <string name="group_waiting_title">Ожидайте соединения…</string>
     <string name="group_waiting_text">Пожалуйста, подождите. Это может занять несколько секунд</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="drawer_vpn">VPN</string>
+    <string name="drawer_proxy">VPN</string>
+    <string name="send_error">Отправить ошибку</string>
+    <string name="make_call">Позвонить</string>
+    <string name="drawer_news">Новости</string>
+    <string name="drawer_profile">Моя информация</string>
+    <string name="connecting_btn">Соединение…</string>
+    <string name="buy_btn">Купить</string>
+    <string name="till_text">до %s</string>
+    <string name="empty_news">Еще нет новостей\n Тут будет появляться вся важная для вас информация</string>
+    <string name="minutes_check_title">Пожалуйста, подождите</string>
+    <string name="minutes_check_desc">Синхронизируем данные вашего аккаунта</string>
+    <string name="not_available_title">У вас закончились минуты</string>
+    <string name="utog_free_call_title">У вас есть бесплатный звонок</string>
+    <string name="utog_free_call_desc">УТОГ каждый день дарит вам бесплатный звонок</string>
+    <string name="personal_name">Имя</string>
+    <string name="personal_info">Личная информация</string>
+    <string name="personal_phone">Номер телефона</string>
+    <string name="personal_utog">УТОГ</string>
+    <string name="utog_assigned">Подключен</string>
+    <string name="press_to_fill_utog">Нажмите чтобы заполнить данные</string>
+    <plurals name="minutes">
+        <item quantity="one">%d минута</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+    </plurals>
+    <plurals name="seconds">
+        <item quantity="one">%d секунда</item>
+        <item quantity="few">%d секунды</item>
+        <item quantity="many">%d секунд</item>
+    </plurals>
+    <string name="profile_other">Прочее</string>
+    <string name="personal_buy">Купить еще минут</string>
+    <string name="help">Помощь</string>
+    <string name="group_later">Событие начнется позже</string>
+    <string name="group_later_desc">%1$s начнется %2$s в %3$s</string>
+
 </resources>
 

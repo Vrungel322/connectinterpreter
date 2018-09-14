@@ -2,6 +2,7 @@ package com.getbewarned.connectinterpreter.managers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.getbewarned.connectinterpreter.models.UtogAsk;
 
@@ -13,16 +14,19 @@ import java.util.Date;
 
 public class UserManager {
 
-    private static final String FIRST_TIME = "first_time";
-    private static final String USER_TOKEN = "user_token";
-    private static final String USER_NAME = "user_name";
-    private static final String USER_SECONDS = "user_seconds";
-    private static final String USER_UNLIM = "user_unlim";
-    private static final String USER_ACTIVE_TILL = "user_active_till";
-    private static final String USER_UTOG = "user_utog";
-    private static final String USER_UKRAINIAN = "user_ukrainian";
-    private static final String UTOG_ASK = "utog_ask";
-    private static final String UTOG_ASK_DATE = "utog_ask_date";
+    public static final String FIRST_TIME = "first_time";
+    public static final String USER_TOKEN = "user_token";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_PHONE = "user_phone";
+    public static final String USER_REGION = "user_region";
+    public static final String USER_SECONDS = "user_seconds";
+    public static final String USER_UNLIM = "user_unlim";
+    public static final String USER_ACTIVE_TILL = "user_active_till";
+    public static final String USER_UTOG = "user_utog";
+    public static final String USER_UTOG_AVAILABLE = "user_utog_available";
+    public static final String USER_UKRAINIAN = "user_ukrainian";
+    public static final String UTOG_ASK = "utog_ask";
+    public static final String UTOG_ASK_DATE = "utog_ask_date";
 
     private static final String LAST_APP_VERSION = "last_app_version";
 
@@ -33,7 +37,7 @@ public class UserManager {
     private SharedPreferences sharedPreferences;
 
     public UserManager(Context context) {
-        sharedPreferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public void updateUserToken(String userToken) {
@@ -46,6 +50,12 @@ public class UserManager {
     public void updateUserName(String userName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_NAME, userName);
+        editor.apply();
+    }
+
+    public void updateUserPhone(String userPhone) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_PHONE, userPhone);
         editor.apply();
     }
 
@@ -79,6 +89,12 @@ public class UserManager {
         editor.apply();
     }
 
+    public void updateUtogCallAvailable(boolean isAvailable) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(USER_UTOG_AVAILABLE, isAvailable);
+        editor.apply();
+    }
+
     public void updateUserUkrainian(boolean isUkrainian) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(USER_UKRAINIAN, isUkrainian);
@@ -103,6 +119,11 @@ public class UserManager {
     public void updateFirstTime(boolean firstTime) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(FIRST_TIME, firstTime);
+        editor.apply();
+    }
+    public void updateUserRegion(String region) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_REGION, region);
         editor.apply();
     }
 
@@ -135,7 +156,7 @@ public class UserManager {
     }
 
     public boolean getUserUkrainian() {
-        return sharedPreferences.getBoolean(USER_UKRAINIAN, false);
+        return sharedPreferences.getString(USER_REGION, "").equals("ua");
     }
 
     public UtogAsk getUtogAsk() {
@@ -155,4 +176,14 @@ public class UserManager {
     public boolean isFirstTime() {
         return sharedPreferences.getBoolean(FIRST_TIME, false);
     }
+
+    public String getUserPhone() {
+        return sharedPreferences.getString(USER_PHONE, "");
+    }
+
+    public boolean isUtogAvailable() {
+        return sharedPreferences.getBoolean(USER_UTOG_AVAILABLE, false);
+    }
+
+
 }

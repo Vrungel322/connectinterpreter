@@ -18,6 +18,7 @@ import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestCreated;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestMessageCreated;
+import com.getbewarned.connectinterpreter.interfaces.NewsReceived;
 import com.getbewarned.connectinterpreter.interfaces.ReasonsReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestMessagesReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestsReceived;
@@ -36,6 +37,7 @@ import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.NewRequestResponse;
+import com.getbewarned.connectinterpreter.models.NewsResponse;
 import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
@@ -47,13 +49,23 @@ import com.google.gson.GsonBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.net.Authenticator;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.ProxySelector;
+import java.net.URI;
+import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
+import okhttp3.Credentials;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,6 +96,28 @@ public class NetworkManager {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.addInterceptor(loggingInterceptor);
+//        client.proxySelector(ProxySelector.getDefault());
+//        client.proxyAuthenticator(new okhttp3.Authenticator() {
+//            @Nullable
+//            @Override
+//            public okhttp3.Request authenticate(Route route, okhttp3.Response response) throws IOException {
+//                InetSocketAddress socketAddress = (InetSocketAddress) route.proxy().address();
+//                if (socketAddress.getAddress().toString().equals("/193.22.99.11")) {
+//                    return response.request().newBuilder()
+//                            .header("Proxy-Connection", "Keep-Alive")
+//                            .header("Proxy-Authorization", Credentials.basic("ACtanN", "eMf7aK"))
+//                            .build();
+//                }
+//                if (socketAddress.getAddress().toString().equals("/176.107.186.200")) {
+//                    return response.request().newBuilder()
+//                            .header("Proxy-Connection", "Keep-Alive")
+//                            .header("Proxy-Authorization", Credentials.basic("GsH2zL", "DS6BZJ"))
+//                            .build();
+//                }
+//                return response.request();
+//            }
+//        });
+        client.retryOnConnectionFailure(true);
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client.build())
@@ -120,7 +154,8 @@ public class NetworkManager {
             @Override
             public void onFailure(Call<ApiResponseBase> call, Throwable t) {
                 t.printStackTrace();
-                codeReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+                codeReceived.onErrorReceived(new Error(t));
+//                codeReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }
@@ -144,7 +179,8 @@ public class NetworkManager {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 t.printStackTrace();
-                loginComplete.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+                loginComplete.onErrorReceived(new Error(t));
+//                loginComplete.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }
@@ -296,7 +332,7 @@ public class NetworkManager {
     }
 
     public void getTariffs(final TariffsReceived tariffsReceived) {
-        Call<TariffsResponse> call = api.getTariffs(getLanguage());
+        Call<TariffsResponse> call = api.getTariffs(authToken, getLanguage());
         call.enqueue(new Callback<TariffsResponse>() {
             @Override
             public void onResponse(Call<TariffsResponse> call, Response<TariffsResponse> response) {
@@ -662,6 +698,29 @@ public class NetworkManager {
             @Override
             public void onFailure(Call<ApiResponseBase> call, Throwable t) {
                 baseRequestCompleted.onErrorReceived(new Error(t));
+            }
+        });
+    }
+
+    public void getNews(final NewsReceived newsReceived) {
+        Call<NewsResponse> call = api.getNews(authToken, getLanguage());
+        call.enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        newsReceived.onDataReceived(response.body());
+                    } else {
+                        newsReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    newsReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                newsReceived.onErrorReceived(new Error(t));
             }
         });
     }

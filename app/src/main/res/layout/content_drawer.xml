@@ -41,7 +41,7 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
-            android:id="@+id/left_label"
+            android:id="@+id/availability_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -59,7 +59,7 @@
             android:textSize="50sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/left_label"
+            app:layout_constraintTop_toBottomOf="@+id/availability_desc"
             tools:text="10:00" />
     </android.support.constraint.ConstraintLayout>
 

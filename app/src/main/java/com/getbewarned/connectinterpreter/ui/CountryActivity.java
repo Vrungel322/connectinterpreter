@@ -74,6 +74,9 @@ public class CountryActivity extends AppCompatActivity implements CountriesView 
 
     @Override
     public void showError(String message) {
+        if (isFinishing()) {
+            return;
+        }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         finish();
     }

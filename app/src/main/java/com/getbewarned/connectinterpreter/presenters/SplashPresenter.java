@@ -5,15 +5,25 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.interfaces.SplashView;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
+import com.getbewarned.connectinterpreter.managers.ProxyManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.ProxySelector;
+import java.net.SocketAddress;
+import java.net.URI;
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -30,6 +40,8 @@ public class SplashPresenter implements Presenter {
 
     public SplashPresenter(SplashView view) {
         this.view = view;
+        ProxyManager proxyManager = new ProxyManager(view.getContext());
+        ProxySelector.setDefault(proxyManager);
         networkManager = new NetworkManager(view.getContext());
         userManager = new UserManager(view.getContext());
         Realm.init(view.getContext());

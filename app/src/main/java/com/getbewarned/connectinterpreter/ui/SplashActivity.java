@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void navigateToApp() {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NewMainActivity.class);
         startActivity(intent);
         finish();
     }

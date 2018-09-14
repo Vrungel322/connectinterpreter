@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/connect_interpreter_icon_blank"/>
+            android:src="@drawable/logo_blank"/>
     </item>
 
 </layer-list>

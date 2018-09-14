@@ -22,6 +22,15 @@ import com.opentok.android.Session;
 import com.opentok.android.Stream;
 import com.opentok.android.Subscriber;
 import com.opentok.android.SubscriberKit;
+import com.opentok.jni.ProxyDetector;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.ProxySelector;
+import java.net.SocketAddress;
+import java.net.URI;
+import java.util.List;
 
 
 /**
@@ -54,12 +63,15 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     private String sessionId;
     private String token;
 
+    private Handler handler = new Handler();
+
 
     public CallPresenter(CallView view) {
         this.view = view;
         this.userManager = new UserManager(view.getContext());
         this.networkManager = new NetworkManager(view.getContext());
         this.networkManager.setAuthToken(userManager.getUserToken());
+
     }
 
     @Override
@@ -67,15 +79,30 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         view.toggleEndCallButtonVisibility(false);
         view.updateCurrentCallDuration("00:00");
         view.showIndicator();
+        initVideoShowing(10);
         apiKey = extras.getString(KEY_EXTRA);
         sessionId = extras.getString(SESSION_EXTRA);
         token = extras.getString(TOKEN_EXTRA);
         leftMinutesOnStart = extras.getLong(SECONDS_EXTRA) * 1000;
 
-        view.updateLeftTime(new HumanTime(leftMinutesOnStart).getTime());
+        view.updateLeftTime(new HumanTime(view.getContext(), leftMinutesOnStart).getTime());
         createSession(apiKey, sessionId, token);
 
 
+    }
+
+    private void initVideoShowing(int seconds) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (answered) {
+                    return;
+                }
+                view.hideIndicator();
+                view.showWaitVideo();
+                initVideoShowing(15);
+            }
+        }, seconds * 1000);
     }
 
 
@@ -170,6 +197,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         answered = true;
         runTimer();
         view.hideIndicator();
+        view.hideWaitVideo();
         view.toggleEndCallButtonVisibility(true);
         userManager.updateLastCallSessionId(session.getSessionId());
 
@@ -183,8 +211,8 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
             public void onTick(long millisUntilFinished) {
                 long timePassed = leftMinutesOnStart - millisUntilFinished;
-                view.updateLeftTime(new HumanTime(millisUntilFinished).getTime());
-                view.updateCurrentCallDuration(new HumanTime(timePassed).getTime());
+                view.updateLeftTime(new HumanTime(view.getContext(), millisUntilFinished).getTime());
+                view.updateCurrentCallDuration(new HumanTime(view.getContext(), timePassed).getTime());
             }
 
             public void onFinish() {

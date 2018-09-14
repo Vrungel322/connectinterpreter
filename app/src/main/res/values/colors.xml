@@ -8,6 +8,10 @@
     <color name="qrScannerBackground">#AA01579b</color>
     <color name="colorRed">#BD3F32</color>
 
+    <color name="colorCallBtn">#66bb6a</color>
+    <color name="colorWaitBtn">#BD3F32</color>
+    <color name="colorBuyBtn">#ffa726</color>
+
     <item name="visible" type="id" />
     <item name="masked" type="id" />
 </resources>

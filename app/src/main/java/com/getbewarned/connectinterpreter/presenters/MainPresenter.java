@@ -1,5 +1,6 @@
 package com.getbewarned.connectinterpreter.presenters;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -48,13 +49,19 @@ public class MainPresenter implements Presenter {
     private UserManager userManager;
     private NetworkManager networkManager;
     private String selectedTariff;
+    private Context context;
 
     private boolean callInitiated = false;
 
-    public MainPresenter(final MainView view) {
+    public MainPresenter(MainView view, Context context) {
         this.view = view;
-        this.userManager = new UserManager(view.getContext());
-        this.networkManager = new NetworkManager(view.getContext());
+        this.context = context;
+        this.userManager = new UserManager(context);
+        setupNetworkManager();
+    }
+
+    private void setupNetworkManager() {
+        this.networkManager = new NetworkManager(context);
         this.networkManager.setAuthToken(userManager.getUserToken());
         this.networkManager.setUnauthRequestHandler(new UnauthRequestHandler() {
             @Override
@@ -70,7 +77,6 @@ public class MainPresenter implements Presenter {
         view.showChecking();
         view.showLeftTime("00:00");
         view.requestPermissions();
-        view.showWorkTime(userManager.getUserUkrainian());
         String fbToken = FirebaseInstanceId.getInstance().getToken();
         if (fbToken != null) {
             Log.d("FB_TOKEN", fbToken);
@@ -92,6 +98,7 @@ public class MainPresenter implements Presenter {
 
     public void onResume() {
         view.showChecking();
+        setupNetworkManager();
         updateAvailability();
         checkUtog();
 
@@ -139,26 +146,27 @@ public class MainPresenter implements Presenter {
             public void onAvailabilityReceived(AvailabilityResponse response) {
                 if (response.isSuccess()) {
                     userManager.updateUserSeconds(response.getSeconds());
-                    userManager.updateUserUnlim(response.isUnlim());
                     userManager.updateUserActiveTill(response.getActiveTill());
                     userManager.updateUserUtog(response.isUtog());
-                    view.toggleUnlim(userManager.getUserUnlim());
-                    if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
-                        view.hideUtog();
+                    userManager.updateUtogCallAvailable(response.isUtogAvailable());
+                    userManager.updateUserRegion(response.getRegion());
+                    userManager.updateUserName(response.getName());
+                    userManager.updateUserPhone(response.getPhone());
+                    if (response.isUtog() && response.isUtogAvailable()) {
+                        view.toggleCallAvailability(true, true);
+                        return;
                     }
-                    if (response.isUnlim()) {
-                        HumanDate humanDate = new HumanDate(view.getContext(), response.getActiveTill());
-                        view.toggleCallAvailability(true, userManager.getUserUtog());
-                        view.showDateTill(humanDate.getDate());
-                    } else {
-                        HumanTime humanTime = new HumanTime(response.getSeconds() * 1000);
-                        if (response.getSeconds() > 0) {
-                            view.toggleCallAvailability(true, userManager.getUserUtog());
-                            view.showLeftTime(humanTime.getTime());
-                        } else {
-                            view.toggleCallAvailability(false, userManager.getUserUtog());
-                        }
+
+                    if (response.getSeconds() == 0) {
+                        view.toggleCallAvailability(false, userManager.getUserUtog());
+                        return;
                     }
+
+                    HumanDate humanDate = new HumanDate(context, response.getActiveTill());
+                    view.showDateTill(humanDate.getDate());
+                    HumanTime humanTime = new HumanTime(context, response.getSeconds() * 1000);
+                    view.showLeftTime(humanTime.getEasyTime());
+                    view.toggleCallAvailability(true, false);
                 } else {
                     view.showError(response.getMessage());
                 }
@@ -293,7 +301,7 @@ public class MainPresenter implements Presenter {
         networkManager.buyUnlim(selectedTariff, new LiqPayDataReceived() {
             @Override
             public void onDataReceived(LiqPayResponse response) {
-                LiqPay.checkout(view.getContext(), response.getData(), response.getSignature(), new LiqPayCallBack() {
+                LiqPay.checkout(context, response.getData(), response.getSignature(), new LiqPayCallBack() {
                     @Override
                     public void onResponseSuccess(String s) {
                         Log.i("PAYMENT SUCCESS", s);

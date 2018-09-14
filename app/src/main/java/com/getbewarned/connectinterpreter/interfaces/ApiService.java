@@ -11,6 +11,7 @@ import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.NewRequestResponse;
+import com.getbewarned.connectinterpreter.models.NewsResponse;
 import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
@@ -79,7 +80,8 @@ public interface ApiService {
 
 
     @GET("/api/client/unlim_list")
-    Call<TariffsResponse> getTariffs(@Query("lang") String language);
+    Call<TariffsResponse> getTariffs(@Header("X-Interpreter-Client-Token") String authorization,
+                                     @Query("lang") String language);
 
     @POST("/api/client/buy_unlim")
     @FormUrlEncoded
@@ -159,4 +161,9 @@ public interface ApiService {
     @DELETE("/api/client/group/{session}/askers")
     Call<ApiResponseBase> stopAsking(@Header("X-Interpreter-Client-Token") String authorization,
                                      @Path("session") String sessionId);
+
+    @GET("/api/client/news")
+    Call<NewsResponse> getNews(@Header("X-Interpreter-Client-Token") String authorization,
+                               @Query("lang") String language);
+
 }

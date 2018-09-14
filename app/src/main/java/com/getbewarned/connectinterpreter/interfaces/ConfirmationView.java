@@ -2,6 +2,8 @@ package com.getbewarned.connectinterpreter.interfaces;
 
 import android.content.Context;
 
+import javax.annotation.Nullable;
+
 /**
  * Created by artycake on 1/24/18.
  */
@@ -10,8 +12,6 @@ public interface ConfirmationView {
     void navigateToApp();
 
     Context getContext();
-
-    void showError(String message);
 
     void toggleEnabledRequestBtn(boolean enabled);
 
@@ -24,4 +24,6 @@ public interface ConfirmationView {
     void showNumber(String phone);
 
     void showHelpRequested();
+
+    void showError(String message, @Nullable Throwable throwable);
 }

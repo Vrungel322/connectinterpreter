@@ -8,7 +8,7 @@ public class TariffResponse {
     @Expose
     String id;
     @Expose
-    double price;
+    String price;
 
     public String getName() {
         return name;
@@ -18,7 +18,7 @@ public class TariffResponse {
         return id;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 }
