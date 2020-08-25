@@ -67,7 +67,7 @@
     <string name="confirmation_desc">СМС с кодом подтверждения было отправлено на номер %s</string>
     <string name="wrong_number">Неправильный номер?</string>
     <string name="whats_new">Что нового</string>
-    <string name="confirmation_wait">Если вы его еще не получили, подождите немного.\nЭто может занять несколько минут</string>
+    <string name="confirmation_wait">Если вы его еще не получили, подождите немного.\nЭто может занять несколько минут!</string>
     <string name="confirmation_title">Вы получили\nкод подтверждения?</string>
     <string name="drawer_unlim">Купить безлимит</string>
     <string name="drawer_utog">Я - член УТОГ</string>
@@ -158,6 +158,7 @@
     <string name="help">Помощь</string>
     <string name="group_later">Событие начнется позже</string>
     <string name="group_later_desc">%1$s начнется %2$s в %3$s</string>
+    <string name="enter_confirmation_code">Введите код подтверждения</string>
 
 </resources>
 

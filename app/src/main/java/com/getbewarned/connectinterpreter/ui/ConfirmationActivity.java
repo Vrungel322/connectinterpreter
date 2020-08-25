@@ -3,20 +3,17 @@ package com.getbewarned.connectinterpreter.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
-import android.support.design.widget.TextInputLayout;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ConfirmationView;
@@ -38,13 +35,15 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmation);
+        setContentView(R.layout.activity_confirmation_v2);
 
         codeField = findViewById(R.id.code);
         loginBtn = findViewById(R.id.login_button);
         confirmationDesc = findViewById(R.id.confirmation_description);
         wrongNumber = findViewById(R.id.wrong_number);
+        wrongNumber.setPaintFlags(wrongNumber.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         needHelp = findViewById(R.id.need_help);
+        needHelp.setPaintFlags(needHelp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +68,11 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
 
         presenter = new ConfirmationPresenter(this);
         presenter.onCreate(getIntent().getExtras());
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 
     @Override

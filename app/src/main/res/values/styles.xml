@@ -71,5 +71,19 @@
         <item name="android:textViewStyle">@style/AppTheme.TextViewBlack</item>
     </style>
 
+    <!--new ui-->
+    <style name="Text_default">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Button_fab">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/rounded_background_fab</item>
+    </style>
+
 
 </resources>

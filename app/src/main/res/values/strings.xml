@@ -182,5 +182,6 @@
     <string name="help">Help</string>
     <string name="group_later">Event will begin later</string>
     <string name="group_later_desc">%1$s will begin %2$s at %3$s</string>
+    <string name="enter_confirmation_code">Enter confirmation code</string>
 
 </resources>

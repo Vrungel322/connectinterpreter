@@ -14,4 +14,9 @@
 
     <item name="visible" type="id" />
     <item name="masked" type="id" />
+
+<!--    new ui-->
+    <color name="white">#FFFFFF</color>
+    <color name="red_new_ui">#C91518</color>
+
 </resources>

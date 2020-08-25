@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_dark"
+    android:paddingTop="32dp"
+    tools:context="com.getbewarned.connectinterpreter.ui.ConfirmationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/confirmation_title"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+
+        <EditText
+            android:id="@+id/code"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_background"
+            android:gravity="center"
+            android:hint="@string/enter_confirmation_code"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:singleLine="true" />
+
+
+        <TextView
+            android:id="@+id/confirmation_description"
+            style="@style/Text_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lines="2"
+            android:maxLines="2"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            tools:text="@string/confirmation_desc" />
+
+        <TextView
+            style="@style/Text_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/confirmation_wait" />
+
+        <Button
+            android:id="@+id/login_button"
+            style="@style/Button_fab"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/action_login" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="36dp">
+
+            <TextView
+                android:id="@+id/wrong_number"
+                style="@style/Text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:text="@string/wrong_number"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/need_help"
+                style="@style/Text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:text="@string/need_help"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </LinearLayout>
+</ScrollView>
