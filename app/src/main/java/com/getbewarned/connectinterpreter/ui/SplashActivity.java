@@ -39,11 +39,14 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         // stub 2
 //        Intent intent = new Intent(this, NameInputActivity.class);
 //        startActivityForResult(intent, NameInputActivity.RC);
+        // stub 3
+//        Intent intent = new Intent(this, NewMainActivity.class);
+
 
         // real code
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     @Override
