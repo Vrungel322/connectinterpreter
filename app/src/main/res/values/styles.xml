@@ -21,6 +21,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="AppTheme.RedButton" parent="Widget.AppCompat.Button.Colored">
         <item name="backgroundTint">@color/colorRed</item>
         <item name="android:textColor">@android:color/white</item>
@@ -82,6 +83,7 @@
         <item name="android:background">@drawable/rounded_background</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
 

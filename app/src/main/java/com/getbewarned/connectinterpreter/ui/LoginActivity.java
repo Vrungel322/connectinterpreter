@@ -72,8 +72,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone = "+7" + phoneField.getText().toString();
-                presenter.continuePressed(phone, acceptCheck.isChecked());
+                if (continueBtn.isActivated()) {
+                    String phone = "+7" + phoneField.getText().toString();
+                    presenter.continuePressed(phone, acceptCheck.isChecked());
+                }
             }
         });
 

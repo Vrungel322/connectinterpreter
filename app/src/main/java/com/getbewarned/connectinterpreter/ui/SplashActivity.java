@@ -3,24 +3,14 @@ package com.getbewarned.connectinterpreter.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.SplashView;
-import com.getbewarned.connectinterpreter.managers.UserManager;
-import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.SplashPresenter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
@@ -30,7 +20,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter  = new SplashPresenter(this);
+        presenter = new SplashPresenter(this);
         presenter.onCreate(getIntent().getExtras());
     }
 
@@ -45,10 +35,14 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         // stub
 //        Intent intent = new Intent(this, ConfirmationActivity.class);
 //        intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "test");
+        // stub 2
+        Intent intent = new Intent(this, NameInputActivity.class);
+        startActivityForResult(intent, NameInputActivity.RC);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        // real code
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 
     @Override
