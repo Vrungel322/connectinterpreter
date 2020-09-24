@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_menu_white" />
@@ -21,7 +21,7 @@
         android:id="@+id/iv_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         style="@style/Text_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="135dp"
         android:text="@string/available_minutes"
         app:layout_constraintStart_toStartOf="@+id/tv_timer"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,11 +41,11 @@
     <TextView
         android:id="@+id/tv_timer"
         style="@style/Main_timer"
-        android:layout_width="250dp"
-        android:layout_height="64dp"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:paddingStart="32dp"
+        android:paddingStart="40dp"
         android:paddingLeft="32dp"
         android:paddingEnd="80dp"
         android:paddingRight="80dp"
@@ -58,10 +58,10 @@
     <ImageView
         android:id="@+id/iv_add_minutes"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="136dp"
         android:elevation="8dp"
         android:paddingTop="8dp"
-        android:paddingEnd="-40dp"
+        android:paddingEnd="-24dp"
         android:paddingRight="-30dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_timer"
         app:layout_constraintEnd_toEndOf="@+id/tv_timer"
@@ -71,14 +71,14 @@
     <TextView
         android:id="@+id/tv_minutes_expiration"
         style="@style/Text_default"
-        android:visibility="gone"
-        tools:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="to 07.08.2020"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tv_timer"
-        app:layout_constraintTop_toBottomOf="@+id/tv_timer" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+        tools:visibility="gone" />
 
     <ImageView
         android:id="@+id/iv_requests"

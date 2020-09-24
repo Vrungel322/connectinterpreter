@@ -29,7 +29,7 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class NewMainActivity extends AppCompatActivity implements MainView {
+public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
@@ -42,6 +42,7 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
     LinearLayout noMinutesContainer;
     ImageView profile;
     TextView timer;
+    ImageView buyButton;
 
     MainPresenter presenter;
 
@@ -52,6 +53,7 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
         availabilityTitleLabel = findViewById(R.id.tv_avaliavle_minutes_label);
         tvMinutesExpiration = findViewById(R.id.tv_minutes_expiration);
         callBtn = findViewById(R.id.ll_call);
+        buyButton = findViewById(R.id.iv_add_minutes);
 
         requests = findViewById(R.id.iv_requests);
         timer = findViewById(R.id.tv_timer);
@@ -65,7 +67,12 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
                 presenter.onStartCallPressed();
             }
         });
-
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.buyUnlimPressed();
+            }
+        });
 
         requests.setOnClickListener(new View.OnClickListener() {
             @Override
