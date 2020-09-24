@@ -21,7 +21,7 @@ import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 
 import javax.annotation.Nullable;
 
-public class ConfirmationActivity extends AppCompatActivity implements ConfirmationView {
+public class ConfirmationActivity extends NoStatusBarActivity implements ConfirmationView {
 
     private EditText codeField;
     private Button loginBtn;
@@ -69,10 +69,7 @@ public class ConfirmationActivity extends AppCompatActivity implements Confirmat
         presenter = new ConfirmationPresenter(this);
         presenter.onCreate(getIntent().getExtras());
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+
     }
 
     @Override

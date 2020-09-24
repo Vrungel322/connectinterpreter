@@ -24,7 +24,7 @@ import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.LoginPresenter;
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends NoStatusBarActivity implements LoginView {
 
     private static final int COUNTRY_REQUEST_CODE = 782;
 

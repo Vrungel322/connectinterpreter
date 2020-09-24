@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.SplashView;
+import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.SplashPresenter;
 
 
@@ -36,12 +37,12 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 //        Intent intent = new Intent(this, ConfirmationActivity.class);
 //        intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "test");
         // stub 2
-        Intent intent = new Intent(this, NameInputActivity.class);
-        startActivityForResult(intent, NameInputActivity.RC);
+//        Intent intent = new Intent(this, NameInputActivity.class);
+//        startActivityForResult(intent, NameInputActivity.RC);
 
         // real code
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
 //        finish();
     }
 

@@ -19,7 +19,7 @@ import com.getbewarned.connectinterpreter.R;
  *
  * rc: [NameInputActivity.RC]
  */
-public class NameInputActivity extends AppCompatActivity {
+public class NameInputActivity extends NoStatusBarActivity {
     public static final int RC = 774;
     public static final String NAME_KEY = "NAME_KEY";
 
