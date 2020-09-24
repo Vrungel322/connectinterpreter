@@ -80,14 +80,12 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         tools:visibility="gone" />
 
-    <ImageView
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/iv_requests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ActionItem_FAB"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
         android:layout_marginBottom="32dp"
-        android:elevation="@dimen/default_elevation"
         app:layout_constraintBottom_toTopOf="@+id/ll_call_container"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_requests_mini" />
