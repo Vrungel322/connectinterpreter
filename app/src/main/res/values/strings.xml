@@ -47,7 +47,7 @@
     <string name="error_outside_working_time">Unfortunately you are calling outside office hours</string>
     <string name="error_in_call">You\'ve already calling from other device</string>
     <string name="error_no_right">You have no right to complete this operation</string>
-    <string name="login_accept"><![CDATA[I have read and agree to the <a href=\'https://interpreter.getbw.me/docs/terms_of_use\'>terms of use</a> and <a href=\'https://interpreter.getbw.me/docs/privacy_policy\'>privacy policy</a>]]></string>
+    <string name="login_accept"><![CDATA[I have read and agree to the <b href=\'https://interpreter.getbw.me/docs/terms_of_use\'>terms of use</b> and <b href=\'https://interpreter.getbw.me/docs/privacy_policy\'>privacy policy</b>]]></string>
     <string name="date_format">MM/dd/yy</string>
     <string name="main_active_till">Unlimited calls till</string>
     <string name="buy_unlim_btn">Buy unlim</string>
@@ -183,5 +183,7 @@
     <string name="group_later">Event will begin later</string>
     <string name="group_later_desc">%1$s will begin %2$s at %3$s</string>
     <string name="enter_confirmation_code">Enter confirmation code</string>
+    <string name="login_title_v2">Enter</string>
+    <string name="phone_number" >Phone number</string>
 
 </resources>

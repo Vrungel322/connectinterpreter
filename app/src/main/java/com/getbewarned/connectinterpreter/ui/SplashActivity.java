@@ -14,6 +14,7 @@ import android.os.Bundle;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.SplashView;
 import com.getbewarned.connectinterpreter.managers.UserManager;
+import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.SplashPresenter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,14 +42,17 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     public void navigateToLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        // stub
+        Intent intent = new Intent(this, ConfirmationActivity.class);
+        intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "test");
+
+//        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void navigateToApp() {
-
         Intent intent = new Intent(this, NewMainActivity.class);
         startActivity(intent);
         finish();

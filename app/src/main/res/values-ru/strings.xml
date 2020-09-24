@@ -46,7 +46,7 @@
     <string name="error_outside_working_time">К сожалению, вы звоните в нерабочее время</string>
     <string name="error_in_call">Вы уже общаетесь на другом устройстве</string>
     <string name="error_no_right">У вас нет прав на совершение данного действия</string>
-    <string name="login_accept"><![CDATA[Я прочитал(-а) и согласен(-а) с <a href=\'https://interpreter.getbw.me/docs/terms_of_use\'>условиями использования</a> и <a href=\'https://interpreter.getbw.me/docs/privacy_policy\'>политикой конфиденциальности</a>]]></string>
+    <string name="login_accept"><![CDATA[Я прочитал(-а) и согласен(-а) с <b href=\'https://interpreter.getbw.me/docs/terms_of_use\'>условиями использования</b> и <b href=\'https://interpreter.getbw.me/docs/privacy_policy\'>политикой конфиденциальности</b>]]></string>
     <string name="main_active_till">Безлимитные звонки до</string>
     <string name="date_format">dd.MM.yy</string>
     <string name="buy_unlim_btn">Купить безлимит</string>
@@ -159,6 +159,8 @@
     <string name="group_later">Событие начнется позже</string>
     <string name="group_later_desc">%1$s начнется %2$s в %3$s</string>
     <string name="enter_confirmation_code">Введите код подтверждения</string>
+    <string name="login_title_v2">Вход</string>
+    <string name="phone_number" >Номер телефона</string>
 
 </resources>
 

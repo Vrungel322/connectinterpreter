@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -76,6 +76,13 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="EditText_rounded">
+        <item name="android:background">@drawable/rounded_background</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
 
     <style name="Button_fab">

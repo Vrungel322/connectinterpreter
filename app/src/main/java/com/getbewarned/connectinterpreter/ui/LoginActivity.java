@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -26,27 +28,27 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private static final int COUNTRY_REQUEST_CODE = 782;
 
-    private EditText countryCodeField;
+    //    private EditText countryCodeField;
     private EditText phoneField;
     private Button continueBtn;
     private CheckBox acceptCheck;
     private TextView acceptText;
-    private EditText countryField;
+//    private EditText countryField;
 
     private LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        countryCodeField = findViewById(R.id.country_code);
+        setContentView(R.layout.activity_login_v2);
+//        countryCodeField = findViewById(R.id.country_code);
         phoneField = findViewById(R.id.phone);
         continueBtn = findViewById(R.id.get_code_button);
         acceptCheck = findViewById(R.id.accept_check);
         acceptText = findViewById(R.id.accept_text);
-        countryField = findViewById(R.id.country);
-        countryField.setKeyListener(null);
-        countryField.setFocusable(false);
+//        countryField = findViewById(R.id.country);
+//        countryField.setKeyListener(null);
+//        countryField.setFocusable(false);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             acceptText.setText(Html.fromHtml(getString(R.string.login_accept), Html.FROM_HTML_MODE_LEGACY));
@@ -56,14 +58,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         acceptText.setClickable(true);
         acceptText.setMovementMethod(LinkMovementMethod.getInstance());
 
-        countryField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, CountryActivity.class);
-                startActivityForResult(intent, COUNTRY_REQUEST_CODE);
-            }
-        });
-
+//        countryField.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(LoginActivity.this, CountryActivity.class);
+//                startActivityForResult(intent, COUNTRY_REQUEST_CODE);
+//            }
+//        });
 
 
         presenter = new LoginPresenter(this);
@@ -71,8 +72,25 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone = countryCodeField.getText().toString() + phoneField.getText().toString();
+                String phone = "+7" + phoneField.getText().toString();
                 presenter.continuePressed(phone, acceptCheck.isChecked());
+            }
+        });
+
+        phoneField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                continueBtn.setActivated(!s.toString().equals(""));
             }
         });
     }
@@ -112,8 +130,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void setCountry(Country country) {
-        countryField.setText(country.getName());
-        countryCodeField.setText(country.getCode());
+//        countryField.setText(country.getName());
+//        countryCodeField.setText(country.getCode());
     }
 
     @Override
