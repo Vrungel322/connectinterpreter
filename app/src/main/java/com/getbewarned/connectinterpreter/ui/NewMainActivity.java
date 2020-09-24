@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -44,6 +43,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
     ImageView profile;
     TextView timer;
     ImageView buyButton;
+    ImageView menu;
 
     MainPresenter presenter;
 
@@ -55,6 +55,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         tvMinutesExpiration = findViewById(R.id.tv_minutes_expiration);
         callBtn = findViewById(R.id.ll_call);
         buyButton = findViewById(R.id.iv_add_minutes);
+        menu = findViewById(R.id.iv_menu);
 
         requests = findViewById(R.id.iv_requests);
         timer = findViewById(R.id.tv_timer);
@@ -89,20 +90,6 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
-//        qrScanner.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NewMainActivity.this, QrScannerActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        news.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NewMainActivity.this, NewsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,17 +97,13 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 startActivity(intent);
             }
         });
-
-//        share.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String share = getString(R.string.share_text);
-//                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                shareIntent.setType("text/plain");
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, share);
-//                startActivity(Intent.createChooser(shareIntent, getString(R.string.drawer_share)));
-//            }
-//        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewMainActivity.this, ActionsMenuActivity.class);
+                startActivity(intent);
+            }
+        });
 
         presenter = new MainPresenter(this, this);
         presenter.onCreate(getIntent().getExtras());
