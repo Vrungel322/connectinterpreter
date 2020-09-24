@@ -20,6 +20,9 @@
             android:label=""
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.ActionsMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.CallActivity"
             android:configChanges="orientation|screenSize" />
         <activity
