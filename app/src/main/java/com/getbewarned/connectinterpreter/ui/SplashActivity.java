@@ -43,10 +43,10 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void navigateToLogin() {
         // stub
-        Intent intent = new Intent(this, ConfirmationActivity.class);
-        intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "test");
+//        Intent intent = new Intent(this, ConfirmationActivity.class);
+//        intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "test");
 
-//        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
