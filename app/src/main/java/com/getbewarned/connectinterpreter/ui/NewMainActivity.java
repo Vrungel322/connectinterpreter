@@ -1,18 +1,17 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -36,48 +35,34 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
     private static final int RC_PHONE_STATE_PERM = 483;
 
     TextView availabilityTitleLabel;
-    TextView availabilityDescLabel;
-    AppCompatButton callBtn;
-    AppCompatButton waitBtn;
-    AppCompatButton buyBtn;
-
-    LinearLayout requests;
-    LinearLayout help;
-    LinearLayout news;
-    LinearLayout qrScanner;
-    LinearLayout share;
-    LinearLayout profile;
+    TextView tvMinutesExpiration;
+    LinearLayout callBtn;
+    ImageView requests;
+    ImageView help;
+    LinearLayout noMinutesContainer;
+    ImageView profile;
+    TextView timer;
 
     MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_new);
-        availabilityTitleLabel = findViewById(R.id.availability_title);
-        availabilityDescLabel = findViewById(R.id.availability_desc);
-        callBtn = findViewById(R.id.call_btn);
-        waitBtn = findViewById(R.id.wait_btn);
-        buyBtn = findViewById(R.id.buy_btn);
+        setContentView(R.layout.activity_main_new_v2);
+        availabilityTitleLabel = findViewById(R.id.tv_avaliavle_minutes_label);
+        tvMinutesExpiration = findViewById(R.id.tv_minutes_expiration);
+        callBtn = findViewById(R.id.ll_call);
 
-        requests = findViewById(R.id.requests_layout);
-        help = findViewById(R.id.help_layout);
-        news = findViewById(R.id.news_layout);
-        qrScanner = findViewById(R.id.qr_code_layout);
-        share = findViewById(R.id.share_layout);
-        profile = findViewById(R.id.profile_layout);
+        requests = findViewById(R.id.iv_requests);
+        timer = findViewById(R.id.tv_timer);
+        help = findViewById(R.id.iv_help);
+        noMinutesContainer = findViewById(R.id.ll_no_minutes);
+        profile = findViewById(R.id.iv_profile);
 
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.onStartCallPressed();
-            }
-        });
-
-        buyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.buyUnlimPressed();
             }
         });
 
@@ -96,20 +81,20 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
-        qrScanner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NewMainActivity.this, QrScannerActivity.class);
-                startActivity(intent);
-            }
-        });
-        news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NewMainActivity.this, NewsActivity.class);
-                startActivity(intent);
-            }
-        });
+//        qrScanner.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(NewMainActivity.this, QrScannerActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        news.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(NewMainActivity.this, NewsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,16 +103,16 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
             }
         });
 
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String share = getString(R.string.share_text);
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, share);
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.drawer_share)));
-            }
-        });
+//        share.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String share = getString(R.string.share_text);
+//                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//                shareIntent.setType("text/plain");
+//                shareIntent.putExtra(Intent.EXTRA_TEXT, share);
+//                startActivity(Intent.createChooser(shareIntent, getString(R.string.drawer_share)));
+//            }
+//        });
 
         presenter = new MainPresenter(this, this);
         presenter.onCreate(getIntent().getExtras());
@@ -141,7 +126,7 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showLeftTime(String leftTime) {
-        availabilityTitleLabel.setText(leftTime);
+        timer.setText(leftTime);
     }
 
     @Override
@@ -149,31 +134,21 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
         if (available) {
             if (isUtog) {
                 availabilityTitleLabel.setText(R.string.utog_free_call_title);
-                availabilityDescLabel.setText(R.string.utog_free_call_desc);
             }
+            noMinutesContainer.setVisibility(View.GONE);
             callBtn.setVisibility(View.VISIBLE);
-            waitBtn.setVisibility(View.GONE);
-            buyBtn.setVisibility(View.GONE);
         } else {
             availabilityTitleLabel.setText(R.string.not_available_title);
-            if (isUtog) {
-                availabilityDescLabel.setText(R.string.not_available_desc_utog);
-            } else {
-                availabilityDescLabel.setText(R.string.not_available_desc);
-            }
+            noMinutesContainer.setVisibility(View.VISIBLE);
             callBtn.setVisibility(View.GONE);
-            waitBtn.setVisibility(View.GONE);
-            buyBtn.setVisibility(View.VISIBLE);
+            timer.setText("00:00");
         }
     }
 
     @Override
     public void showChecking() {
         availabilityTitleLabel.setText(R.string.minutes_check_title);
-        availabilityDescLabel.setText(R.string.minutes_check_desc);
         callBtn.setVisibility(View.GONE);
-        waitBtn.setVisibility(View.VISIBLE);
-        buyBtn.setVisibility(View.GONE);
     }
 
     @Override
@@ -272,7 +247,8 @@ public class NewMainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showDateTill(String dateTill) {
         availabilityTitleLabel.setText("Безлимит");
-        availabilityDescLabel.setText(getString(R.string.till_text, dateTill));
+        tvMinutesExpiration.setVisibility(View.VISIBLE);
+        tvMinutesExpiration.setText(getString(R.string.till_text, dateTill));
     }
 
     @Override

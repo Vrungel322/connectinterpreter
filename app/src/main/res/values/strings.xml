@@ -186,5 +186,6 @@
     <string name="login_title_v2">Enter</string>
     <string name="phone_number" >Phone number</string>
     <string name="enter_your_name">Enter your name</string>
+    <string name="available_minutes">Available minutes</string>
 
 </resources>

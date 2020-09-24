@@ -87,11 +87,16 @@
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
 
+
     <style name="Button_fab">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/rounded_background_fab</item>
+    </style>
+
+    <style name="Main_timer" parent="EditText_rounded">
+        <item name="android:textSize">44sp</item>
     </style>
 
 

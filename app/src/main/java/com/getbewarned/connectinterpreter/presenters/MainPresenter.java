@@ -165,7 +165,7 @@ public class MainPresenter implements Presenter {
                     HumanDate humanDate = new HumanDate(context, response.getActiveTill());
                     view.showDateTill(humanDate.getDate());
                     HumanTime humanTime = new HumanTime(context, response.getSeconds() * 1000);
-                    view.showLeftTime(humanTime.getEasyTime());
+                    view.showLeftTime(humanTime.getTime());
                     view.toggleCallAvailability(true, false);
                 } else {
                     view.showError(response.getMessage());
