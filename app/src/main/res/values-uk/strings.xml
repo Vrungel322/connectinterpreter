@@ -167,4 +167,8 @@
     <string name="qr_scanner">Qr сканер</string>
     <string name="full_name">ПІБ</string>
     <string name="country_and_city">Країна, місто</string>
+    <string name="country">Країна</string>
+    <string name="city">Місто</string>
+    <string name="save">Зберегти</string>
+    <string name="enter_later">Заповнити Пізніше</string>
 </resources>

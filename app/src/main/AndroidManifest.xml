@@ -125,6 +125,12 @@
             android:name=".ui.ProfileActivityV2"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.EditPersonalInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.PurchaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"
             android:screenOrientation="portrait"

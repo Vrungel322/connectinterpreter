@@ -166,6 +166,10 @@
     <string name="qr_scanner">Qr сканер</string>
     <string name="full_name">ФИО</string>
     <string name="country_and_city">Страна город</string>
+    <string name="country">Страна</string>
+    <string name="city">Город</string>
+    <string name="save">Сохранить</string>
+    <string name="enter_later">Заполнить Позже</string>
 
 </resources>
 

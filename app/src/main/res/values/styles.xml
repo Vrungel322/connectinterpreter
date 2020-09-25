@@ -105,7 +105,9 @@
         <item name="android:background">@drawable/rounded_background</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@android:color/holo_blue_dark</item>
+        <item name="android:paddingStart">16sp</item>
+        <item name="android:paddingLeft">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
 
@@ -117,29 +119,32 @@
         <item name="android:background">@drawable/rounded_background_fab</item>
     </style>
 
-    <style name="Main_timer" parent="EditText_rounded">
+    <style name="Main_timer">
+        <item name="android:background">@drawable/rounded_background</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">52sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
 
-    <style name="ActionItem_72" parent="EditText_rounded">
+    <style name="ActionItem_72" >
+        <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/circle_action_main_screen</item>
     </style>
 
-    <style name="ActionItem_ActionsScreen" parent="EditText_rounded">
+    <style name="ActionItem_ActionsScreen" parent="ActionItem_72">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/circle_action_actions_screen</item>
     </style>
 
-    <style name="ActionItem_Call" parent="EditText_rounded">
+    <style name="ActionItem_Call" parent="ActionItem_72">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/circle_call</item>
     </style>
-
-
 
 
 </resources>

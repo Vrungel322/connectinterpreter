@@ -72,7 +72,10 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.buyUnlimPressed();
+                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
+                startActivity(intent);
+
+//                presenter.buyUnlimPressed();
             }
         });
         requests.setOnClickListener(new View.OnClickListener() {

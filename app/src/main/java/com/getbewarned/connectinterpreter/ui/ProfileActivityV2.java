@@ -34,11 +34,18 @@ public class ProfileActivityV2 extends NoStatusBarActivity implements ProfileVie
                 presenter.logout();
             }
         });
+        ((ImageView) findViewById(R.id.iv_edit_personal_info)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivityV2.this, EditPersonalInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         ((FrameLayout) findViewById(R.id.fl_buy)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(ProfileActivityV2.this, PurchaseActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(ProfileActivityV2.this, PurchaseActivity.class);
+                startActivity(intent);
             }
         });
 
