@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.UiUtils;
 
 public class ActionsMenuActivity extends NoStatusBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,14 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.drawer_share)));
             }
         });
+
+        // set shadows
+        UiUtils.actionActionsScreen(findViewById(R.id.iv_requests));
+        UiUtils.actionActionsScreen(findViewById(R.id.iv_help));
+        UiUtils.actionActionsScreen(findViewById(R.id.iv_news));
+        UiUtils.actionActionsScreen(findViewById(R.id.iv_qr));
+        UiUtils.actionActionsScreen(findViewById(R.id.iv_share));
+
     }
 
     @Override

@@ -10,6 +10,10 @@ public class UiUtils {
         UiUtils.shadow(v, 24, 1.2f, 0.5f);
     }
 
+    public static void actionActionsScreen(View v) {
+        UiUtils.shadow(v, 16, 1.1f, 0.5f);
+    }
+
     /**
      * [v] need to have background some like
      * <shape xmlns:android="http://schemas.android.com/apk/res/android"

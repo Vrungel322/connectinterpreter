@@ -105,6 +105,12 @@
         <item name="android:background">@drawable/circle_action_main_screen</item>
     </style>
 
+    <style name="ActionItem_ActionsScreen" parent="EditText_rounded">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/circle_action_actions_screen</item>
+    </style>
+
     <style name="ActionItem_Call" parent="EditText_rounded">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

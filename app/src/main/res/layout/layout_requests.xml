@@ -10,10 +10,9 @@
 
     <ImageView
         android:id="@+id/iv_requests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_requests_new"
+        style="@style/ActionItem_ActionsScreen"
+        app:srcCompat="@drawable/ic_requests_new"
         app:layout_constraintBottom_toTopOf="@+id/tv_requests"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
