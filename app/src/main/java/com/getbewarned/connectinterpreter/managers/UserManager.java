@@ -25,6 +25,8 @@ public class UserManager {
     public static final String USER_UTOG = "user_utog";
     public static final String USER_UTOG_AVAILABLE = "user_utog_available";
     public static final String USER_UKRAINIAN = "user_ukrainian";
+    public static final String USER_COUNTRY = "user_country";
+    public static final String USER_CITY = "user_city";
     public static final String UTOG_ASK = "utog_ask";
     public static final String UTOG_ASK_DATE = "utog_ask_date";
 
@@ -121,9 +123,22 @@ public class UserManager {
         editor.putBoolean(FIRST_TIME, firstTime);
         editor.apply();
     }
+
     public void updateUserRegion(String region) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_REGION, region);
+        editor.apply();
+    }
+
+    public void updateUserCountry(String country) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_COUNTRY, country);
+        editor.apply();
+    }
+
+    public void updateUserCity(String city) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_CITY, city);
         editor.apply();
     }
 
@@ -183,6 +198,14 @@ public class UserManager {
 
     public boolean isUtogAvailable() {
         return sharedPreferences.getBoolean(USER_UTOG_AVAILABLE, false);
+    }
+
+    public String getUserCountry() {
+        return sharedPreferences.getString(USER_COUNTRY, "");
+    }
+
+    public String getUserCity() {
+        return sharedPreferences.getString(USER_CITY, "");
     }
 
 

@@ -92,7 +92,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewMainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(NewMainActivity.this, ProfileActivityV2.class);
                 startActivity(intent);
             }
         });

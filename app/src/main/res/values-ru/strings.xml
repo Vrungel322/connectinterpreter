@@ -164,6 +164,8 @@
     <string name="enter_your_name">Введите свое имя, чтобы мы знали, как к Вам обращаться</string>
     <string name="available_minutes">Доступные минуты</string>
     <string name="qr_scanner">Qr сканер</string>
+    <string name="full_name">ФИО</string>
+    <string name="country_and_city">Страна город</string>
 
 </resources>
 

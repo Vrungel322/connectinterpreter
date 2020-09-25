@@ -23,7 +23,7 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
         findViewById(R.id.iv_profile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActionsMenuActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(ActionsMenuActivity.this, ProfileActivityV2.class);
                 startActivity(intent);
             }
         });

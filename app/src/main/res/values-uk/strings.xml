@@ -165,4 +165,6 @@
     <string name="enter_your_name">Введіть своє ім\'я, щоб ми знали, як до Вас звертатися</string>
     <string name="available_minutes">Доступні хвилини</string>
     <string name="qr_scanner">Qr сканер</string>
+    <string name="full_name">ПІБ</string>
+    <string name="country_and_city">Країна, місто</string>
 </resources>

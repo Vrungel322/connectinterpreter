@@ -85,10 +85,18 @@
     </style>
 
     <style name="Text_news_item_title">
-        <item name="android:textColor">@android:color/holo_blue_dark</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text_user_info_block_title" parent="Text_news_item_title">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Text_user_info_block_value" parent="Text_default">
+        <item name="android:textColor">@android:color/black</item>
+
     </style>
 
     <style name="EditText_rounded">
