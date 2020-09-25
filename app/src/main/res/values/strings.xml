@@ -187,5 +187,6 @@
     <string name="phone_number" >Phone number</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="available_minutes">Available minutes</string>
+    <string name="qr_scanner">Qr scanner</string>
 
 </resources>

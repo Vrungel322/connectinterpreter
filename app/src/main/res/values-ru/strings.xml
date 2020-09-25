@@ -163,6 +163,7 @@
     <string name="phone_number" >Номер телефона</string>
     <string name="enter_your_name">Введите свое имя, чтобы мы знали, как к Вам обращаться</string>
     <string name="available_minutes">Доступные минуты</string>
+    <string name="qr_scanner">Qr сканер</string>
 
 </resources>
 

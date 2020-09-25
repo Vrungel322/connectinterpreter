@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.QrScannerActivity">
 
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_new_ui" />
+
+    <TextView
+        android:id="@+id/tv_toolbar_title"
+        style="@style/Text_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_back"
+        app:layout_constraintTop_toTopOf="@+id/iv_back"
+        tools:text="Toolbar title" />
+
     <SurfaceView
         android:id="@+id/scanner_surface"
         android:layout_width="match_parent"
@@ -24,35 +52,38 @@
         android:id="@+id/top_border"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/qrScannerBackground"
         app:layout_constraintBottom_toTopOf="@id/preview_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/qrScannerBackground"
         app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/bottom_border"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/preview_view"
+        android:background="@color/qrScannerBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/qrScannerBackground"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/preview_view" />
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/top_border"
+        android:background="@color/qrScannerBackground"
+        app:layout_constraintBottom_toTopOf="@id/bottom_border"
         app:layout_constraintEnd_toStartOf="@id/preview_view"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/qrScannerBackground"
-        app:layout_constraintBottom_toTopOf="@id/bottom_border" />
+        app:layout_constraintTop_toBottomOf="@id/top_border" />
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/top_border"
+        android:background="@color/qrScannerBackground"
+        app:layout_constraintBottom_toTopOf="@id/bottom_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/preview_view"
-        android:background="@color/qrScannerBackground"
-        app:layout_constraintBottom_toTopOf="@id/bottom_border" />
+        app:layout_constraintTop_toBottomOf="@id/top_border" />
 
 </android.support.constraint.ConstraintLayout>

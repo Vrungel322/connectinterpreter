@@ -164,4 +164,5 @@
     <string name="login_title_v2">Вхід</string>
     <string name="enter_your_name">Введіть своє ім\'я, щоб ми знали, як до Вас звертатися</string>
     <string name="available_minutes">Доступні хвилини</string>
+    <string name="qr_scanner">Qr сканер</string>
 </resources>

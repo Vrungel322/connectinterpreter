@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
@@ -13,7 +16,7 @@ import com.getbewarned.connectinterpreter.presenters.GroupSessionPresenter;
 import github.nisrulz.qreader.QRDataListener;
 import github.nisrulz.qreader.QREader;
 
-public class QrScannerActivity extends AppCompatActivity {
+public class QrScannerActivity extends NoStatusBarActivity {
 
     private SurfaceView scannerSurface;
     private QREader qrEader;
@@ -23,6 +26,16 @@ public class QrScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_scanner);
+
+        // toolbar
+        ((TextView) findViewById(R.id.tv_toolbar_title)).setText(R.string.qr_scanner);
+        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         scannerSurface = findViewById(R.id.scanner_surface);
         qrCodeManager = new QrCodeManager();
 
