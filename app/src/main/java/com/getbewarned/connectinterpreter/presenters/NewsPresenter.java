@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.getbewarned.connectinterpreter.adapters.NewsAdapter;
+import com.getbewarned.connectinterpreter.adapters.OnNewsClick;
 import com.getbewarned.connectinterpreter.interfaces.NewsReceived;
 import com.getbewarned.connectinterpreter.interfaces.NewsView;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
@@ -22,13 +23,19 @@ public class NewsPresenter implements Presenter {
     NetworkManager networkManager;
     private NewsAdapter adapter;
 
-    public NewsPresenter(NewsView view, Context context) {
+    public NewsPresenter(final NewsView view, Context context) {
         this.newsView = view;
         UserManager userManager = new UserManager(context);
         networkManager = new NetworkManager(context);
         networkManager.setAuthToken(userManager.getUserToken());
 
-        adapter = new NewsAdapter();
+        adapter = new NewsAdapter(new OnNewsClick() {
+
+            @Override
+            public void onNewsClick(News item) {
+                view.navigateToNews(item);
+            }
+        });
     }
 
     public NewsAdapter getAdapter() {
@@ -37,16 +44,6 @@ public class NewsPresenter implements Presenter {
 
     @Override
     public void onCreate(Bundle extras) {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
         networkManager.getNews(new NewsReceived() {
             @Override
             public void onDataReceived(NewsResponse response) {
@@ -69,6 +66,16 @@ public class NewsPresenter implements Presenter {
                 newsView.showError(error.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+
     }
 
     @Override

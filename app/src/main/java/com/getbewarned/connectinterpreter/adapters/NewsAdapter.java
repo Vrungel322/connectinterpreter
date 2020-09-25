@@ -15,7 +15,12 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
+    public NewsAdapter(OnNewsClick onClick) {
+        this.onClick = onClick;
+    }
+
     private List<News> news = new ArrayList<>();
+    private OnNewsClick onClick;
 
     @NonNull
     @Override
@@ -26,7 +31,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.updateUI(news.get(position));
+        final News newsItem = news.get(position);
+        holder.updateUI(newsItem);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onNewsClick(newsItem);
+            }
+        });
     }
 
     @Override

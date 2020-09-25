@@ -119,6 +119,9 @@
                 android:value=".ui.RequestsActivity" />
         </activity>
         <activity
+            android:name=".ui.NewsDetail"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"
             android:screenOrientation="portrait"

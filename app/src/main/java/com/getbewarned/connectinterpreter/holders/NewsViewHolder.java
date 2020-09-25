@@ -33,8 +33,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     public void updateUI(News news) {
         title.setText(news.getTitle());
         content.setText(news.getText());
-        DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-        date.setText(format.format(news.getDate()));
+        date.setText(news.dateFormatted());
 
         if (news.getVideoUrl() == null) {
             videoView.setVisibility(View.GONE);

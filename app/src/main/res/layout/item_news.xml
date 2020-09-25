@@ -49,6 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text_default"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:textColor="?android:attr/textColorPrimary"
             tools:text="I could not find a way how to create a guideline with a constraint. I want a horizontal guideline to be in the middle of two views. Imagine a bigger view with 100dp height on top and smaller one with 50dp height on bottom. I want to place a guideline in the middle of the space between them. " />
     </LinearLayout>

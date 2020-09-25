@@ -2,20 +2,24 @@ package com.getbewarned.connectinterpreter.models;
 
 import android.support.annotation.Nullable;
 
-import java.net.URL;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
-public class News {
+public class News implements Serializable {
 
     String title;
     String text;
     Date date;
-    @Nullable String videoUrl;
+    @Nullable
+    String videoUrl;
 
-    public News(String title, String text, long dateTime, @Nullable  String videoUrl) {
+    public News(String title, String text, long dateTime, @Nullable String videoUrl) {
         this.title = title;
         this.text = text;
-        this.date = new Date(dateTime);
+        this.date = new Date(dateTime * 1000); // dateTime is sec, dateTime *1000 is millis
         this.videoUrl = videoUrl;
     }
 
@@ -33,5 +37,10 @@ public class News {
 
     public String getVideoUrl() {
         return videoUrl;
+    }
+
+    public String dateFormatted() {
+        DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+        return format.format(getDate());
     }
 }

@@ -1,6 +1,7 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.NewsView;
+import com.getbewarned.connectinterpreter.models.News;
 import com.getbewarned.connectinterpreter.presenters.NewsPresenter;
 
 public class NewsActivity extends NoStatusBarActivity implements NewsView {
@@ -76,6 +78,13 @@ public class NewsActivity extends NoStatusBarActivity implements NewsView {
                 })
                 .create()
                 .show();
+    }
+
+    @Override
+    public void navigateToNews(News news) {
+        Intent intent = new Intent(NewsActivity.this, NewsDetail.class);
+        intent.putExtra(NewsDetail.NEWS_KEY, news);
+        startActivity(intent);
     }
 
     @Override
