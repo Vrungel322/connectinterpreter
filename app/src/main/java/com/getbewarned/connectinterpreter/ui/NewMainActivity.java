@@ -102,6 +102,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             public void onClick(View v) {
                 Intent intent = new Intent(NewMainActivity.this, ActionsMenuActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 

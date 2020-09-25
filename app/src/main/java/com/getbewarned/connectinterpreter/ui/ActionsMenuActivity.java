@@ -15,7 +15,7 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
         findViewById(R.id.iv_menu_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -68,5 +68,11 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.drawer_share)));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }
