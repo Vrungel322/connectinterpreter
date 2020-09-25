@@ -3,6 +3,7 @@ package com.getbewarned.connectinterpreter.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,9 +34,22 @@ public class ProfileActivityV2 extends NoStatusBarActivity implements ProfileVie
                 presenter.logout();
             }
         });
+        ((FrameLayout) findViewById(R.id.fl_buy)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(ProfileActivityV2.this, PurchaseActivity.class);
+//                startActivity(intent);
+            }
+        });
 
         presenter = new ProfilePresenterV2(this, this);
         presenter.onCreate(getIntent().getExtras());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
     }
 
     @Override

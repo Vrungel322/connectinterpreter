@@ -92,10 +92,12 @@
 
     <style name="Text_user_info_block_title" parent="Text_news_item_title">
         <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Text_user_info_block_value" parent="Text_default">
         <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
 
     </style>
 
