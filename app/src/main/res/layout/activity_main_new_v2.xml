@@ -80,9 +80,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         tools:visibility="gone" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/iv_requests"
-        style="@style/ActionItem_FAB"
+        style="@style/ActionItem_72"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
         android:layout_marginBottom="32dp"
@@ -93,12 +93,10 @@
 
     <ImageView
         android:id="@+id/iv_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ActionItem_72"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:layout_marginBottom="32dp"
-        android:elevation="@dimen/default_elevation"
         app:layout_constraintBottom_toTopOf="@+id/ll_call_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_help_mini" />
@@ -120,13 +118,12 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="24dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_call_button_new"
-                android:elevation="@dimen/default_elevation" />
+                style="@style/ActionItem_Call"
+                app:srcCompat="@drawable/ic_call_button_new" />
 
         </LinearLayout>
 
@@ -141,12 +138,11 @@
             android:paddingStart="48dp"
             android:paddingEnd="48dp"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <TextView
                 style="@style/Text_default"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:text="@string/not_available_title"
                 android:textAlignment="center"

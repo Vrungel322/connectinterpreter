@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +16,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
@@ -37,7 +37,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
     TextView availabilityTitleLabel;
     TextView tvMinutesExpiration;
     LinearLayout callBtn;
-    FloatingActionButton requests;
+    ImageView requests;
     ImageView help;
     LinearLayout noMinutesContainer;
     ImageView profile;
@@ -75,7 +75,6 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 presenter.buyUnlimPressed();
             }
         });
-
         requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +104,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
+
+        // set shadows
+        UiUtils.actionMainScreen(requests);
+        UiUtils.actionMainScreen(help);
+
 
         presenter = new MainPresenter(this, this);
         presenter.onCreate(getIntent().getExtras());
