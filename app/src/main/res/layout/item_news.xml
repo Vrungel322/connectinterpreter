@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -22,15 +22,16 @@
 
             <TextView
                 android:id="@+id/news_title"
+                style="@style/Text_news_item_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="18sp"
-                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Utog will allow to use sl interpreter for free " />
 
             <TextView
                 android:id="@+id/news_date"
+                style="@style/Text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorSecondary"
@@ -38,15 +39,16 @@
         </LinearLayout>
 
         <WebView
-            android:visibility="gone"
             android:id="@+id/video_view"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/news_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Text_default"
             android:textColor="?android:attr/textColorPrimary"
             tools:text="I could not find a way how to create a guideline with a constraint. I want a horizontal guideline to be in the middle of two views. Imagine a bigger view with 100dp height on top and smaller one with 50dp height on bottom. I want to place a guideline in the middle of the space between them. " />
     </LinearLayout>

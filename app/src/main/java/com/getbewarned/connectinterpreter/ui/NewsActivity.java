@@ -1,20 +1,20 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.NewsView;
 import com.getbewarned.connectinterpreter.presenters.NewsPresenter;
 
-public class NewsActivity extends AppCompatActivity implements NewsView {
+public class NewsActivity extends NoStatusBarActivity implements NewsView {
 
     RecyclerView newsList;
     TextView emptyNews;
@@ -24,12 +24,14 @@ public class NewsActivity extends AppCompatActivity implements NewsView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        ((TextView) findViewById(R.id.tv_toolbar_title)).setText(R.string.drawer_news);
+        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.drawer_news);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         newsList = findViewById(R.id.news_list);
         emptyNews = findViewById(R.id.empty_news);
