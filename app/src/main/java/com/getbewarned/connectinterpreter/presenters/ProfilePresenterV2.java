@@ -36,7 +36,12 @@ public class ProfilePresenterV2 implements Presenter {
 
     @Override
     public void onResume() {
-        view.updateUserData(userManager.getUserName(), userManager.getUserCountry(), userManager.getUserCity(), userManager.getUserPhone());
+        view.updateUserData(userManager.getUserName(),
+                userManager.getUserLastName(),
+                userManager.getUserPatronymic(),
+                userManager.getUserCountry(),
+                userManager.getUserCity(),
+                userManager.getUserPhone());
     }
 
     @Override

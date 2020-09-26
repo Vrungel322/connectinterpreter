@@ -61,10 +61,32 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        style="@style/Text_user_info_block_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_number" />
+
+                    <TextView
+                        android:id="@+id/tv_phone_number"
+                        style="@style/Text_user_info_block_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        tools:text="+71234567890" />
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
@@ -86,8 +108,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_first_name"
-                android:inputType="textPersonName"
-                android:padding="8dp" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/et_last_name"
@@ -96,8 +117,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_last_name"
-                android:inputType="textPersonName"
-                android:padding="8dp" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/et_patronymic_name"
@@ -106,8 +126,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_patronymic"
-                android:inputType="textPersonName"
-                android:padding="8dp" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/et_country"
@@ -116,8 +135,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/country"
-                android:inputType="textPersonName"
-                android:padding="8dp" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/et_city"
@@ -126,12 +144,12 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/city"
-                android:inputType="textPersonName"
-                android:padding="8dp" />
+                android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/b_save"
                 style="@style/Button_fab"
+                android:background="@drawable/activateble_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="30dp"

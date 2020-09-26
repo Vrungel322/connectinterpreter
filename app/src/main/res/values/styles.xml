@@ -85,6 +85,7 @@
     </style>
 
     <style name="Text_news_item_title">
+        <item name="android:textColor">@color/colorFieldHint</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
@@ -105,9 +106,10 @@
         <item name="android:background">@drawable/rounded_background</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:paddingStart">16sp</item>
         <item name="android:paddingLeft">16sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorFieldHint</item>
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
 

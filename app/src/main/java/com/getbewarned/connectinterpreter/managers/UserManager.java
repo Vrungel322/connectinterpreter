@@ -15,20 +15,24 @@ import java.util.Date;
 public class UserManager {
 
     public static final String FIRST_TIME = "first_time";
-    public static final String USER_TOKEN = "user_token";
-    public static final String USER_NAME = "user_name";
-    public static final String USER_PHONE = "user_phone";
-    public static final String USER_REGION = "user_region";
     public static final String USER_SECONDS = "user_seconds";
     public static final String USER_UNLIM = "user_unlim";
     public static final String USER_ACTIVE_TILL = "user_active_till";
+
     public static final String USER_UTOG = "user_utog";
     public static final String USER_UTOG_AVAILABLE = "user_utog_available";
-    public static final String USER_UKRAINIAN = "user_ukrainian";
-    public static final String USER_COUNTRY = "user_country";
-    public static final String USER_CITY = "user_city";
     public static final String UTOG_ASK = "utog_ask";
     public static final String UTOG_ASK_DATE = "utog_ask_date";
+
+    public static final String USER_TOKEN = "user_token";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_LAST_NAME = "user_last_name";
+    public static final String USER_PATRONYMIC = "user_patronymic";
+    public static final String USER_PHONE = "user_phone";
+    public static final String USER_REGION = "user_region";
+    public static final String USER_COUNTRY = "user_country";
+    public static final String USER_CITY = "user_city";
+    public static final String USER_UKRAINIAN = "user_ukrainian";
 
     private static final String LAST_APP_VERSION = "last_app_version";
 
@@ -142,6 +146,18 @@ public class UserManager {
         editor.apply();
     }
 
+    public void updateUserLastName(String lastName) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_LAST_NAME, lastName);
+        editor.apply();
+    }
+
+    public void updateUserPatronymic(String patronimic) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_PATRONYMIC, patronimic);
+        editor.apply();
+    }
+
     public String getUserName() {
         return sharedPreferences.getString(USER_NAME, "");
     }
@@ -206,6 +222,14 @@ public class UserManager {
 
     public String getUserCity() {
         return sharedPreferences.getString(USER_CITY, "");
+    }
+
+    public String getUserLastName() {
+        return sharedPreferences.getString(USER_LAST_NAME, "");
+    }
+
+    public String getUserPatronymic() {
+        return sharedPreferences.getString(USER_PATRONYMIC, "");
     }
 
 

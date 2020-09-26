@@ -60,8 +60,8 @@ public class ProfileActivityV2 extends NoStatusBarActivity implements ProfileVie
     }
 
     @Override
-    public void updateUserData(String userName, String userCountry, String userCity, String userPhone) {
-        ((TextView) findViewById(R.id.tv_user_name)).setText(userName);
+    public void updateUserData(String userName, String userLastName, String userPatronymic, String userCountry, String userCity, String userPhone) {
+        ((TextView) findViewById(R.id.tv_user_name)).setText(userLastName + " " + userName + " " + userPatronymic);
         if (!userCity.isEmpty() && !userCountry.isEmpty()) {
             ((TextView) findViewById(R.id.tv_country_city)).setText(userCountry + "," + userCity);
         }
