@@ -31,11 +31,10 @@
             android:id="@+id/iv_selection_indicator"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:tint="@color/red_new_ui"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_profile_white"
+            app:srcCompat="@drawable/ic_tariff_selection_icon"
             tools:visibility="visible" />
 
         <TextView
