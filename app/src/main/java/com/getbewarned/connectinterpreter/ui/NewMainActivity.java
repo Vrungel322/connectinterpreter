@@ -88,9 +88,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // browser
 //                Uri uri = Uri.parse("https://interpreter.getbw.me/help");
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
+                // dialog
                 Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);

@@ -30,8 +30,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_white_circle"
         android:scaleType="centerInside"
-        android:tint="@color/red_new_ui"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:srcCompat="@drawable/ic_menu_close_new_ui" />
+        app:srcCompat="@drawable/ic_close_help_dialog" />
 </android.support.constraint.ConstraintLayout>

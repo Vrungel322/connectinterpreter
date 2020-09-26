@@ -1,7 +1,6 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -39,8 +38,14 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
         findViewById(R.id.cl_help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("https://interpreter.getbw.me/help");
-                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                // browser
+//                Uri uri = Uri.parse("https://interpreter.getbw.me/help");
+//                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+
+                // dialog
+                Intent intent = new Intent(ActionsMenuActivity.this, HelpActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 
