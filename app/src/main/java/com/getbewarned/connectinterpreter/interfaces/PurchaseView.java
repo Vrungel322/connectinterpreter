@@ -5,4 +5,7 @@ public interface PurchaseView {
 
     void updateDoneBtn();
 
+    void successPurchase();
+
+    void failPurchase(String errorMsg);
 }

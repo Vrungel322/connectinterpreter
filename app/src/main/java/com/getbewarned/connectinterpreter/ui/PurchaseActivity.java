@@ -1,9 +1,11 @@
 package com.getbewarned.connectinterpreter.ui;
 
+import android.Manifest;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,8 +19,12 @@ import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.presenters.PurchasePresenter;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class PurchaseActivity extends NoStatusBarActivity implements PurchaseView {
 
+    private static final int RC_PHONE_STATE_PERM = 483;
 
     private VideoView videoView;
     private ImageView ivPlayingStopVideo;
@@ -57,7 +63,9 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         bChooseTariff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                presenter.getAdapter().selectedItem
+                if (bChooseTariff.isActivated()) {
+                    requestLiqPayPermissions();
+                }
             }
         });
     }
@@ -69,6 +77,12 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
     public void updateDoneBtn() {
         bChooseTariff.setActivated(presenter.getAdapter().selectedItem != null);
     }
@@ -76,6 +90,27 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     @Override
     public void errorReceivingTariffs(Error error) {
         Toast.makeText(this, "Error" + error.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void successPurchase() {
+        onBackPressed();
+    }
+
+    @Override
+    public void failPurchase(String errorMsg) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
+        onBackPressed();
+    }
+
+    @AfterPermissionGranted(RC_PHONE_STATE_PERM)
+    public void requestLiqPayPermissions() {
+        String[] perms = {Manifest.permission.READ_PHONE_STATE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            presenter.startLiqPayPurchaseFlow();
+        } else {
+            EasyPermissions.requestPermissions(this, getString(R.string.permission_rationale_liqpay), RC_PHONE_STATE_PERM, perms);
+        }
     }
 
     private void setupVideo() {
