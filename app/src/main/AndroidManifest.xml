@@ -119,7 +119,7 @@
                 android:value=".ui.RequestsActivity" />
         </activity>
         <activity
-            android:name=".ui.NewsDetail"
+            android:name=".ui.NewsDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ProfileActivityV2"

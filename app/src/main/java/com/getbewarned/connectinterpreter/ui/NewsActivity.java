@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -82,8 +81,8 @@ public class NewsActivity extends NoStatusBarActivity implements NewsView {
 
     @Override
     public void navigateToNews(News news) {
-        Intent intent = new Intent(NewsActivity.this, NewsDetail.class);
-        intent.putExtra(NewsDetail.NEWS_KEY, news);
+        Intent intent = new Intent(NewsActivity.this, NewsDetailActivity.class);
+        intent.putExtra(NewsDetailActivity.NEWS_KEY, news);
         startActivity(intent);
     }
 

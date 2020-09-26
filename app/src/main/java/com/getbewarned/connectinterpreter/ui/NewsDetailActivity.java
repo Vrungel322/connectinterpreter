@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.models.News;
 
-public class NewsDetail extends NoStatusBarActivity {
+public class NewsDetailActivity extends NoStatusBarActivity {
     static final String NEWS_KEY = "NEWS_KEY";
 
     private News news;
