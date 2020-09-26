@@ -194,5 +194,7 @@
     <string name="city">City</string>
     <string name="save">Save</string>
     <string name="enter_later">Enter later</string>
+    <string name="viber">Viber</string>
+    <string name="whats_app">WhatsApp</string>
 
 </resources>
