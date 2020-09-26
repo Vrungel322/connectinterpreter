@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="320dp"
     android:padding="16dp">
 
     <VideoView
@@ -16,11 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         android:weightSum="3"
@@ -40,11 +36,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/telegram" />
+                android:background="@drawable/ic_telegram_new_ui" />
 
             <TextView
+                style="@style/Text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/drawer_telegram"
                 android:textColor="#222" />
 
@@ -61,11 +59,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/telegram" />
+                android:background="@drawable/ic_viber_new_ui" />
 
             <TextView
+                style="@style/Text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/viber"
                 android:textColor="#222" />
 
@@ -82,11 +82,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/telegram" />
+                android:background="@drawable/ic_whatsapp_new_ui" />
 
             <TextView
+                style="@style/Text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/whats_app"
                 android:textColor="#222" />
 
