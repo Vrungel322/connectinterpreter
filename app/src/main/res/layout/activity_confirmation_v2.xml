@@ -29,7 +29,6 @@
             android:id="@+id/code"
             style="@style/EditText_rounded"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
@@ -67,7 +66,6 @@
             android:id="@+id/login_button"
             style="@style/Button_fab"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
             android:layout_marginTop="30dp"
             android:text="@string/action_login" />
 

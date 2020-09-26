@@ -66,7 +66,6 @@
         android:id="@+id/fl_buy"
         style="@style/Button_fab"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:drawablePadding="8dp"
         android:padding="20dp"

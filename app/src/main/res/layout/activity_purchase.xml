@@ -60,12 +60,10 @@
 
         <Button
             android:id="@+id/b_choose_tariff"
-            style="@style/Button_fab"
+            style="@style/Button_fab_activatable"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
             android:elevation="@dimen/default_elevation"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/activateble_button"
             android:text="@string/choose"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

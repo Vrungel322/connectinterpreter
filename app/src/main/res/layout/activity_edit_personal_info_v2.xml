@@ -38,22 +38,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/toolbar_top_margin"
-        android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_logout_new_ui" />
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_toolbar_title">
 
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -105,7 +105,6 @@
                 android:id="@+id/et_name"
                 style="@style/EditText_rounded"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_first_name"
                 android:inputType="textPersonName" />
@@ -114,7 +113,6 @@
                 android:id="@+id/et_last_name"
                 style="@style/EditText_rounded"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_last_name"
                 android:inputType="textPersonName" />
@@ -123,7 +121,6 @@
                 android:id="@+id/et_patronymic_name"
                 style="@style/EditText_rounded"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_patronymic"
                 android:inputType="textPersonName" />
@@ -132,7 +129,6 @@
                 android:id="@+id/et_country"
                 style="@style/EditText_rounded"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/country"
                 android:inputType="textPersonName" />
@@ -141,17 +137,14 @@
                 android:id="@+id/et_city"
                 style="@style/EditText_rounded"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/city"
                 android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/b_save"
-                style="@style/Button_fab"
-                android:background="@drawable/activateble_button"
+                style="@style/Button_fab_activatable"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/save" />
 
