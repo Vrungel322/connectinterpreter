@@ -194,7 +194,10 @@
     <string name="city">City</string>
     <string name="save">Save</string>
     <string name="enter_later">Enter later</string>
-    <string name="viber">Viber</string>
-    <string name="whats_app">WhatsApp</string>
+    <string name="viber" translatable="false">Viber</string>
+    <string name="whats_app" translatable="false">WhatsApp</string>
+    <string name="tariff_choose">Choose tariff</string>
+    <string name="choose">Choose</string>
+    <string name="tariff_name_stub">Tariff name</string>
 
 </resources>

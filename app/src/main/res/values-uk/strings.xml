@@ -171,4 +171,7 @@
     <string name="city">Місто</string>
     <string name="save">Зберегти</string>
     <string name="enter_later">Заповнити Пізніше</string>
+    <string name="tariff_choose">Вибір тарифу</string>
+    <string name="choose">Вибрати</string>
+    <string name="tariff_name_stub">Назва тарифу</string>
 </resources>

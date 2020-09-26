@@ -170,6 +170,9 @@
     <string name="city">Город</string>
     <string name="save">Сохранить</string>
     <string name="enter_later">Заполнить Позже</string>
+    <string name="tariff_choose">Выбор тарифа</string>
+    <string name="choose">Выбрать</string>
+    <string name="tariff_name_stub">Название тарифа</string>
 
 </resources>
 

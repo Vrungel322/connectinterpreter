@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginTop="8dp"
+    app:cardElevation="@dimen/default_elevation"
+    app:elevation="@dimen/default_elevation">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_tariff_name"
+            style="@style/Text_tariff_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_selection_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Tariff name" />
+
+        <ImageView
+            android:id="@+id/iv_selection_indicator"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/red_new_ui"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_profile_white"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_tariff_price"
+            style="@style/Text_tariff_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tariff_name"
+            tools:text="530$" />
+
+        <TextView
+            android:id="@+id/tv_tariff_minutes"
+            style="@style/Text_tariff_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="300 min."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tariff_name" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_unselected_tint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qrScannerBackground"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+</android.support.v7.widget.CardView>
