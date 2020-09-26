@@ -27,7 +27,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     private static final int RC_PHONE_STATE_PERM = 483;
 
     private VideoView videoView;
-    private ImageView ivPlayingStopVideo;
+    private ImageView ivPlayingVideo;
     private Button bChooseTariff;
     private RecyclerView rvTariffs;
 
@@ -116,12 +116,12 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     private void setupVideo() {
         final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
         videoView = findViewById(R.id.vv_purchse);
-        ivPlayingStopVideo = findViewById(R.id.iv_play_stop);
+        ivPlayingVideo = findViewById(R.id.iv_play);
 
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                ivPlayingStopVideo.setVisibility(View.VISIBLE);
+                ivPlayingVideo.setVisibility(View.VISIBLE);
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -130,7 +130,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
                 public boolean onInfo(MediaPlayer mp, int what, int extra) {
 
                     if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                        ivPlayingStopVideo.setVisibility(View.GONE);
+                        ivPlayingVideo.setVisibility(View.GONE);
                         return true;
                     }
                     return false;
@@ -138,7 +138,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
             });
         }
 
-        ivPlayingStopVideo.setOnClickListener(new View.OnClickListener() {
+        ivPlayingVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!videoView.isPlaying()) videoView.start();
