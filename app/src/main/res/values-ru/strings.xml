@@ -50,7 +50,7 @@
     <string name="main_active_till">Безлимитные звонки до</string>
     <string name="date_format">dd.MM.yy</string>
     <string name="buy_unlim_btn">Купить безлимит</string>
-    <string name="not_available_desc_utog">Бесплатно позвонить сможете завтра. Или можете купить еще минут нажав кнопку ниже</string>
+    <string name="not_available_desc_utog">Бесплатно позвонить сможете завтра. Или можете купить еще минут, нажав кнопку "+" рядом с полем доступных минут</string>
     <string name="not_available_desc">Вы можете купить еще минут нажав кнопку ниже</string>
     <string name="tariff_pattern">%s - %s</string>
     <string name="permission_rationale_liqpay">Необходимо предоставить доступ к звонкам для завершения процесса покупки</string>

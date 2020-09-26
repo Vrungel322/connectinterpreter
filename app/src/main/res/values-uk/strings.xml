@@ -51,7 +51,7 @@
     <string name="main_active_till">Безлімітні дзвінки до</string>
     <string name="date_format">dd.MM.yy</string>
     <string name="buy_unlim_btn">Придбати безліміт</string>
-    <string name="not_available_desc_utog">Ви можете купити ще хвилин натиснувши кнопку нижче</string>
+    <string name="not_available_desc_utog">Безкоштовно зателефонувати зможете завтра. Або можете купити ще хвилин, натиснувши кнопку "+" поруч з полем доступних хвилин</string>
     <string name="not_available_desc">Безкоштовно подзвонити зможете завтра. Або можете купити ще хвилин натиснувши кнопку нижче</string>
     <string name="tariff_pattern">%s - %s</string>
     <string name="permission_rationale_liqpay">Необхідно надати доступ до дзвінків для завершення процессу придбання</string>
