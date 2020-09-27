@@ -199,5 +199,6 @@
     <string name="tariff_choose">Choose tariff</string>
     <string name="choose">Choose</string>
     <string name="tariff_name_stub">Tariff name</string>
+    <string name="compensation_step_fullname">Enter your full name so that we know who to apply for compensation</string>
 
 </resources>

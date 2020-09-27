@@ -174,4 +174,5 @@
     <string name="tariff_choose">Вибір тарифу</string>
     <string name="choose">Вибрати</string>
     <string name="tariff_name_stub">Назва тарифу</string>
+    <string name="compensation_step_fullname">Вкажіть своє ПІБ, щоб ми знали на кого оформляти компенсацію</string>
 </resources>

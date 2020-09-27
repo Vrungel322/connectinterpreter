@@ -50,12 +50,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="32dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:layout_marginBottom="24dp"
-        android:background="#90EF6464"
+        android:background="#00EF6464"
         app:layout_constraintBottom_toTopOf="@+id/b_continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        tools:background="#90EF6464" />
 
     <Button
         android:id="@+id/b_continue"

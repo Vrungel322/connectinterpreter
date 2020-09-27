@@ -3,7 +3,6 @@ package com.getbewarned.connectinterpreter.ui;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +21,7 @@ import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
+import com.getbewarned.connectinterpreter.ui.compensation.CompensationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
