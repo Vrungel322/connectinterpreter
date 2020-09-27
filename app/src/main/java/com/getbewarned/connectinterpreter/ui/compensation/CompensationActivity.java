@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.CompensationPageAdapter;
+import com.getbewarned.connectinterpreter.custon_ui_elements.SwipableViewPager;
 import com.getbewarned.connectinterpreter.ui.NoStatusBarActivity;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataConsumer;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataHolder;
@@ -29,7 +30,7 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
 
     TextView toolbarTitle;
     ArrayList<FrameLayout> indicators;
-    ViewPager viewPager;
+    SwipableViewPager viewPager;
     Button bContinue;
     FrameLayout flBack;
     CompensationPageAdapter adapter;
@@ -54,6 +55,7 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
 
         // view pager
         viewPager = findViewById(R.id.vp_steps);
+        viewPager.setSwipeEnabled(false);
         adapter = new CompensationPageAdapter(getSupportFragmentManager());
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

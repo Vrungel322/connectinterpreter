@@ -7,7 +7,7 @@ public class CompensationDataHolder implements Serializable {
     public String firstName;
     public String patronymic;
 
-    private static CompensationDataHolder dataHolder = new CompensationDataHolder();
+    private static CompensationDataHolder dataHolder;
 
     public static CompensationDataHolder getInstance() {
         if (dataHolder == null) {
