@@ -180,4 +180,15 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="CompensationStepIndicator">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:background">@drawable/compensation_step_indicator</item>
+    </style>
+
+    <style name="CompensationStepIndicator_Text" parent="Text_default">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

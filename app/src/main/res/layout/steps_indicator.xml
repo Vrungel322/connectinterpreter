@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/fl_indicator_1"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="1" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_indicator_2"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fl_indicator_1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="2" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_indicator_3"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fl_indicator_2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="3" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_indicator_4"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fl_indicator_3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="4" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_indicator_5"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fl_indicator_4"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="5" />
+    </FrameLayout>
+
+    <FrameLayout
+
+        android:id="@+id/fl_indicator_6"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fl_indicator_5"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="6" />
+    </FrameLayout>
+
+    <FrameLayout
+
+        android:id="@+id/fl_indicator_7"
+        style="@style/CompensationStepIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fl_indicator_6"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/CompensationStepIndicator_Text"
+            android:layout_gravity="center"
+            android:text="7" />
+    </FrameLayout>
+
+
+</android.support.constraint.ConstraintLayout>

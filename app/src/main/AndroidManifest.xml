@@ -131,6 +131,9 @@
             android:name=".ui.PurchaseActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.CompensationActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.HelpActivity"  android:theme="@style/HelpActivity" />
         <activity
             android:name=".ui.ProfileActivity"
