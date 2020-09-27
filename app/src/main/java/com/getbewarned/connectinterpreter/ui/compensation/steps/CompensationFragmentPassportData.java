@@ -17,22 +17,6 @@ import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataH
 public class CompensationFragmentPassportData extends BaseCompensationStep {
     EditText etPassportSerialCode;
     EditText etPassportNumber;
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            updateParent();
-        }
-    };
 
     @Nullable
     @Override
@@ -47,8 +31,8 @@ public class CompensationFragmentPassportData extends BaseCompensationStep {
         etPassportSerialCode = view.findViewById(R.id.et_passport_serial_code);
         etPassportNumber = view.findViewById(R.id.et_passport__serial_number);
 
-        etPassportSerialCode.addTextChangedListener(textWatcher);
-        etPassportNumber.addTextChangedListener(textWatcher);
+        etPassportSerialCode.addTextChangedListener(defaultTextWatcher);
+        etPassportNumber.addTextChangedListener(defaultTextWatcher);
     }
 
     @Override

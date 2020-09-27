@@ -18,22 +18,6 @@ public class CompensationFragmentFullName extends BaseCompensationStep {
     EditText etLastName;
     EditText etName;
     EditText etPatronymic;
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            updateParent();
-        }
-    };
 
     @Nullable
     @Override
@@ -49,9 +33,9 @@ public class CompensationFragmentFullName extends BaseCompensationStep {
         etName = view.findViewById(R.id.et_name);
         etPatronymic = view.findViewById(R.id.et_patronymic_name);
 
-        etLastName.addTextChangedListener(textWatcher);
-        etName.addTextChangedListener(textWatcher);
-        etPatronymic.addTextChangedListener(textWatcher);
+        etLastName.addTextChangedListener(defaultTextWatcher);
+        etName.addTextChangedListener(defaultTextWatcher);
+        etPatronymic.addTextChangedListener(defaultTextWatcher);
     }
 
     @Override

@@ -1,11 +1,31 @@
 package com.getbewarned.connectinterpreter.ui.compensation;
 
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataConsumer;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationStep;
 
 public abstract class BaseCompensationStep extends Fragment implements CompensationStep {
+
+    protected TextWatcher defaultTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            updateParent();
+            storeData();
+        }
+    };
 
     public abstract String getTitle();
 

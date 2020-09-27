@@ -121,10 +121,12 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
 
     @Override
     public void update(String title, String nextButtonText, Boolean isNextButtonActive) {
-        toolbarTitle.setText(title);
-        bContinue.setText(nextButtonText);
-        bContinue.setActivated(isNextButtonActive);
-        updateStepsIndicator();
+        if (((BaseCompensationStep) currentFragment()).getTitle().equals(title)) {
+            toolbarTitle.setText(title);
+            bContinue.setText(nextButtonText);
+            bContinue.setActivated(isNextButtonActive);
+            updateStepsIndicator();
+        }
     }
 
     private Fragment currentFragment() {
