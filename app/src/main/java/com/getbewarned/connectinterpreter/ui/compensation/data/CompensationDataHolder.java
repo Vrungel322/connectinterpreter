@@ -6,6 +6,7 @@ public class CompensationDataHolder implements Serializable {
     public String lastName;
     public String firstName;
     public String patronymic;
+    public Long dateOfBirthMillis;
 
     private static CompensationDataHolder dataHolder;
 

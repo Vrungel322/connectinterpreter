@@ -110,6 +110,7 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
                 }
             }
         });
+//        viewPager.setCurrentItem(1);
     }
 
     @Override

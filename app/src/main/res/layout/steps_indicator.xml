@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:orientation="horizontal">
 
     <FrameLayout
@@ -11,7 +12,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fl_indicator_2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,7 +26,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fl_indicator_3"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/fl_indicator_1"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -41,7 +40,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fl_indicator_4"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/fl_indicator_2"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -56,7 +54,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fl_indicator_5"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/fl_indicator_3"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -71,7 +68,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fl_indicator_6"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/fl_indicator_4"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -87,7 +83,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fl_indicator_7"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/fl_indicator_5"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -103,7 +98,6 @@
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/fl_indicator_6"
         app:layout_constraintTop_toTopOf="parent">
 
