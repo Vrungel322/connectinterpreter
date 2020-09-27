@@ -176,6 +176,10 @@
     <string name="compensation_step_fullname">Укажите свое ФИО, чтобы мы знали на кого оформлять компенсацию</string>
     <string name="date_of_birth">Дата рождения</string>
     <string name="compensation_step_date_of_birth">Также, пожалуйста, укажите вашу дату рождения</string>
+    <string name="enter_passport_serial_code">Введите серию паспорта</string>
+    <string name="enter_passport_serial_number">Введите номер паспорта</string>
+    <string name="compensation_step_passport_data">Предоставьте данные паспорта, чтобы мы могли идентифицировать вас</string>
+    <string name="passport">Паспорт</string>
 
 </resources>
 

@@ -202,5 +202,9 @@
     <string name="compensation_step_fullname">Enter your full name so that we know who to apply for compensation</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="compensation_step_date_of_birth">Also, please include your date of birth</string>
+    <string name="enter_passport_serial_code">Enter your passport serial code</string>
+    <string name="enter_passport_serial_number">Enter your passport number</string>
+    <string name="compensation_step_passport_data">Provide your passport details so we can identify you</string>
+    <string name="passport">Passport</string>
 
 </resources>

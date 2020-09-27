@@ -177,4 +177,8 @@
     <string name="compensation_step_fullname">Вкажіть своє ПІБ, щоб ми знали на кого оформляти компенсацію</string>
     <string name="date_of_birth">Дата народження</string>
     <string name="compensation_step_date_of_birth">Також, будь ласка, вкажіть вашу дату народження</string>
+    <string name="enter_passport_serial_code">Введіть серію паспорта</string>
+    <string name="enter_passport_serial_number">Введіть номер паспорта</string>
+    <string name="compensation_step_passport_data">Надайте дані паспорта, щоб ми могли ідентифікувати вас</string>
+    <string name="passport">Паспорт</string>
 </resources>

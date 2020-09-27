@@ -7,6 +7,8 @@ public class CompensationDataHolder implements Serializable {
     public String firstName;
     public String patronymic;
     public Long dateOfBirthMillis;
+    public String passportSerialCode;
+    public String passportSerialNumber;
 
     private static CompensationDataHolder dataHolder;
 

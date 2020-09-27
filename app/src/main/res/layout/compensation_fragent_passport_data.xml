@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00222222"
+    tools:background="#80D66D6D">
+
+    <EditText
+        android:id="@+id/et_passport_serial_code"
+        style="@style/EditText_rounded"
+        android:layout_width="0dp"
+        android:hint="@string/enter_passport_serial_code"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/et_passport__serial_number"
+        style="@style/EditText_rounded"
+        android:layout_width="0dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/enter_passport_serial_number"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_passport_serial_code" />
+
+    <TextView
+        android:id="@+id/tv_compensation_passport_data"
+        style="@style/CompensationStepDescription_Text"
+        android:layout_marginTop="32dp"
+        android:text="@string/compensation_step_passport_data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_passport__serial_number" />
+
+</android.support.constraint.ConstraintLayout>
