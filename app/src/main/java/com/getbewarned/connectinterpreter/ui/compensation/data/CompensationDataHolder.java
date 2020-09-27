@@ -1,10 +1,23 @@
 package com.getbewarned.connectinterpreter.ui.compensation.data;
 
-public class CompensationDataHolder {
+import java.io.Serializable;
+
+public class CompensationDataHolder implements Serializable {
     public String lastName;
     public String firstName;
     public String patronymic;
 
-    public static CompensationDataHolder dataHolder = new CompensationDataHolder();
+    private static CompensationDataHolder dataHolder = new CompensationDataHolder();
+
+    public static CompensationDataHolder getInstance() {
+        if (dataHolder == null) {
+            dataHolder = new CompensationDataHolder();
+        }
+        return dataHolder;
+    }
+
+    public static void dispose() {
+        dataHolder = null;
+    }
 
 }

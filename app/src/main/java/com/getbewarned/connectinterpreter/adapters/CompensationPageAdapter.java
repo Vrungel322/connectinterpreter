@@ -4,16 +4,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationFragmentFullName;
+import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentDateOfBirth;
+import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentFullName;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CompensationPageAdapter extends FragmentStatePagerAdapter {
 
-    private static final List<Fragment> fragments = new ArrayList(Collections.singletonList(
-            CompensationFragmentFullName.newInstance()));
+    private static final List<Fragment> fragments = new ArrayList(Arrays.asList(
+            CompensationFragmentFullName.newInstance(),
+            CompensationFragmentDateOfBirth.newInstance()
+    ));
 
     public CompensationPageAdapter(FragmentManager fm) {
         super(fm);

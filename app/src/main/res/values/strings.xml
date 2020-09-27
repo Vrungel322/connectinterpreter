@@ -200,5 +200,6 @@
     <string name="choose">Choose</string>
     <string name="tariff_name_stub">Tariff name</string>
     <string name="compensation_step_fullname">Enter your full name so that we know who to apply for compensation</string>
+    <string name="date_of_birth">Date of birth</string>
 
 </resources>

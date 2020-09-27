@@ -2,10 +2,10 @@ package com.getbewarned.connectinterpreter.ui.compensation.data;
 
 public interface CompensationStep {
 
-    void initData();
+    public void initData();
 
-    void updateParent();
+    public void updateParent();
 
-    void storeData();
+    public void storeData();
 }
 

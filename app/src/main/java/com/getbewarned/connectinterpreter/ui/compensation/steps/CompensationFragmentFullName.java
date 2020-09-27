@@ -1,4 +1,4 @@
-package com.getbewarned.connectinterpreter.ui.compensation;
+package com.getbewarned.connectinterpreter.ui.compensation.steps;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.ui.compensation.BaseCompensationStep;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataHolder;
 
 public class CompensationFragmentFullName extends BaseCompensationStep {
@@ -51,37 +52,43 @@ public class CompensationFragmentFullName extends BaseCompensationStep {
         etLastName.addTextChangedListener(textWatcher);
         etName.addTextChangedListener(textWatcher);
         etPatronymic.addTextChangedListener(textWatcher);
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // this needs only for first fragment - all other fragments will be updated via  viewPage OnPageChangeListener
+        initData();
     }
 
     @Override
     public void initData() {
-        etLastName.setText(CompensationDataHolder.dataHolder.lastName);
-        etName.setText(CompensationDataHolder.dataHolder.firstName);
-        etPatronymic.setText(CompensationDataHolder.dataHolder.patronymic);
-        updateParent();
+        etLastName.setText(CompensationDataHolder.getInstance().lastName);
+        etName.setText(CompensationDataHolder.getInstance().firstName);
+        etPatronymic.setText(CompensationDataHolder.getInstance().patronymic);
+        super.initData();
     }
 
 
     @Override
     public void storeData() {
-        CompensationDataHolder.dataHolder.lastName = etLastName.getText().toString();
-        CompensationDataHolder.dataHolder.firstName = etName.getText().toString();
-        CompensationDataHolder.dataHolder.patronymic = etPatronymic.getText().toString();
+        CompensationDataHolder.getInstance().lastName = etLastName.getText().toString();
+        CompensationDataHolder.getInstance().firstName = etName.getText().toString();
+        CompensationDataHolder.getInstance().patronymic = etPatronymic.getText().toString();
     }
 
     @Override
-    String getTitle() {
+    public String getTitle() {
         return this.getString(R.string.full_name);
     }
 
     @Override
-    String getNextButtonText() {
+    public String getNextButtonText() {
         return this.getString(R.string.action_continue);
     }
 
     @Override
-    Boolean getIsNextButtonActive() {
+    public Boolean getIsNextButtonActive() {
         return !etLastName.getText().toString().isEmpty()
                 && !etName.getText().toString().isEmpty()
                 && !etPatronymic.getText().toString().isEmpty();

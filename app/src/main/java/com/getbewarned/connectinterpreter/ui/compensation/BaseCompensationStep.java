@@ -7,11 +7,16 @@ import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationStep;
 
 public abstract class BaseCompensationStep extends Fragment implements CompensationStep {
 
-    abstract String getTitle();
+    public abstract String getTitle();
 
-    abstract String getNextButtonText();
+    public abstract String getNextButtonText();
 
-    abstract Boolean getIsNextButtonActive();
+    public abstract Boolean getIsNextButtonActive();
+
+    @Override
+    public void initData() {
+        updateParent();
+    }
 
     @Override
     public void updateParent() {

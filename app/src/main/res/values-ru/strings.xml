@@ -174,6 +174,7 @@
     <string name="choose">Выбрать</string>
     <string name="tariff_name_stub">Название тарифа</string>
     <string name="compensation_step_fullname">Укажите свое ФИО, чтобы мы знали на кого оформлять компенсацию</string>
+    <string name="date_of_birth">Дата рождения</string>
 
 </resources>
 

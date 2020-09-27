@@ -1,9 +1,10 @@
 package com.getbewarned.connectinterpreter.ui.compensation;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -13,17 +14,21 @@ import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.CompensationPageAdapter;
 import com.getbewarned.connectinterpreter.ui.NoStatusBarActivity;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataConsumer;
+import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataHolder;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationStep;
 
+import java.util.ArrayList;
+
+
+/**
+ * out:
+ * [COMPENSATION_DATA] - [CompensationDataHolder] - get as Serializable
+ */
 public class CompensationActivity extends NoStatusBarActivity implements CompensationDataConsumer {
+    public static final String COMPENSATION_DATA = "COMPENSATION_DATA";
+
     TextView toolbarTitle;
-    FrameLayout indicator1;
-    FrameLayout indicator2;
-    FrameLayout indicator3;
-    FrameLayout indicator4;
-    FrameLayout indicator5;
-    FrameLayout indicator6;
-    FrameLayout indicator7;
+    ArrayList<FrameLayout> indicators;
     ViewPager viewPager;
     Button bContinue;
     FrameLayout flBack;
@@ -38,13 +43,14 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
         toolbarTitle = findViewById(R.id.tv_toolbar_title);
 
         // step indicators
-        indicator1 = findViewById(R.id.fl_indicator_1);
-        indicator2 = findViewById(R.id.fl_indicator_2);
-        indicator3 = findViewById(R.id.fl_indicator_3);
-        indicator4 = findViewById(R.id.fl_indicator_4);
-        indicator5 = findViewById(R.id.fl_indicator_5);
-        indicator6 = findViewById(R.id.fl_indicator_6);
-        indicator7 = findViewById(R.id.fl_indicator_7);
+        indicators = new ArrayList();
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_1));
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_2));
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_3));
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_4));
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_5));
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_6));
+        indicators.add((FrameLayout) findViewById(R.id.fl_indicator_7));
 
         // view pager
         viewPager = findViewById(R.id.vp_steps);
@@ -52,25 +58,21 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.e("page onPageScrolled", String.valueOf(viewPager.getCurrentItem()));
-                ((CompensationStep) currentFragment()).initData();
             }
 
             @Override
             public void onPageSelected(int position) {
-                Log.e("page onPageSelected", String.valueOf(viewPager.getCurrentItem()));
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    Log.e("page onPageScrollStateC", String.valueOf(viewPager.getCurrentItem()));
+                    ((CompensationStep) currentFragment()).initData();
                 }
             }
         });
         viewPager.setAdapter(adapter);
-
 
         //back and continue
         bContinue = findViewById(R.id.b_continue);
@@ -79,9 +81,39 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
         bContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CompensationStep) currentFragment()).storeData();
+                if (bContinue.isActivated()) {
+                    ((CompensationStep) currentFragment()).storeData();
+
+                    int nextIndex = viewPager.getCurrentItem() + 1;
+                    if (nextIndex >= adapter.getCount()) {
+                        Intent data = new Intent();
+                        data.putExtra(COMPENSATION_DATA, CompensationDataHolder.getInstance());
+                        setResult(Activity.RESULT_OK, data);
+                        finish();
+                    } else {
+                        viewPager.setCurrentItem(nextIndex);
+                    }
+                }
             }
         });
+
+        flBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int prevIndex = viewPager.getCurrentItem() - 1;
+                if (prevIndex < 0) {
+                    onBackPressed();
+                } else {
+                    viewPager.setCurrentItem(prevIndex);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CompensationDataHolder.dispose();
     }
 
     @Override
@@ -89,11 +121,21 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
         toolbarTitle.setText(title);
         bContinue.setText(nextButtonText);
         bContinue.setActivated(isNextButtonActive);
-
+        updateStepsIndicator();
     }
 
     private Fragment currentFragment() {
         return (Fragment) adapter.instantiateItem(viewPager, viewPager.getCurrentItem());
     }
 
+    private void updateStepsIndicator() {
+        int currentIndex = viewPager.getCurrentItem();
+        for (int i = 0; i <= indicators.size() - 1; i++) {
+            indicators.get(i).setActivated(false);
+        }
+        for (int i = 0; i <= currentIndex; i++) {
+            indicators.get(i).setActivated(true);
+        }
+
+    }
 }
