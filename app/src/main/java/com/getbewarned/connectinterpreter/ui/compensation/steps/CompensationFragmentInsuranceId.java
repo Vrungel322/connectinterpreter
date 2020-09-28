@@ -12,38 +12,38 @@ import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.ui.compensation.BaseCompensationStep;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataHolder;
 
-public class CompensationFragmentTaxPayerId extends BaseCompensationStep {
-    EditText etTaxPayerId;
+public class CompensationFragmentInsuranceId extends BaseCompensationStep {
+    EditText etInsuranceId;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.compensation_fragent_tax_payer_id, container, false);
+        return inflater.inflate(R.layout.compensation_fragent_insurance_id, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        etTaxPayerId = view.findViewById(R.id.et_tax_payer_id);
+        etInsuranceId = view.findViewById(R.id.et_insurance_id);
 
-        etTaxPayerId.addTextChangedListener(defaultTextWatcher);
+        etInsuranceId.addTextChangedListener(defaultTextWatcher);
     }
 
     @Override
     public void initData() {
-        etTaxPayerId.setText(CompensationDataHolder.getInstance().taxPayerId);
+        etInsuranceId.setText(CompensationDataHolder.getInstance().insuranceId);
         super.initData();
     }
 
     @Override
     public void storeData() {
-        CompensationDataHolder.getInstance().taxPayerId = etTaxPayerId.getText().toString();
+        CompensationDataHolder.getInstance().insuranceId = etInsuranceId.getText().toString();
     }
 
     @Override
     public String getTitle() {
-        return this.getString(R.string.tax_payer_id);
+        return this.getString(R.string.insurance_id);
     }
 
     @Override
@@ -53,13 +53,14 @@ public class CompensationFragmentTaxPayerId extends BaseCompensationStep {
 
     @Override
     public Boolean getIsNextButtonActive() {
-        return !etTaxPayerId.getText().toString().isEmpty();
+        return !etInsuranceId.getText().toString().isEmpty();
     }
 
-    public static CompensationFragmentTaxPayerId newInstance() {
+    public static CompensationFragmentInsuranceId newInstance() {
         Bundle args = new Bundle();
-        CompensationFragmentTaxPayerId fragment = new CompensationFragmentTaxPayerId();
+        CompensationFragmentInsuranceId fragment = new CompensationFragmentInsuranceId();
         fragment.setArguments(args);
         return fragment;
     }
+
 }

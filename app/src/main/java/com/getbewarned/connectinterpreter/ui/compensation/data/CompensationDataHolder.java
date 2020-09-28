@@ -10,6 +10,7 @@ public class CompensationDataHolder implements Serializable {
     public String passportSerialCode;
     public String passportSerialNumber;
     public String taxPayerId;
+    public String insuranceId;
 
     private static CompensationDataHolder dataHolder;
 

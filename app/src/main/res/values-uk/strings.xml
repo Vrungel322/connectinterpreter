@@ -184,4 +184,7 @@
     <string name="enter_tax_payer_id">Введіть ваш ІПН</string>
     <string name="compensation_step_tax_payer_id">Вкажіть дані ідентифікаційного номера платника податків</string>
     <string name="tax_payer_id">ІПН</string>
+    <string name="enter_insurance_id">Введіть ваш СНІЛС</string>
+    <string name="compensation_step_insurance_id">Надайте дані страхового номери індивідуального особового рахунку</string>
+    <string name="insurance_id">СНІЛС</string>
 </resources>

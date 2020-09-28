@@ -209,5 +209,8 @@
     <string name="enter_tax_payer_id">Enter tax payer ID</string>
     <string name="compensation_step_tax_payer_id">Provide taxpayer ID</string>
     <string name="tax_payer_id">Tax payer ID</string>
+    <string name="enter_insurance_id">Enter insurance ID</string>
+    <string name="compensation_step_insurance_id">Enter your insurance ID</string>
+    <string name="insurance_id">Insurance ID</string>
 
 </resources>

@@ -8,25 +8,25 @@
     tools:background="#80D66D6D">
 
     <EditText
-        android:id="@+id/et_tax_payer_id"
+        android:id="@+id/et_insurance_id"
         style="@style/EditText_rounded"
         android:layout_width="0dp"
         android:layout_marginTop="32dp"
-        android:hint="@string/enter_tax_payer_id"
-        android:inputType="number"
+        android:hint="@string/enter_insurance_id"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/tv_compensation_tax_payer_id"
+        android:id="@+id/tv_compensation_insurance_id"
         style="@style/CompensationStepDescription_Text"
         android:layout_marginTop="32dp"
-        android:text="@string/compensation_step_tax_payer_id"
+        android:text="@string/compensation_step_insurance_id"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_tax_payer_id" />
+        app:layout_constraintTop_toBottomOf="@+id/et_insurance_id" />
 
 </android.support.constraint.ConstraintLayout>

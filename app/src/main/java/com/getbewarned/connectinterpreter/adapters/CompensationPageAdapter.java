@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentDateOfBirth;
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentFullName;
+import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentInsuranceId;
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentPassportData;
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentTaxPayerId;
 
@@ -19,7 +20,8 @@ public class CompensationPageAdapter extends FragmentStatePagerAdapter {
             CompensationFragmentFullName.newInstance(),
             CompensationFragmentDateOfBirth.newInstance(),
             CompensationFragmentPassportData.newInstance(),
-            CompensationFragmentTaxPayerId.newInstance()
+            CompensationFragmentTaxPayerId.newInstance(),
+            CompensationFragmentInsuranceId.newInstance()
     ));
 
     public CompensationPageAdapter(FragmentManager fm) {
