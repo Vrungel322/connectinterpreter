@@ -18,18 +18,19 @@ import java.util.List;
 
 public class CompensationPageAdapter extends FragmentStatePagerAdapter {
 
-    private static final List<Fragment> fragments = new ArrayList(Arrays.asList(
-            CompensationFragmentFullName.newInstance(),
-            CompensationFragmentDateOfBirth.newInstance(),
-            CompensationFragmentPassportData.newInstance(),
-            CompensationFragmentTaxPayerId.newInstance(),
-            CompensationFragmentInsuranceId.newInstance(),
-            CompensationFragmentRegistrationAddress.newInstance(),
-            CompensationFragmentFinal.newInstance()
-    ));
+    private static List<Fragment> fragments;
 
     public CompensationPageAdapter(FragmentManager fm) {
         super(fm);
+        fragments = new ArrayList(Arrays.asList(
+                CompensationFragmentFullName.newInstance(),
+                CompensationFragmentDateOfBirth.newInstance(),
+                CompensationFragmentPassportData.newInstance(),
+                CompensationFragmentTaxPayerId.newInstance(),
+                CompensationFragmentInsuranceId.newInstance(),
+                CompensationFragmentRegistrationAddress.newInstance(),
+                CompensationFragmentFinal.newInstance()
+        ));
     }
 
     @Override
