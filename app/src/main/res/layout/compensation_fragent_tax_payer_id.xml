@@ -8,36 +8,25 @@
     tools:background="#80D66D6D">
 
     <EditText
-        android:id="@+id/et_passport_serial_code"
+        android:id="@+id/et_tax_payer_id"
         style="@style/EditText_rounded"
         android:layout_width="0dp"
         android:layout_marginTop="32dp"
-        android:hint="@string/enter_passport_serial_code"
+        android:hint="@string/enter_tax_payer_id"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
-        android:id="@+id/et_passport__serial_number"
-        style="@style/EditText_rounded"
-        android:layout_width="0dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/enter_passport_serial_number"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_passport_serial_code" />
-
     <TextView
-        android:id="@+id/tv_compensation_passport_data"
+        android:id="@+id/tv_compensation_tax_payer_id"
         style="@style/CompensationStepDescription_Text"
         android:layout_marginTop="32dp"
-        android:text="@string/compensation_step_passport_data"
+        android:text="@string/compensation_step_tax_payer_id"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_passport__serial_number" />
+        app:layout_constraintTop_toBottomOf="@+id/et_tax_payer_id" />
 
 </android.support.constraint.ConstraintLayout>

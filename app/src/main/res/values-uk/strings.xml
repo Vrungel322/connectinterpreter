@@ -181,4 +181,7 @@
     <string name="enter_passport_serial_number">Введіть номер паспорта</string>
     <string name="compensation_step_passport_data">Надайте дані паспорта, щоб ми могли ідентифікувати вас</string>
     <string name="passport">Паспорт</string>
+    <string name="enter_tax_payer_id">Введіть ваш ІПН</string>
+    <string name="compensation_step_tax_payer_id">Вкажіть дані ідентифікаційного номера платника податків</string>
+    <string name="tax_payer_id">ІПН</string>
 </resources>

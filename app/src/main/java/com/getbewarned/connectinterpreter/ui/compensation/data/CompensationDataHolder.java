@@ -9,6 +9,7 @@ public class CompensationDataHolder implements Serializable {
     public Long dateOfBirthMillis;
     public String passportSerialCode;
     public String passportSerialNumber;
+    public String taxPayerId;
 
     private static CompensationDataHolder dataHolder;
 

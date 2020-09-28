@@ -180,6 +180,9 @@
     <string name="enter_passport_serial_number">Введите номер паспорта</string>
     <string name="compensation_step_passport_data">Предоставьте данные паспорта, чтобы мы могли идентифицировать вас</string>
     <string name="passport">Паспорт</string>
+    <string name="enter_tax_payer_id">Введите ваш ИНН</string>
+    <string name="compensation_step_tax_payer_id">Предоставьте данные идентификационного номера налогоплательщика</string>
+    <string name="tax_payer_id">ИНН</string>
 
 </resources>
 

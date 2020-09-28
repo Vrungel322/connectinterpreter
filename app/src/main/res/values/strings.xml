@@ -206,5 +206,8 @@
     <string name="enter_passport_serial_number">Enter your passport number</string>
     <string name="compensation_step_passport_data">Provide your passport details so we can identify you</string>
     <string name="passport">Passport</string>
+    <string name="enter_tax_payer_id">Enter tax payer ID</string>
+    <string name="compensation_step_tax_payer_id">Provide taxpayer ID</string>
+    <string name="tax_payer_id">Tax payer ID</string>
 
 </resources>
