@@ -212,5 +212,12 @@
     <string name="enter_insurance_id">Enter insurance ID</string>
     <string name="compensation_step_insurance_id">Enter your insurance ID</string>
     <string name="insurance_id">Insurance ID</string>
+    <string name="enter_city">Enter city</string>
+    <string name="enter_street">Enter street</string>
+    <string name="enter_building_number">Building number</string>
+    <string name="enter_apartment_number">Apartment number</string>
+    <string name="enter_post_id">Post ID</string>
+    <string name="compensation_step_registration_address">Enter your registration address</string>
+    <string name="registration_address">Registration address</string>
 
 </resources>

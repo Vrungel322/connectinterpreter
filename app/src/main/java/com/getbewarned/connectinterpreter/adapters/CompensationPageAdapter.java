@@ -8,6 +8,7 @@ import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFrag
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentFullName;
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentInsuranceId;
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentPassportData;
+import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentRegistrationAddress;
 import com.getbewarned.connectinterpreter.ui.compensation.steps.CompensationFragmentTaxPayerId;
 
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class CompensationPageAdapter extends FragmentStatePagerAdapter {
             CompensationFragmentDateOfBirth.newInstance(),
             CompensationFragmentPassportData.newInstance(),
             CompensationFragmentTaxPayerId.newInstance(),
-            CompensationFragmentInsuranceId.newInstance()
+            CompensationFragmentInsuranceId.newInstance(),
+            CompensationFragmentRegistrationAddress.newInstance()
     ));
 
     public CompensationPageAdapter(FragmentManager fm) {

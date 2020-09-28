@@ -187,4 +187,11 @@
     <string name="enter_insurance_id">Введіть ваш СНІЛС</string>
     <string name="compensation_step_insurance_id">Надайте дані страхового номери індивідуального особового рахунку</string>
     <string name="insurance_id">СНІЛС</string>
+    <string name="enter_city">Населений пункт</string>
+    <string name="enter_street">Вулиця</string>
+    <string name="enter_building_number">Номер будинку</string>
+    <string name="enter_apartment_number">Квартира</string>
+    <string name="enter_post_id">Індекс</string>
+    <string name="compensation_step_registration_address">Надайте адресу вашої реєстрації</string>
+    <string name="registration_address">Адреса реєстрації</string>
 </resources>

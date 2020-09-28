@@ -3,8 +3,6 @@ package com.getbewarned.connectinterpreter.ui.compensation.steps;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +27,7 @@ public class CompensationFragmentPassportData extends BaseCompensationStep {
         super.onViewCreated(view, savedInstanceState);
 
         etPassportSerialCode = view.findViewById(R.id.et_passport_serial_code);
-        etPassportNumber = view.findViewById(R.id.et_passport__serial_number);
+        etPassportNumber = view.findViewById(R.id.et_passport_serial_number);
 
         etPassportSerialCode.addTextChangedListener(defaultTextWatcher);
         etPassportNumber.addTextChangedListener(defaultTextWatcher);

@@ -11,6 +11,11 @@ public class CompensationDataHolder implements Serializable {
     public String passportSerialNumber;
     public String taxPayerId;
     public String insuranceId;
+    public String city;
+    public String streetAddress;
+    public String buildingNumber;
+    public String apartmentNumber;
+    public String postId;
 
     private static CompensationDataHolder dataHolder;
 

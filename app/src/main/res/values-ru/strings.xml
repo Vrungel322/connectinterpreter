@@ -186,6 +186,13 @@
     <string name="enter_insurance_id">Введите ваш СНИЛС</string>
     <string name="compensation_step_insurance_id">Предоставьте данные страхового номера индивидуального лицевого счета</string>
     <string name="insurance_id">СНИЛС</string>
+    <string name="enter_city">Населенный пункт</string>
+    <string name="enter_street">Улица</string>
+    <string name="enter_building_number">Номер дома</string>
+    <string name="enter_apartment_number">Квартира</string>
+    <string name="enter_post_id">Индекс</string>
+    <string name="compensation_step_registration_address">Предоставьте адрес вашей регистрации</string>
+    <string name="registration_address">Адрес регистрации</string>
 
 </resources>
 
