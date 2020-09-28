@@ -26,6 +26,7 @@ import java.util.ArrayList;
  * [COMPENSATION_DATA] - [CompensationDataHolder] - get as Serializable
  */
 public class CompensationActivity extends NoStatusBarActivity implements CompensationDataConsumer {
+    public static final int RC = 989;
     public static final String COMPENSATION_DATA = "COMPENSATION_DATA";
 
     TextView toolbarTitle;
@@ -110,7 +111,6 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
                 }
             }
         });
-//        viewPager.setCurrentItem(1);
     }
 
     @Override

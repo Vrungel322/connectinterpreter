@@ -219,5 +219,8 @@
     <string name="enter_post_id">Post ID</string>
     <string name="compensation_step_registration_address">Enter your registration address</string>
     <string name="registration_address">Registration address</string>
+    <string name="compensation_step_final">Congratulations!\nYou have successfully completed the compensation form</string>
+    <string name="final_step">Final</string>
+    <string name="action_send">Send</string>
 
 </resources>

@@ -194,4 +194,7 @@
     <string name="enter_post_id">Індекс</string>
     <string name="compensation_step_registration_address">Надайте адресу вашої реєстрації</string>
     <string name="registration_address">Адреса реєстрації</string>
+    <string name="compensation_step_final">Вітаємо!\nВи успішно заповнили форму для отримання компенсації</string>
+    <string name="final_step">Фінал</string>
+    <string name="action_send">Надіслати</string>
 </resources>
