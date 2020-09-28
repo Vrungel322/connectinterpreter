@@ -22,6 +22,7 @@ import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
 import com.getbewarned.connectinterpreter.ui.compensation.CompensationActivity;
+import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,9 +73,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // new ui
                 Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
                 startActivity(intent);
 
+                // old ui
 //                presenter.buyUnlimPressed();
             }
         });
@@ -121,10 +124,6 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
         presenter = new MainPresenter(this, this);
         presenter.onCreate(getIntent().getExtras());
-
-        Intent intent = new Intent(NewMainActivity.this, CompensationActivity.class);
-        startActivity(intent);
-
     }
 
     @Override

@@ -222,5 +222,8 @@
     <string name="compensation_step_final">Congratulations!\nYou have successfully completed the compensation form</string>
     <string name="final_step">Final</string>
     <string name="action_send">Send</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="compensation_prepare">Are you ready to provide your details to receive compensation?</string>
 
 </resources>

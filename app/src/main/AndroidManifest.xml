@@ -131,6 +131,9 @@
             android:name=".ui.PurchaseActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.compensation.CompensationPrepareActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.compensation.CompensationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"/>

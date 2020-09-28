@@ -82,7 +82,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:background="@drawable/rounded_background_compensation_step_inactive"
+        android:background="@drawable/rounded_background_compensation_step_back"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/b_continue"
         app:layout_constraintStart_toEndOf="@+id/b_continue"

@@ -107,7 +107,7 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_height">64dp</item>
-        <item name="android:background">@drawable/rounded_background_fab</item>
+        <item name="android:background">@drawable/rounded_background_fab_red</item>
     </style>
 
     <style name="Button_fab_activatable" parent="Button_fab">

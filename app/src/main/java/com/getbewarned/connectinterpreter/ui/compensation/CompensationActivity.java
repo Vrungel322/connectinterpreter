@@ -115,8 +115,8 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         CompensationDataHolder.dispose();
+        super.onDestroy();
     }
 
     @Override

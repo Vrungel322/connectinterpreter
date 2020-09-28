@@ -197,4 +197,7 @@
     <string name="compensation_step_final">Вітаємо!\nВи успішно заповнили форму для отримання компенсації</string>
     <string name="final_step">Фінал</string>
     <string name="action_send">Надіслати</string>
+    <string name="no">Ні</string>
+    <string name="yes">Так</string>
+    <string name="compensation_prepare">Чи готові ви надати свої дані для отримання компенсації?</string>
 </resources>

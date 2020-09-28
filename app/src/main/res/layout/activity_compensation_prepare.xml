@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back01">
+
+    <VideoView
+        android:id="@+id/vv_prepare"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_compensation_prepare"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_compensation_prepare"
+        style="@style/CompensationStepDescription_Text"
+        android:layout_marginBottom="128dp"
+        android:text="@string/compensation_prepare"
+        app:layout_constraintBottom_toTopOf="@+id/b_yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/b_yes"
+        style="@style/Button_fab"
+        android:layout_width="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:paddingStart="64dp"
+        android:paddingEnd="64dp"
+        android:text="@string/yes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/b_no" />
+
+    <Button
+        android:id="@+id/b_no"
+        style="@style/Button_fab"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:background="@drawable/rounded_background_fab_blue"
+        android:orientation="horizontal"
+        android:text="@string/no"
+        app:layout_constraintBottom_toBottomOf="@+id/b_yes"
+        app:layout_constraintEnd_toStartOf="@+id/b_yes"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/b_yes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/b_yes">
+
+    </Button>
+
+
+</android.support.constraint.ConstraintLayout>
