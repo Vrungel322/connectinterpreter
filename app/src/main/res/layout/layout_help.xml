@@ -10,22 +10,20 @@
 
     <ImageView
         android:id="@+id/iv_help"
-        android:layout_marginBottom="8dp"
         style="@style/ActionItem_ActionsScreen"
-       app:srcCompat="@drawable/ic_help_new_ui"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_help"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_help_new_ui" />
 
     <TextView
         android:id="@+id/tv_help"
-        style="@style/Text_default"
+        style="@style/Action_Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="2"
         android:text="@string/help"
-        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_help"
         app:layout_constraintStart_toStartOf="@+id/iv_help"

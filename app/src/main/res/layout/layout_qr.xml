@@ -20,12 +20,10 @@
 
     <TextView
         android:id="@+id/tv_qr"
-        style="@style/Text_default"
+        style="@style/Action_Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="2"
         android:text="@string/drawer_scan_qr"
-        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_qr"
         app:layout_constraintStart_toStartOf="@+id/iv_qr"

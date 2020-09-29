@@ -12,16 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="@dimen/toolbar_top_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile"
         app:srcCompat="@drawable/ic_menu_white" />
 
     <ImageView
         android:id="@+id/iv_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/toolbar_top_margin"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,14 +59,13 @@
         android:id="@+id/iv_add_minutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:elevation="8dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="-24dp"
-        android:paddingRight="-30dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_timer"
         app:layout_constraintEnd_toEndOf="@+id/tv_timer"
         app:layout_constraintTop_toTopOf="@+id/tv_timer"
-        app:srcCompat="@drawable/ic_plus_fab" />
+        app:srcCompat="@drawable/ic_add_fab" />
 
     <TextView
         android:id="@+id/tv_minutes_expiration"
