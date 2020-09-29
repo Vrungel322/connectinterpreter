@@ -229,5 +229,12 @@
         <item name="android:padding">6dp</item>
     </style>
 
+    <style name="Requests_PickImage" parent="Text_default">
+        <item name="android:textColor">@color/red_new_ui</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 
 </resources>

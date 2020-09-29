@@ -21,8 +21,7 @@ import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationActivity;
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
+import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

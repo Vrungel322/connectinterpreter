@@ -16,6 +16,7 @@ import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestMessage;
 import com.getbewarned.connectinterpreter.models.RequestResponse;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
+import com.getbewarned.connectinterpreter.ui.requests.RequestBitmapHolder;
 
 import java.util.Date;
 
@@ -79,37 +80,39 @@ public class RequestsPresenter implements Presenter {
     }
 
     public void onImageSelected(Bitmap image) {
-        view.showLoading();
-        this.networkManager.newRequest(image, new NewRequestCreated() {
-            @Override
-            public void onRequestCreated(NewRequestResponse response) {
-                realm.beginTransaction();
-                Request request = new Request();
-                request.setId(response.getRequest().getId());
-                request.setCreated(new Date(response.getRequest().getCreated_at() * 1000));
-                request.setUpdated(new Date(response.getRequest().getUpdated_at() * 1000));
-                request.setStatus(response.getRequest().getStatus());
-                request.setName(response.getRequest().getName());
-                request = realm.copyToRealmOrUpdate(request);
-                RequestMessage message = new RequestMessage();
-                message.setId(response.getRequestMessage().getId());
-                message.setCreated(new Date(response.getRequestMessage().getCreated_at() * 1000));
-                message.setType(response.getRequestMessage().getType());
-                message.setContent(response.getRequestMessage().getContent());
-                message.setThumbnail(response.getRequestMessage().getThumbnail());
-                message.setAuthor(RequestMessage.SELF);
-                request.getMessages().add(message);
-                realm.commitTransaction();
-                view.hideLoading();
-                view.goToRequest(request);
-            }
+        RequestBitmapHolder.bitmap = image;
 
-            @Override
-            public void onErrorReceived(Error error) {
-                view.hideLoading();
-                view.showError(error.getMessage());
-            }
-        });
+//        view.showLoading();
+//        this.networkManager.newRequest(image, new NewRequestCreated() {
+//            @Override
+//            public void onRequestCreated(NewRequestResponse response) {
+//                realm.beginTransaction();
+//                Request request = new Request();
+//                request.setId(response.getRequest().getId());
+//                request.setCreated(new Date(response.getRequest().getCreated_at() * 1000));
+//                request.setUpdated(new Date(response.getRequest().getUpdated_at() * 1000));
+//                request.setStatus(response.getRequest().getStatus());
+//                request.setName(response.getRequest().getName());
+//                request = realm.copyToRealmOrUpdate(request);
+//                RequestMessage message = new RequestMessage();
+//                message.setId(response.getRequestMessage().getId());
+//                message.setCreated(new Date(response.getRequestMessage().getCreated_at() * 1000));
+//                message.setType(response.getRequestMessage().getType());
+//                message.setContent(response.getRequestMessage().getContent());
+//                message.setThumbnail(response.getRequestMessage().getThumbnail());
+//                message.setAuthor(RequestMessage.SELF);
+//                request.getMessages().add(message);
+//                realm.commitTransaction();
+//                view.hideLoading();
+//                view.goToRequest(request);
+//            }
+//
+//            @Override
+//            public void onErrorReceived(Error error) {
+//                view.hideLoading();
+//                view.showError(error.getMessage());
+//            }
+//        });
     }
 
     public RequestsAdapter getAdapter() {

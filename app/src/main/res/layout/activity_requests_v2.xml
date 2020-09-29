@@ -5,7 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    tools:context=".ui.RequestsActivity">
+    android:id="@+id/cl_root"
+    tools:context=".ui.requests.RequestsActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_add_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_pick_photo"
+            style="@style/Requests_PickImage"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:gravity="center"
+            android:text="@string/media_image_gallery" />
+
+        <TextView
+            android:id="@+id/tv_make_photo"
+            style="@style/Requests_PickImage"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_background"
+            android:gravity="center"
+            android:text="@string/media_image_camera" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_back"
@@ -89,8 +124,8 @@
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
             android:gravity="center"
-            android:textAlignment="center"
             android:text="@string/no_requests_desc"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

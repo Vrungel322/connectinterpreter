@@ -28,10 +28,10 @@ public class RequestFileSelector implements RequestFileSelection {
     private Context context;
     private Activity activity;
 
-    private Uri imageUri;
+    public static Uri imageUri;
 
-    private static final int PICK_IMAGE = 1;
-    private static final int CAPTURE_IMAGE = 2;
+    public static final int PICK_IMAGE = 1;
+    public static final int CAPTURE_IMAGE = 2;
     private static final int PICK_VIDEO = 3;
 
     public RequestFileSelector(Activity activity) {

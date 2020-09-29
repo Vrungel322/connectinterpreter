@@ -74,7 +74,7 @@
                 android:value=".ui.LoginActivity" />
         </activity>
         <activity
-            android:name=".ui.RequestsActivity"
+            android:name=".ui.requests.RequestsActivity"
             android:parentActivityName=".ui.NewMainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -83,11 +83,11 @@
         </activity>
         <activity
             android:name=".ui.RequestActivity"
-            android:parentActivityName=".ui.RequestsActivity"
+            android:parentActivityName=".ui.requests.RequestsActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.RequestsActivity" />
+                android:value=".ui.requests.RequestsActivity" />
         </activity>
         <activity
             android:name=".ui.VideoPlayerActivity"
@@ -116,7 +116,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.RequestsActivity" />
+                android:value=".ui.requests.RequestsActivity" />
         </activity>
         <activity
             android:name=".ui.NewsDetailActivity"
