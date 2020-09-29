@@ -89,6 +89,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginRight="32dp"
+        android:elevation="@dimen/default_elevation"
         android:layout_marginBottom="32dp"
         android:background="@drawable/ic_add_fab"
         app:layout_constraintBottom_toBottomOf="parent"
