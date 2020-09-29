@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +33,7 @@ import static com.getbewarned.connectinterpreter.ui.RequestFileSelector.PICK_IMA
 
 public class RequestsActivity extends NoStatusBarActivity implements RequestsView {
 
-    private FloatingActionButton createRequestButton;
+    private ImageView createRequestButton;
     private RecyclerView requestsList;
     private View noRequestsView;
     private LinearLayout llAddImage;
@@ -114,7 +113,7 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
     @Override
     public void onBackPressed() {
         if (llAddImage.getVisibility() == View.VISIBLE) {
-            llAddImage.setVisibility(View.GONE);
+            hideSelectionImageMenu();
             return;
         }
         super.onBackPressed();
@@ -141,7 +140,7 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
 
     @Override
     public void openImagePicker() {
-        llAddImage.setVisibility(View.VISIBLE);
+        showSelectionImageMenu();
 //        requestFileSelector.showChoiceSheet();
     }
 
@@ -158,7 +157,7 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                llAddImage.setVisibility(View.GONE);
+                hideSelectionImageMenu();
                 Bitmap image = requestFileSelector.getImageFromActivityResult(requestCode, resultCode, data);
                 if (image != null) {
                     presenter.onImageSelected(image);
@@ -198,5 +197,19 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
             this.loading.hide();
             this.loading = null;
         }
+    }
+
+    private void showSelectionImageMenu() {
+        llAddImage.setVisibility(View.VISIBLE);
+        createRequestButton.setScaleX(0.7f);
+        createRequestButton.setScaleY(0.7f);
+        createRequestButton.setRotation(45);
+    }
+
+    private void hideSelectionImageMenu() {
+        llAddImage.setVisibility(View.GONE);
+        createRequestButton.setScaleX(1.0f);
+        createRequestButton.setScaleY(1.f);
+        createRequestButton.setRotation(0);
     }
 }
