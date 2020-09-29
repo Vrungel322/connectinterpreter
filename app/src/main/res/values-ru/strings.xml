@@ -106,12 +106,12 @@
     <string name="media_image_camera">Снять фото</string>
     <string name="media_selector_title">Выбрать изображение</string>
     <string name="file_uploading">Загрузка файла. Подождите</string>
-    <string name="no_requests_desc">Вы можете попросить наших переводчиков обьяснить при помощи ЖЯ непонятный вам документ. Сфотографируйте его или выберите на устройстве</string>
+    <string name="no_requests_desc">Вы можете попросить наших переводчиков обьяснить с помощью ЖЯ непонятный вам документ. Сфотографируйте его или выберите с устройства</string>
     <!--Вы можете попросить наших переводчиков обьяснить на РЖЯ документ или перевести ваше видео на РЖЯ в текст для слышаших-->
     <string name="no_requests_title">У вас еще нет заявок</string>
-    <string name="status_new">Новая</string>
-    <string name="status_assigned">В работе</string>
-    <string name="status_closed">Закрыта</string>
+    <string name="status_new">Новый</string>
+    <string name="status_assigned">Принят в обработку</string>
+    <string name="status_closed">Решен/Закрыт</string>
     <string name="drawer_scan_qr">Сканер QR кода</string>
     <string name="btn_reconnect">Переподключиться</string>
     <string name="btn_close">Закрыть</string>

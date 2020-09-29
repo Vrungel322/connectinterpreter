@@ -30,7 +30,7 @@ public class RequestsAdapter extends RealmRecyclerViewAdapter<Request, RequestVi
     public RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_request, parent, false);
+                .inflate(R.layout.item_request_v2, parent, false);
         return new RequestViewHolder(itemView);
 
     }

@@ -215,4 +215,19 @@
         <item name="colorControlNormal">#9C9C9C</item>
     </style>
 
+    <style name="RequestItem_title" parent="Text_default">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorFieldHint</item>
+    </style>
+
+    <style name="RequestItem_time" parent="Text_default">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="RequestItem_badge" parent="Text_default">
+        <item name="android:padding">6dp</item>
+    </style>
+
+
 </resources>

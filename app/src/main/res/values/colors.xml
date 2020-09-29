@@ -18,6 +18,9 @@
 <!--    new ui-->
     <color name="white">#FFFFFF</color>
     <color name="red_new_ui">#C91518</color>
+    <color name="green_new_ui">#3CE261</color>
+    <color name="blue_new_ui">#004BDB</color>
+
     <color name="colorRed_transparent">#4FC91518</color>
 
 

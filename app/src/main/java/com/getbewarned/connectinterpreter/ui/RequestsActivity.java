@@ -3,15 +3,14 @@ package com.getbewarned.connectinterpreter.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
@@ -21,10 +20,7 @@ import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.presenters.RequestPresenter;
 import com.getbewarned.connectinterpreter.presenters.RequestsPresenter;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
-public class RequestsActivity extends AppCompatActivity implements RequestsView {
+public class RequestsActivity extends NoStatusBarActivity implements RequestsView {
 
     private FloatingActionButton createRequestButton;
     private RecyclerView requestsList;
@@ -39,13 +35,15 @@ public class RequestsActivity extends AppCompatActivity implements RequestsView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requests);
+        setContentView(R.layout.activity_requests_v2);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.drawer_requests);
+        ((TextView) findViewById(R.id.tv_toolbar_title)).setText(R.string.drawer_requests);
+        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         requestFileSelector = new RequestFileSelector(this);
 

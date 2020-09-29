@@ -136,7 +136,7 @@
     <string name="no_requests_title">You haven\'t any requests yet</string>
     <string name="status_new">New</string>
     <string name="status_assigned">In process</string>
-    <string name="status_closed">Closed</string>
+    <string name="status_closed">Solved/Closed</string>
     <string name="drawer_scan_qr">Scan QR code</string>
     <string name="btn_reconnect">Reconnect</string>
     <string name="btn_close">Close</string>
