@@ -37,15 +37,16 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
         // badge
         status.setText(getStatusString(request.getStatus()));
         if (request.getStatus().equals("new")){
-            status.setTextColor(itemView.getResources().getColor(android.R.color.black));
+            status.setTextColor(itemView.getResources().getColor(R.color.blue_new_ui));
             status.setBackgroundResource(R.drawable.request_new_list_item);
+
         }
         if (request.getStatus().equals("assigned")){
-            status.setTextColor(itemView.getResources().getColor(R.color.blue_new_ui));
+            status.setTextColor(itemView.getResources().getColor(android.R.color.holo_orange_dark));
             status.setBackgroundResource(R.drawable.request_in_progress_list_item);
         }
         if (request.getStatus().equals("closed")){
-            status.setTextColor(itemView.getResources().getColor(R.color.white));
+            status.setTextColor(itemView.getResources().getColor(android.R.color.black));
             status.setBackgroundResource(R.drawable.request_closed_list_item);
         }
 
