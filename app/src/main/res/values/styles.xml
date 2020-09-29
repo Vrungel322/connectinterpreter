@@ -96,7 +96,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:paddingStart">16sp</item>
         <item name="android:paddingLeft">16sp</item>
-        <item name="android:textColor">@color/colorFieldHint</item>
+        <item name="android:textColor">@color/blue_new_ui</item>
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
         <item name="android:layout_height">48dp</item>
     </style>
@@ -120,14 +120,14 @@
     </style>
 
     <style name="Text_news_item_title">
-        <item name="android:textColor">@color/colorFieldHint</item>
+        <item name="android:textColor">@color/blue_new_ui_text</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text_user_info_block_title" parent="Text_news_item_title">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/blue_new_ui</item>
         <item name="android:textSize">18sp</item>
     </style>
 
@@ -139,7 +139,7 @@
     </style>
 
     <style name="Text_tariff_minutes" parent="Text_tariff_price">
-        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textColor">@color/red_new_ui</item>
         <item name="android:textSize">26sp</item>
     </style>
 
@@ -211,14 +211,14 @@
     <style name="DatePicker" parent="Text_default">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">32sp</item>
-        <item name="android:textColorPrimary">@color/colorFieldHint</item>
+        <item name="android:textColorPrimary">@color/blue_new_ui_text</item>
         <item name="colorControlNormal">#9C9C9C</item>
     </style>
 
     <style name="RequestItem_title" parent="Text_default">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/colorFieldHint</item>
+        <item name="android:textColor">@color/blue_new_ui_text</item>
     </style>
 
     <style name="RequestItem_time" parent="Text_default">
