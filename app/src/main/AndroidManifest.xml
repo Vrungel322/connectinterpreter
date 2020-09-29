@@ -39,9 +39,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-<!--        <meta-data-->
-<!--            android:name="preloaded_fonts"-->
-<!--            android:resource="@array/preloaded_fonts" />-->
+        <!--        <meta-data-->
+        <!--            android:name="preloaded_fonts"-->
+        <!--            android:resource="@array/preloaded_fonts" />-->
 
         <activity
             android:name=".ui.LoginActivity"
@@ -84,6 +84,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.NewMainActivity" />
         </activity>
+
+        <activity
+            android:name=".ui.requests.NewRequestActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RequestActivity"
             android:parentActivityName=".ui.requests.RequestsActivity"
@@ -139,9 +143,10 @@
         <activity
             android:name=".ui.compensation.CompensationActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.HelpActivity"  android:theme="@style/HelpActivity" />
+            android:name=".ui.HelpActivity"
+            android:theme="@style/HelpActivity" />
         <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"

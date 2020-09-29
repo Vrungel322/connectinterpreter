@@ -150,6 +150,8 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
                 Bitmap image = requestFileSelector.getImageFromActivityResult(requestCode, resultCode, data);
                 if (image != null) {
                     presenter.onImageSelected(image);
+                    Intent intent = new Intent(RequestsActivity.this, NewRequestActivity.class);
+                    startActivity(intent);
                 }
             }
         };
@@ -202,7 +204,7 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         createRequestButton.setRotation(0);
     }
 
-    private void takePhoto(){
+    private void takePhoto() {
         File photo = null;
         try {
             photo = File.createTempFile("picture", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
@@ -217,7 +219,7 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         }
     }
 
-    private void pickPhoto(){
+    private void pickPhoto() {
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 
