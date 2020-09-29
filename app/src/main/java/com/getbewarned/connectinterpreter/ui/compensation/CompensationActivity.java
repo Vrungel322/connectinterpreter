@@ -146,8 +146,8 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
         }
         for (int i = 0; i <= currentIndex; i++) {
             indicators.get(i).first.setActivated(true);
-            indicators.get(i).first.setScaleX(1.2f);
-            indicators.get(i).first.setScaleY(1.2f);
+            indicators.get(i).first.setScaleX(1.3f);
+            indicators.get(i).first.setScaleY(1.3f);
             if (indicators.get(i).second != null) indicators.get(i).second.setVisibility(View.VISIBLE);
         }
 
