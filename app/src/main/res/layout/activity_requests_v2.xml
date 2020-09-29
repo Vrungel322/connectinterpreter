@@ -12,14 +12,14 @@
         android:id="@+id/ll_add_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:elevation="10dp"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/create_request"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/create_request"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tv_pick_photo"
@@ -35,7 +35,7 @@
             style="@style/Requests_PickImage"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/rounded_background"
             android:gravity="center"
             android:text="@string/media_image_camera" />
