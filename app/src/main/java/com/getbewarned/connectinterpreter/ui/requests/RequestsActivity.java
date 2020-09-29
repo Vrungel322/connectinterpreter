@@ -140,7 +140,11 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
 
     @Override
     public void openImagePicker() {
-        showSelectionImageMenu();
+        if (llAddImage.getVisibility() == View.GONE) {
+            showSelectionImageMenu();
+        } else {
+            hideSelectionImageMenu();
+        }
 //        requestFileSelector.showChoiceSheet();
     }
 
