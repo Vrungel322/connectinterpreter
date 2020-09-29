@@ -73,28 +73,13 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         findViewById(R.id.tv_pick_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                getIntent.setType("image/*");
-
-                startActivityForResult(getIntent, PICK_IMAGE);
-
+                pickPhoto();
             }
         });
         findViewById(R.id.tv_make_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File photo = null;
-                try {
-                    photo = File.createTempFile("picture", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
-                } catch (Exception e) {
-                    Toast.makeText(RequestsActivity.this, "Please check SD card! Image shot is impossible!", Toast.LENGTH_LONG).show();
-                }
-                RequestFileSelector.imageUri = FileProvider.getUriForFile(RequestsActivity.this, getPackageName() + ".provider", photo);
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, RequestFileSelector.imageUri);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, CAPTURE_IMAGE);
-                }
+                takePhoto();
             }
         });
 
@@ -215,5 +200,27 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         createRequestButton.setScaleX(1.0f);
         createRequestButton.setScaleY(1.f);
         createRequestButton.setRotation(0);
+    }
+
+    private void takePhoto(){
+        File photo = null;
+        try {
+            photo = File.createTempFile("picture", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+        } catch (Exception e) {
+            Toast.makeText(RequestsActivity.this, "Please check SD card! Image shot is impossible!", Toast.LENGTH_LONG).show();
+        }
+        RequestFileSelector.imageUri = FileProvider.getUriForFile(RequestsActivity.this, getPackageName() + ".provider", photo);
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, RequestFileSelector.imageUri);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, CAPTURE_IMAGE);
+        }
+    }
+
+    private void pickPhoto(){
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        startActivityForResult(getIntent, PICK_IMAGE);
     }
 }
