@@ -4,6 +4,10 @@
 
     <solid android:color="@color/white" />
 
+    <stroke
+        android:color="@color/blue_new_ui"
+        android:width="@dimen/request_item_stroke" />
+
     <corners android:radius="@dimen/request_item_badge_corner" />
 
 </shape>
