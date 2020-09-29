@@ -149,7 +149,8 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
                 hideSelectionImageMenu();
                 Bitmap image = requestFileSelector.getImageFromActivityResult(requestCode, resultCode, data);
                 if (image != null) {
-                    presenter.onImageSelected(image);
+//                    presenter.onImageSelected(image);
+                    RequestBitmapHolder.bitmap = image;
                     Intent intent = new Intent(RequestsActivity.this, NewRequestActivity.class);
                     startActivity(intent);
                 }

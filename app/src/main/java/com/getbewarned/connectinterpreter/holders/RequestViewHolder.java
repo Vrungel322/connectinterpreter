@@ -39,7 +39,6 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
         if (request.getStatus().equals("new")){
             status.setTextColor(itemView.getResources().getColor(R.color.blue_new_ui));
             status.setBackgroundResource(R.drawable.request_new_list_item);
-
         }
         if (request.getStatus().equals("assigned")){
 //            todo set valid colors

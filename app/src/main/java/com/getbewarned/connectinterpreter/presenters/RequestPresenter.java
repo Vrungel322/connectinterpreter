@@ -20,12 +20,8 @@ import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestMessage;
 import com.getbewarned.connectinterpreter.models.RequestMessageResponse;
-import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -88,7 +84,7 @@ public class RequestPresenter implements Presenter {
                 request.setUnreadCount(0);
             }
         });
-        view.setTitle(request.getName());
+        view.updateUi(request);
         adapter = new RequestMessagesAdapter(request.getMessages(), true);
         adapter.setItemClickListener(new RequestMessagesAdapter.ItemClickListener() {
             @Override

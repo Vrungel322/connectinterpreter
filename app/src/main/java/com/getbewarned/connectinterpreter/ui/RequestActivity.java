@@ -5,22 +5,22 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.RequestMessagesAdapter;
 import com.getbewarned.connectinterpreter.interfaces.RequestFileSelection;
 import com.getbewarned.connectinterpreter.interfaces.RequestView;
+import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.presenters.RequestPresenter;
 
-public class RequestActivity extends AppCompatActivity implements RequestView {
+public class RequestActivity extends NoStatusBarActivity implements RequestView {
 
     private RecyclerView messagesList;
     private Button sendPhotoBtn;
@@ -35,12 +35,19 @@ public class RequestActivity extends AppCompatActivity implements RequestView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request);
+        setContentView(R.layout.activity_request_v2);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         messagesList = findViewById(R.id.messages_list);
         sendPhotoBtn = findViewById(R.id.send_photo);
@@ -80,9 +87,26 @@ public class RequestActivity extends AppCompatActivity implements RequestView {
     }
 
     @Override
-    public void setTitle(String title) {
-        getSupportActionBar().setTitle(title);
+    public void updateUi(Request request) {
+        ((TextView)findViewById(R.id.tv_toolbar_title)).setText(request.getName());
+        TextView tvStatus = findViewById(R.id.tv_request_state);
+        tvStatus.setText(getStatus(request));
+        if (request.getStatus().equals("new")){
+            tvStatus.setTextColor(getResources().getColor(R.color.blue_new_ui));
+            tvStatus.setBackgroundResource(R.drawable.request_new_list_item);
+        }
+        if (request.getStatus().equals("assigned")){
+//            todo set valid colors
+            tvStatus.setTextColor(getResources().getColor(android.R.color.holo_orange_dark));
+            tvStatus.setBackgroundResource(R.drawable.request_in_progress_list_item);
+        }
+        if (request.getStatus().equals("closed")){
+            tvStatus.setTextColor(getResources().getColor(android.R.color.black));
+            tvStatus.setBackgroundResource(R.drawable.request_closed_list_item);
+        }
     }
+
+
 
     @Override
     public void hideSendButtons() {
@@ -156,5 +180,18 @@ public class RequestActivity extends AppCompatActivity implements RequestView {
     @Override
     public void scrollToBottom() {
         this.messagesList.getLayoutManager().scrollToPosition(messagesList.getAdapter().getItemCount() - 1);
+    }
+
+    public String getStatus(Request request) {
+        switch (request.getStatus()) {
+            case "new":
+                return getString(R.string.status_new);
+            case "assigned":
+                return getString(R.string.status_assigned);
+            case "closed":
+                return getString(R.string.status_closed);
+            default:
+                return "";
+        }
     }
 }

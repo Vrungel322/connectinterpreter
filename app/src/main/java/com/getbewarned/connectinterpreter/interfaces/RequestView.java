@@ -1,10 +1,12 @@
 package com.getbewarned.connectinterpreter.interfaces;
 
+import com.getbewarned.connectinterpreter.models.Request;
+
 public interface RequestView {
 
     void goBack();
 
-    void setTitle(String title);
+    void updateUi(Request request);
 
     void hideSendButtons();
 
