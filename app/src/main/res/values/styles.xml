@@ -115,6 +115,10 @@
     </style>
 
     <!--new ui-->
+    <style name="Screen_Title" parent="Text_default">
+        <item name="android:textSize">22sp</item>
+    </style>
+
     <style name="Text_toolbar" parent="Text_default">
         <item name="android:textSize">18sp</item>
     </style>
