@@ -65,13 +65,18 @@ public class RequestMessageViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateUI(RequestMessage message) {
-        if (message.getAuthor().equals(RequestMessage.SELF)) {
-            spaceLeft.setVisibility(View.GONE);
-            spaceRight.setVisibility(View.VISIBLE);
-        } else {
-            spaceLeft.setVisibility(View.VISIBLE);
-            spaceRight.setVisibility(View.GONE);
-        }
+//        used in old ui
+//        if (message.getAuthor().equals(RequestMessage.SELF)) {
+//            spaceLeft.setVisibility(View.GONE);
+//            spaceRight.setVisibility(View.VISIBLE);
+//        } else {
+//            spaceLeft.setVisibility(View.VISIBLE);
+//            spaceRight.setVisibility(View.GONE);
+//        }
+        // new ui : all messages need to be in center
+        spaceLeft.setVisibility(View.GONE);
+        spaceRight.setVisibility(View.GONE);
+
 
         if (message.getType().equals("text")) {
             text.setVisibility(View.VISIBLE);

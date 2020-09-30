@@ -97,11 +97,11 @@ public class RequestActivity extends NoStatusBarActivity implements RequestView 
         }
         if (request.getStatus().equals("assigned")){
 //            todo set valid colors
-            tvStatus.setTextColor(getResources().getColor(android.R.color.holo_orange_dark));
+            tvStatus.setTextColor(getResources().getColor(android.R.color.white));
             tvStatus.setBackgroundResource(R.drawable.request_in_progress_list_item);
         }
         if (request.getStatus().equals("closed")){
-            tvStatus.setTextColor(getResources().getColor(android.R.color.black));
+            tvStatus.setTextColor(getResources().getColor(android.R.color.white));
             tvStatus.setBackgroundResource(R.drawable.request_closed_list_item);
         }
     }

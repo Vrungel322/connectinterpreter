@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
 
-    <solid android:color="@color/colorRed" />
+    <solid android:color="@color/blue_new_ui_40" />
 
     <corners android:radius="@dimen/request_item_badge_corner" />
 </shape>

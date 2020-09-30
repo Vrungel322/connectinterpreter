@@ -111,7 +111,7 @@
     <string name="no_requests_title">У вас еще нет заявок</string>
     <string name="status_new">Новый</string>
     <string name="status_assigned">Принят в обработку</string>
-    <string name="status_closed">Решен/Закрыт</string>
+    <string name="status_closed">Готова</string>
     <string name="drawer_scan_qr">Сканер QR кода</string>
     <string name="btn_reconnect">Переподключиться</string>
     <string name="btn_close">Закрыть</string>

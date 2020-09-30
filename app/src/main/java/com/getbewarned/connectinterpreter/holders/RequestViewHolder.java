@@ -42,11 +42,11 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
         }
         if (request.getStatus().equals("assigned")){
 //            todo set valid colors
-            status.setTextColor(itemView.getResources().getColor(android.R.color.holo_orange_dark));
+            status.setTextColor(itemView.getResources().getColor(android.R.color.white));
             status.setBackgroundResource(R.drawable.request_in_progress_list_item);
         }
         if (request.getStatus().equals("closed")){
-            status.setTextColor(itemView.getResources().getColor(android.R.color.black));
+            status.setTextColor(itemView.getResources().getColor(android.R.color.white));
             status.setBackgroundResource(R.drawable.request_closed_list_item);
         }
 
