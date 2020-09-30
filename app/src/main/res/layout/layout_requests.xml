@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_requests"
+    tools:background="#4D222222"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -22,10 +23,10 @@
         android:id="@+id/tv_requests"
         style="@style/Action_Text"
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
-        android:text="@string/drawer_requests"
+        android:text="@string/action_requests"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_requests"
-        app:layout_constraintStart_toStartOf="@+id/iv_requests"
-        tools:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintStart_toStartOf="@+id/iv_requests"/>
 </android.support.constraint.ConstraintLayout>

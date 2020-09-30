@@ -23,9 +23,8 @@
         style="@style/Action_Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/drawer_share"
+        android:text="@string/action_share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_share"
-        app:layout_constraintStart_toStartOf="@+id/iv_share"
-        tools:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintStart_toStartOf="@+id/iv_share" />
 </android.support.constraint.ConstraintLayout>

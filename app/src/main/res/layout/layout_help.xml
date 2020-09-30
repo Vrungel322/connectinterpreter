@@ -26,6 +26,5 @@
         android:text="@string/help"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_help"
-        app:layout_constraintStart_toStartOf="@+id/iv_help"
-        tools:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintStart_toStartOf="@+id/iv_help" />
 </android.support.constraint.ConstraintLayout>

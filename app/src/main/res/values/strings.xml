@@ -124,8 +124,10 @@
     <string name="help_requested_text">Please wait. A specialist will contact you shortly</string>
     <string name="need_help">Didn\'t receive code?</string>
     <string name="drawer_share">Tell a friend</string>
+    <string name="action_share">Tell\na friend</string>
     <string name="share_text">I advise you to install a SL Interpreter. It helps me to solve problems. I like it. https://interpreter.getbw.me</string>
     <string name="drawer_requests">Text-Video-Interpretation</string>
+    <string name="action_requests">Text-Video\nInterpretation</string>
     <string name="request_send_photo">Send file</string>
     <string name="media_image_gallery">Peek a photo</string>
     <string name="media_image_camera">Take a photo</string>

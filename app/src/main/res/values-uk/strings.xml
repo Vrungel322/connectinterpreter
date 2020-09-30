@@ -100,6 +100,7 @@
     <string name="help_requested_text">Зачекайте. Незабаром з вами зв\'яжеться наш фахівець</string>
     <string name="need_help">Не отримали код?</string>
     <string name="drawer_share">Розповісти другу</string>
+    <string name="action_share">Розповісти\nдругу</string>
     <string name="share_text">Раджу встановити Перекладач ЖМ. Допомагає мені вирішувати проблеми. Мені дуже подобається. https://interpreter.getbw.me</string>
     <string name="drawer_requests">Текст-Відео-Переклад</string>
     <string name="request_send_photo">Надіслати файл</string>
@@ -113,7 +114,7 @@
     <string name="status_new">Новий</string>
     <string name="status_assigned">У роботі</string>
     <string name="status_closed">Готова</string>
-    <string name="drawer_scan_qr">Сканер QR коду</string>
+    <string name="drawer_scan_qr">QR Сканер</string>
     <string name="btn_reconnect">Перепідключитися</string>
     <string name="btn_close">Закрити</string>
     <string name="waiting_for_interpreter">Чекаємо на перекладача…</string>
@@ -201,4 +202,5 @@
     <string name="yes">Так</string>
     <string name="compensation_prepare">Чи готові ви надати свої дані для отримання компенсації?</string>
     <string name="start">Розпочати</string>
+    <string name="action_requests">Текст-Відео\nПереклад</string>
 </resources>

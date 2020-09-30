@@ -26,6 +26,5 @@
         android:text="@string/drawer_scan_qr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_qr"
-        app:layout_constraintStart_toStartOf="@+id/iv_qr"
-        tools:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintStart_toStartOf="@+id/iv_qr" />
 </android.support.constraint.ConstraintLayout>

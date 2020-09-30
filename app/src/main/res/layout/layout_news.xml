@@ -26,6 +26,5 @@
         android:text="@string/drawer_news"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_news"
-        app:layout_constraintStart_toStartOf="@+id/iv_news"
-        tools:textColor="@color/colorPrimaryDark" />
+        app:layout_constraintStart_toStartOf="@+id/iv_news" />
 </android.support.constraint.ConstraintLayout>
