@@ -18,7 +18,6 @@
 
         <TextView
             style="@style/Screen_Title"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -64,7 +63,7 @@
 
         <Button
             android:id="@+id/login_button"
-            style="@style/Button_fab"
+            style="@style/Button_fab_activatable"
             android:layout_width="match_parent"
             android:layout_marginTop="30dp"
             android:text="@string/action_login" />
@@ -72,7 +71,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="36dp">
+            android:layout_marginTop="28dp">
 
             <TextView
                 android:id="@+id/wrong_number"

@@ -20,6 +20,7 @@ import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
+import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
 import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
@@ -75,7 +76,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             public void onClick(View v) {
                 // new ui
 //                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
-                Intent intent = new Intent(NewMainActivity.this, LoginActivity.class);
+
+//                stub
+                Intent intent = new Intent(NewMainActivity.this, ConfirmationActivity.class);
+                intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "12345678");
+
                 startActivity(intent);
 
                 // old ui

@@ -64,7 +64,7 @@
     <string name="new_app_version">Вышла версия %s</string>
     <string name="update_required">Пожалуйста, обновите приложение, чтобы продолжить</string>
     <string name="update_recommended">Рекомендуем обновить приложение для более комфортного использования</string>
-    <string name="confirmation_desc">СМС с кодом подтверждения было отправлено на номер %s</string>
+    <string name="confirmation_desc">СМС с кодом подтверждения было\nотправлено на номер %s</string>
     <string name="wrong_number">Неправильный номер?</string>
     <string name="whats_new">Что нового</string>
     <string name="confirmation_wait">Если вы его еще не получили, подождите немного.\nЭто может занять несколько минут!</string>
