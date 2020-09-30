@@ -157,12 +157,15 @@
 
     </style>
 
-    <style name="Main_timer">
+    <style name="Main_timer_background">
         <item name="android:background">@drawable/rounded_background</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">52sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
+    </style>
+    <style name="Main_timer_time">
+        <item name="android:fontFamily">@font/font_montserrat</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">46sp</item>
+        <item name="android:textColor">@color/timer_color_with_minutes</item>
     </style>
 
     <style name="ActionItem_72">

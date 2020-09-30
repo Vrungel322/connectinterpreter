@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,9 +21,7 @@ import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
-import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
 import java.util.ArrayList;
@@ -35,10 +34,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
+    private static final String  ZERO_TIME = "00:00";
 
     TextView availabilityTitleLabel;
     TextView tvMinutesExpiration;
-    LinearLayout callBtn;
+    ImageView callBtn;
     ImageView requests;
     ImageView help;
     LinearLayout noMinutesContainer;
@@ -55,7 +55,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         setContentView(R.layout.activity_main_new_v2);
         availabilityTitleLabel = findViewById(R.id.tv_avaliavle_minutes_label);
         tvMinutesExpiration = findViewById(R.id.tv_minutes_expiration);
-        callBtn = findViewById(R.id.ll_call);
+        callBtn = findViewById(R.id.iv_call);
         buyButton = findViewById(R.id.iv_add_minutes);
         menu = findViewById(R.id.iv_menu);
 
@@ -75,12 +75,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             @Override
             public void onClick(View v) {
                 // new ui
-//                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
-
-//                stub
-                Intent intent = new Intent(NewMainActivity.this, NameInputActivity.class);
-//                intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "12345678");
-
+                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
                 startActivity(intent);
 
                 // old ui
@@ -140,6 +135,12 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void showLeftTime(String leftTime) {
+        if (leftTime.equals(ZERO_TIME)){
+            timer.setTextColor(ContextCompat.getColor(this,R.color.timer_color_with_minutes));
+        }else {
+            timer.setTextColor(ContextCompat.getColor(this,R.color.timer_color_without_minutes));
+        }
+
         timer.setText(leftTime);
     }
 
@@ -152,10 +153,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             noMinutesContainer.setVisibility(View.GONE);
             callBtn.setVisibility(View.VISIBLE);
         } else {
-            availabilityTitleLabel.setText(R.string.not_available_title);
+//            availabilityTitleLabel.setText(R.string.not_available_title);
+            availabilityTitleLabel.setText(R.string.available_minutes);
             noMinutesContainer.setVisibility(View.VISIBLE);
             callBtn.setVisibility(View.GONE);
-            timer.setText("00:00");
+            showLeftTime(ZERO_TIME);
         }
     }
 
