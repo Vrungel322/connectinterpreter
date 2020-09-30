@@ -124,10 +124,6 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
         presenter = new MainPresenter(this, this);
         presenter.onCreate(getIntent().getExtras());
-
-//        stub
-        Intent intent = new Intent(NewMainActivity.this, RequestsActivity.class);
-        startActivity(intent);
     }
 
     @Override

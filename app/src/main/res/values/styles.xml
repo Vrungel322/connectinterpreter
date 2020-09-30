@@ -254,5 +254,11 @@
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
+    <style name="Requests_dialog_start_button" parent="Text_default" >
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/red_new_ui</item>
+    </style>
+
 
 </resources>

@@ -93,6 +93,9 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         this.requestsList.setLayoutManager(layoutManager);
         this.requestsList.setAdapter(this.presenter.getAdapter());
 
+        // help dialog
+        Intent intent = new Intent(RequestsActivity.this, HelpRequestActivity.class);
+        startActivity(intent);
     }
 
     @Override

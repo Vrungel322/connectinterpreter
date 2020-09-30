@@ -199,6 +199,7 @@
     <string name="no">Нет</string>
     <string name="yes">Да</string>
     <string name="compensation_prepare">Готовы ли вы предоставить свои данные для получения компенсации?</string>
+    <string name="start">" Начать"</string>
 
 </resources>
 

@@ -225,5 +225,6 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="compensation_prepare">Are you ready to provide your details to receive compensation?</string>
+    <string name="start">Start</string>
 
 </resources>

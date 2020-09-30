@@ -200,4 +200,5 @@
     <string name="no">Ні</string>
     <string name="yes">Так</string>
     <string name="compensation_prepare">Чи готові ви надати свої дані для отримання компенсації?</string>
+    <string name="start">Розпочати</string>
 </resources>
