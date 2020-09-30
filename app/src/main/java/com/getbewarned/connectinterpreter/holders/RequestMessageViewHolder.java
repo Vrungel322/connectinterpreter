@@ -47,8 +47,6 @@ import java.io.IOException;
 
 public class RequestMessageViewHolder extends RecyclerView.ViewHolder {
 
-    private View spaceLeft;
-    private View spaceRight;
     private TextView text;
     private View imageWrapper;
     private ImageView image;
@@ -56,8 +54,6 @@ public class RequestMessageViewHolder extends RecyclerView.ViewHolder {
 
     public RequestMessageViewHolder(View itemView) {
         super(itemView);
-        spaceLeft = itemView.findViewById(R.id.space_left);
-        spaceRight = itemView.findViewById(R.id.space_right);
         text = itemView.findViewById(R.id.text);
         imageWrapper = itemView.findViewById(R.id.image_wrapper);
         image = itemView.findViewById(R.id.image);
@@ -65,17 +61,6 @@ public class RequestMessageViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateUI(RequestMessage message) {
-//        used in old ui
-//        if (message.getAuthor().equals(RequestMessage.SELF)) {
-//            spaceLeft.setVisibility(View.GONE);
-//            spaceRight.setVisibility(View.VISIBLE);
-//        } else {
-//            spaceLeft.setVisibility(View.VISIBLE);
-//            spaceRight.setVisibility(View.GONE);
-//        }
-        // new ui : all messages need to be in center
-        spaceLeft.setVisibility(View.GONE);
-        spaceRight.setVisibility(View.GONE);
 
 
         if (message.getType().equals("text")) {

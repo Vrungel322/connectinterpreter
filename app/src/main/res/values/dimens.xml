@@ -9,7 +9,7 @@
     <dimen name="toolbar_top_margin">48dp</dimen>
     <dimen name="compensation_indicator_drawable_size">8dp</dimen>
     <dimen name="request_item_badge_corner">4dp</dimen>
-    <dimen name="request_item_stroke">2dp</dimen>
+    <dimen name="request_item_stroke">1dp</dimen>
 
     <!--    helps to make image in fab larger-->
 <!--    <dimen name="design_fab_image_size" tools:override="true">56dp</dimen>-->
