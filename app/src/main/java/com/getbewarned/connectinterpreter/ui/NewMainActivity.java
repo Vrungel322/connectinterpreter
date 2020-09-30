@@ -78,8 +78,8 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
 
 //                stub
-                Intent intent = new Intent(NewMainActivity.this, ConfirmationActivity.class);
-                intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "12345678");
+                Intent intent = new Intent(NewMainActivity.this, NameInputActivity.class);
+//                intent.putExtra(ConfirmationPresenter.PHONE_EXTRA, "12345678");
 
                 startActivity(intent);
 

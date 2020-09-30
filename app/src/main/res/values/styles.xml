@@ -119,6 +119,7 @@
     <!--new ui-->
     <style name="Screen_Title" parent="Text_default">
         <item name="android:textSize">22sp</item>
+        <item name="android:textAlignment">center</item>
         <item name="android:fontFamily">@font/font_montserrat_semi_bold</item>
     </style>
 
