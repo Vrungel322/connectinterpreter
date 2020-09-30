@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/Screen_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -16,7 +17,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/login_title_v2"
-        style="@style/Screen_Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +28,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="48dp"
+        android:fontFamily="@font/font_montserrat_semi_bold"
         android:text="+7"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -80,9 +81,10 @@
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/accept_check"
-            app:buttonTint="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:gravity="top"
+            app:buttonTint="@color/white" />
 
         <TextView
             android:id="@+id/accept_text"

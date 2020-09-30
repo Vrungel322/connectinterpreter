@@ -74,7 +74,8 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             @Override
             public void onClick(View v) {
                 // new ui
-                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
+//                Intent intent = new Intent(NewMainActivity.this, PurchaseActivity.class);
+                Intent intent = new Intent(NewMainActivity.this, LoginActivity.class);
                 startActivity(intent);
 
                 // old ui

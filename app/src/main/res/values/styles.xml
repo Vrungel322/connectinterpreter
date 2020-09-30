@@ -85,15 +85,14 @@
     <!--new ui common-->
     <style name="Text_default">
         <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="EditText_rounded">
         <item name="android:background">@drawable/rounded_background</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/font_montserrat_semi_bold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:paddingStart">16sp</item>
         <item name="android:paddingLeft">16sp</item>
         <item name="android:textColor">@color/blue_new_ui</item>
@@ -104,9 +103,11 @@
 
     <style name="Button_fab">
         <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/font_montserrat</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:layout_height">64dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/rounded_background_fab_red</item>
     </style>
 
@@ -117,6 +118,7 @@
     <!--new ui-->
     <style name="Screen_Title" parent="Text_default">
         <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/font_montserrat_semi_bold</item>
     </style>
 
     <style name="Text_toolbar" parent="Text_default">
@@ -243,21 +245,21 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="Steps_divider" >
+    <style name="Steps_divider">
         <item name="android:layout_height">4dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="Action_Text" >
+    <style name="Action_Text">
         <item name="android:textAlignment">center</item>
         <item name="android:maxLines">2</item>
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/font_open_sans_semi_bold</item>
     </style>
 
-    <style name="Requests_dialog_start_button" parent="Text_default" >
+    <style name="Requests_dialog_start_button" parent="Text_default">
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/red_new_ui</item>
