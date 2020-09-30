@@ -251,7 +251,7 @@
         <item name="android:textAlignment">center</item>
         <item name="android:maxLines">2</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/open_sans_semi_bold</item>
+        <item name="android:fontFamily">@font/font_open_sans_semi_bold</item>
     </style>
 
     <style name="Requests_dialog_start_button" parent="Text_default" >
