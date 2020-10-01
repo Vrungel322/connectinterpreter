@@ -35,7 +35,6 @@
     <TextView
         android:id="@+id/tv_compensation_passport_data"
         style="@style/CompensationStepDescription_Text"
-        android:layout_marginTop="32dp"
         android:text="@string/compensation_step_passport_data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

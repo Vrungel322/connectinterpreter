@@ -33,7 +33,7 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
     public static final String COMPENSATION_DATA = "COMPENSATION_DATA";
 
     TextView toolbarTitle;
-    List<Pair<FrameLayout, LinearLayout>> indicators;
+    List<Pair<TextView, View>> indicators;
     SwipableViewPager viewPager;
     Button bContinue;
     FrameLayout flBack;
@@ -49,13 +49,13 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
 
         // step indicators
         indicators = new ArrayList<>();
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_1), null));
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_2), (LinearLayout) findViewById(R.id.ll_step_divider_1_2)));
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_3), (LinearLayout) findViewById(R.id.ll_step_divider_2_3)));
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_4), (LinearLayout) findViewById(R.id.ll_step_divider_3_4)));
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_5), (LinearLayout) findViewById(R.id.ll_step_divider_4_5)));
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_6), (LinearLayout) findViewById(R.id.ll_step_divider_5_6)));
-        indicators.add(new Pair((FrameLayout) findViewById(R.id.fl_indicator_7), (LinearLayout) findViewById(R.id.ll_step_divider_6_7)));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_1), null));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_2), (View) findViewById(R.id.step_divider_1_2)));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_3), (View) findViewById(R.id.step_divider_2_3)));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_4), (View) findViewById(R.id.step_divider_3_4)));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_5), (View) findViewById(R.id.step_divider_4_5)));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_6), (View) findViewById(R.id.step_divider_5_6)));
+        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_7), (View) findViewById(R.id.step_divider_6_7)));
 
         // view pager
         viewPager = findViewById(R.id.vp_steps);

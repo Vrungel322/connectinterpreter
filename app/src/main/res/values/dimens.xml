@@ -13,6 +13,7 @@
     <dimen name="stroke_button_fab">3dp</dimen>
     <dimen name="compensation_message_bottom_margin">100dp</dimen>
     <dimen name="default_side_margins">16dp</dimen>
+    <dimen name="compensation_message_margin">36dp</dimen>
 
     <!--    helps to make image in fab larger-->
 <!--    <dimen name="design_fab_image_size" tools:override="true">56dp</dimen>-->
