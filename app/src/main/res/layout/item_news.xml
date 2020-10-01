@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -17,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -31,7 +34,7 @@
 
             <TextView
                 android:id="@+id/news_date"
-                style="@style/Text_default"
+                style="@style/RequestItem_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorSecondary"
@@ -40,8 +43,10 @@
 
         <WebView
             android:id="@+id/video_view"
+            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            tools:visibility="visible"
             android:visibility="gone" />
 
         <TextView
@@ -49,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text_default"
+            android:textSize="12sp"
             android:maxLines="3"
             android:ellipsize="end"
             android:textColor="?android:attr/textColorPrimary"

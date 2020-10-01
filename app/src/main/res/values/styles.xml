@@ -128,10 +128,10 @@
     </style>
 
     <style name="Text_news_item_title">
-        <item name="android:textColor">@color/blue_new_ui_text</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blue_new_ui</item>
+        <item name="android:fontFamily">@font/font_montserrat</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Text_user_info_block_title" parent="Text_news_item_title">
