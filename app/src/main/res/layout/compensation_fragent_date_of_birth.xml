@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00222222"
+    android:paddingStart="@dimen/default_side_margins"
+    android:paddingEnd="@dimen/default_side_margins"
     tools:background="#80D66D6D">
 
 
@@ -29,6 +31,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:theme="@style/DatePicker" />
+
     </android.support.v7.widget.CardView>
 
 

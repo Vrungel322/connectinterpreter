@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00222222"
+    android:paddingStart="@dimen/default_side_margins"
+    android:paddingEnd="@dimen/default_side_margins"
     tools:background="#80D66D6D">
 
     <EditText
@@ -16,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/et_name"
         style="@style/EditText_rounded"
