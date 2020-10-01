@@ -205,11 +205,6 @@
         <item name="android:background">@drawable/compensation_step_indicator</item>
     </style>
 
-    <style name="CompensationStepIndicator_Text" parent="Text_default">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
     <style name="CompensationStepDescription_Text" parent="Text_default">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -265,8 +260,6 @@
     <style name="Steps_divider">
         <item name="android:layout_height">4dp</item>
         <item name="android:background">@color/white</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="Action_Text">
