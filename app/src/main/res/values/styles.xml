@@ -161,6 +161,7 @@
         <item name="android:background">@drawable/rounded_background</item>
         <item name="android:elevation" tools:targetApi="lollipop">8dp</item>
     </style>
+
     <style name="Main_timer_time">
         <item name="android:fontFamily">@font/font_montserrat</item>
         <item name="android:textStyle">bold</item>
@@ -245,10 +246,15 @@
     </style>
 
     <style name="Requests_PickImage" parent="Text_default">
+        <item name="android:fontFamily">@font/font_montserrat_semi_bold</item>
         <item name="android:textColor">@color/red_new_ui</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_width">200dp</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rounded_background</item>
+
     </style>
 
     <style name="Steps_divider">

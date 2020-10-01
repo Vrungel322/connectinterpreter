@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    android:id="@+id/cl_root"
     tools:context=".ui.requests.RequestsActivity">
 
     <LinearLayout
@@ -24,20 +24,14 @@
         <TextView
             android:id="@+id/tv_pick_photo"
             style="@style/Requests_PickImage"
-            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
-            android:gravity="center"
             android:text="@string/media_image_gallery" />
 
         <TextView
             android:id="@+id/tv_make_photo"
             style="@style/Requests_PickImage"
-            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:background="@drawable/rounded_background"
-            android:gravity="center"
             android:text="@string/media_image_camera" />
 
     </LinearLayout>
@@ -89,9 +83,9 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginRight="32dp"
-        android:elevation="@dimen/default_elevation"
         android:layout_marginBottom="32dp"
         android:background="@drawable/ic_add_fab"
+        android:elevation="@dimen/default_elevation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
