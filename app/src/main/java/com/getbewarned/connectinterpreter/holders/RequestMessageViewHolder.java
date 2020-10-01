@@ -76,7 +76,6 @@ public class RequestMessageViewHolder extends RecyclerView.ViewHolder {
             instance.setLoggingEnabled(true);
             instance
                     .load(message.getThumbnail())
-                    .placeholder(R.drawable.blue_gradient)
                     .into(image);
             if (message.getType().equals("video")) {
                 videoIndicator.setVisibility(View.VISIBLE);

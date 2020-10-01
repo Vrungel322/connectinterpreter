@@ -37,11 +37,6 @@ public class RequestActivity extends NoStatusBarActivity implements RequestView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_v2);
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
