@@ -59,6 +59,12 @@ public class EditPersonalInfoActivity extends NoStatusBarActivity implements Edi
         setContentView(R.layout.activity_edit_personal_info_v2);
 
         // toolbar
+        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         ((TextView) findViewById(R.id.tv_toolbar_title)).setText(R.string.drawer_profile);
         ((ImageView) findViewById(R.id.iv_logout)).setOnClickListener(new View.OnClickListener() {
             @Override
