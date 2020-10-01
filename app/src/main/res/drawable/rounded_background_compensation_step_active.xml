@@ -7,7 +7,7 @@
     <solid android:color="@color/colorRed" />
 
     <stroke
-        android:width="2dp"
+        android:width="@dimen/stroke_button_fab"
         android:color="@color/white" />
 
     <corners android:radius="2dp" />

@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="@dimen/default_side_margins"
+    android:paddingEnd="@dimen/default_side_margins"
     android:orientation="horizontal"
     tools:background="@color/blue_new_ui_text">
 
     <FrameLayout
+        android:layout_marginStart="4dp"
         android:id="@+id/fl_indicator_1"
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fl_indicator_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -93,12 +95,11 @@
     </FrameLayout>
 
     <FrameLayout
-
+        android:layout_marginEnd="4dp"
         android:id="@+id/fl_indicator_7"
         style="@style/CompensationStepIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fl_indicator_6"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
