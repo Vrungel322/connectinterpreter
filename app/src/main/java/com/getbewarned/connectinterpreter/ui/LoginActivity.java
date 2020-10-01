@@ -91,8 +91,9 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
             }
         });
 
-        Intent intent = new Intent(this, CompensationPrepareActivity.class);
-        startActivity(intent);
+//        stub
+//        Intent intent = new Intent(this, CompensationPrepareActivity.class);
+//        startActivity(intent);
     }
 
     @Override
