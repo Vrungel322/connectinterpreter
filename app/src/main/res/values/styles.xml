@@ -88,6 +88,7 @@
         <item name="android:fontFamily">@font/font_montserrat</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:letterSpacing">0.02</item>
     </style>
 
     <style name="EditText_rounded">
@@ -212,7 +213,8 @@
     <style name="CompensationStepDescription_Text" parent="Text_default">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/font_montserrat_semi_bold</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginStart">56dp</item>
         <item name="android:layout_marginLeft">56dp</item>

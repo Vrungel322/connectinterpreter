@@ -4,7 +4,7 @@
     <solid android:color="@color/colorRed" />
 
     <stroke
-        android:width="4dp"
+        android:width="@dimen/stroke_button_fab"
         android:color="@color/white" />
 
     <corners android:radius="240dp" />

@@ -2,24 +2,39 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/back01">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_compensation_video_mask"
+        android:elevation="1dp">
+
+    </ImageView>
 
     <VideoView
         android:id="@+id/vv_prepare"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="48dp"
+        android:elevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_compensation_prepare"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/ic_bottom_wave"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <TextView
         android:id="@+id/tv_compensation_prepare"
         style="@style/CompensationStepDescription_Text"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="100dp"
+        android:elevation="3dp"
         android:text="@string/compensation_prepare"
         app:layout_constraintBottom_toTopOf="@+id/b_yes"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +48,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:paddingStart="64dp"
         android:paddingEnd="64dp"
         android:text="@string/yes"
@@ -62,6 +77,5 @@
         app:layout_constraintTop_toTopOf="@+id/b_yes">
 
     </Button>
-
 
 </android.support.constraint.ConstraintLayout>

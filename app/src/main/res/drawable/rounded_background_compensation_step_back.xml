@@ -4,10 +4,10 @@
     <size
         android:width="@dimen/compensation_indicator_drawable_size"
         android:height="@dimen/compensation_indicator_drawable_size" />
-    <solid android:color="@color/colorAccent" />
+    <solid android:color="@color/blue_new_ui" />
 
     <stroke
-        android:width="2dp"
+        android:width="@dimen/stroke_button_fab"
         android:color="@color/white" />
 
     <corners android:radius="2dp" />

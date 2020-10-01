@@ -23,6 +23,7 @@ import com.getbewarned.connectinterpreter.interfaces.LoginView;
 import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.LoginPresenter;
+import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 
 public class LoginActivity extends NoStatusBarActivity implements LoginView {
 
@@ -89,6 +90,9 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
                 toggleActiveContinueBtn();
             }
         });
+
+        Intent intent = new Intent(this, CompensationPrepareActivity.class);
+        startActivity(intent);
     }
 
     @Override
