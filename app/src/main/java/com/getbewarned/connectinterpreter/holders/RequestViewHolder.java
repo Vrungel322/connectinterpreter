@@ -41,7 +41,6 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
             status.setBackgroundResource(R.drawable.request_new_list_item);
         }
         if (request.getStatus().equals("assigned")){
-//            todo set valid colors
             status.setTextColor(itemView.getResources().getColor(android.R.color.white));
             status.setBackgroundResource(R.drawable.request_in_progress_list_item);
         }

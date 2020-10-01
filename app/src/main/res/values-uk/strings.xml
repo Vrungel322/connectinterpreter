@@ -102,7 +102,7 @@
     <string name="drawer_share">Розповісти другу</string>
     <string name="action_share">Розповісти\nдругу</string>
     <string name="share_text">Раджу встановити Перекладач ЖМ. Допомагає мені вирішувати проблеми. Мені дуже подобається. https://interpreter.getbw.me</string>
-    <string name="drawer_requests">Текст-Відео-Переклад</string>
+    <string name="drawer_requests">Текст-Відео Переклад</string>
     <string name="request_send_photo">Надіслати файл</string>
     <string name="media_image_gallery">Обрати фото</string>
     <string name="media_image_camera">Зробити фото</string>

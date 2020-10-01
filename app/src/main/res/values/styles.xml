@@ -227,12 +227,13 @@
     </style>
 
     <style name="RequestItem_title" parent="Text_default">
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font_montserrat_semi_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/blue_new_ui_text</item>
     </style>
 
     <style name="RequestItem_time" parent="Text_default">
+        <item name="android:textSize">10sp</item>
         <item name="android:textColor">@android:color/darker_gray</item>
     </style>
 

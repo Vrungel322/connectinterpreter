@@ -111,7 +111,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/no_requests_title"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/no_requests_description" />
 
@@ -120,8 +120,8 @@
             style="@style/Text_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="56dp"
-            android:layout_marginRight="56dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="@string/no_requests_desc"
             android:textAlignment="center"
