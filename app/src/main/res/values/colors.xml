@@ -5,7 +5,7 @@
     <color name="colorAccent">#01579b</color>
     <color name="colorCallToolbar">#7b1e1e1e</color>
     <color name="colorFieldHint">#01579b</color>
-    <color name="qrScannerBackground">#AB5C6FA7</color>
+    <color name="qrScannerBackground">@color/blue_new_ui_40</color>
     <color name="colorRed">#BD3F32</color>
 
     <color name="colorCallBtn">#66bb6a</color>
