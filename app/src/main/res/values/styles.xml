@@ -228,8 +228,8 @@
     <style name="DatePicker" parent="Text_default">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">32sp</item>
-        <item name="android:textColorPrimary">@color/blue_new_ui_text</item>
-        <item name="colorControlNormal">#9C9C9C</item>
+        <item name="android:textColorPrimary">@color/blue_new_ui</item>
+        <item name="colorControlNormal">@android:color/darker_gray</item>
     </style>
 
     <style name="RequestItem_title" parent="Text_default">
