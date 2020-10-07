@@ -217,6 +217,37 @@ public class NetworkManager {
         });
     }
 
+    public void updateCompensationInfo(String firstName, String lastName, String patronymic,
+                                       String birthday, String passport, String itn, String inila,
+                                       String city, String street, String number, String apartment,
+                                       String postcode, final BaseRequestCompleted requestCompleted) {
+        Call<ApiResponseBase> call = api.updateCompensationInfo(this.authToken, firstName, lastName, patronymic, birthday, passport, itn, inila, city, street, number, apartment, postcode);
+        call.enqueue(new Callback<ApiResponseBase>() {
+            @Override
+            public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
+                if (response.code() == 401 && unauthRequestHandler != null) {
+                    unauthRequestHandler.onUnathRequest();
+                    return;
+                }
+                if (response.isSuccessful()) {
+                    if (response.code() == 204) {
+                        requestCompleted.onComplete(response.body());
+                    } else {
+                        requestCompleted.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    requestCompleted.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseBase> call, Throwable t) {
+                t.printStackTrace();
+                requestCompleted.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
     public void updateAvailability(final AvailabilityReceived millisecondsReceived) {
         Call<AvailabilityResponse> call = api.updateAvailability(this.authToken, getLanguage());
         call.enqueue(new Callback<AvailabilityResponse>() {

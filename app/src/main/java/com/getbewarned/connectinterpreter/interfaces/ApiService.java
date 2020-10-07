@@ -2,11 +2,11 @@ package com.getbewarned.connectinterpreter.interfaces;
 
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
+import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.CountriesResponse;
 import com.getbewarned.connectinterpreter.models.GroupSessionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
-import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
@@ -18,6 +18,7 @@ import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 
+import kotlin.PublishedApi;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -28,6 +29,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -56,6 +58,28 @@ public interface ApiService {
     Call<NameResponse> updateName(@Header("X-Interpreter-Client-Token") String authorization,
                                   @Field("name") String name,
                                   @Query("lang") String language);
+
+    @PUT("api/v3/profile")
+    @FormUrlEncoded
+    Call<NameResponse> updateProfile(@Header("X-Interpreter-Client-Token") String authorization,
+                                     @Field("name") String name,
+                                     @Query("lang") String language);
+
+    @POST("api/v3/compensation")
+    @FormUrlEncoded
+    Call<ApiResponseBase> updateCompensationInfo(@Header("X-Interpreter-Client-Token") String authorization,
+                                              @Field("first_name") String firstName,
+                                              @Field("last_name") String lastName,
+                                              @Field("patronymic") String patronymic,
+                                              @Field("birthday") String birthday,
+                                              @Field("passport_number_series") String passport,
+                                              @Field("itn") String itn,
+                                              @Field("inila") String inila,
+                                              @Field("city") String city,
+                                              @Field("street") String street,
+                                              @Field("number") String number,
+                                              @Field("apartment") String apartment,
+                                              @Field("postcode") String postcode);
 
     @GET("api/client/availability")
     Call<AvailabilityResponse> updateAvailability(@Header("X-Interpreter-Client-Token") String authorization,

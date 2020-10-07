@@ -1,21 +1,23 @@
 package com.getbewarned.connectinterpreter.ui.compensation;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.CompensationPageAdapter;
 import com.getbewarned.connectinterpreter.custon_ui_elements.SwipableViewPager;
+import com.getbewarned.connectinterpreter.interfaces.CompensationView;
+import com.getbewarned.connectinterpreter.presenters.CompensationPresenter;
 import com.getbewarned.connectinterpreter.ui.NoStatusBarActivity;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataConsumer;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataHolder;
@@ -24,12 +26,14 @@ import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationStep;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 
 /**
  * out:
  * [COMPENSATION_DATA] - [CompensationDataHolder] - get as Serializable
  */
-public class CompensationActivity extends NoStatusBarActivity implements CompensationDataConsumer {
+public class CompensationActivity extends NoStatusBarActivity implements CompensationDataConsumer, CompensationView {
     public static final int RC = 989;
     public static final String COMPENSATION_DATA = "COMPENSATION_DATA";
 
@@ -39,15 +43,15 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
     Button bContinue;
     FrameLayout flBack;
     CompensationPageAdapter adapter;
-
+    CompensationPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compensation);
-
+        presenter = new CompensationPresenter(this);
         // toolbar
         toolbarTitle = findViewById(R.id.tv_toolbar_title);
-        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -56,13 +60,13 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
 
         // step indicators
         indicators = new ArrayList<>();
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_1), null));
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_2), (View) findViewById(R.id.step_divider_1_2)));
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_3), (View) findViewById(R.id.step_divider_2_3)));
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_4), (View) findViewById(R.id.step_divider_3_4)));
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_5), (View) findViewById(R.id.step_divider_4_5)));
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_6), (View) findViewById(R.id.step_divider_5_6)));
-        indicators.add(new Pair((TextView) findViewById(R.id.tv_indicator_7), (View) findViewById(R.id.step_divider_6_7)));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_1), null));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_2), findViewById(R.id.step_divider_1_2)));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_3), findViewById(R.id.step_divider_2_3)));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_4), findViewById(R.id.step_divider_3_4)));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_5), findViewById(R.id.step_divider_4_5)));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_6), findViewById(R.id.step_divider_5_6)));
+        indicators.add(new Pair(findViewById(R.id.tv_indicator_7), findViewById(R.id.step_divider_6_7)));
 
         // view pager
         viewPager = findViewById(R.id.vp_steps);
@@ -96,13 +100,9 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
             public void onClick(View v) {
                 if (bContinue.isActivated()) {
                     ((CompensationStep) currentFragment()).storeData();
-
                     int nextIndex = viewPager.getCurrentItem() + 1;
                     if (nextIndex >= adapter.getCount()) {
-                        Intent data = new Intent();
-                        data.putExtra(COMPENSATION_DATA, CompensationDataHolder.getInstance());
-                        setResult(Activity.RESULT_OK, data);
-                        finish();
+                        presenter.updateCompensationInfo();
                     } else {
                         viewPager.setCurrentItem(nextIndex);
                     }
@@ -155,8 +155,38 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
             indicators.get(i).first.setActivated(true);
             indicators.get(i).first.setScaleX(1.2f);
             indicators.get(i).first.setScaleY(1.2f);
-            if (indicators.get(i).second != null) indicators.get(i).second.setVisibility(View.VISIBLE);
+            if (indicators.get(i).second != null)
+                indicators.get(i).second.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void showError(String message, @Nullable Throwable throwable) {
+        if (isFinishing()) {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.error_global)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    @Override
+    public void goBack() {
+        finish();
     }
 }
