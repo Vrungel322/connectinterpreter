@@ -1,9 +1,17 @@
 package com.getbewarned.connectinterpreter;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.graphics.Outline;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 public class UiUtils {
     public static void actionMainScreen(View v) {
@@ -52,5 +60,54 @@ public class UiUtils {
             });
             v.setElevation(elevation);
         }
+    }
+
+    public static void showAnimated(final View v, Techniques technique, Long duration) {
+        YoYo.with(technique)
+                .duration(duration)
+                .onStart(new YoYo.AnimatorCallback() {
+                    @Override
+                    public void call(Animator animator) {
+                        v.setVisibility(View.VISIBLE);
+
+                    }
+                })
+                .playOn(v);
+    }
+
+    public static void hideAnimated(final View v, Techniques technique, Long duration) {
+        YoYo.with(technique)
+                .duration(duration)
+                .onEnd(new YoYo.AnimatorCallback() {
+                    @Override
+                    public void call(Animator animator) {
+                        v.setVisibility(View.GONE);
+
+                    }
+                })
+                .playOn(v);
+    }
+
+    public static void rotateAnimated(final View v, int fromAngle, int toAngle, Long duration) {
+        int centerX = v.getMeasuredWidth() / 2;
+        int centerY = v.getMeasuredHeight() / 2;
+        ObjectAnimator animation = ObjectAnimator.ofFloat(v, "rotation", fromAngle, toAngle);
+        animation.setDuration(duration);
+        v.setPivotX(centerX);
+        v.setPivotY(centerY);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.start();
+
+    }
+
+    public static void scaleToCenterAnimated(final View v, float fromScale, float toScale, Long duration) {
+        Animation anim = new ScaleAnimation(
+                fromScale, toScale, // Start and end values for the X axis scaling
+                fromScale, toScale, // Start and end values for the Y axis scaling
+                Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
+                Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
+        anim.setFillAfter(true); // Needed to keep the result of the animation
+        anim.setDuration(duration);
+        v.startAnimation(anim);
     }
 }

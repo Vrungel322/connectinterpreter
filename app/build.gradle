@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.github.nisrulz:qreader:2.1.2'
     implementation 'com.github.nkzawa:socket.io-client:0.3.0'
     implementation 'com.android.support:gridlayout-v7:27.1.1'
+    implementation 'com.daimajia.androidanimations:library:2.0@aar'
 //    implementation 'com.yandex.money:checkout:3.1.0'
 }
 

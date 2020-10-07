@@ -16,7 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.interfaces.RequestFileSelection;
 import com.getbewarned.connectinterpreter.interfaces.RequestsView;
 import com.getbewarned.connectinterpreter.models.Request;
@@ -32,6 +34,13 @@ import static com.getbewarned.connectinterpreter.ui.RequestFileSelector.CAPTURE_
 import static com.getbewarned.connectinterpreter.ui.RequestFileSelector.PICK_IMAGE;
 
 public class RequestsActivity extends NoStatusBarActivity implements RequestsView {
+
+    // Fab anim settings
+    private static final Long ANIMATION_DURATION = 250L;
+    private static final int FROM_ANGLE = 0;
+    private static final int TO_ANGLE = 45;
+    private static final float FROM_SCALE_DOWN = 1.f;
+    private static final float TO_SCALE_DOWN = 0.7f;
 
     private ImageView createRequestButton;
     private RecyclerView requestsList;
@@ -195,17 +204,15 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
     }
 
     private void showSelectionImageMenu() {
-        llAddImage.setVisibility(View.VISIBLE);
-        createRequestButton.setScaleX(0.7f);
-        createRequestButton.setScaleY(0.7f);
-        createRequestButton.setRotation(45);
+        UiUtils.showAnimated(llAddImage, Techniques.SlideInUp, ANIMATION_DURATION);
+        UiUtils.rotateAnimated(createRequestButton, FROM_ANGLE, TO_ANGLE, ANIMATION_DURATION);
+        UiUtils.scaleToCenterAnimated(createRequestButton, FROM_SCALE_DOWN, TO_SCALE_DOWN, ANIMATION_DURATION);
     }
 
     private void hideSelectionImageMenu() {
-        llAddImage.setVisibility(View.GONE);
-        createRequestButton.setScaleX(1.0f);
-        createRequestButton.setScaleY(1.f);
-        createRequestButton.setRotation(0);
+        UiUtils.hideAnimated(llAddImage, Techniques.SlideOutDown, ANIMATION_DURATION);
+        UiUtils.rotateAnimated(createRequestButton, TO_ANGLE, FROM_ANGLE, ANIMATION_DURATION);
+        UiUtils.scaleToCenterAnimated(createRequestButton, TO_SCALE_DOWN, FROM_SCALE_DOWN, ANIMATION_DURATION);
     }
 
     private void takePhoto() {
