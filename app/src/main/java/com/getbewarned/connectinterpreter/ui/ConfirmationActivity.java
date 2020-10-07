@@ -203,4 +203,13 @@ public class ConfirmationActivity extends NoStatusBarActivity implements Confirm
         builder.create()
                 .show();
     }
+
+    @Override
+    public void navigateInputName() {
+        Intent intent = new Intent(this, NameInputActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 }

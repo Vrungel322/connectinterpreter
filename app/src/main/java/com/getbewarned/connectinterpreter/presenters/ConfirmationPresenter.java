@@ -77,7 +77,8 @@ public class ConfirmationPresenter implements Presenter {
             @Override
             public void onLoginComplete(LoginResponse response) {
                 if (response.isSuccess()) {
-                    userManager.updateUserName(response.getName());
+                    String name = response.getName();
+                    userManager.updateUserName(name);
                     userManager.updateUserToken(response.getAuthToken());
                     userManager.updateUserSeconds(response.getSeconds());
                     userManager.updateUserActiveTill(response.getActiveTill());
@@ -86,7 +87,12 @@ public class ConfirmationPresenter implements Presenter {
                     userManager.updateFirstTime(response.getFirstTime());
                     userManager.updateUserPhone(response.getUserPhone());
                     userManager.updateUserRegion(response.getRegion());
-                    view.navigateToApp();
+
+                    if (name == null || name.isEmpty()) {
+                        view.navigateInputName();
+                    } else {
+                        view.navigateToApp();
+                    }
                 } else {
                     view.showError(response.getMessage(), null);
                     view.toggleEnabledRequestBtn(true);

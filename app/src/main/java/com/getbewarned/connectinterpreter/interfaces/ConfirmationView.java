@@ -26,4 +26,6 @@ public interface ConfirmationView {
     void showHelpRequested();
 
     void showError(String message, @Nullable Throwable throwable);
+
+    void navigateInputName();
 }
