@@ -78,6 +78,9 @@ public class NameInputActivity extends NoStatusBarActivity implements NameInputV
 
     @Override
     public void showError(String message, @javax.annotation.Nullable final Throwable throwable) {
+        if (isFinishing()) {
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error_global)
                 .setMessage(message)
@@ -85,33 +88,11 @@ public class NameInputActivity extends NoStatusBarActivity implements NameInputV
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        navigateToApp();
+                        dialogInterface.dismiss();
                     }
-                });
-        if (throwable != null) {
-            builder.setNeutralButton(R.string.send_error, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    StringBuilder bodyStringBuilder = new StringBuilder();
-                    bodyStringBuilder.append(throwable.getMessage());
-                    for (StackTraceElement e : throwable.getStackTrace()) {
-                        bodyStringBuilder.append("\n");
-                        bodyStringBuilder.append(e.getClassName() + "." + e.getMethodName() + "(" + e.getFileName() + ":" + e.getLineNumber() + ")");
-                    }
-
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setData(Uri.parse("mailto:"));
-                    intent.setType("text/html");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"developers@getbewarned.com"});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Ошибка");
-                    intent.putExtra(Intent.EXTRA_TEXT, bodyStringBuilder.toString());
-
-                    startActivity(Intent.createChooser(intent, "Отправить ошибку"));
-                }
-            });
-        }
-        builder.create().show();
+                })
+                .create()
+                .show();
     }
 
     @Override

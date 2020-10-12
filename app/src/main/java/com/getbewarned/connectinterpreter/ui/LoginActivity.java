@@ -23,7 +23,6 @@ import com.getbewarned.connectinterpreter.interfaces.LoginView;
 import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.LoginPresenter;
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 
 public class LoginActivity extends NoStatusBarActivity implements LoginView {
 
@@ -61,7 +60,7 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
             public void onClick(View view) {
                 if (continueBtn.isActivated()) {
 //                    String phone = "+7" + phoneField.getText().toString();
-                    String phone = "+380689647569";
+                    String phone = "+380661805980";
                     presenter.continuePressed(phone, acceptCheck.isChecked());
                 }
             }
@@ -157,7 +156,7 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
                 .show();
     }
 
-    private void toggleActiveContinueBtn(){
+    private void toggleActiveContinueBtn() {
         continueBtn.setActivated(!phoneField.getText().toString().equals("") && acceptCheck.isChecked());
 
     }

@@ -19,6 +19,7 @@ import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestCreated;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestMessageCreated;
 import com.getbewarned.connectinterpreter.interfaces.NewsReceived;
+import com.getbewarned.connectinterpreter.interfaces.ProfileReceived;
 import com.getbewarned.connectinterpreter.interfaces.ReasonsReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestMessagesReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestsReceived;
@@ -38,6 +39,7 @@ import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.NewRequestResponse;
 import com.getbewarned.connectinterpreter.models.NewsResponse;
+import com.getbewarned.connectinterpreter.models.ProfileResponse;
 import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
@@ -213,6 +215,63 @@ public class NetworkManager {
             public void onFailure(Call<NameResponse> call, Throwable t) {
                 t.printStackTrace();
                 nameChanged.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void updateProfile(String firstName, String lastName, String patronymic,
+                              String country, String city, final ProfileReceived  profileReceived) {
+        Call<ProfileResponse> call = api.updateProfile(this.authToken, firstName, lastName, patronymic, country, city, getLanguage());
+        call.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                if (response.code() == 401 && unauthRequestHandler != null) {
+                    unauthRequestHandler.onUnathRequest();
+                    return;
+                }
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        profileReceived.onReceived(response.body());
+                    } else {
+                        profileReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    profileReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                t.printStackTrace();
+                profileReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void getProfile(final ProfileReceived  profileReceived) {
+        Call<ProfileResponse> call = api.getProfile(this.authToken, getLanguage());
+        call.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                if (response.code() == 401 && unauthRequestHandler != null) {
+                    unauthRequestHandler.onUnathRequest();
+                    return;
+                }
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        profileReceived.onReceived(response.body());
+                    } else {
+                        profileReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    profileReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                t.printStackTrace();
+                profileReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }

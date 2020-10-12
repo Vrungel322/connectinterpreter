@@ -9,14 +9,13 @@ import com.getbewarned.connectinterpreter.interfaces.ConfirmationView;
 import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
+import com.getbewarned.connectinterpreter.interfaces.ProfileReceived;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
-import com.getbewarned.connectinterpreter.managers.ProxyManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
+import com.getbewarned.connectinterpreter.models.ProfileResponse;
 import com.jaredrummler.android.device.DeviceName;
-
-import java.net.ProxySelector;
 
 /**
  * Created by artycake on 1/24/18.
@@ -87,12 +86,7 @@ public class ConfirmationPresenter implements Presenter {
                     userManager.updateFirstTime(response.getFirstTime());
                     userManager.updateUserPhone(response.getUserPhone());
                     userManager.updateUserRegion(response.getRegion());
-
-                    if (name == null || name.isEmpty()) {
-                        view.navigateInputName();
-                    } else {
-                        view.navigateToApp();
-                    }
+                    getProfile();
                 } else {
                     view.showError(response.getMessage(), null);
                     view.toggleEnabledRequestBtn(true);
@@ -103,6 +97,31 @@ public class ConfirmationPresenter implements Presenter {
             public void onErrorReceived(Error error) {
                 view.showError(error.getMessage(), error.getCause());
                 view.toggleEnabledRequestBtn(true);
+            }
+        });
+    }
+
+    private void getProfile() {
+        networkManager.getProfile(new ProfileReceived() {
+            @Override
+            public void onReceived(ProfileResponse response) {
+                ProfileResponse.Profile profile = response.getProfile();
+                userManager.updateUserName(profile.getFirstName());
+                userManager.updateUserLastName(profile.getLastName());
+                userManager.updateUserPatronymic(profile.getPatronymic());
+                userManager.updateUserCountry(profile.getCountry());
+                userManager.updateUserCity(profile.getCity());
+
+                if (profile.getFirstName() == null || profile.getFirstName().isEmpty()) {
+                    view.navigateInputName();
+                } else {
+                    view.navigateToApp();
+                }
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.showError(error.getMessage(), error.getCause());
             }
         });
     }

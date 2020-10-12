@@ -12,13 +12,13 @@ import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
 import com.getbewarned.connectinterpreter.models.NewRequestResponse;
 import com.getbewarned.connectinterpreter.models.NewsResponse;
+import com.getbewarned.connectinterpreter.models.ProfileResponse;
 import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 
-import kotlin.PublishedApi;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -61,25 +61,33 @@ public interface ApiService {
 
     @PUT("api/v3/profile")
     @FormUrlEncoded
-    Call<NameResponse> updateProfile(@Header("X-Interpreter-Client-Token") String authorization,
-                                     @Field("name") String name,
+    Call<ProfileResponse> updateProfile(@Header("X-Interpreter-Client-Token") String authorization,
+                                        @Field("first_name") String firstName,
+                                        @Field("last_name") String lastName,
+                                        @Field("patronymic") String patronymic,
+                                        @Field("country") String country,
+                                        @Field("city") String city,
+                                        @Query("lang") String language);
+
+    @GET("api/v3/profile")
+    Call<ProfileResponse> getProfile(@Header("X-Interpreter-Client-Token") String authorization,
                                      @Query("lang") String language);
 
     @POST("api/v3/compensation")
     @FormUrlEncoded
     Call<ApiResponseBase> updateCompensationInfo(@Header("X-Interpreter-Client-Token") String authorization,
-                                              @Field("first_name") String firstName,
-                                              @Field("last_name") String lastName,
-                                              @Field("patronymic") String patronymic,
-                                              @Field("birthday") String birthday,
-                                              @Field("passport_number_series") String passport,
-                                              @Field("itn") String itn,
-                                              @Field("inila") String inila,
-                                              @Field("city") String city,
-                                              @Field("street") String street,
-                                              @Field("number") String number,
-                                              @Field("apartment") String apartment,
-                                              @Field("postcode") String postcode);
+                                                 @Field("first_name") String firstName,
+                                                 @Field("last_name") String lastName,
+                                                 @Field("patronymic") String patronymic,
+                                                 @Field("birthday") String birthday,
+                                                 @Field("passport_number_series") String passport,
+                                                 @Field("itn") String itn,
+                                                 @Field("inila") String inila,
+                                                 @Field("city") String city,
+                                                 @Field("street") String street,
+                                                 @Field("number") String number,
+                                                 @Field("apartment") String apartment,
+                                                 @Field("postcode") String postcode);
 
     @GET("api/client/availability")
     Call<AvailabilityResponse> updateAvailability(@Header("X-Interpreter-Client-Token") String authorization,

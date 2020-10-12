@@ -1,8 +1,10 @@
 package com.getbewarned.connectinterpreter.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,7 +15,6 @@ import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.EditPersonalInfoView;
-import com.getbewarned.connectinterpreter.presenters.DataStored;
 import com.getbewarned.connectinterpreter.presenters.EditPersonalInfoPresenterV2;
 
 public class EditPersonalInfoActivity extends NoStatusBarActivity implements EditPersonalInfoView {
@@ -92,13 +93,7 @@ public class EditPersonalInfoActivity extends NoStatusBarActivity implements Edi
                             etLastName.getText().toString(),
                             etPatronymicName.getText().toString(),
                             etCountry.getText().toString(),
-                            etCity.getText().toString(),
-                            new DataStored() {
-                                @Override
-                                public void dataStored() {
-                                    finish();
-                                }
-                            });
+                            etCity.getText().toString());
                 }
             }
         });
@@ -135,5 +130,29 @@ public class EditPersonalInfoActivity extends NoStatusBarActivity implements Edi
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void showError(String message) {
+        if (isFinishing()) {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.error_global)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    @Override
+    public void goBack() {
+        finish();
     }
 }
