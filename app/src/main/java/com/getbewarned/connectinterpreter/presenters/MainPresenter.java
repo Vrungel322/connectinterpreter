@@ -108,21 +108,22 @@ public class MainPresenter implements Presenter {
     }
 
     private void checkUtog() {
-        if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
-            return;
-        }
-
-        switch (userManager.getUtogAsk().getStatus()) {
-            case NEVER:
-                return;
-            case LATER:
-                if (new Date().before(userManager.getUtogAsk().getDate())) {
-                    return;
-                }
-            case SHOUD_ASK:
-            default:
-                view.askAboutUtog();
-        }
+//        no need to handle in РЖЯ
+//        if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
+//            return;
+//        }
+//
+//        switch (userManager.getUtogAsk().getStatus()) {
+//            case NEVER:
+//                return;
+//            case LATER:
+//                if (new Date().before(userManager.getUtogAsk().getDate())) {
+//                    return;
+//                }
+//            case SHOUD_ASK:
+//            default:
+//                view.askAboutUtog();
+//        }
     }
 
     public void utogConfirmed() {

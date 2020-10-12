@@ -102,6 +102,7 @@ public class ConfirmationPresenter implements Presenter {
     }
 
     private void getProfile() {
+        networkManager.setAuthToken(userManager.getUserToken());
         networkManager.getProfile(new ProfileReceived() {
             @Override
             public void onReceived(ProfileResponse response) {

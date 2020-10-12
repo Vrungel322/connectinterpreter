@@ -67,11 +67,12 @@
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1" />
 
-            <include
-                layout="@layout/layout_qr"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_columnWeight="1" />
+<!--No need in РЖЯ-->
+<!--            <include-->
+<!--                layout="@layout/layout_qr"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_columnWeight="1" />-->
 
             <include
                 layout="@layout/layout_share"
