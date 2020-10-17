@@ -116,7 +116,7 @@
     <string name="ukraine">Ukraine</string>
     <string name="confirm_phone">Check phone number</string>
     <string name="change_number">Change number</string>
-    <string name="review_title">Please assess the interpreter’s performance</string>
+    <string name="review_title">Please assess the interpreter</string>
     <string name="review_hint">Why was it good or bad?</string>
     <string name="menu_help">Help</string>
     <string name="drawer_subscribe_title">Follow us:</string>
@@ -229,5 +229,6 @@
     <string name="compensation_prepare">Are you ready to provide your details to receive compensation?</string>
     <string name="start">Start</string>
     <string name="please_stay_on_the_line">Please stay on the line while we connect you to an interpreter.</string>
+    <string name="feedback">Feedback on the work of the translator</string>
 
 </resources>

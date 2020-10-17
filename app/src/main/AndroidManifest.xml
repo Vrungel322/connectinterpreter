@@ -157,6 +157,9 @@
             android:name=".ui.WaitCallResponseActivity"
             android:theme="@style/Transparent_Activity" />
         <activity
+            android:name=".ui.RateInterpreterActivity"
+            android:theme="@style/Transparent_Activity" />
+        <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"
             android:screenOrientation="portrait"

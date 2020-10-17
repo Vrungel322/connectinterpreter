@@ -10,10 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
@@ -103,18 +101,8 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
-//                Intent intent = new Intent(NewMainActivity.this, WaitCallResponseActivity.class);
-//                startActivityForResult(intent, WaitCallResponseActivity.RC);
-//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                askAboutLastCall();
 //
-//                help.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        if (WaitCallResponseActivity.activity != null) WaitCallResponseActivity.activity.finish();
-//
-//                    }
-//                }, 3000);
-//                showErrorNewUI("Вам отказано в доступе к услуге за несоответствующее поведениею. Доступ будет востановлен через 1 час 59 минут");
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
@@ -362,28 +350,25 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void askAboutLastCall() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_LoaderDialog);
-        builder.setTitle(R.string.review_title)
-                .setView(R.layout.dialog_rate_call)
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        RatingBar ratingBar = ((AlertDialog) dialogInterface).findViewById(R.id.rating);
-                        EditText review = ((AlertDialog) dialogInterface).findViewById(R.id.review);
-                        presenter.onReview((int) ratingBar.getRating(), review.getText().toString());
-                        dialogInterface.dismiss();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        presenter.onReviewSkipped();
-                        dialogInterface.dismiss();
-                    }
-                })
-                .create()
-                .show();
+        Intent intent = new Intent(NewMainActivity.this, RateInterpreterActivity.class);
+        startActivityForResult(intent, RateInterpreterActivity.RC);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == RateInterpreterActivity.RC) {
+                int stars = data.getIntExtra(RateInterpreterActivity.STARS_KEY, -1);
+                String feedback = data.getStringExtra(RateInterpreterActivity.FEEDBACK_KEY);
+                if (stars != -1 && feedback != null) {
+                    presenter.onReview(stars, feedback);
+                }
+
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

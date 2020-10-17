@@ -289,5 +289,10 @@
         <item name="android:textSize">28sp</item>
     </style>
 
+    <style name="Rate_Bar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/blue_new_ui_40</item>
+        <item name="colorControlActivated">#FDA03A</item>
+    </style>
+
 
 </resources>
