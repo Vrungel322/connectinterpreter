@@ -277,5 +277,12 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="Dialog_Primary_button" parent="Requests_dialog_start_button">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blue_new_ui</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 
 </resources>
