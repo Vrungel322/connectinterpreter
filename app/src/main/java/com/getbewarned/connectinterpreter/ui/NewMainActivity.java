@@ -96,13 +96,14 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
                 // dialog
-//                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
-                askAboutLastCall();
-//
+//                Intent intent = new Intent(NewMainActivity.this, WaitCallResponseActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
@@ -23,6 +27,8 @@ public class WaitCallResponseActivity extends NoStatusBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_for_call_response);
         activity = this;
+
+        animatePhoneIcon();
 
         (findViewById(R.id.tv_calncel)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,5 +67,20 @@ public class WaitCallResponseActivity extends NoStatusBarActivity {
         countDownTimer.cancel();
         countDownTimer = null;
         super.onDestroy();
+    }
+
+    private void animatePhoneIcon() {
+        ImageView big = findViewById(R.id.iv_circle_big);
+        ImageView small = findViewById(R.id.iv_circle_small);
+
+        Animation rotationBig = AnimationUtils.loadAnimation(WaitCallResponseActivity.this, R.anim.rotate_big);
+        rotationBig.setFillAfter(true);
+        rotationBig.setInterpolator(new LinearInterpolator());
+        big.startAnimation(rotationBig);
+
+        Animation rotationSmall = AnimationUtils.loadAnimation(WaitCallResponseActivity.this, R.anim.rotate_small);
+        rotationSmall.setFillAfter(true);
+        rotationSmall.setInterpolator(new LinearInterpolator());
+        small.startAnimation(rotationSmall);
     }
 }

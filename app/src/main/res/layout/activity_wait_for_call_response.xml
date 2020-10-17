@@ -27,7 +27,37 @@
             android:padding="24dp"
             tools:background="#4ADF7171">
 
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_circle_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/iv_circle_big" />
+
+                <ImageView
+                    android:layout_margin="8dp"
+                    android:id="@+id/iv_circle_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/iv_circle_small" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/iv_phone" />
+
+
+            </FrameLayout>
+
             <ImageView
+                android:visibility="gone"
+                android:id="@+id/iv_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_wait_for_call_response" />
@@ -47,9 +77,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_to_title_in_dialog"
+                android:text="@string/please_stay_on_the_line"
                 android:textAlignment="center"
-                android:textColor="@color/blue_new_ui_text"
-                android:text="@string/please_stay_on_the_line" />
+                android:textColor="@color/blue_new_ui_text" />
 
             <TextView
                 android:id="@+id/tv_count_down_timer_to_connect"
