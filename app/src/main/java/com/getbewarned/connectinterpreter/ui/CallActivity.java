@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -101,14 +102,17 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
 
         messagesAdapter = new MessagesAdapter();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        messagesList.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager llManager = new LinearLayoutManager(this, LinearLayout.VERTICAL,true);
+        messagesList.setLayoutManager(llManager);
         messagesList.setAdapter(messagesAdapter);
 
         presenter = new CallPresenter(this);
         presenter.onCreate(getIntent().getExtras());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        showOneMoreMessage("qwer");
+        showOneMoreMessage("qwer1");
+        showOneMoreMessage("qwer2");
 
     }
 
