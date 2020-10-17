@@ -27,6 +27,8 @@ public interface CallView {
 
     void showError(String message);
 
+    void showErrorNewUI(String message);
+
     void navigateBack();
 
     void showSelfView(View view);

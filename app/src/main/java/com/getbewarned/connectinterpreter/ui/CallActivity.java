@@ -30,7 +30,7 @@ import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 
 public class CallActivity extends NoStatusBarActivity implements CallView {
 
-    private Boolean debug = true;
+    private Boolean debug = false;
 
     private FrameLayout selfContainer;
     private FrameLayout interpreterContainer;
@@ -193,6 +193,17 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                     .show();
         }
     }
+
+    @Override
+    public void showErrorNewUI(String message) {
+        if (debug == false) {
+            Intent intent = new Intent(CallActivity.this, ErrorActivity.class);
+            intent.putExtra(ErrorActivity.TEXT_KEY, message);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }
+    }
+
 
     @Override
     public void navigateBack() {

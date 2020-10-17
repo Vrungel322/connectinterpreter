@@ -235,7 +235,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
             return;
         }
         view.hideIndicator();
-        view.showError(opentokError.getMessage());
+        view.showErrorNewUI(opentokError.getMessage());
     }
 
     @Override
@@ -256,7 +256,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
             return;
         }
         view.hideIndicator();
-        view.showError(opentokError.getMessage());
+        view.showErrorNewUI(opentokError.getMessage());
     }
 
     public void sendMessage(final String message) {

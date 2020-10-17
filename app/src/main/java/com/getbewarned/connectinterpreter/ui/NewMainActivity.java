@@ -101,9 +101,6 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
-//                Intent intent = new Intent(NewMainActivity.this, WaitCallResponseActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 navigateToCallWith("","","",1000L);
             }
         });
