@@ -192,7 +192,7 @@
         <item name="android:background">@drawable/circle_call</item>
     </style>
 
-    <style name="HelpActivity" parent="Theme.Transparent">
+    <style name="Transparent_Activity" parent="Theme.Transparent">
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 

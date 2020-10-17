@@ -146,10 +146,13 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.HelpActivity"
-            android:theme="@style/HelpActivity" />
+            android:theme="@style/Transparent_Activity" />
         <activity
             android:name=".ui.requests.HelpRequestActivity"
-            android:theme="@style/HelpActivity" />
+            android:theme="@style/Transparent_Activity" />
+        <activity
+            android:name=".ui.ErrorActivity"
+            android:theme="@style/Transparent_Activity" />
         <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"

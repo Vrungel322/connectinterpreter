@@ -34,7 +34,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
-    private static final String  ZERO_TIME = "00:00";
+    private static final String ZERO_TIME = "00:00";
 
     TextView availabilityTitleLabel;
     TextView tvMinutesExpiration;
@@ -97,9 +97,12 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
                 // dialog
-                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                // stub
+                showErrorNewUI("Вам отказано в доступе к услуге за несоответствующее поведениею. Доступ будет востановлен через 1 час 59 минут");
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
@@ -135,10 +138,10 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void showLeftTime(String leftTime) {
-        if (leftTime.equals(ZERO_TIME)){
-            timer.setTextColor(ContextCompat.getColor(this,R.color.timer_color_with_minutes));
-        }else {
-            timer.setTextColor(ContextCompat.getColor(this,R.color.timer_color_without_minutes));
+        if (leftTime.equals(ZERO_TIME)) {
+            timer.setTextColor(ContextCompat.getColor(this, R.color.timer_color_with_minutes));
+        } else {
+            timer.setTextColor(ContextCompat.getColor(this, R.color.timer_color_without_minutes));
         }
 
         timer.setText(leftTime);
@@ -184,6 +187,14 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 })
                 .create()
                 .show();
+    }
+
+    @Override
+    public void showErrorNewUI(String message) {
+        Intent intent = new Intent(NewMainActivity.this, ErrorActivity.class);
+        intent.putExtra(ErrorActivity.TEXT_KEY, message);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
     @AfterPermissionGranted(RC_VIDEO_APP_PERM)

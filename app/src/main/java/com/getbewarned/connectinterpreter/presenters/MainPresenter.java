@@ -196,7 +196,7 @@ public class MainPresenter implements Presenter {
 
             @Override
             public void onErrorReceived(Error error) {
-                view.showError(error.getMessage());
+                view.showErrorNewUI(error.getMessage());
             }
         });
 
@@ -218,7 +218,7 @@ public class MainPresenter implements Presenter {
             @Override
             public void onErrorReceived(Error error) {
                 callInitiated = false;
-                view.showError(error.getMessage());
+                view.showErrorNewUI(error.getMessage());
             }
         });
     }
