@@ -8,10 +8,13 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,7 +26,9 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.daimajia.androidanimations.library.Techniques;
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
 import com.getbewarned.connectinterpreter.interfaces.CallView;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
@@ -31,6 +36,8 @@ import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 public class CallActivity extends NoStatusBarActivity implements CallView {
 
     private Boolean debug = false;
+    private Boolean useCountDownTimer = false;
+    private static final Long CHAT_ANIM_DURATION = 500L;
 
     private FrameLayout selfContainer;
     private FrameLayout interpreterContainer;
@@ -49,6 +56,8 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     private AudioManager audioManager;
     private int volume;
     private int streamType = AudioManager.STREAM_VOICE_CALL;
+
+    private CountDownTimer timerForChatGone;
 
 
     @Override
@@ -97,6 +106,31 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                 return true;
             }
         });
+        if (useCountDownTimer) {
+            messageField.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (s.toString().isEmpty()) {
+                        launchChatVisibilityCountDownTimer();
+                    } else {
+                        if (messagesList.getVisibility() != View.VISIBLE) {
+                            UiUtils.showAnimated(messagesList, Techniques.FadeIn, CHAT_ANIM_DURATION);
+                        }
+
+                    }
+                }
+            });
+        }
 
         this.audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
@@ -110,8 +144,10 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
         presenter.onCreate(getIntent().getExtras());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        for (int i = 0; i < 20; i++) {
-            showOneMoreMessage("Some message to interpreter " + i);
+        if (debug) {
+            for (int i = 0; i < 20; i++) {
+                showOneMoreMessage("Some message to interpreter " + i);
+            }
         }
     }
 
@@ -242,6 +278,9 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     @Override
     public void showOneMoreMessage(String message) {
         messagesAdapter.addMessage(message);
+        if (useCountDownTimer) {
+            launchChatVisibilityCountDownTimer();
+        }
     }
 
 
@@ -311,5 +350,22 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     @Override
     public void resetVolume() {
         audioManager.setStreamVolume(streamType, volume, 0);
+    }
+
+    private void launchChatVisibilityCountDownTimer() {
+        if (timerForChatGone != null) {
+            timerForChatGone.cancel();
+            timerForChatGone = null;
+        }
+        timerForChatGone = new CountDownTimer(5 * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                UiUtils.hideAnimated(messagesList, Techniques.FadeOut, CHAT_ANIM_DURATION);
+            }
+        }.start();
     }
 }

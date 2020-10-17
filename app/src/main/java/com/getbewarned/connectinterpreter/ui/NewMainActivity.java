@@ -101,7 +101,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
-                navigateToCallWith("","","",1000L);
+                navigateToCallWith("","","",300L);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {

@@ -116,6 +116,7 @@
             style="@style/EditText_rounded"
             android:layout_width="0dp"
             android:layout_height="45dp"
+            android:inputType="text"
             android:elevation="1dp"
             android:hint="@string/call_chat_hint"
             app:layout_constraintEnd_toEndOf="parent"
