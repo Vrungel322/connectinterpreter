@@ -1,15 +1,17 @@
 package com.getbewarned.connectinterpreter.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -41,7 +43,6 @@ public class CallActivity extends AppCompatActivity implements CallView {
     private CallPresenter presenter;
 
     private MessagesAdapter messagesAdapter;
-    private ProgressDialog loadingDialog;
     private AlertDialog videoDialog;
 
     private AudioManager audioManager;
@@ -142,31 +143,25 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
     @Override
     public void showIndicator() {
-        if (loadingDialog == null) {
-            loadingDialog = new ProgressDialog(this, R.style.AppTheme_LoaderDialog);
-            loadingDialog.setCancelable(false);
-            loadingDialog.setButton(
-                    DialogInterface.BUTTON_NEGATIVE,
-                    getResources().getString(R.string.cancel),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            presenter.endCall();
-                            dialog.dismiss();
-                        }
-                    }
-            );
-            loadingDialog.setTitle(getString(R.string.video_call_waiting_title));
-            loadingDialog.setMessage(getString(R.string.video_call_waiting_text));
-            loadingDialog.show();
+        Intent intent = new Intent(CallActivity.this, WaitCallResponseActivity.class);
+        startActivityForResult(intent, WaitCallResponseActivity.RC);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == WaitCallResponseActivity.RC) {
+                presenter.endCall(); // case when user tap "Cancel" in WaitCallResponseActivity
+            }
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void hideIndicator() {
-        if (loadingDialog != null) {
-            loadingDialog.dismiss();
-            loadingDialog = null;
+        if (WaitCallResponseActivity.activity != null) {
+            WaitCallResponseActivity.activity.finish();
         }
     }
 

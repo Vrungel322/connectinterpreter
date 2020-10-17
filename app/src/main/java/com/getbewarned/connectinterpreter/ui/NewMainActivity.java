@@ -1,6 +1,7 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -97,13 +98,13 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
                 // dialog
-                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
 //                Intent intent = new Intent(NewMainActivity.this, WaitCallResponseActivity.class);
-//                startActivity(intent);
+//                startActivityForResult(intent, WaitCallResponseActivity.RC);
 //                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 //
 //                help.postDelayed(new Runnable() {

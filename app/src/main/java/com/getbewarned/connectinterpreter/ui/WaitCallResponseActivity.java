@@ -27,7 +27,7 @@ public class WaitCallResponseActivity extends NoStatusBarActivity {
         (findViewById(R.id.tv_calncel)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(Activity.RESULT_CANCELED);
+                setResult(Activity.RESULT_OK);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
@@ -58,6 +58,8 @@ public class WaitCallResponseActivity extends NoStatusBarActivity {
     @Override
     protected void onDestroy() {
         activity = null;
+        countDownTimer.cancel();
+        countDownTimer = null;
         super.onDestroy();
     }
 }
