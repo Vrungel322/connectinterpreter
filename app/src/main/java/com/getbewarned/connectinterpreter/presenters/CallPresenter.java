@@ -42,7 +42,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     private Publisher publisher;
     private Subscriber subscriber;
 
-    private boolean answered = false;
+    public boolean answered = false;
     private CountDownTimer countDownTimer;
     private boolean ended = false;
 

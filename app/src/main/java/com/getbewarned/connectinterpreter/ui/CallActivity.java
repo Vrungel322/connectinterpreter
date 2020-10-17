@@ -187,7 +187,7 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     public void showIndicator(Long pleaseWaiteVideoDelayMillis) {
         if (debug == false) {
             Intent intent = new Intent(CallActivity.this, WaitCallResponseActivity.class);
-            intent.putExtra(WaitCallResponseActivity.MILLIS_KEY_LONG,pleaseWaiteVideoDelayMillis);
+            intent.putExtra(WaitCallResponseActivity.MILLIS_KEY_LONG, pleaseWaiteVideoDelayMillis);
             startActivityForResult(intent, WaitCallResponseActivity.RC);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }
@@ -327,8 +327,10 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         videoDialog.dismiss();
-                        showIndicator(CallPresenter.PLEASE_WAITE_VIDEO_DELAY_MILLIS);
-                        presenter.initVideoShowing();
+                        if (!presenter.answered) {
+                            showIndicator(CallPresenter.PLEASE_WAITE_VIDEO_DELAY_MILLIS);
+                            presenter.initVideoShowing();
+                        }
                     }
                 });
             }
