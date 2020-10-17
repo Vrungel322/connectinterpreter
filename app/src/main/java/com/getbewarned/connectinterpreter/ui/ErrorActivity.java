@@ -6,6 +6,10 @@ import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
 
+/**
+ * income:
+ * [TEXT_KEY] - error message
+ */
 public class ErrorActivity extends NoStatusBarActivity {
      static final String TEXT_KEY = "307";
 

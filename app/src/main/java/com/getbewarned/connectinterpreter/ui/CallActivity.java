@@ -187,6 +187,7 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     public void showIndicator() {
         if (debug == false) {
             Intent intent = new Intent(CallActivity.this, WaitCallResponseActivity.class);
+//            intent.putExtra(WaitCallResponseActivity.MILLIS_KEY_LONG,3000L);
             startActivityForResult(intent, WaitCallResponseActivity.RC);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }

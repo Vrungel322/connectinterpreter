@@ -13,12 +13,20 @@ import android.widget.TextView;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.models.HumanTime;
 
+/**
+ * income:
+ * [MILLIS_KEY] - Long - def. value = 5 * 60 * 1000L - millisecons for count down timer
+ * <p>
+ * NOTE:
+ * If user tap on "Cancel" button - Activity.RESULT_OK will be send.
+ */
 public class WaitCallResponseActivity extends NoStatusBarActivity {
     static final int RC = 999;
+    static final String MILLIS_KEY_LONG = "159";
 
     static Activity activity = null;
 
-    private final Long leftTime = 5 * 60 * 1000L; // min * sec * millis
+    private Long leftTime;
 
     private CountDownTimer countDownTimer;
 
@@ -27,10 +35,11 @@ public class WaitCallResponseActivity extends NoStatusBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_for_call_response);
         activity = this;
+        leftTime = getIntent().getLongExtra(MILLIS_KEY_LONG, 5 * 60 * 1000L); // min * sec * millis
 
         animatePhoneIcon();
 
-        (findViewById(R.id.tv_calncel)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.tv_cancel)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(Activity.RESULT_OK);
@@ -64,8 +73,10 @@ public class WaitCallResponseActivity extends NoStatusBarActivity {
     @Override
     protected void onDestroy() {
         activity = null;
-        countDownTimer.cancel();
-        countDownTimer = null;
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
         super.onDestroy();
     }
 
