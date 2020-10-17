@@ -1,7 +1,6 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -30,7 +28,9 @@ import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
 import com.getbewarned.connectinterpreter.interfaces.CallView;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 
-public class CallActivity extends AppCompatActivity implements CallView {
+public class CallActivity extends NoStatusBarActivity implements CallView {
+
+    private Boolean debug = true;
 
     private FrameLayout selfContainer;
     private FrameLayout interpreterContainer;
@@ -102,7 +102,7 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
 
         messagesAdapter = new MessagesAdapter();
-        LinearLayoutManager llManager = new LinearLayoutManager(this, LinearLayout.VERTICAL,true);
+        LinearLayoutManager llManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, true);
         messagesList.setLayoutManager(llManager);
         messagesList.setAdapter(messagesAdapter);
 
@@ -110,10 +110,9 @@ public class CallActivity extends AppCompatActivity implements CallView {
         presenter.onCreate(getIntent().getExtras());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        showOneMoreMessage("qwer");
-        showOneMoreMessage("qwer1");
-        showOneMoreMessage("qwer2");
-
+        for (int i = 0; i < 20; i++) {
+            showOneMoreMessage("Some message to interpreter " + i);
+        }
     }
 
     private void sendMessage() {
@@ -143,13 +142,18 @@ public class CallActivity extends AppCompatActivity implements CallView {
         } else {
             endCallButton.setVisibility(View.INVISIBLE);
         }
+        if (debug) {
+            endCallButton.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void showIndicator() {
-        Intent intent = new Intent(CallActivity.this, WaitCallResponseActivity.class);
-        startActivityForResult(intent, WaitCallResponseActivity.RC);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        if (debug == false) {
+            Intent intent = new Intent(CallActivity.this, WaitCallResponseActivity.class);
+            startActivityForResult(intent, WaitCallResponseActivity.RC);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }
     }
 
     @Override
@@ -171,21 +175,23 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
     @Override
     public void showError(String message) {
-        if (isFinishing()) {
-            return;
+        if (debug == false) {
+            if (isFinishing()) {
+                return;
+            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.error_call_failed)
+                    .setMessage(R.string.err_call_try_later)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            navigateBack();
+                        }
+                    })
+                    .create()
+                    .show();
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.error_call_failed)
-                .setMessage(R.string.err_call_try_later)
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        navigateBack();
-                    }
-                })
-                .create()
-                .show();
     }
 
     @Override
@@ -230,50 +236,52 @@ public class CallActivity extends AppCompatActivity implements CallView {
 
     @Override
     public void showWaitVideo() {
-        if (isFinishing()) {
-            return;
-        }
-        if (videoDialog == null) {
-            final VideoView videoView = new VideoView(this);
-            videoView.setMediaController(new MediaController(this));
-            final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
-            videoDialog = new AlertDialog.Builder(this)
-                    .setView(videoView)
-                    .setCancelable(false)
-                    .setNegativeButton(
-                            getResources().getString(R.string.cancel),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    presenter.endCall();
-                                    dialog.dismiss();
+        if (debug == false) {
+            if (isFinishing()) {
+                return;
+            }
+            if (videoDialog == null) {
+                final VideoView videoView = new VideoView(this);
+                videoView.setMediaController(new MediaController(this));
+                final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
+                videoDialog = new AlertDialog.Builder(this)
+                        .setView(videoView)
+                        .setCancelable(false)
+                        .setNegativeButton(
+                                getResources().getString(R.string.cancel),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        presenter.endCall();
+                                        dialog.dismiss();
+                                    }
                                 }
-                            }
-                    )
-                    .create();
-            videoDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface dialog) {
-                    videoView.setVideoURI(video);
-                    videoView.start();
-                }
-            });
+                        )
+                        .create();
+                videoDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        videoView.setVideoURI(video);
+                        videoView.start();
+                    }
+                });
 
-            videoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    videoView.stopPlayback();
-                }
-            });
-            videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    videoDialog.dismiss();
-                    showIndicator();
-                }
-            });
+                videoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        videoView.stopPlayback();
+                    }
+                });
+                videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        videoDialog.dismiss();
+                        showIndicator();
+                    }
+                });
+            }
+            videoDialog.show();
         }
-        videoDialog.show();
     }
 
     @Override
