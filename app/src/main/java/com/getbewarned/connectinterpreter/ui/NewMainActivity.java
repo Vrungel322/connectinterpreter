@@ -97,12 +97,12 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
                 // dialog
-//                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
-                showErrorNewUI("Вам отказано в доступе к услуге за несоответствующее поведениею. Доступ будет востановлен через 1 час 59 минут");
+//                showErrorNewUI("Вам отказано в доступе к услуге за несоответствующее поведениею. Доступ будет востановлен через 1 час 59 минут");
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
