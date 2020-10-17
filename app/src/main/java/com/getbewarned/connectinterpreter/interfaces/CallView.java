@@ -17,7 +17,7 @@ public interface CallView {
 
     void toggleEndCallButtonVisibility(boolean visible);
 
-    void showIndicator();
+    void showIndicator(Long pleaseWaiteVideoDelayMillis);
 
     void showWaitVideo();
 

@@ -1,7 +1,5 @@
 package com.getbewarned.connectinterpreter.presenters;
 
-import android.content.Context;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -14,7 +12,6 @@ import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.HumanTime;
-import com.opentok.android.AudioDeviceManager;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Publisher;
 import com.opentok.android.PublisherKit;
@@ -22,15 +19,6 @@ import com.opentok.android.Session;
 import com.opentok.android.Stream;
 import com.opentok.android.Subscriber;
 import com.opentok.android.SubscriberKit;
-import com.opentok.jni.ProxyDetector;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.ProxySelector;
-import java.net.SocketAddress;
-import java.net.URI;
-import java.util.List;
 
 
 /**
@@ -43,6 +31,8 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     public static final String SESSION_EXTRA = "CallPresenter.session_id";
     public static final String KEY_EXTRA = "CallPresenter.api_key";
     public static final String SECONDS_EXTRA = "CallPresenter.max_seconds";
+
+    public static final Long PLEASE_WAITE_VIDEO_DELAY_MILLIS = 11 * 1000L;
 
     private CallView view;
     private UserManager userManager;
@@ -78,8 +68,8 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     public void onCreate(Bundle extras) {
         view.toggleEndCallButtonVisibility(false);
         view.updateCurrentCallDuration("00:00");
-        view.showIndicator();
-        initVideoShowing(10);
+        view.showIndicator(PLEASE_WAITE_VIDEO_DELAY_MILLIS);
+        initVideoShowing();
         apiKey = extras.getString(KEY_EXTRA);
         sessionId = extras.getString(SESSION_EXTRA);
         token = extras.getString(TOKEN_EXTRA);
@@ -91,7 +81,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     }
 
-    private void initVideoShowing(int seconds) {
+    public void initVideoShowing() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -100,9 +90,8 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
                 }
                 view.hideIndicator();
                 view.showWaitVideo();
-                initVideoShowing(15);
             }
-        }, seconds * 1000);
+        }, PLEASE_WAITE_VIDEO_DELAY_MILLIS);
     }
 
 

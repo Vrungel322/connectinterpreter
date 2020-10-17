@@ -54,9 +54,9 @@
             <TextView
                 android:id="@+id/tv_ok_error"
                 style="@style/Dialog_Primary_button_blue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/margin_top_to_body_in_dialog"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_to_body_in_dialog"
                 android:text="@string/ok" />
 
         </LinearLayout>
