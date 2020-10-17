@@ -202,6 +202,7 @@
     <string name="compensation_prepare">Готовы ли вы предоставить свои данные для получения компенсации?</string>
     <string name="start">" Начать"</string>
     <string name="action_requests">Текст-Видео\nПеревод</string>
+    <string name="please_stay_on_the_line">Пожалуйста, оставайтесь на линии пока мы соединяем вас с переводчиком.</string>
 
 </resources>
 

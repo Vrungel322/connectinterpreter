@@ -270,18 +270,23 @@
         <item name="android:fontFamily">@font/font_open_sans_semi_bold</item>
     </style>
 
-    <style name="Requests_dialog_start_button" parent="Text_default">
+    <style name="Dialog_Primary_button_red" parent="Text_default">
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/red_new_ui</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="Dialog_Primary_button" parent="Requests_dialog_start_button">
+    <style name="Dialog_Primary_button_blue" parent="Dialog_Primary_button_red">
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/blue_new_ui</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Timer_to_connect_interpreter" parent="Main_timer_time">
+        <item name="android:textColor">@color/blue_new_ui</item>
+        <item name="android:textSize">28sp</item>
     </style>
 
 

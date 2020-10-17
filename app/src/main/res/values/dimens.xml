@@ -14,6 +14,10 @@
     <dimen name="compensation_message_bottom_margin">100dp</dimen>
     <dimen name="default_side_margins">16dp</dimen>
     <dimen name="compensation_message_margin">36dp</dimen>
+    <dimen name="margin_top_to_icon_in_dialog">24dp</dimen>
+    <dimen name="margin_top_to_title_in_dialog">16dp</dimen>
+    <dimen name="margin_top_to_body_in_dialog">16dp</dimen>
+    <dimen name="default_dialog_width">330dp</dimen>
 
     <!--    helps to make image in fab larger-->
 <!--    <dimen name="design_fab_image_size" tools:override="true">56dp</dimen>-->

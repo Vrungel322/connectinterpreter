@@ -34,7 +34,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
-    private static final String ZERO_TIME = "00:00";
+    static final String ZERO_TIME = "00:00";
 
     TextView availabilityTitleLabel;
     TextView tvMinutesExpiration;
@@ -102,6 +102,17 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 // stub
+//                Intent intent = new Intent(NewMainActivity.this, WaitCallResponseActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//
+//                help.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (WaitCallResponseActivity.activity != null) WaitCallResponseActivity.activity.finish();
+//
+//                    }
+//                }, 3000);
 //                showErrorNewUI("Вам отказано в доступе к услуге за несоответствующее поведениею. Доступ будет востановлен через 1 час 59 минут");
             }
         });

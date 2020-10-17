@@ -228,5 +228,6 @@
     <string name="yes">Yes</string>
     <string name="compensation_prepare">Are you ready to provide your details to receive compensation?</string>
     <string name="start">Start</string>
+    <string name="please_stay_on_the_line">Please stay on the line while we connect you to an interpreter.</string>
 
 </resources>
