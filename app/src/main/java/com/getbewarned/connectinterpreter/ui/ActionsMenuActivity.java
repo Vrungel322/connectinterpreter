@@ -57,13 +57,13 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
                 startActivity(intent);
             }
         });
-        findViewById(R.id.cl_qr).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActionsMenuActivity.this, QrScannerActivity.class);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.cl_qr).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ActionsMenuActivity.this, QrScannerActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         findViewById(R.id.cl_share).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +80,8 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
         UiUtils.actionActionsScreen(findViewById(R.id.iv_requests));
         UiUtils.actionActionsScreen(findViewById(R.id.iv_help));
         UiUtils.actionActionsScreen(findViewById(R.id.iv_news));
-        UiUtils.actionActionsScreen(findViewById(R.id.iv_qr));
         UiUtils.actionActionsScreen(findViewById(R.id.iv_share));
+//        UiUtils.actionActionsScreen(findViewById(R.id.iv_qr));
 
     }
 

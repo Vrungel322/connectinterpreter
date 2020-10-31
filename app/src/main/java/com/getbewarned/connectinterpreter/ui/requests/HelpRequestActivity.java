@@ -29,7 +29,7 @@ public class HelpRequestActivity extends NoStatusBarActivity {
         super.onStart();
         final VideoView videoView = findViewById(R.id.vv_help_requests);
         videoView.setMediaController(new MediaController(this));
-        final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
+        final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.text_video_translate);
         videoView.setVideoURI(video);
         videoView.start();
     }

@@ -114,7 +114,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     }
 
     private void setupVideo() {
-        final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
+        final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tariff);
         videoView = findViewById(R.id.vv_purchse);
         ivPlayingVideo = findViewById(R.id.iv_play);
 
@@ -128,7 +128,6 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
             videoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
                 @Override
                 public boolean onInfo(MediaPlayer mp, int what, int extra) {
-
                     if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
                         ivPlayingVideo.setVisibility(View.GONE);
                         return true;
@@ -141,6 +140,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         ivPlayingVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivPlayingVideo.setVisibility(View.GONE);
                 if (!videoView.isPlaying()) videoView.start();
             }
         });

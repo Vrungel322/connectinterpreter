@@ -12,6 +12,8 @@ import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.SplashView;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.SplashPresenter;
+import com.getbewarned.connectinterpreter.ui.compensation.CompensationActivity;
+import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
@@ -51,7 +53,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     public void navigateToApp() {
-        Intent intent = new Intent(this, NameInputActivity.class);
+        Intent intent = new Intent(this, NewMainActivity.class);
         startActivity(intent);
         finish();
     }

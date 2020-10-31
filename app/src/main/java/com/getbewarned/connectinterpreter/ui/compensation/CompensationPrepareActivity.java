@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.getbewarned.connectinterpreter.R;
@@ -41,8 +42,9 @@ public class CompensationPrepareActivity extends NoStatusBarActivity {
             }
         });
 
-        videoView = findViewById(R.id.vv_prepare);
-        final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
+        videoView = findViewById(R.id.video_view);
+        videoView.setMediaController(new MediaController(this));
+        final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.intro_compensation);
         videoView.setVideoURI(video);
 
     }

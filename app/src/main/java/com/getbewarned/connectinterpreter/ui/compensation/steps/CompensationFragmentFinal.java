@@ -24,9 +24,9 @@ public class CompensationFragmentFinal extends BaseCompensationStep {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        vvCompensationFinal = view.findViewById(R.id.vv_compensation_final);
+        vvCompensationFinal = view.findViewById(R.id.video_view);
 
-        final Uri video = Uri.parse("android.resource://" + getContext().getPackageName() + "/" + R.raw.please_wait);
+        final Uri video = Uri.parse("android.resource://" + getContext().getPackageName() + "/" + R.raw.final_compensation);
         vvCompensationFinal.setVideoURI(video);
     }
 
