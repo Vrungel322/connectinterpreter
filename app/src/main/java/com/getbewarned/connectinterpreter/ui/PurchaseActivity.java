@@ -1,6 +1,7 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -17,15 +18,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.presenters.PurchasePresenter;
 
+import java.math.BigDecimal;
+import java.util.Currency;
+
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import ru.yandex.money.android.sdk.Amount;
+import ru.yandex.money.android.sdk.Checkout;
+import ru.yandex.money.android.sdk.PaymentParameters;
+import ru.yandex.money.android.sdk.SavePaymentMethod;
+import ru.yandex.money.android.sdk.TokenizationResult;
 
 public class PurchaseActivity extends NoStatusBarActivity implements PurchaseView {
 
     private static final int RC_PHONE_STATE_PERM = 483;
+    private static final int REQUEST_CODE_TOKENIZE = 125;
 
     private VideoView videoView;
     private ImageView ivPlayingVideo;
@@ -44,7 +55,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
 
         // toolbar
         ((TextView) findViewById(R.id.tv_toolbar_title)).setText(R.string.tariff_choose);
-        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -111,6 +122,37 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
             presenter.startLiqPayPurchaseFlow();
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.permission_rationale_liqpay), RC_PHONE_STATE_PERM, perms);
+        }
+    }
+
+    public void continueCheckout(String item, String itemDescription, float price, String currency) {
+        PaymentParameters paymentParameters = new PaymentParameters(
+                new Amount(BigDecimal.valueOf(price), Currency.getInstance(currency)),
+                item,
+                itemDescription,
+                YandexKassaDataHolder.getClientApplicationKey(),
+                YandexKassaDataHolder.getShopId(),
+                SavePaymentMethod.OFF
+        );
+        Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
+        startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_TOKENIZE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    // successful tokenization
+                    TokenizationResult result = Checkout.createTokenizationResult(data);
+                    //todo continue
+                    break;
+                case RESULT_CANCELED:
+                    // user canceled tokenization
+                    break;
+            }
         }
     }
 
