@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -35,13 +36,13 @@ import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 
 public class CallActivity extends NoStatusBarActivity implements CallView {
 
-    private Boolean debug = false;
-    private Boolean useCountDownTimer = false;
+    private Boolean debug = true;
+    private Boolean useCountDownTimer = true;
     private static final Long CHAT_ANIM_DURATION = 500L;
 
     private FrameLayout selfContainer;
     private FrameLayout interpreterContainer;
-    private ImageButton endCallButton;
+    private ImageView endCallButton;
     private TextView timeLeft;
     private TextView duration;
     private RecyclerView messagesList;
@@ -149,6 +150,8 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                 showOneMoreMessage("Some message to interpreter " + i);
             }
         }
+        UiUtils.shadow(endCallButton, 24, 1.2f, 0.5f);
+
     }
 
     private void sendMessage() {

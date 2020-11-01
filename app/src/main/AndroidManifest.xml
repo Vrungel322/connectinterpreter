@@ -24,6 +24,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.CallActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ui.SplashActivity"
