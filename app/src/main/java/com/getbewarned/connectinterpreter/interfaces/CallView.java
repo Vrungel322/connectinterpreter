@@ -17,15 +17,13 @@ public interface CallView {
 
     void toggleEndCallButtonVisibility(boolean visible);
 
-    void showIndicator();
-
-    void showWaitVideo();
-
-    void hideWaitVideo();
+    void showIndicator(Long pleaseWaiteVideoDelayMillis);
 
     void hideIndicator();
 
     void showError(String message);
+
+    void showErrorNewUI(String message);
 
     void navigateBack();
 

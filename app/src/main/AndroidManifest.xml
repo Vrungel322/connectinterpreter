@@ -24,6 +24,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.CallActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ui.SplashActivity"
@@ -146,10 +147,19 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.HelpActivity"
-            android:theme="@style/HelpActivity" />
+            android:theme="@style/Transparent_Activity" />
         <activity
             android:name=".ui.requests.HelpRequestActivity"
-            android:theme="@style/HelpActivity" />
+            android:theme="@style/Transparent_Activity" />
+        <activity
+            android:name=".ui.ErrorActivity"
+            android:theme="@style/Transparent_Activity" />
+        <activity
+            android:name=".ui.WaitCallResponseActivity"
+            android:theme="@style/Transparent_Activity" />
+        <activity
+            android:name=".ui.RateInterpreterActivity"
+            android:theme="@style/Transparent_Activity" />
         <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"

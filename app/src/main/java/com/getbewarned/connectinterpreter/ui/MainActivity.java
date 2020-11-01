@@ -188,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements MainView, Navigat
     }
 
     @Override
+    public void showErrorNewUI(String message) {
+
+    }
+
+    @Override
     public void askAboutUtog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.utog_alert_title)

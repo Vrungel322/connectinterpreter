@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="@dimen/default_dialog_width"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            tools:background="#4ADF7171">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_circle_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/iv_circle_big" />
+
+                <ImageView
+                    android:layout_margin="8dp"
+                    android:id="@+id/iv_circle_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/iv_circle_small" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/iv_phone" />
+
+
+            </FrameLayout>
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/iv_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_wait_for_call_response" />
+
+            <TextView
+                style="@style/Action_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/video_call_waiting_title"
+                android:textColor="@color/blue_new_ui_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_error_message"
+                style="@style/Text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_to_title_in_dialog"
+                android:text="@string/please_stay_on_the_line"
+                android:textAlignment="center"
+                android:textColor="@color/blue_new_ui_text" />
+
+            <TextView
+                android:id="@+id/tv_count_down_timer_to_connect"
+                style="@style/Timer_to_connect_interpreter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_to_body_in_dialog"
+                android:text="5:59" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                style="@style/Dialog_Primary_button_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/cancel" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>

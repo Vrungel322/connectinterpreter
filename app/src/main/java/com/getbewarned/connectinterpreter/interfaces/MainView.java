@@ -21,6 +21,8 @@ public interface MainView {
 
     void showError(String message);
 
+    void showErrorNewUI(String message);
+
     void requestPermissions();
 
     void requestLiqPayPermissions();

@@ -1,6 +1,7 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
@@ -34,7 +33,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
-    private static final String  ZERO_TIME = "00:00";
+    static final String ZERO_TIME = "00:00";
 
     TextView availabilityTitleLabel;
     TextView tvMinutesExpiration;
@@ -89,10 +88,12 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // dialog
                 Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                // stub
+//                navigateToCallWith("","","",300L);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +129,10 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void showLeftTime(String leftTime) {
-        if (leftTime.equals(ZERO_TIME)){
-            timer.setTextColor(ContextCompat.getColor(this,R.color.timer_color_with_minutes));
-        }else {
-            timer.setTextColor(ContextCompat.getColor(this,R.color.timer_color_without_minutes));
+        if (leftTime.equals(ZERO_TIME)) {
+            timer.setTextColor(ContextCompat.getColor(this, R.color.timer_color_with_minutes));
+        } else {
+            timer.setTextColor(ContextCompat.getColor(this, R.color.timer_color_without_minutes));
         }
 
         timer.setText(leftTime);
@@ -177,6 +178,14 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
                 })
                 .create()
                 .show();
+    }
+
+    @Override
+    public void showErrorNewUI(String message) {
+        Intent intent = new Intent(NewMainActivity.this, ErrorActivity.class);
+        intent.putExtra(ErrorActivity.TEXT_KEY, message);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
     @AfterPermissionGranted(RC_VIDEO_APP_PERM)
@@ -332,28 +341,25 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void askAboutLastCall() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppTheme_LoaderDialog);
-        builder.setTitle(R.string.review_title)
-                .setView(R.layout.dialog_rate_call)
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        RatingBar ratingBar = ((AlertDialog) dialogInterface).findViewById(R.id.rating);
-                        EditText review = ((AlertDialog) dialogInterface).findViewById(R.id.review);
-                        presenter.onReview((int) ratingBar.getRating(), review.getText().toString());
-                        dialogInterface.dismiss();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        presenter.onReviewSkipped();
-                        dialogInterface.dismiss();
-                    }
-                })
-                .create()
-                .show();
+        Intent intent = new Intent(NewMainActivity.this, RateInterpreterActivity.class);
+        startActivityForResult(intent, RateInterpreterActivity.RC);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == RateInterpreterActivity.RC) {
+                int stars = data.getIntExtra(RateInterpreterActivity.STARS_KEY, -1);
+                String feedback = data.getStringExtra(RateInterpreterActivity.FEEDBACK_KEY);
+                if (stars != -1 && feedback != null) {
+                    presenter.onReview(stars, feedback);
+                }
+
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

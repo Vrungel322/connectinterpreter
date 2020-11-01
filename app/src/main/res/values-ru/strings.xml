@@ -91,7 +91,7 @@
     <string name="ukraine">Украина</string>
     <string name="confirm_phone">Проверьте номер телефона</string>
     <string name="change_number">Изменить номер</string>
-    <string name="review_title">Оцените работу переводчика</string>
+    <string name="review_title">Оцените переводчика</string>
     <string name="review_hint">Что понравилось/не понравилось?</string>
     <string name="menu_help">Help</string>
     <string name="drawer_subscribe_title">Подписывайтесь на нас:</string>
@@ -202,6 +202,8 @@
     <string name="compensation_prepare">Готовы ли вы предоставить свои данные для получения компенсации?</string>
     <string name="start">" Начать"</string>
     <string name="action_requests">Текст-Видео\nПеревод</string>
+    <string name="please_stay_on_the_line">Пожалуйста, оставайтесь на линии пока мы соединяем вас с переводчиком.</string>
+    <string name="feedback">Отзыв о работе переводчика</string>
 
 </resources>
 
