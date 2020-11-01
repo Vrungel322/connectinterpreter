@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -17,6 +16,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.LoginView;
@@ -60,8 +61,8 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
             public void onClick(View view) {
                 if (continueBtn.isActivated()) {
 //                    String phone = "+7" + phoneField.getText().toString();
-//                    String phone = "+380661805980";
-                    String phone = "+380689647569";
+                    String phone = "+380661805980";
+//                    String phone = "+380689647569";
                     presenter.continuePressed(phone, acceptCheck.isChecked());
                 }
             }

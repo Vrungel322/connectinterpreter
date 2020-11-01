@@ -5,15 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.SplashView;
-import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 import com.getbewarned.connectinterpreter.presenters.SplashPresenter;
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationActivity;
-import com.getbewarned.connectinterpreter.ui.compensation.CompensationPrepareActivity;
 
 
 public class SplashActivity extends AppCompatActivity implements SplashView {

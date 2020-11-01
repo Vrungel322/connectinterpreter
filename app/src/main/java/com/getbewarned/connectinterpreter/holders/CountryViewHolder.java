@@ -1,8 +1,9 @@
 package com.getbewarned.connectinterpreter.holders;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.models.Country;
@@ -13,8 +14,8 @@ import com.getbewarned.connectinterpreter.models.Country;
 
 public class CountryViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView countryName;
-    private TextView phoneCode;
+    private final TextView countryName;
+    private final TextView phoneCode;
 
     public CountryViewHolder(View itemView) {
         super(itemView);

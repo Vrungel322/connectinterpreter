@@ -1,14 +1,13 @@
 package com.getbewarned.connectinterpreter.ui.compensation.steps;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.ui.compensation.BaseCompensationStep;

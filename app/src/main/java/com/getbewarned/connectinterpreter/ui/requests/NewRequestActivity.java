@@ -3,10 +3,9 @@ package com.getbewarned.connectinterpreter.ui.requests;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
@@ -27,13 +26,13 @@ public class NewRequestActivity extends NoStatusBarActivity implements NewReques
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_request_activity);
 
-        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        ImageView image = ((ImageView) findViewById(R.id.iv_image_request));
+        ImageView image = findViewById(R.id.iv_image_request);
         image.setImageBitmap(RequestBitmapHolder.bitmap);
 
         findViewById(R.id.b_send_request).setOnClickListener(new View.OnClickListener() {

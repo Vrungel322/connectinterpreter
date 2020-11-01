@@ -1,17 +1,14 @@
 package com.getbewarned.connectinterpreter.holders;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.models.News;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
     TextView title;
