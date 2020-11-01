@@ -19,10 +19,6 @@ public interface CallView {
 
     void showIndicator(Long pleaseWaiteVideoDelayMillis);
 
-    void showWaitVideo();
-
-    void hideWaitVideo();
-
     void hideIndicator();
 
     void showError(String message);

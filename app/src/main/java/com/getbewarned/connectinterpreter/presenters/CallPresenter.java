@@ -32,7 +32,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     public static final String KEY_EXTRA = "CallPresenter.api_key";
     public static final String SECONDS_EXTRA = "CallPresenter.max_seconds";
 
-    public static final Long PLEASE_WAITE_VIDEO_DELAY_MILLIS = 11 * 1000L;
+    public static final Long PLEASE_WAITE_VIDEO_DELAY_MILLIS = 61 * 1000L;
 
     private CallView view;
     private UserManager userManager;
@@ -69,7 +69,6 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         view.toggleEndCallButtonVisibility(false);
         view.updateCurrentCallDuration("00:00");
         view.showIndicator(PLEASE_WAITE_VIDEO_DELAY_MILLIS);
-        initVideoShowing();
         apiKey = extras.getString(KEY_EXTRA);
         sessionId = extras.getString(SESSION_EXTRA);
         token = extras.getString(TOKEN_EXTRA);
@@ -80,20 +79,6 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
 
     }
-
-    public void initVideoShowing() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (answered) {
-                    return;
-                }
-                view.hideIndicator();
-                view.showWaitVideo();
-            }
-        }, PLEASE_WAITE_VIDEO_DELAY_MILLIS);
-    }
-
 
     private void createSession(String apiKey, String sessionId, String token) {
         session = new Session.Builder(view.getContext(), apiKey, sessionId).build();
@@ -186,7 +171,6 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
         answered = true;
         runTimer();
         view.hideIndicator();
-        view.hideWaitVideo();
         view.toggleEndCallButtonVisibility(true);
         userManager.updateLastCallSessionId(session.getSessionId());
 

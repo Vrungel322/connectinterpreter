@@ -36,8 +36,8 @@ import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 
 public class CallActivity extends NoStatusBarActivity implements CallView {
 
-    private Boolean debug = true;
-    private Boolean useCountDownTimer = true;
+    private Boolean debug = false; // hide all error dialogs and show "end call" btn and show list of messages with stubs
+    private Boolean useCountDownTimer = true; // make messages hide in X sec
     private static final Long CHAT_ANIM_DURATION = 500L;
 
     private FrameLayout selfContainer;
@@ -52,7 +52,6 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     private CallPresenter presenter;
 
     private MessagesAdapter messagesAdapter;
-    private AlertDialog videoDialog;
 
     private AudioManager audioManager;
     private int volume;
@@ -85,6 +84,7 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                 presenter.endCall();
             }
         });
+        UiUtils.shadow(endCallButton, 24, 1.2f, 0.5f);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +150,6 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                 showOneMoreMessage("Some message to interpreter " + i);
             }
         }
-        UiUtils.shadow(endCallButton, 24, 1.2f, 0.5f);
 
     }
 
@@ -284,67 +283,6 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
         messagesAdapter.addMessage(message);
         if (useCountDownTimer) {
             launchChatVisibilityCountDownTimer();
-        }
-    }
-
-
-    @Override
-    public void showWaitVideo() {
-        if (debug == false) {
-            if (isFinishing()) {
-                return;
-            }
-            if (videoDialog == null) {
-                final VideoView videoView = new VideoView(this);
-                videoView.setMediaController(new MediaController(this));
-                final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.please_wait);
-                videoDialog = new AlertDialog.Builder(this)
-                        .setView(videoView)
-                        .setCancelable(false)
-                        .setNegativeButton(
-                                getResources().getString(R.string.cancel),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        presenter.endCall();
-                                        dialog.dismiss();
-                                    }
-                                }
-                        )
-                        .create();
-                videoDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        videoView.setVideoURI(video);
-                        videoView.start();
-                    }
-                });
-
-                videoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        videoView.stopPlayback();
-                    }
-                });
-                videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        videoDialog.dismiss();
-                        if (!presenter.answered) {
-                            showIndicator(CallPresenter.PLEASE_WAITE_VIDEO_DELAY_MILLIS);
-                            presenter.initVideoShowing();
-                        }
-                    }
-                });
-            }
-            videoDialog.show();
-        }
-    }
-
-    @Override
-    public void hideWaitVideo() {
-        if (videoDialog != null) {
-            videoDialog.dismiss();
         }
     }
 
