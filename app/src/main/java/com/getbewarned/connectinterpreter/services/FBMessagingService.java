@@ -29,16 +29,19 @@ public class FBMessagingService extends FirebaseMessagingService {
 
     private static final int NOTIFICATION_ID = 17;
 
+
     @Override
     public void onNewToken(@NonNull String newToken) {
         FirebaseMessaging.getInstance().subscribeToTopic("news");
 
         UserManager userManager = new UserManager(this);
-        if (userManager.getUserToken() == null) {
+        String userToken = userManager.getUserToken();
+        if (userToken == null || userToken.isEmpty()) {
+            userManager.updateNotificationToken(newToken);
             return;
         }
         NetworkManager networkManager = new NetworkManager(this);
-        networkManager.setAuthToken(userManager.getUserToken());
+        networkManager.setAuthToken(userToken);
         networkManager.sendNotificationToken(newToken);
     }
 

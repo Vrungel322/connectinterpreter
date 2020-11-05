@@ -77,8 +77,8 @@ public class MainPresenter implements Presenter {
         view.showChecking();
         view.showLeftTime("00:00");
         view.requestPermissions();
-        String fbToken = FirebaseInstanceId.getInstance().getToken();
-        if (fbToken != null) {
+        String fbToken = userManager.getNotificationToken();
+        if (fbToken != null && fbToken.isEmpty()) {
             Log.d("FB_TOKEN", fbToken);
             networkManager.sendNotificationToken(fbToken);
         }
