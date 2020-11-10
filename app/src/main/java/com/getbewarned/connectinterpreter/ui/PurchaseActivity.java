@@ -32,6 +32,7 @@ import ru.yandex.money.android.sdk.Checkout;
 import ru.yandex.money.android.sdk.PaymentParameters;
 import ru.yandex.money.android.sdk.SavePaymentMethod;
 import ru.yandex.money.android.sdk.TokenizationResult;
+import ru.yandex.money.android.sdk.utils.WebViewActivity;
 
 public class PurchaseActivity extends NoStatusBarActivity implements PurchaseView {
 
@@ -76,8 +77,9 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
             @Override
             public void onClick(View v) {
                 if (bChooseTariff.isActivated()) {
-                    requestLiqPayPermissions();
+
                 }
+
             }
         });
     }
@@ -115,16 +117,6 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         onBackPressed();
     }
 
-    @AfterPermissionGranted(RC_PHONE_STATE_PERM)
-    public void requestLiqPayPermissions() {
-        String[] perms = {Manifest.permission.READ_PHONE_STATE};
-        if (EasyPermissions.hasPermissions(this, perms)) {
-            presenter.startLiqPayPurchaseFlow();
-        } else {
-            EasyPermissions.requestPermissions(this, getString(R.string.permission_rationale_liqpay), RC_PHONE_STATE_PERM, perms);
-        }
-    }
-
     public void continueCheckout(String item, String itemDescription, float price, String currency) {
         PaymentParameters paymentParameters = new PaymentParameters(
                 new Amount(BigDecimal.valueOf(price), Currency.getInstance(currency)),
@@ -136,6 +128,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         );
         Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
         startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
+//        WebViewActivity
     }
 
     @Override

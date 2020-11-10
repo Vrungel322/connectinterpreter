@@ -16,6 +16,7 @@ import com.getbewarned.connectinterpreter.models.ProfileResponse;
 import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
+import com.getbewarned.connectinterpreter.models.TariffsResponseV2;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 
@@ -114,6 +115,10 @@ public interface ApiService {
     @GET("/api/client/unlim_list")
     Call<TariffsResponse> getTariffs(@Header("X-Interpreter-Client-Token") String authorization,
                                      @Query("lang") String language);
+
+    @GET("/api/v3/tariffs")
+    Call<TariffsResponseV2> getTariffsV2(@Header("X-Interpreter-Client-Token") String authorization,
+                                         @Query("lang") String language);
 
     @POST("/api/client/buy_unlim")
     @FormUrlEncoded

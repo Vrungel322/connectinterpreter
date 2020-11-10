@@ -24,6 +24,7 @@ import com.getbewarned.connectinterpreter.interfaces.ReasonsReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestMessagesReceived;
 import com.getbewarned.connectinterpreter.interfaces.RequestsReceived;
 import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
+import com.getbewarned.connectinterpreter.interfaces.TariffsReceivedV2;
 import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
 import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
 import com.getbewarned.connectinterpreter.interfaces.UtogResponseReceived;
@@ -44,6 +45,7 @@ import com.getbewarned.connectinterpreter.models.ReasonsResponse;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.models.RequestsResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponse;
+import com.getbewarned.connectinterpreter.models.TariffsResponseV2;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 import com.google.gson.GsonBuilder;
@@ -439,6 +441,30 @@ public class NetworkManager {
 
             @Override
             public void onFailure(Call<TariffsResponse> call, Throwable t) {
+                t.printStackTrace();
+                tariffsReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void getTariffsV2(final TariffsReceivedV2 tariffsReceived) {
+        Call<TariffsResponseV2> call = api.getTariffsV2(authToken, getLanguage());
+        call.enqueue(new Callback<TariffsResponseV2>() {
+            @Override
+            public void onResponse(Call<TariffsResponseV2> call, Response<TariffsResponseV2> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        tariffsReceived.onTariffsReceived(response.body());
+                    } else {
+                        tariffsReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    tariffsReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TariffsResponseV2> call, Throwable t) {
                 t.printStackTrace();
                 tariffsReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }

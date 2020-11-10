@@ -4,19 +4,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.TariffsAdapter;
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.interfaces.TariffClickListener;
-import com.getbewarned.connectinterpreter.interfaces.TariffsReceived;
+import com.getbewarned.connectinterpreter.interfaces.TariffsReceivedV2;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.TariffItem;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
-import com.getbewarned.connectinterpreter.models.TariffsResponse;
+import com.getbewarned.connectinterpreter.models.TariffsResponseV2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +26,10 @@ import ua.privatbank.paylibliqpay.LiqPayCallBack;
 
 public class PurchasePresenter implements Presenter, TariffClickListener {
 
-    private PurchaseView view;
+    private final PurchaseView view;
     NetworkManager networkManager;
-    private TariffsAdapter adapter;
-    private Context context;
+    private final TariffsAdapter adapter;
+    private final Context context;
 
     public PurchasePresenter(final PurchaseView view, Context context) {
         this.view = view;
@@ -48,12 +47,12 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
 
     @Override
     public void onCreate(Bundle extras) {
-        networkManager.getTariffs(new TariffsReceived() {
+        networkManager.getTariffsV2(new TariffsReceivedV2() {
             @Override
-            public void onTariffsReceived(TariffsResponse response) {
+            public void onTariffsReceived(TariffsResponseV2 response) {
                 final List<TariffItem> items = new ArrayList<>();
                 for (TariffResponse item : response.getTariffs()) {
-                    items.add(new TariffItem(context.getString(R.string.tariff_name_stub), item.getPrice(), item.getName(), item.getId()));
+                    items.add(new TariffItem(item.getName(), item.getPrice(), item.getMinutes(), item.getId(), item.getCurrencySign()));
                 }
                 adapter.setItems(items);
             }
@@ -84,32 +83,5 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
     @Override
     public void onDestroy() {
 
-    }
-
-    public void startLiqPayPurchaseFlow() {
-        networkManager.buyUnlim(adapter.selectedItem.tariffId, new LiqPayDataReceived() {
-            @Override
-            public void onDataReceived(LiqPayResponse response) {
-                LiqPay.checkout(context, response.getData(), response.getSignature(), new LiqPayCallBack() {
-                    @Override
-                    public void onResponseSuccess(String s) {
-                        Log.i("PAYMENT SUCCESS", s);
-                        view.successPurchase();
-                    }
-
-                    @Override
-                    public void onResponceError(ErrorCode errorCode) {
-                        Log.i("PAYMENT FAIL", errorCode.toString());
-                        view.failPurchase(errorCode.toString());
-                    }
-                });
-            }
-
-            @Override
-            public void onErrorReceived(Error error) {
-                Log.i("PAYMENT FAIL", error.getMessage());
-                view.failPurchase(error.toString());
-            }
-        });
     }
 }

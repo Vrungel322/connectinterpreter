@@ -83,12 +83,12 @@ class TariffViewHolder extends RecyclerView.ViewHolder {
 
 
     public void updateUI(TariffItem item, @Nullable TariffItem selectedItem) {
-        tvTariffName.setText(item.tariffName);
-        tvTariffPrice.setText(item.tariffPrice);
-        tvTariffMinutes.setText(item.tariffMinutes);
+        tvTariffName.setText(item.getTariffName());
+        tvTariffPrice.setText(item.getTariffPrice() + item.getSign());
+        tvTariffMinutes.setText(String.valueOf(item.getTariffMinutes() + "мин"));
 
         if (selectedItem != null) {
-            boolean isSelected = item.tariffId.equals(selectedItem.tariffId);
+            boolean isSelected = item.getTariffId().equals(selectedItem.getTariffId());
             if (isSelected) {
                 llUnselectedTint.setVisibility(View.GONE);
                 ivSelectionIndicator.setVisibility(View.VISIBLE);
