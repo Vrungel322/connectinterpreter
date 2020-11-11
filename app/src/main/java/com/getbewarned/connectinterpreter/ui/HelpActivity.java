@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -50,7 +49,6 @@ public class HelpActivity extends NoStatusBarActivity {
     protected void onStart() {
         super.onStart();
         final VideoView videoView = findViewById(R.id.vv_help);
-        videoView.setMediaController(new MediaController(this));
         final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.help);
         videoView.setVideoURI(video);
         videoView.start();
@@ -63,67 +61,33 @@ public class HelpActivity extends NoStatusBarActivity {
     }
 
     void telegram() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=BeWarned"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=Serg1906"));
         intent.setPackage("org.telegram.messenger");
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/BeWarned")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Serg1906")));
         }
     }
 
     void viber() {
+        // viber opens with delay
         try {
-            String viberNumber = "";
-            Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("viber://contact?number=" + viberNumber));
-            startActivity(intent);
+            String viberNumber = "79031140903"; // no need "+" sign
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("viber://contact?number=" + viberNumber)));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getApplicationContext(), "Viber not installed", Toast.LENGTH_SHORT).show();
         }
     }
 
     void whatsApp() {
-        // group
         try {
-            String whatsAppGroupLink = "";
-            Intent intentWhatsapp = new Intent(Intent.ACTION_VIEW);
-            String url = "https://chat.whatsapp.com/" + whatsAppGroupLink;
-            intentWhatsapp.setData(Uri.parse(url));
+            String whatsAppNumber = "+79031140903";
+            Intent intentWhatsapp = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=" + whatsAppNumber));
             intentWhatsapp.setPackage("com.whatsapp");
             startActivity(intentWhatsapp);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getApplicationContext(), "WhatsApp not installed", Toast.LENGTH_SHORT).show();
         }
-
-        // contact
-//        String contact = "+00 9876543210"; // use country code with your phone number
-//        String url = "https://api.whatsapp.com/send?phone=" + contact;
-//        try {
-//            PackageManager pm = getPackageManager();
-//            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
-//            Intent i = new Intent(Intent.ACTION_VIEW);
-//            i.setData(Uri.parse(url));
-//            startActivity(i);
-//        } catch (PackageManager.NameNotFoundException e) {
-//            Toast.makeText(getApplicationContext(), "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
-//            e.printStackTrace();
-//        }
     }
 }
-
-//Viber:
-//this for contact number:
-//
-//        Intent intent = new Intent("android.intent.action.VIEW",
-//        Android.Net.Uri.Parse("viber://contact?number=contactnumber"));
-//        Context.StartActivity(intent);
-//        this for public account chat:
-//
-//        Intent intent = new Intent("android.intent.action.VIEW",
-//        Android.Net.Uri.Parse("viber://pa?chatURI=publicaccounturi"));
-//        Context.StartActivity(intent);
-//        this for public account info page:
-//
-//        Intent intent = new Intent("android.intent.action.VIEW",
-//        Android.Net.Uri.Parse("viber://pa/info?uri=publicaccounturi"));
-//        Context.StartActivity(intent);
