@@ -6,15 +6,15 @@ import android.graphics.Bitmap;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ApiService;
 import com.getbewarned.connectinterpreter.interfaces.AppVersionReceived;
+import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
+import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
 import com.getbewarned.connectinterpreter.interfaces.CountriesReceived;
 import com.getbewarned.connectinterpreter.interfaces.GroupSessionReceived;
 import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
 import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.LoginComplete;
-import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
 import com.getbewarned.connectinterpreter.interfaces.MessageSent;
-import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestCreated;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestMessageCreated;
@@ -28,13 +28,16 @@ import com.getbewarned.connectinterpreter.interfaces.TariffsReceivedV2;
 import com.getbewarned.connectinterpreter.interfaces.TokenReceived;
 import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
 import com.getbewarned.connectinterpreter.interfaces.UtogResponseReceived;
+import com.getbewarned.connectinterpreter.interfaces.YandexKassaPaymentReceived;
+import com.getbewarned.connectinterpreter.interfaces.YandexPaymentApprove;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
+import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.CountriesResponse;
+import com.getbewarned.connectinterpreter.models.CreateYandexPaymentResponse;
 import com.getbewarned.connectinterpreter.models.GroupSessionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
-import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.MessagesResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.NewMessageResponse;
@@ -53,23 +56,13 @@ import com.google.gson.GsonBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.net.Authenticator;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.ProxySelector;
-import java.net.URI;
-import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Nullable;
-
-import okhttp3.Credentials;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,10 +78,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkManager {
     private static final String BASE_URL = "https://interpreter.getbw.me";
 
-    private ApiService api;
+    private final ApiService api;
     private String authToken;
-    private Retrofit retrofit;
-    private Context context;
+    private final Retrofit retrofit;
+    private final Context context;
 
 
     private UnauthRequestHandler unauthRequestHandler;
@@ -222,7 +215,7 @@ public class NetworkManager {
     }
 
     public void updateProfile(String firstName, String lastName, String patronymic,
-                              String country, String city, final ProfileReceived  profileReceived) {
+                              String country, String city, final ProfileReceived profileReceived) {
         Call<ProfileResponse> call = api.updateProfile(this.authToken, firstName, lastName, patronymic, country, city, getLanguage());
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
@@ -250,7 +243,7 @@ public class NetworkManager {
         });
     }
 
-    public void getProfile(final ProfileReceived  profileReceived) {
+    public void getProfile(final ProfileReceived profileReceived) {
         Call<ProfileResponse> call = api.getProfile(this.authToken, getLanguage());
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
@@ -467,6 +460,58 @@ public class NetworkManager {
             public void onFailure(Call<TariffsResponseV2> call, Throwable t) {
                 t.printStackTrace();
                 tariffsReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void buyYandexKassa(String token, String tariffId, final YandexKassaPaymentReceived buyReceived) {
+        Call<CreateYandexPaymentResponse> call = api.createYandexPayment(authToken, token, tariffId, getLanguage());
+        call.enqueue(new Callback<CreateYandexPaymentResponse>() {
+            @Override
+            public void onResponse(Call<CreateYandexPaymentResponse> call, Response<CreateYandexPaymentResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        buyReceived.onPaymentReceived(response.body());
+                    } else {
+                        buyReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    buyReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreateYandexPaymentResponse> call, Throwable t) {
+                t.printStackTrace();
+                buyReceived.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
+            }
+        });
+    }
+
+    public void approveYandexPayment(String paymentId, final YandexPaymentApprove yandexPaymentApprove) {
+        Call<ApiResponseBase> call = api.approveYandexPayment(this.authToken, paymentId, getLanguage());
+        call.enqueue(new Callback<ApiResponseBase>() {
+            @Override
+            public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
+                if (response.code() == 401 && unauthRequestHandler != null) {
+                    unauthRequestHandler.onUnathRequest();
+                    return;
+                }
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        yandexPaymentApprove.onYandexPaymentApprove(response.body());
+                    } else {
+                        yandexPaymentApprove.onErrorReceived(getErrorByCode(response.body().getCode()));
+                    }
+                } else {
+                    yandexPaymentApprove.onErrorReceived(getErrorFromResponse(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseBase> call, Throwable t) {
+                t.printStackTrace();
+                yandexPaymentApprove.onErrorReceived(new Error(context.getString(R.string.error_server_base)));
             }
         });
     }

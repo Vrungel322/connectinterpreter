@@ -205,4 +205,5 @@
     <string name="action_requests">Текст-Відео\nПереклад</string>
     <string name="please_stay_on_the_line">Будь ласка, залишайтеся на лінії поки ми з\'єднуємо вас з перекладачем.</string>
     <string name="feedback">Відгук про роботу перекладача</string>
+    <string name="payment_canceled">Платіж відмінено</string>
 </resources>

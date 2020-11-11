@@ -2,27 +2,25 @@ package com.getbewarned.connectinterpreter.presenters;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
 import com.getbewarned.connectinterpreter.adapters.TariffsAdapter;
-import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.interfaces.TariffClickListener;
 import com.getbewarned.connectinterpreter.interfaces.TariffsReceivedV2;
+import com.getbewarned.connectinterpreter.interfaces.YandexKassaPaymentReceived;
+import com.getbewarned.connectinterpreter.interfaces.YandexPaymentApprove;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
-import com.getbewarned.connectinterpreter.models.LiqPayResponse;
+import com.getbewarned.connectinterpreter.models.ApiResponseBase;
+import com.getbewarned.connectinterpreter.models.CreateYandexPaymentResponse;
 import com.getbewarned.connectinterpreter.models.TariffItem;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.models.TariffsResponseV2;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ua.privatbank.paylibliqpay.ErrorCode;
-import ua.privatbank.paylibliqpay.LiqPay;
-import ua.privatbank.paylibliqpay.LiqPayCallBack;
 
 public class PurchasePresenter implements Presenter, TariffClickListener {
 
@@ -52,14 +50,14 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
             public void onTariffsReceived(TariffsResponseV2 response) {
                 final List<TariffItem> items = new ArrayList<>();
                 for (TariffResponse item : response.getTariffs()) {
-                    items.add(new TariffItem(item.getName(), item.getPrice(), item.getMinutes(), item.getId(), item.getCurrencySign()));
+                    items.add(new TariffItem(item.getName(), item.getPrice(), item.getMinutes(), item.getId(), item.getCurrencySign(), item.getCurrency()));
                 }
                 adapter.setItems(items);
             }
 
             @Override
             public void onErrorReceived(Error error) {
-                view.errorReceivingTariffs(error);
+                view.error(error);
             }
         });
     }
@@ -83,5 +81,43 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
     @Override
     public void onDestroy() {
 
+    }
+
+    public TariffItem getSelectedTariff() {
+        return adapter.selectedItem;
+    }
+
+    public void sendPaymentToken(String token, String tariffId) {
+        networkManager.buyYandexKassa(token, tariffId, new YandexKassaPaymentReceived() {
+            @Override
+            public void onPaymentReceived(CreateYandexPaymentResponse response) {
+                String confirmation = response.getConfirmation();
+                if (confirmation != null && !confirmation.isEmpty()) {
+                    YandexKassaDataHolder.yandexPurchaseId = response.getId();
+                    view.start3DSecure(confirmation);
+                } else {
+                    approvePayment(response.getId());
+                }
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.error(error);
+            }
+        });
+    }
+
+    public void approvePayment(String yandexPurchaseId) {
+        networkManager.approveYandexPayment(yandexPurchaseId, new YandexPaymentApprove() {
+            @Override
+            public void onYandexPaymentApprove(ApiResponseBase response) {
+                view.paymentSuccess();
+            }
+
+            @Override
+            public void onErrorReceived(Error error) {
+                view.error(error);
+            }
+        });
     }
 }

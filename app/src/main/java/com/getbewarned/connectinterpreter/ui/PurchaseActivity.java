@@ -1,6 +1,5 @@
 package com.getbewarned.connectinterpreter.ui;
 
-import android.Manifest;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -20,24 +19,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
+import com.getbewarned.connectinterpreter.models.TariffItem;
 import com.getbewarned.connectinterpreter.presenters.PurchasePresenter;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 
-import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import ru.yandex.money.android.sdk.Amount;
 import ru.yandex.money.android.sdk.Checkout;
 import ru.yandex.money.android.sdk.PaymentParameters;
 import ru.yandex.money.android.sdk.SavePaymentMethod;
 import ru.yandex.money.android.sdk.TokenizationResult;
-import ru.yandex.money.android.sdk.utils.WebViewActivity;
 
 public class PurchaseActivity extends NoStatusBarActivity implements PurchaseView {
 
     private static final int RC_PHONE_STATE_PERM = 483;
     private static final int REQUEST_CODE_TOKENIZE = 125;
+    private static final int REQUEST_CODE_3DS = 126;
 
     private VideoView videoView;
     private ImageView ivPlayingVideo;
@@ -45,6 +44,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     private RecyclerView rvTariffs;
 
     private PurchasePresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +77,17 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
             @Override
             public void onClick(View v) {
                 if (bChooseTariff.isActivated()) {
-
+                    checkout();
                 }
 
             }
         });
+    }
+
+    private void checkout() {
+        YandexKassaDataHolder.initDefault();
+        TariffItem selectedTariff = presenter.getSelectedTariff();
+        continueCheckoutYandexKassa(selectedTariff.getTariffId(), selectedTariff.getTariffName(), selectedTariff.getTariffName(), Float.valueOf(selectedTariff.getTariffPrice()), selectedTariff.getCurrency());
     }
 
     @Override
@@ -102,7 +108,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     }
 
     @Override
-    public void errorReceivingTariffs(Error error) {
+    public void error(Error error) {
         Toast.makeText(this, "Error" + error.toString(), Toast.LENGTH_LONG).show();
     }
 
@@ -117,18 +123,31 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         onBackPressed();
     }
 
-    public void continueCheckout(String item, String itemDescription, float price, String currency) {
+    public void continueCheckoutYandexKassa(String id, String item, String itemDescription, float price, String currency) {
+        YandexKassaDataHolder.tariffId = id;
         PaymentParameters paymentParameters = new PaymentParameters(
                 new Amount(BigDecimal.valueOf(price), Currency.getInstance(currency)),
                 item,
                 itemDescription,
                 YandexKassaDataHolder.getClientApplicationKey(),
                 YandexKassaDataHolder.getShopId(),
-                SavePaymentMethod.OFF
+                SavePaymentMethod.OFF,
+                YandexKassaDataHolder.getPayMethods()
         );
         Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
         startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
-//        WebViewActivity
+    }
+
+    @Override
+    public void start3DSecure(String confirmationUrl) {
+        Intent intent = Checkout.create3dsIntent(this, confirmationUrl);
+        startActivityForResult(intent, REQUEST_CODE_3DS);
+    }
+
+    @Override
+    public void paymentSuccess() {
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
@@ -140,14 +159,27 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
                 case RESULT_OK:
                     // successful tokenization
                     TokenizationResult result = Checkout.createTokenizationResult(data);
-                    //todo continue
+                    presenter.sendPaymentToken(result.paymentToken, YandexKassaDataHolder.tariffId);
                     break;
                 case RESULT_CANCELED:
-                    // user canceled tokenization
+                    Toast.makeText(this, R.string.payment_canceled, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        } else if (requestCode == REQUEST_CODE_3DS) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    presenter.approvePayment(YandexKassaDataHolder.yandexPurchaseId);
+                    break;
+                case RESULT_CANCELED:
+                    Toast.makeText(this, R.string.payment_canceled, Toast.LENGTH_SHORT).show();
+                    break;
+                case Checkout.RESULT_ERROR:
+                    Toast.makeText(this, R.string.payment_confiramtion_error, Toast.LENGTH_SHORT).show();
                     break;
             }
         }
     }
+
 
     private void setupVideo() {
         final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tariff);

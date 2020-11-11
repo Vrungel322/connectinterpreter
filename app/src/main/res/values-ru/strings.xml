@@ -204,6 +204,7 @@
     <string name="action_requests">Текст-Видео\nПеревод</string>
     <string name="please_stay_on_the_line">Пожалуйста, оставайтесь на линии пока мы соединяем вас с переводчиком.</string>
     <string name="feedback">Отзыв о работе переводчика</string>
+    <string name="payment_canceled">Платеж отменен</string>
 
 </resources>
 

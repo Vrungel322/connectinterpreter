@@ -230,5 +230,7 @@
     <string name="start">Start</string>
     <string name="please_stay_on_the_line">Please stay on the line while we connect you to an interpreter.</string>
     <string name="feedback">Feedback on the work of the translator</string>
+    <string name="payment_canceled">Payment canceled</string>
+    <string name="payment_confiramtion_error">Ошибка подтверждения платежа</string>
 
 </resources>

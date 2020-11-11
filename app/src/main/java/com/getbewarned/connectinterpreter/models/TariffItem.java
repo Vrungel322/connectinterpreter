@@ -6,12 +6,14 @@ public class TariffItem {
     private String sign;
     private int tariffMinutes;
     private String tariffId;
+    private String currency;
 
-    public TariffItem(String tariffName, String tariffPrice, int tariffMinutes, String tariffId, String sign) {
+    public TariffItem(String tariffName, String tariffPrice, int tariffMinutes, String tariffId, String sign, String currency) {
         this.tariffName = tariffName;
         this.tariffPrice = tariffPrice;
         this.tariffMinutes = tariffMinutes;
         this.tariffId = tariffId;
+        this.currency = currency;
         this.sign = sign;
     }
 
@@ -34,5 +36,9 @@ public class TariffItem {
 
     public String getTariffId() {
         return tariffId;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 }

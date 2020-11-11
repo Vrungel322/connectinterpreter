@@ -4,6 +4,7 @@ import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.AppVersionResponse;
 import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.CountriesResponse;
+import com.getbewarned.connectinterpreter.models.CreateYandexPaymentResponse;
 import com.getbewarned.connectinterpreter.models.GroupSessionResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.LoginResponse;
@@ -119,6 +120,17 @@ public interface ApiService {
     @GET("/api/v3/tariffs")
     Call<TariffsResponseV2> getTariffsV2(@Header("X-Interpreter-Client-Token") String authorization,
                                          @Query("lang") String language);
+
+    @POST("/api/v3/payment/create")
+    Call<CreateYandexPaymentResponse> createYandexPayment(@Header("X-Interpreter-Client-Token") String authorization,
+                                                          @Field("token") String token,
+                                                          @Field("tariff_id") String id,
+                                                          @Query("lang") String language);
+
+    @GET("/api/v3/payment/approve")
+    Call<ApiResponseBase> approveYandexPayment(@Header("X-Interpreter-Client-Token") String authorization,
+                                                          @Field("payment_id") String id,
+                                                          @Query("lang") String language);
 
     @POST("/api/client/buy_unlim")
     @FormUrlEncoded
