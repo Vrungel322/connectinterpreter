@@ -13,15 +13,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true" />
 
-    <FrameLayout
-        android:id="@+id/interpreter_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -36,12 +27,13 @@
             android:layout_width="0dp"
             android:layout_height="180dp"
             android:layout_weight="1"
+            android:padding="16dp"
             android:gravity="center">
 
             <FrameLayout
                 android:id="@+id/self_container"
-                android:layout_width="130dp"
-                android:layout_height="130dp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,19 +75,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/messages"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:fadingEdgeLength="300dp"
-        android:requiresFadingEdge="vertical"
-        app:layout_constraintBottom_toTopOf="@id/message_field"
-        app:layout_constraintEnd_toEndOf="@+id/message_field"
-        app:layout_constraintStart_toStartOf="@+id/message_field"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:listitem="@layout/item_message_v2" />
-
 
     <EditText
         android:id="@+id/message_field"
@@ -128,6 +107,29 @@
         app:layout_constraintEnd_toEndOf="@+id/message_field"
         app:layout_constraintTop_toTopOf="@+id/message_field"
         app:srcCompat="@drawable/ic_send_new" />
+
+    <FrameLayout
+        android:id="@+id/interpreter_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:fadingEdgeLength="300dp"
+        android:requiresFadingEdge="vertical"
+        app:layout_constraintBottom_toTopOf="@id/message_field"
+        app:layout_constraintEnd_toEndOf="@+id/message_field"
+        app:layout_constraintStart_toStartOf="@+id/message_field"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:listitem="@layout/item_message_v2" />
 
 
 </android.support.constraint.ConstraintLayout>

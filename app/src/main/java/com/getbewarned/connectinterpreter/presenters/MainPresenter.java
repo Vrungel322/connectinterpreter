@@ -4,10 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
-import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
-import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.interfaces.AvailabilityReceived;
+import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
+import com.getbewarned.connectinterpreter.interfaces.LiqPayDataReceived;
+import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.interfaces.NameChanged;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.interfaces.ReasonsReceived;
@@ -17,9 +17,9 @@ import com.getbewarned.connectinterpreter.interfaces.UnauthRequestHandler;
 import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
+import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.HumanDate;
 import com.getbewarned.connectinterpreter.models.HumanTime;
-import com.getbewarned.connectinterpreter.models.AvailabilityResponse;
 import com.getbewarned.connectinterpreter.models.LiqPayResponse;
 import com.getbewarned.connectinterpreter.models.NameResponse;
 import com.getbewarned.connectinterpreter.models.Reason;
@@ -32,7 +32,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
@@ -45,11 +44,11 @@ import ua.privatbank.paylibliqpay.LiqPayCallBack;
  */
 
 public class MainPresenter implements Presenter {
-    private MainView view;
-    private UserManager userManager;
+    private final MainView view;
+    private final UserManager userManager;
     private NetworkManager networkManager;
     private String selectedTariff;
-    private Context context;
+    private final Context context;
 
     private boolean callInitiated = false;
 
@@ -100,31 +99,12 @@ public class MainPresenter implements Presenter {
         view.showChecking();
         setupNetworkManager();
         updateAvailability();
-        checkUtog();
 
         if (userManager.getLastCallSessionId() != null) {
             view.askAboutLastCall();
         }
     }
 
-    private void checkUtog() {
-//        no need to handle in РЖЯ
-//        if (!userManager.getUserUkrainian() || userManager.getUserUtog()) {
-//            return;
-//        }
-//
-//        switch (userManager.getUtogAsk().getStatus()) {
-//            case NEVER:
-//                return;
-//            case LATER:
-//                if (new Date().before(userManager.getUtogAsk().getDate())) {
-//                    return;
-//                }
-//            case SHOUD_ASK:
-//            default:
-//                view.askAboutUtog();
-//        }
-    }
 
     public void utogConfirmed() {
         utogLater();
@@ -327,9 +307,10 @@ public class MainPresenter implements Presenter {
     }
 
     public void onReview(int rating, String review) {
-        String sessionId = userManager.getLastCallSessionId();
-        networkManager.leaveReview(sessionId, rating, review);
-
+        if (rating != -1 && review != null) {
+            String sessionId = userManager.getLastCallSessionId();
+            networkManager.leaveReview(sessionId, rating, review);
+        }
         userManager.updateLastCallSessionId(null);
     }
 
