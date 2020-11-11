@@ -1,9 +1,10 @@
 package com.getbewarned.connectinterpreter.adapters;
 
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.holders.RequestMessageViewHolder;

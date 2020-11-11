@@ -34,6 +34,8 @@ public class UserManager {
     public static final String USER_CITY = "user_city";
     public static final String USER_UKRAINIAN = "user_ukrainian";
 
+    public static final String NOTIFICATION_TOKEN = "token";
+
     private static final String LAST_APP_VERSION = "last_app_version";
 
 
@@ -233,4 +235,11 @@ public class UserManager {
     }
 
 
+    public void updateNotificationToken(String newToken) {
+        sharedPreferences.edit().putString(NOTIFICATION_TOKEN, newToken).apply();
+    }
+
+    public String getNotificationToken() {
+        return sharedPreferences.getString(NOTIFICATION_TOKEN, "");
+    }
 }

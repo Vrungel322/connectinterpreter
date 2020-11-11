@@ -68,7 +68,8 @@ public class SplashPresenter implements Presenter {
             linkOpening = false;
             return;
         }
-        checkVersion();
+
+        navigateNext();
     }
 
     @Override

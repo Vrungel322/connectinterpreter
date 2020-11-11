@@ -9,6 +9,13 @@ public class TariffResponse {
     String id;
     @Expose
     String price;
+    @Expose
+    int minutes;
+    @Expose
+    String currency_sign;
+
+    @Expose
+    String currency;
 
     public String getName() {
         return name;
@@ -20,5 +27,17 @@ public class TariffResponse {
 
     public String getPrice() {
         return price;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public String getCurrencySign() {
+        return currency_sign;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 }

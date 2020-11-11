@@ -1,14 +1,15 @@
 package com.getbewarned.connectinterpreter.adapters;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.TariffClickListener;
@@ -82,12 +83,12 @@ class TariffViewHolder extends RecyclerView.ViewHolder {
 
 
     public void updateUI(TariffItem item, @Nullable TariffItem selectedItem) {
-        tvTariffName.setText(item.tariffName);
-        tvTariffPrice.setText(item.tariffPrice);
-        tvTariffMinutes.setText(item.tariffMinutes);
+        tvTariffName.setText(item.getTariffName());
+        tvTariffPrice.setText(item.getTariffPrice() + item.getSign());
+        tvTariffMinutes.setText(String.valueOf(item.getTariffMinutes() + "мин"));
 
         if (selectedItem != null) {
-            boolean isSelected = item.tariffId.equals(selectedItem.tariffId);
+            boolean isSelected = item.getTariffId().equals(selectedItem.getTariffId());
             if (isSelected) {
                 llUnselectedTint.setVisibility(View.GONE);
                 ivSelectionIndicator.setVisibility(View.VISIBLE);

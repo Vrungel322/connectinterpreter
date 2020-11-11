@@ -3,8 +3,9 @@ package com.getbewarned.connectinterpreter.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.getbewarned.connectinterpreter.R;
 import com.google.android.exoplayer2.DefaultRenderersFactory;

@@ -1,9 +1,10 @@
 package com.getbewarned.connectinterpreter.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.holders.CountryViewHolder;
@@ -19,13 +20,13 @@ import java.util.List;
 
 public class CountriesAdapter extends RecyclerView.Adapter<CountryViewHolder> {
 
-    private List<Country> countries = new ArrayList<>();
-    private List<Country> allCountries = new ArrayList<>();
+    private final List<Country> countries = new ArrayList<>();
+    private final List<Country> allCountries = new ArrayList<>();
     private OnCountryClicked onCountryClicked;
 
     @Override
     public CountryViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_country, parent ,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_country, parent, false);
         return new CountryViewHolder(view);
     }
 
@@ -61,7 +62,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountryViewHolder> {
             notifyDataSetChanged();
             return;
         }
-        for (Country country: this.allCountries) {
+        for (Country country : this.allCountries) {
             if (country.getName().toLowerCase().contains(query.toLowerCase())) {
                 this.countries.add(country);
             }

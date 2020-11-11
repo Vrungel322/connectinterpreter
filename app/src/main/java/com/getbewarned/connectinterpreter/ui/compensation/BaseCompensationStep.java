@@ -1,8 +1,9 @@
 package com.getbewarned.connectinterpreter.ui.compensation;
 
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+
+import androidx.fragment.app.Fragment;
 
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationDataConsumer;
 import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationStep;

@@ -4,13 +4,18 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.managers.NetworkManager;
+import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.presenters.RequestPresenter;
 import com.getbewarned.connectinterpreter.ui.RequestActivity;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -23,6 +28,22 @@ import io.realm.Realm;
 public class FBMessagingService extends FirebaseMessagingService {
 
     private static final int NOTIFICATION_ID = 17;
+
+
+    @Override
+    public void onNewToken(@NonNull String newToken) {
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+
+        UserManager userManager = new UserManager(this);
+        String userToken = userManager.getUserToken();
+        if (userToken == null || userToken.isEmpty()) {
+            userManager.updateNotificationToken(newToken);
+            return;
+        }
+        NetworkManager networkManager = new NetworkManager(this);
+        networkManager.setAuthToken(userToken);
+        networkManager.sendNotificationToken(newToken);
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

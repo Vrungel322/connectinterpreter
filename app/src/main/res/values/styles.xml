@@ -67,7 +67,7 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowBackground">@drawable/splash_back</item>
     </style>
 
     <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -136,7 +136,9 @@
     </style>
 
 
-    <style name="Text_tariff_title" parent="Text_user_info_block_title"></style>
+    <style name="Text_tariff_title" parent="Text_user_info_block_title">
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="Text_tariff_price" parent="Text_user_info_block_title">
         <item name="android:textColor">@color/blue_new_ui_text</item>
@@ -145,7 +147,7 @@
 
     <style name="Text_tariff_minutes" parent="Text_tariff_price">
         <item name="android:textColor">@color/red_new_ui</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">34sp</item>
     </style>
 
     <style name="Text_user_info_block_title" parent="Text_news_item_title">

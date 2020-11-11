@@ -1,9 +1,10 @@
 package com.getbewarned.connectinterpreter.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.holders.MessageViewHolder;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
-    private List<String> messages = new ArrayList<>();
+    private final List<String> messages = new ArrayList<>();
 
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

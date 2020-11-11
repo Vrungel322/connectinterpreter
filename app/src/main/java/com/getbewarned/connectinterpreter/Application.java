@@ -1,11 +1,7 @@
 package com.getbewarned.connectinterpreter;
 
-import android.support.annotation.NonNull;
 
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;

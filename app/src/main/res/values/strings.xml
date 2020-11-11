@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="app_name">SL Interpreter</string>
+    <string name="app_name">МойРЖЯ</string>
     <string name="main_call_to_action">Press to connect with interpreter</string>
     <string name="main_minutes_left">Minutes left:</string>
     <string name="current_call">Current call</string>
@@ -230,5 +230,7 @@
     <string name="start">Start</string>
     <string name="please_stay_on_the_line">Please stay on the line while we connect you to an interpreter.</string>
     <string name="feedback">Feedback on the work of the translator</string>
+    <string name="payment_canceled">Payment canceled</string>
+    <string name="payment_confiramtion_error">Ошибка подтверждения платежа</string>
 
 </resources>

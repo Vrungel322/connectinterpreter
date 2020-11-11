@@ -3,15 +3,16 @@ package com.getbewarned.connectinterpreter.ui.compensation;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.CompensationPageAdapter;
@@ -25,8 +26,6 @@ import com.getbewarned.connectinterpreter.ui.compensation.data.CompensationStep;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 
 /**
@@ -44,6 +43,7 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
     FrameLayout flBack;
     CompensationPageAdapter adapter;
     CompensationPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

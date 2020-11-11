@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:text="@string/login_title" />
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/country"
                 android:layout_marginTop="10dp"
                 style="@style/AppTheme.EditText"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/country_code"
                     style="@style/AppTheme.EditText"
                     android:layout_width="0dp"
@@ -67,7 +67,7 @@
                     android:text="+380"
                     android:theme="@style/AppTheme.EditText" />
 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/phone"
                     style="@style/AppTheme.EditText"
                     android:layout_width="0dp"
@@ -87,7 +87,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/accept_check"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />

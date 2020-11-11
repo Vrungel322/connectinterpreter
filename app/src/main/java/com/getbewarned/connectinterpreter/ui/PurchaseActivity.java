@@ -1,13 +1,10 @@
 package com.getbewarned.connectinterpreter.ui;
 
-import android.Manifest;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,16 +12,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
+import com.getbewarned.connectinterpreter.models.TariffItem;
 import com.getbewarned.connectinterpreter.presenters.PurchasePresenter;
 
-import pub.devrel.easypermissions.AfterPermissionGranted;
+import java.math.BigDecimal;
+import java.util.Currency;
+
 import pub.devrel.easypermissions.EasyPermissions;
+import ru.yandex.money.android.sdk.Amount;
+import ru.yandex.money.android.sdk.Checkout;
+import ru.yandex.money.android.sdk.PaymentParameters;
+import ru.yandex.money.android.sdk.SavePaymentMethod;
+import ru.yandex.money.android.sdk.TokenizationResult;
 
 public class PurchaseActivity extends NoStatusBarActivity implements PurchaseView {
 
     private static final int RC_PHONE_STATE_PERM = 483;
+    private static final int REQUEST_CODE_TOKENIZE = 125;
+    private static final int REQUEST_CODE_3DS = 126;
 
     private VideoView videoView;
     private ImageView ivPlayingVideo;
@@ -32,6 +44,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     private RecyclerView rvTariffs;
 
     private PurchasePresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +56,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
 
         // toolbar
         ((TextView) findViewById(R.id.tv_toolbar_title)).setText(R.string.tariff_choose);
-        ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -64,10 +77,17 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
             @Override
             public void onClick(View v) {
                 if (bChooseTariff.isActivated()) {
-                    requestLiqPayPermissions();
+                    checkout();
                 }
+
             }
         });
+    }
+
+    private void checkout() {
+        YandexKassaDataHolder.initDefault();
+        TariffItem selectedTariff = presenter.getSelectedTariff();
+        continueCheckoutYandexKassa(selectedTariff.getTariffId(), selectedTariff.getTariffName(), selectedTariff.getTariffName(), Float.valueOf(selectedTariff.getTariffPrice()), selectedTariff.getCurrency());
     }
 
     @Override
@@ -88,7 +108,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     }
 
     @Override
-    public void errorReceivingTariffs(Error error) {
+    public void error(Error error) {
         Toast.makeText(this, "Error" + error.toString(), Toast.LENGTH_LONG).show();
     }
 
@@ -103,15 +123,63 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         onBackPressed();
     }
 
-    @AfterPermissionGranted(RC_PHONE_STATE_PERM)
-    public void requestLiqPayPermissions() {
-        String[] perms = {Manifest.permission.READ_PHONE_STATE};
-        if (EasyPermissions.hasPermissions(this, perms)) {
-            presenter.startLiqPayPurchaseFlow();
-        } else {
-            EasyPermissions.requestPermissions(this, getString(R.string.permission_rationale_liqpay), RC_PHONE_STATE_PERM, perms);
+    public void continueCheckoutYandexKassa(String id, String item, String itemDescription, float price, String currency) {
+        YandexKassaDataHolder.tariffId = id;
+        PaymentParameters paymentParameters = new PaymentParameters(
+                new Amount(BigDecimal.valueOf(price), Currency.getInstance(currency)),
+                item,
+                itemDescription,
+                YandexKassaDataHolder.getClientApplicationKey(),
+                YandexKassaDataHolder.getShopId(),
+                SavePaymentMethod.OFF,
+                YandexKassaDataHolder.getPayMethods()
+        );
+        Intent intent = Checkout.createTokenizeIntent(this, paymentParameters);
+        startActivityForResult(intent, REQUEST_CODE_TOKENIZE);
+    }
+
+    @Override
+    public void start3DSecure(String confirmationUrl) {
+        Intent intent = Checkout.create3dsIntent(this, confirmationUrl);
+        startActivityForResult(intent, REQUEST_CODE_3DS);
+    }
+
+    @Override
+    public void paymentSuccess() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_TOKENIZE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    // successful tokenization
+                    TokenizationResult result = Checkout.createTokenizationResult(data);
+                    presenter.sendPaymentToken(result.paymentToken, YandexKassaDataHolder.tariffId);
+                    break;
+                case RESULT_CANCELED:
+                    Toast.makeText(this, R.string.payment_canceled, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        } else if (requestCode == REQUEST_CODE_3DS) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    presenter.approvePayment(YandexKassaDataHolder.yandexPurchaseId);
+                    break;
+                case RESULT_CANCELED:
+                    Toast.makeText(this, R.string.payment_canceled, Toast.LENGTH_SHORT).show();
+                    break;
+                case Checkout.RESULT_ERROR:
+                    Toast.makeText(this, R.string.payment_confiramtion_error, Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
+
 
     private void setupVideo() {
         final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tariff);
