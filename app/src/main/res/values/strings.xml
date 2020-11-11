@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="app_name">SL Interpreter</string>
+    <string name="app_name">МойРЖЯ</string>
     <string name="main_call_to_action">Press to connect with interpreter</string>
     <string name="main_minutes_left">Minutes left:</string>
     <string name="current_call">Current call</string>

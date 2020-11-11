@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Перекладач ЖМ</string>
+    <string name="app_name">МойРЖЯ</string>
     <string name="cancel">Назад</string>
     <string name="current_call">Поточний виклик</string>
     <string name="err_call_try_later">Під час виклику сталася помилка. Спробуйте пізніше</string>

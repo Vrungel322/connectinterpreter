@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Переводчик ЖЯ</string>
+    <string name="app_name">МойРЖЯ</string>
     <string name="cancel">Отмена</string>
     <string name="current_call">Текущий вызов</string>
     <string name="err_call_try_later">Во время вызова произошла ошибка. Пожалуйста, попробуйте позже</string>
