@@ -12,6 +12,7 @@ import com.getbewarned.connectinterpreter.managers.NetworkManager;
 import com.getbewarned.connectinterpreter.managers.UserManager;
 import com.getbewarned.connectinterpreter.models.ApiResponseBase;
 import com.getbewarned.connectinterpreter.models.HumanTime;
+import com.opentok.android.BaseVideoRenderer;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Publisher;
 import com.opentok.android.PublisherKit;
@@ -34,9 +35,9 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
 
     public static final Long PLEASE_WAITE_VIDEO_DELAY_MILLIS = 61 * 1000L;
 
-    private CallView view;
-    private UserManager userManager;
-    private NetworkManager networkManager;
+    private final CallView view;
+    private final UserManager userManager;
+    private final NetworkManager networkManager;
 
     private Session session;
     private Publisher publisher;
@@ -53,7 +54,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     private String sessionId;
     private String token;
 
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
 
     public CallPresenter(CallView view) {
@@ -135,13 +136,11 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     @Override
     public void onConnected(Session session) {
         publisher = new Publisher.Builder(view.getContext()).build();
+        publisher.getRenderer().setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FILL);
         publisher.setPublisherListener(CallPresenter.this);
-
         view.showSelfView(publisher.getView());
 
         session.publish(publisher);
-
-
     }
 
 
@@ -154,6 +153,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     public void onStreamReceived(Session session, Stream stream) {
         if (subscriber == null) {
             subscriber = new Subscriber.Builder(view.getContext(), stream).build();
+            subscriber.getRenderer().setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FILL);
             session.subscribe(subscriber);
             view.showInterpreterView(subscriber.getView());
             connectionEstablished();

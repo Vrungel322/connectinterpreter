@@ -353,10 +353,11 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             if (requestCode == RateInterpreterActivity.RC) {
                 int stars = data.getIntExtra(RateInterpreterActivity.STARS_KEY, -1);
                 String feedback = data.getStringExtra(RateInterpreterActivity.FEEDBACK_KEY);
-                if (stars != -1 && feedback != null) {
-                    presenter.onReview(stars, feedback);
-                }
-
+                presenter.onReview(stars, feedback);
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            if (requestCode == RateInterpreterActivity.RC) {
+                presenter.onReviewSkipped();
             }
         }
 
