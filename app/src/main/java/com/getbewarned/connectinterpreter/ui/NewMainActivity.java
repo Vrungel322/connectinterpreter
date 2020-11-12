@@ -36,7 +36,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     private static final int RC_VIDEO_APP_PERM = 387;
     private static final int RC_PHONE_STATE_PERM = 483;
-    static final String ZERO_TIME = "00:00";
+    public static final String ZERO_TIME = "00:00";
 
     TextView availabilityTitleLabel;
     TextView tvMinutesExpiration;
@@ -91,7 +91,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().add(new HelpDialog(), "HelpDialog").commitAllowingStateLoss();
+                getSupportFragmentManager().beginTransaction().add(new HelpDialog(), HelpDialog.TAG).commitAllowingStateLoss();
                 // stub
 //                navigateToCallWith("","","",300L);
             }

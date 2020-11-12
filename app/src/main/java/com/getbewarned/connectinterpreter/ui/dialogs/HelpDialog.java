@@ -21,6 +21,8 @@ import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.ui.dialogs.NoBackgroundDialog;
 
 public class HelpDialog extends NoBackgroundDialog {
+    public static final String TAG = "HelpDialog";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
