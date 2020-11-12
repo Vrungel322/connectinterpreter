@@ -32,7 +32,7 @@ public class WaitCallResponseDialog extends NoBackgroundDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_wait_for_call_response, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_wait_for_call_response, container, false);
     }
 
     @Override

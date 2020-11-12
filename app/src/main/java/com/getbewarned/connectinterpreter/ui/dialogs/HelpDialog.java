@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.getbewarned.connectinterpreter.R;
-import com.getbewarned.connectinterpreter.ui.dialogs.NoBackgroundDialog;
 
 public class HelpDialog extends NoBackgroundDialog {
     public static final String TAG = "HelpDialog";
@@ -26,7 +25,7 @@ public class HelpDialog extends NoBackgroundDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_help, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_help, container, false);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class HelpRequestDialog extends NoBackgroundDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_help_request, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_help_request, container, false);
     }
 
     @Override
