@@ -22,7 +22,7 @@ import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
 import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
-import com.getbewarned.connectinterpreter.ui.dialogs.RateDone;
+import com.getbewarned.connectinterpreter.ui.dialogs.RateInterpreterListener;
 import com.getbewarned.connectinterpreter.ui.dialogs.RateInterpreterDialog;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
@@ -342,7 +342,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
     @Override
     public void askAboutLastCall() {
         RateInterpreterDialog dialog = new RateInterpreterDialog();
-        dialog.setListener(new RateDone() {
+        dialog.setListener(new RateInterpreterListener() {
             @Override
             public void onRateDone(int rating, String feedback) {
                 presenter.onReview(rating, feedback);

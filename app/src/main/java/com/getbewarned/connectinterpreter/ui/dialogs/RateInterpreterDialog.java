@@ -19,9 +19,9 @@ public class RateInterpreterDialog extends NoBackgroundDialog {
 
     private EditText feedback;
     private TextView send;
-    private RateDone onDoneListener;
+    private RateInterpreterListener onDoneListener;
 
-    public void setListener(RateDone onDone) {
+    public void setListener(RateInterpreterListener onDone) {
         this.onDoneListener = onDone;
     }
 
