@@ -1,4 +1,4 @@
-package com.getbewarned.connectinterpreter.ui;
+package com.getbewarned.connectinterpreter.ui.dialogs;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -18,8 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.ui.dialogs.NoBackgroundDialog;
 
-public class HelpDialog extends DialogFragment {
+public class HelpDialog extends NoBackgroundDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class HelpDialog extends DialogFragment {
         view.findViewById(R.id.iv_close_help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                onBackPressed();
                 dismissAllowingStateLoss();
             }
         });

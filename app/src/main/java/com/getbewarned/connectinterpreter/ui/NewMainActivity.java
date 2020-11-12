@@ -1,7 +1,6 @@
 package com.getbewarned.connectinterpreter.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +21,9 @@ import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
+import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
+import com.getbewarned.connectinterpreter.ui.dialogs.RateDone;
+import com.getbewarned.connectinterpreter.ui.dialogs.RateInterpreterDialog;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
 import java.util.ArrayList;
@@ -339,26 +341,19 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void askAboutLastCall() {
-        Intent intent = new Intent(NewMainActivity.this, RateInterpreterActivity.class);
-        startActivityForResult(intent, RateInterpreterActivity.RC);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == RateInterpreterActivity.RC) {
-                int stars = data.getIntExtra(RateInterpreterActivity.STARS_KEY, -1);
-                String feedback = data.getStringExtra(RateInterpreterActivity.FEEDBACK_KEY);
-                presenter.onReview(stars, feedback);
+        RateInterpreterDialog dialog = new RateInterpreterDialog();
+        dialog.setListener(new RateDone() {
+            @Override
+            public void onRateDone(int rating, String feedback) {
+                presenter.onReview(rating, feedback);
             }
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            if (requestCode == RateInterpreterActivity.RC) {
+
+            @Override
+            public void rateSkipped() {
                 presenter.onReviewSkipped();
             }
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
+        });
+        getSupportFragmentManager().beginTransaction().add(dialog, "RateInterpreterDialog").commitAllowingStateLoss();
     }
 
     @Override

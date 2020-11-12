@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
 public class ActionsMenuActivity extends NoStatusBarActivity {
