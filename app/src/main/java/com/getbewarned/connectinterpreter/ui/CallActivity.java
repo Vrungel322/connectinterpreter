@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
@@ -20,11 +18,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +32,10 @@ import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
 import com.getbewarned.connectinterpreter.interfaces.CallView;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
+import com.getbewarned.connectinterpreter.ui.dialogs.ErrorDialog;
+import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
+import com.getbewarned.connectinterpreter.ui.dialogs.WaitCallResponseDialog;
+import com.getbewarned.connectinterpreter.ui.dialogs.WaitCallResponseListener;
 
 public class CallActivity extends NoStatusBarActivity implements CallView {
 
@@ -189,28 +191,21 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     @Override
     public void showIndicator(Long pleaseWaiteVideoDelayMillis) {
         if (debug == false) {
-            Intent intent = new Intent(CallActivity.this, WaitCallResponseActivity.class);
-            intent.putExtra(WaitCallResponseActivity.MILLIS_KEY_LONG, pleaseWaiteVideoDelayMillis);
-            startActivityForResult(intent, WaitCallResponseActivity.RC);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            WaitCallResponseDialog dialog = new WaitCallResponseDialog();
+            dialog.setDialogData(pleaseWaiteVideoDelayMillis, new WaitCallResponseListener() {
+                @Override
+                public void onDeclineToWait() {
+                    presenter.endCall(); // case when user tap "Cancel" in WaitCallResponseActivity
+                }
+            });
+            getSupportFragmentManager().beginTransaction().add(dialog, WaitCallResponseDialog.TAG).commitAllowingStateLoss();
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == WaitCallResponseActivity.RC) {
-                presenter.endCall(); // case when user tap "Cancel" in WaitCallResponseActivity
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void hideIndicator() {
-        if (WaitCallResponseActivity.activity != null) {
-            WaitCallResponseActivity.activity.finish();
-        }
+        Fragment prev = getSupportFragmentManager().findFragmentByTag(WaitCallResponseDialog.TAG);
+        if (prev != null) ((DialogFragment) prev).dismissAllowingStateLoss();
     }
 
     @Override
@@ -237,10 +232,9 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     @Override
     public void showErrorNewUI(String message) {
         if (debug == false) {
-            Intent intent = new Intent(CallActivity.this, ErrorActivity.class);
-            intent.putExtra(ErrorActivity.TEXT_KEY, message);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            ErrorDialog dialog = new ErrorDialog();
+            dialog.setErrorText(message);
+            getSupportFragmentManager().beginTransaction().add(dialog, ErrorDialog.TAG).commitAllowingStateLoss();
         }
     }
 

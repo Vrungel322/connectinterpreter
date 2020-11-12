@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
 public class ActionsMenuActivity extends NoStatusBarActivity {
@@ -44,9 +45,7 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
                 // dialog
-                Intent intent = new Intent(ActionsMenuActivity.this, HelpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                getSupportFragmentManager().beginTransaction().add(new HelpDialog(), "HelpDialog").commitAllowingStateLoss();
             }
         });
 
