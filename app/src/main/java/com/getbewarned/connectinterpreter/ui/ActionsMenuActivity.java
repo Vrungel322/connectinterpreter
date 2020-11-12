@@ -44,9 +44,7 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
 //                startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
                 // dialog
-                Intent intent = new Intent(ActionsMenuActivity.this, HelpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                getSupportFragmentManager().beginTransaction().add(new HelpDialog(), "HelpDialog").commitAllowingStateLoss();
             }
         });
 

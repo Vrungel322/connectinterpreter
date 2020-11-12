@@ -89,10 +89,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewMainActivity.this, HelpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
+                getSupportFragmentManager().beginTransaction().add(new HelpDialog(), "HelpDialog").commitAllowingStateLoss();
                 // stub
 //                navigateToCallWith("","","",300L);
             }
