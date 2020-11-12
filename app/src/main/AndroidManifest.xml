@@ -146,9 +146,6 @@
             android:name=".ui.requests.HelpRequestActivity"
             android:theme="@style/Transparent_Activity" />
         <activity
-            android:name=".ui.ErrorActivity"
-            android:theme="@style/Transparent_Activity" />
-        <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.NewMainActivity"
             android:screenOrientation="portrait"

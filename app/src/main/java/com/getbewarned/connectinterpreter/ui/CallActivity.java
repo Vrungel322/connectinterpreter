@@ -32,6 +32,8 @@ import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
 import com.getbewarned.connectinterpreter.interfaces.CallView;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
+import com.getbewarned.connectinterpreter.ui.dialogs.ErrorDialog;
+import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
 import com.getbewarned.connectinterpreter.ui.dialogs.WaitCallResponseDialog;
 import com.getbewarned.connectinterpreter.ui.dialogs.WaitCallResponseListener;
 
@@ -230,10 +232,9 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
     @Override
     public void showErrorNewUI(String message) {
         if (debug == false) {
-            Intent intent = new Intent(CallActivity.this, ErrorActivity.class);
-            intent.putExtra(ErrorActivity.TEXT_KEY, message);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            ErrorDialog dialog = new ErrorDialog();
+            dialog.setErrorText(message);
+            getSupportFragmentManager().beginTransaction().add(dialog, ErrorDialog.TAG).commitAllowingStateLoss();
         }
     }
 

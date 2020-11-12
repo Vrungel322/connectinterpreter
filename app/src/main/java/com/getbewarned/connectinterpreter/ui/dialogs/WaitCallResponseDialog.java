@@ -38,6 +38,7 @@ public class WaitCallResponseDialog extends NoBackgroundDialog {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setCancelable(false);
         animatePhoneIcon(view);
 
         view.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {

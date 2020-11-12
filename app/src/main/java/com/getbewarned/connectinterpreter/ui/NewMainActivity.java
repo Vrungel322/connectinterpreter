@@ -21,6 +21,7 @@ import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.presenters.MainPresenter;
+import com.getbewarned.connectinterpreter.ui.dialogs.ErrorDialog;
 import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
 import com.getbewarned.connectinterpreter.ui.dialogs.RateInterpreterListener;
 import com.getbewarned.connectinterpreter.ui.dialogs.RateInterpreterDialog;
@@ -182,10 +183,9 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
     @Override
     public void showErrorNewUI(String message) {
-        Intent intent = new Intent(NewMainActivity.this, ErrorActivity.class);
-        intent.putExtra(ErrorActivity.TEXT_KEY, message);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        ErrorDialog dialog = new ErrorDialog();
+        dialog.setErrorText(message);
+        getSupportFragmentManager().beginTransaction().add(dialog, ErrorDialog.TAG).commitAllowingStateLoss();
     }
 
     @AfterPermissionGranted(RC_VIDEO_APP_PERM)
