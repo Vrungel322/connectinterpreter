@@ -7,15 +7,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.getbewarned.connectinterpreter.R;
@@ -28,6 +28,7 @@ import com.getbewarned.connectinterpreter.presenters.RequestsPresenter;
 import com.getbewarned.connectinterpreter.ui.NoStatusBarActivity;
 import com.getbewarned.connectinterpreter.ui.RequestActivity;
 import com.getbewarned.connectinterpreter.ui.RequestFileSelector;
+import com.getbewarned.connectinterpreter.ui.dialogs.HelpRequestDialog;
 
 import java.io.File;
 
@@ -104,8 +105,7 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
         this.requestsList.setAdapter(this.presenter.getAdapter());
 
         // help dialog
-        Intent intent = new Intent(RequestsActivity.this, HelpRequestActivity.class);
-        startActivity(intent);
+        getSupportFragmentManager().beginTransaction().add(new HelpRequestDialog(), HelpRequestDialog.TAG).commitAllowingStateLoss();
     }
 
     @Override
