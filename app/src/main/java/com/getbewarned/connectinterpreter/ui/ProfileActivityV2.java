@@ -41,13 +41,6 @@ public class ProfileActivityV2 extends NoStatusBarActivity implements ProfileVie
                 startActivity(intent);
             }
         });
-        ((FrameLayout) findViewById(R.id.fl_buy)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivityV2.this, PurchaseActivity.class);
-                startActivity(intent);
-            }
-        });
 
         presenter = new ProfilePresenterV2(this, this);
         presenter.onCreate(getIntent().getExtras());
