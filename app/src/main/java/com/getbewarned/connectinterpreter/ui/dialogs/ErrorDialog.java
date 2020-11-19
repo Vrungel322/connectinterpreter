@@ -23,7 +23,7 @@ public class ErrorDialog extends NoBackgroundDialog {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_error, container, false);
+        return inflater.inflate(R.layout.dialog_fragment_error, container, false);
     }
 
     @Override
