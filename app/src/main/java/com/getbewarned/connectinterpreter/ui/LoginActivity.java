@@ -75,7 +75,7 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
             @Override
             public void onClick(View view) {
                 if (continueBtn.isActivated()) {
-                    String phone = "+7" + phoneField.getText().toString();
+                    String phone = "+" + phoneField.getText().toString();
 //                    String phone = "+380661805980";
 //                    String phone = "+380689647569";
                     presenter.continuePressed(phone, acceptCheck.isChecked());
