@@ -13,6 +13,7 @@ import com.getbewarned.connectinterpreter.interfaces.NewRequestView;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.presenters.NewRequestPresenter;
 import com.getbewarned.connectinterpreter.presenters.RequestPresenter;
+import com.getbewarned.connectinterpreter.ui.NewMainActivity;
 import com.getbewarned.connectinterpreter.ui.NoStatusBarActivity;
 import com.getbewarned.connectinterpreter.ui.RequestActivity;
 
@@ -38,7 +39,7 @@ public class NewRequestActivity extends NoStatusBarActivity implements NewReques
         findViewById(R.id.b_send_request).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.createRequest(RequestBitmapHolder.bitmap);
+                presenter.createRequest(RequestBitmapHolder.bitmap, NewRequestActivity.this);
             }
         });
 
