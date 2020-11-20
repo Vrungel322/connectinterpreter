@@ -34,7 +34,7 @@
     <VideoView
         android:id="@+id/vv_purchse"
         android:layout_width="wrap_content"
-        android:layout_height="270dp"
+        android:layout_height="250dp"
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
