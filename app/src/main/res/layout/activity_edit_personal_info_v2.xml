@@ -10,8 +10,8 @@
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:layout_marginTop="@dimen/toolbar_top_margin"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_new_ui" />
@@ -103,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_first_name"
+                android:imeOptions="actionDone"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -111,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_last_name"
+                android:imeOptions="actionDone"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -119,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:hint="@string/utog_patronymic"
+                android:imeOptions="actionDone"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -127,6 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:hint="@string/country"
+                android:imeOptions="actionDone"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -135,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:hint="@string/city"
+                android:imeOptions="actionDone"
                 android:inputType="textPersonName" />
 
             <Button

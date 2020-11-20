@@ -9,7 +9,9 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.interfaces.LoginView;
 import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
@@ -35,6 +38,18 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
     private TextView acceptText;
 
     private LoginPresenter presenter;
+
+    TextView.OnEditorActionListener imeDoneListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                continueBtn.performClick();
+                UiUtils.hideKeyboard(getCurrentFocus());
+                return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +99,7 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
                 toggleActiveContinueBtn();
             }
         });
+        phoneField.setOnEditorActionListener(imeDoneListener);
 
         acceptCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -91,10 +107,6 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
                 toggleActiveContinueBtn();
             }
         });
-
-//        stub
-//        Intent intent = new Intent(this, CompensationPrepareActivity.class);
-//        startActivity(intent);
     }
 
     @Override

@@ -6,7 +6,9 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.interfaces.EditPersonalInfoView;
 import com.getbewarned.connectinterpreter.presenters.EditPersonalInfoPresenterV2;
 
@@ -55,6 +58,17 @@ public class EditPersonalInfoActivity extends NoStatusBarActivity implements Edi
         }
     };
 
+    TextView.OnEditorActionListener imeDoneListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                UiUtils.hideKeyboard(getCurrentFocus());
+                return true;
+            }
+            return false;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +99,12 @@ public class EditPersonalInfoActivity extends NoStatusBarActivity implements Edi
         bSave = findViewById(R.id.b_save);
         tvSaveLater = findViewById(R.id.tv_save_later);
         tvSaveLater.setPaintFlags(tvSaveLater.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        etName.setOnEditorActionListener(imeDoneListener);
+        etLastName.setOnEditorActionListener(imeDoneListener);
+        etPatronymicName.setOnEditorActionListener(imeDoneListener);
+        etCountry.setOnEditorActionListener(imeDoneListener);
+        etCity.setOnEditorActionListener(imeDoneListener);
 
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override

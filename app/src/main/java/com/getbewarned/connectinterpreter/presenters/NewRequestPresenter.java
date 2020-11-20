@@ -1,5 +1,6 @@
 package com.getbewarned.connectinterpreter.presenters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class NewRequestPresenter implements Presenter {
 
     public NewRequestPresenter(final NewRequestView view, Context context) {
         this.view = view;
+        Realm.init(context);
         this.realm = Realm.getDefaultInstance();
         UserManager userManager = new UserManager(context);
         networkManager = new NetworkManager(context);
@@ -52,37 +54,53 @@ public class NewRequestPresenter implements Presenter {
 
     }
 
-    public void createRequest(Bitmap bitmap) {
+    public void createRequest(final Bitmap bitmap, final Activity a) {
         view.showLoading();
-        this.networkManager.newRequest(bitmap, new NewRequestCreated() {
+        new Thread(new Runnable() {
             @Override
-            public void onRequestCreated(NewRequestResponse response) {
-                realm.beginTransaction();
-                Request request = new Request();
-                request.setId(response.getRequest().getId());
-                request.setCreated(new Date(response.getRequest().getCreated_at() * 1000));
-                request.setUpdated(new Date(response.getRequest().getUpdated_at() * 1000));
-                request.setStatus(response.getRequest().getStatus());
-                request.setName(response.getRequest().getName());
-                request = realm.copyToRealmOrUpdate(request);
-                RequestMessage message = new RequestMessage();
-                message.setId(response.getRequestMessage().getId());
-                message.setCreated(new Date(response.getRequestMessage().getCreated_at() * 1000));
-                message.setType(response.getRequestMessage().getType());
-                message.setContent(response.getRequestMessage().getContent());
-                message.setThumbnail(response.getRequestMessage().getThumbnail());
-                message.setAuthor(RequestMessage.SELF);
-                request.getMessages().add(message);
-                realm.commitTransaction();
-                view.hideLoading();
-                view.goToRequest(request);
-            }
+            public void run() {
+                networkManager.newRequest(bitmap, new NewRequestCreated() {
+                    @Override
+                    public void onRequestCreated(NewRequestResponse response) {
+                        realm.beginTransaction();
+                        Request request = new Request();
+                        request.setId(response.getRequest().getId());
+                        request.setCreated(new Date(response.getRequest().getCreated_at() * 1000));
+                        request.setUpdated(new Date(response.getRequest().getUpdated_at() * 1000));
+                        request.setStatus(response.getRequest().getStatus());
+                        request.setName(response.getRequest().getName());
+                        request = realm.copyToRealmOrUpdate(request);
+                        RequestMessage message = new RequestMessage();
+                        message.setId(response.getRequestMessage().getId());
+                        message.setCreated(new Date(response.getRequestMessage().getCreated_at() * 1000));
+                        message.setType(response.getRequestMessage().getType());
+                        message.setContent(response.getRequestMessage().getContent());
+                        message.setThumbnail(response.getRequestMessage().getThumbnail());
+                        message.setAuthor(RequestMessage.SELF);
+                        request.getMessages().add(message);
+                        realm.commitTransaction();
+                        final Request finalRequest = request;
+                        a.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.hideLoading();
+                                view.goToRequest(finalRequest);
+                            }
+                        });
+                    }
 
-            @Override
-            public void onErrorReceived(Error error) {
-                view.hideLoading();
-                view.showError(error.getMessage());
+                    @Override
+                    public void onErrorReceived(final Error error) {
+                        a.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.hideLoading();
+                                view.showError(error.getMessage());
+                            }
+                        });
+                    }
+                });
             }
-        });
+        }).start();
     }
 }

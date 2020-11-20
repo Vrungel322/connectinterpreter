@@ -40,6 +40,7 @@ public class RequestsPresenter implements Presenter {
     public RequestsPresenter(RequestsView view, Context context) {
         this.view = view;
         this.context = context;
+        Realm.init(context);
         this.realm = Realm.getDefaultInstance();
         this.networkManager = new NetworkManager(context);
         this.userManager = new UserManager(context);
