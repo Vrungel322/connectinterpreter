@@ -2,6 +2,7 @@ package com.getbewarned.connectinterpreter;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.graphics.Outline;
 import android.os.Build;
 import android.view.View;
@@ -9,9 +10,12 @@ import android.view.ViewOutlineProvider;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.view.inputmethod.InputMethodManager;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+
+import javax.annotation.Nullable;
 
 public class UiUtils {
     public static void actionMainScreen(View v) {
@@ -109,5 +113,12 @@ public class UiUtils {
         anim.setFillAfter(true); // Needed to keep the result of the animation
         anim.setDuration(duration);
         v.startAnimation(anim);
+    }
+
+    public static void hideKeyboard(@Nullable View currentFocus) {
+        if (currentFocus != null) {
+            ((InputMethodManager) currentFocus.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+        }
     }
 }
