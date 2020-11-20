@@ -25,6 +25,7 @@ public class NewRequestPresenter implements Presenter {
 
     public NewRequestPresenter(final NewRequestView view, Context context) {
         this.view = view;
+        Realm.init(context);
         this.realm = Realm.getDefaultInstance();
         UserManager userManager = new UserManager(context);
         networkManager = new NetworkManager(context);
