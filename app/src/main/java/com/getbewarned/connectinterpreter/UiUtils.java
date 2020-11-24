@@ -5,12 +5,19 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Outline;
 import android.os.Build;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -119,6 +126,29 @@ public class UiUtils {
         if (currentFocus != null) {
             ((InputMethodManager) currentFocus.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                     .hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+        }
+    }
+
+    public static void clickSubText(TextView view, final String clickableText, final ClickableSpan listener) {
+
+        CharSequence text = view.getText();
+        String string = text.toString();
+
+        int start = string.indexOf(clickableText);
+        int end = start + clickableText.length();
+        if (start == -1) return;
+
+        if (text instanceof Spannable) {
+            ((Spannable)text).setSpan(listener, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            SpannableString s = SpannableString.valueOf(text);
+            s.setSpan(listener, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            view.setText(s);
+        }
+
+        MovementMethod m = view.getMovementMethod();
+        if ((m == null) || !(m instanceof LinkMovementMethod)) {
+            view.setMovementMethod(LinkMovementMethod.getInstance());
         }
     }
 }

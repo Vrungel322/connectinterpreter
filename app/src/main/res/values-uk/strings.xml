@@ -47,7 +47,9 @@
     <string name="error_outside_working_time">На жаль, ви телефонуєте в неробочий час</string>
     <string name="error_in_call">Ви вже спілкуєтесь на іншому пристрої</string>
     <string name="error_no_right">Ви не маєте права здійснювати цю дію</string>
-    <string name="login_accept"><![CDATA[Я прочитав(-ла) та згоден(-а) з <b href=\'https://interpreter.getbw.me/docs/terms_of_use\'>умовами використання</b> та <b href=\'https://interpreter.getbw.me/docs/privacy_policy\'>політикою конфеденційності</b>]]></string>
+    <string name="login_accept"><![CDATA[Я прочитав(-ла) та згоден(-а) з <b>умовами використання</b> та <b>політикою конфеденційності</b>]]></string>
+    <string name="login_tos">умовами використання</string>
+    <string name="login_privacy_policy">політикою конфеденційності</string>
     <string name="main_active_till">Безлімітні дзвінки до</string>
     <string name="date_format">dd.MM.yy</string>
     <string name="buy_unlim_btn">Придбати безліміт</string>

@@ -3,12 +3,13 @@ package com.getbewarned.connectinterpreter.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -19,8 +20,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.getbewarned.connectinterpreter.NetworkLinks;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.interfaces.LoginView;
@@ -61,13 +64,23 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
         acceptText = findViewById(R.id.accept_text);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            acceptText.setText(Html.fromHtml(getString(R.string.login_accept), Html.FROM_HTML_MODE_LEGACY));
+            acceptText.setText(Html.fromHtml(getString(R.string.login_accept), Html.FROM_HTML_MODE_COMPACT));
         } else {
             acceptText.setText(Html.fromHtml(getString(R.string.login_accept)));
         }
-        acceptText.setClickable(true);
-        acceptText.setMovementMethod(LinkMovementMethod.getInstance());
+        UiUtils.clickSubText(acceptText, getString(R.string.login_tos), new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(NetworkLinks.TOS)));
+            }
+        });
 
+        UiUtils.clickSubText(acceptText, getString(R.string.login_privacy_policy), new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(NetworkLinks.PRIVACY_POLICY)));
+            }
+        });
 
         presenter = new LoginPresenter(this);
 
