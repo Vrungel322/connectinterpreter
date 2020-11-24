@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
 import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.models.TariffItem;
