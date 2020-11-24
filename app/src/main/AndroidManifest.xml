@@ -48,6 +48,7 @@
 
         <activity
             android:name=".ui.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.NameInputActivity"
@@ -62,6 +63,7 @@
 
         <activity
             android:name=".ui.ConfirmationActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.UtogActivity"
