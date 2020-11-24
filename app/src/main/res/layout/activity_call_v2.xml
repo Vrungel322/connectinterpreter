@@ -123,8 +123,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        android:fadingEdgeLength="300dp"
-        android:requiresFadingEdge="vertical"
         app:layout_constraintBottom_toTopOf="@id/message_field"
         app:layout_constraintEnd_toEndOf="@+id/message_field"
         app:layout_constraintStart_toStartOf="@+id/message_field"
