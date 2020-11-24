@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.ui.dialogs.HelpDialog;
 import com.getbewarned.connectinterpreter.ui.requests.RequestsActivity;
 
@@ -40,12 +42,8 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
         findViewById(R.id.cl_help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // browser
-//                Uri uri = Uri.parse("https://interpreter.getbw.me/help");
-//                startActivity(new Intent(Intent.ACTION_VIEW, uri));
-
-                // dialog
                 getSupportFragmentManager().beginTransaction().add(new HelpDialog(), "HelpDialog").commitAllowingStateLoss();
+                Analytics.getInstance().trackEvent(Events.EVENT_ACTION_HELP);
             }
         });
 
@@ -81,6 +79,8 @@ public class ActionsMenuActivity extends NoStatusBarActivity {
         UiUtils.actionActionsScreen(findViewById(R.id.iv_news));
         UiUtils.actionActionsScreen(findViewById(R.id.iv_share));
 //        UiUtils.actionActionsScreen(findViewById(R.id.iv_qr));
+
+        Analytics.getInstance().trackEvent(Events.EVENT_MAIN_MENU_OPENED);
 
     }
 

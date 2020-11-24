@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.NameInputView;
 import com.getbewarned.connectinterpreter.presenters.NameInputPresenter;
 
@@ -65,6 +67,7 @@ public class NameInputActivity extends NoStatusBarActivity implements NameInputV
                 }
             }
         });
+        Analytics.getInstance().trackEvent(Events.EVENT_INPUT_NAME_OPENED);
     }
 
     @Override

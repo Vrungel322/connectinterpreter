@@ -16,6 +16,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.adapters.CompensationPageAdapter;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.custon_ui_elements.SwipableViewPager;
 import com.getbewarned.connectinterpreter.interfaces.CompensationView;
 import com.getbewarned.connectinterpreter.presenters.CompensationPresenter;
@@ -121,6 +123,8 @@ public class CompensationActivity extends NoStatusBarActivity implements Compens
                 }
             }
         });
+
+        Analytics.getInstance().trackEvent(Events.EVENT_COMPENSATION_OPENED);
     }
 
     @Override

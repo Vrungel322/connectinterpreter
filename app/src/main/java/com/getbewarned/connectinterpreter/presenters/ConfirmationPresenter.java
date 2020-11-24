@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.CodeReceived;
 import com.getbewarned.connectinterpreter.interfaces.ConfirmationView;
 import com.getbewarned.connectinterpreter.interfaces.HelpRequested;
@@ -64,6 +66,7 @@ public class ConfirmationPresenter implements Presenter {
     }
 
     public void loginPressed(String code) {
+        Analytics.getInstance().trackEvent(Events.EVENT_ACTION_CODE_ENETERED);
         if (code.isEmpty()) {
             view.showError(view.getContext().getString(R.string.fields_required), null);
             return;
@@ -91,6 +94,7 @@ public class ConfirmationPresenter implements Presenter {
                     view.showError(response.getMessage(), null);
                     view.toggleEnabledRequestBtn(true);
                 }
+                Analytics.getInstance().trackEvent(Events.EVENT_ACTION_LOGIN);
             }
 
             @Override

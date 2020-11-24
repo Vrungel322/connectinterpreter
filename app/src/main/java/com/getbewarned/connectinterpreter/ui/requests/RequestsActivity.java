@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.RequestFileSelection;
 import com.getbewarned.connectinterpreter.interfaces.RequestsView;
 import com.getbewarned.connectinterpreter.models.Request;
@@ -106,6 +108,8 @@ public class RequestsActivity extends NoStatusBarActivity implements RequestsVie
 
         // help dialog
         getSupportFragmentManager().beginTransaction().add(new HelpRequestDialog(), HelpRequestDialog.TAG).commitAllowingStateLoss();
+
+        Analytics.getInstance().trackEvent(Events.EVENT_TEXT_TO_VIDEO_OPENED);
     }
 
     @Override

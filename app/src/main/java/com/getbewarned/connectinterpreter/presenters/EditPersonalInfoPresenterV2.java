@@ -3,6 +3,8 @@ package com.getbewarned.connectinterpreter.presenters;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
 import com.getbewarned.connectinterpreter.interfaces.EditPersonalInfoView;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
@@ -85,6 +87,7 @@ public class EditPersonalInfoPresenterV2 implements Presenter {
         networkManager.updateProfile(firstName, lastName, patronymic, country, city, new ProfileReceived() {
             @Override
             public void onReceived(ProfileResponse response) {
+                Analytics.getInstance().trackEvent(Events.EVENT_ACTION_PROFILE_UPDATED);
                 userManager.updateUserName(firstName);
                 userManager.updateUserLastName(lastName);
                 userManager.updateUserPatronymic(patronymic);

@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.ProfileView;
 import com.getbewarned.connectinterpreter.presenters.ProfilePresenterV2;
 
@@ -44,6 +46,8 @@ public class ProfileActivityV2 extends NoStatusBarActivity implements ProfileVie
 
         presenter = new ProfilePresenterV2(this, this);
         presenter.onCreate(getIntent().getExtras());
+
+        Analytics.getInstance().trackEvent(Events.EVENT_PROFILE_OPENED);
     }
 
     @Override

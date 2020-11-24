@@ -18,6 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.EditPersonalInfoView;
 import com.getbewarned.connectinterpreter.presenters.EditPersonalInfoPresenterV2;
 
@@ -129,6 +131,8 @@ public class EditPersonalInfoActivity extends NoStatusBarActivity implements Edi
                 onBackPressed();
             }
         });
+
+        Analytics.getInstance().trackEvent(Events.EVENT_EDIT_PROFILE_OPENED);
     }
 
     @Override

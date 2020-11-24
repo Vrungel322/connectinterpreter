@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "783442215496",
-    "firebase_url": "https://sl-interpreter-cloud-messaging.firebaseio.com",
-    "project_id": "sl-interpreter-cloud-messaging",
-    "storage_bucket": "sl-interpreter-cloud-messaging.appspot.com"
+    "project_number": "537031231656",
+    "firebase_url": "https://russian-sli.firebaseio.com",
+    "project_id": "russian-sli",
+    "storage_bucket": "russian-sli.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:783442215496:android:9a386ec6f19df604",
+        "mobilesdk_app_id": "1:537031231656:android:9bd8d57ddc80dbccea9a9d",
         "android_client_info": {
           "package_name": "com.interpreter_android.ru"
         }
       },
       "oauth_client": [
         {
-          "client_id": "783442215496-3rkjj8m5ddf6ri78o05imjffcoptgbi2.apps.googleusercontent.com",
+          "client_id": "537031231656-u9isg42ss7p4slp6hmfrne210bb1tdt4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDIQ-aKjrv24u5kXfAzWdLzJuXzxY-xVuc"
+          "current_key": "AIzaSyA32udNdxEOWdi3VCcEHaCag-x9RCbqLoc"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537031231656-u9isg42ss7p4slp6hmfrne210bb1tdt4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
