@@ -30,6 +30,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
 import com.getbewarned.connectinterpreter.adapters.MessagesAdapter;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.CallView;
 import com.getbewarned.connectinterpreter.presenters.CallPresenter;
 import com.getbewarned.connectinterpreter.ui.dialogs.ErrorDialog;
@@ -153,6 +155,8 @@ public class CallActivity extends NoStatusBarActivity implements CallView {
                 showOneMoreMessage("Some message to interpreter " + i);
             }
         }
+
+        Analytics.getInstance().trackEvent(Events.EVENT_ACTION_NEW_CALL);
 
     }
 

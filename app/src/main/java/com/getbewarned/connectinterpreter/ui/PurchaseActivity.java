@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.models.TariffItem;
 import com.getbewarned.connectinterpreter.presenters.PurchasePresenter;
@@ -82,6 +83,8 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
 
             }
         });
+
+        Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_OPENED);
     }
 
     private void checkout() {
@@ -168,7 +171,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         } else if (requestCode == REQUEST_CODE_3DS) {
             switch (resultCode) {
                 case RESULT_OK:
-                    presenter.approvePayment(YandexKassaDataHolder.yandexPurchaseId);
+                    presenter.approvePayment(YandexKassaDataHolder.yandexPurchaseId, YandexKassaDataHolder.tariffId);
                     break;
                 case RESULT_CANCELED:
                     Toast.makeText(this, R.string.payment_canceled, Toast.LENGTH_SHORT).show();

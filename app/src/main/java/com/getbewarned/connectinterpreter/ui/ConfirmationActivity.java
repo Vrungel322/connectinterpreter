@@ -22,6 +22,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.ConfirmationView;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
 
@@ -110,6 +112,7 @@ public class ConfirmationActivity extends NoStatusBarActivity implements Confirm
             }
         });
         codeField.setOnEditorActionListener(imeDoneListener);
+        Analytics.getInstance().trackEvent(Events.EVENT_CODE_OPENED);
     }
 
     @Override

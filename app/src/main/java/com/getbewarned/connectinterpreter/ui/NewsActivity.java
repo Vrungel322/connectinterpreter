@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.NewsView;
 import com.getbewarned.connectinterpreter.models.News;
 import com.getbewarned.connectinterpreter.presenters.NewsPresenter;
@@ -47,7 +49,7 @@ public class NewsActivity extends NoStatusBarActivity implements NewsView {
 
         newsList.setAdapter(presenter.getAdapter());
 
-
+        Analytics.getInstance().trackEvent(Events.EVENT_NEWS_OPENED);
     }
 
     @Override

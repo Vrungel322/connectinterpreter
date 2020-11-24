@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.getbewarned.connectinterpreter.R;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.NewRequestView;
 import com.getbewarned.connectinterpreter.models.Request;
 import com.getbewarned.connectinterpreter.presenters.NewRequestPresenter;
@@ -39,6 +41,7 @@ public class NewRequestActivity extends NoStatusBarActivity implements NewReques
         findViewById(R.id.b_send_request).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Analytics.getInstance().trackEvent(Events.EVENT_ACTION_NEW_TEXT_TO_VIDEO);
                 presenter.createRequest(RequestBitmapHolder.bitmap, NewRequestActivity.this);
             }
         });

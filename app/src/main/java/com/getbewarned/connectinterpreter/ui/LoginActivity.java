@@ -26,6 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import com.getbewarned.connectinterpreter.NetworkLinks;
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.LoginView;
 import com.getbewarned.connectinterpreter.models.Country;
 import com.getbewarned.connectinterpreter.presenters.ConfirmationPresenter;
@@ -120,6 +122,7 @@ public class LoginActivity extends NoStatusBarActivity implements LoginView {
                 toggleActiveContinueBtn();
             }
         });
+        Analytics.getInstance().trackEvent(Events.EVENT_LOGIN_OPENED);
     }
 
     @Override

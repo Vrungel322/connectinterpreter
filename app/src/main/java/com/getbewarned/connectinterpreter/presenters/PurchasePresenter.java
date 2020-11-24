@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
 import com.getbewarned.connectinterpreter.adapters.TariffsAdapter;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
 import com.getbewarned.connectinterpreter.interfaces.PurchaseView;
 import com.getbewarned.connectinterpreter.interfaces.TariffClickListener;
@@ -87,7 +89,8 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
         return adapter.selectedItem;
     }
 
-    public void sendPaymentToken(String token, String tariffId) {
+    public void sendPaymentToken(String token, final String tariffId) {
+        Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_PLAN + tariffId);
         networkManager.buyYandexKassa(token, tariffId, new YandexKassaPaymentReceived() {
             @Override
             public void onPaymentReceived(CreateYandexPaymentResponse response) {
@@ -96,26 +99,29 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
                     YandexKassaDataHolder.yandexPurchaseId = response.getId();
                     view.start3DSecure(confirmation);
                 } else {
-                    approvePayment(response.getId());
+                    approvePayment(response.getId(), tariffId);
                 }
             }
 
             @Override
             public void onErrorReceived(Error error) {
+                Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_PLAN_ERROR + tariffId);
                 view.error(error);
             }
         });
     }
 
-    public void approvePayment(String yandexPurchaseId) {
+    public void approvePayment(String yandexPurchaseId, final String tariffId) {
         networkManager.approveYandexPayment(yandexPurchaseId, new YandexPaymentApprove() {
             @Override
             public void onYandexPaymentApprove(ApiResponseBase response) {
+                Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_PLAN_SUCCESS + tariffId);
                 view.paymentSuccess();
             }
 
             @Override
             public void onErrorReceived(Error error) {
+                Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_PLAN_ERROR + tariffId);
                 view.error(error);
             }
         });

@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.UiUtils;
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.MainView;
 import com.getbewarned.connectinterpreter.models.Reason;
 import com.getbewarned.connectinterpreter.models.TariffResponse;
@@ -93,8 +95,7 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().add(new HelpDialog(), HelpDialog.TAG).commitAllowingStateLoss();
-                // stub
-//                navigateToCallWith("","","",300L);
+                Analytics.getInstance().trackEvent(Events.EVENT_ACTION_HELP);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +121,8 @@ public class NewMainActivity extends NoStatusBarActivity implements MainView {
 
         presenter = new MainPresenter(this, this);
         presenter.onCreate(getIntent().getExtras());
+
+        Analytics.getInstance().trackEvent(Events.EVENT_MAIN_OPENED);
     }
 
     @Override

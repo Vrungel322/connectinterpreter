@@ -2,6 +2,8 @@ package com.getbewarned.connectinterpreter.presenters;
 
 import android.os.Bundle;
 
+import com.getbewarned.connectinterpreter.analytics.Analytics;
+import com.getbewarned.connectinterpreter.analytics.Events;
 import com.getbewarned.connectinterpreter.interfaces.BaseRequestCompleted;
 import com.getbewarned.connectinterpreter.interfaces.CompensationView;
 import com.getbewarned.connectinterpreter.interfaces.Presenter;
@@ -18,8 +20,8 @@ import java.util.Locale;
 public class CompensationPresenter implements Presenter {
 
     private final CompensationView view;
-    private NetworkManager networkManager;
-    private UserManager userManager;
+    private final NetworkManager networkManager;
+    private final UserManager userManager;
 
     public CompensationPresenter(CompensationView view) {
         this.view = view;
@@ -42,6 +44,7 @@ public class CompensationPresenter implements Presenter {
                     @Override
                     public void onComplete(ApiResponseBase response) {
                         if (response.isSuccess()) {
+                            Analytics.getInstance().trackEvent(Events.EVENT_COMPENSATION_INFO_SENT);
                             view.goBack();
                         } else {
                             view.showError(response.getMessage(), null);
