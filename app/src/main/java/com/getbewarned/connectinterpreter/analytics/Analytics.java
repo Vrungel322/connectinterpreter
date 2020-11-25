@@ -21,7 +21,9 @@ public class Analytics {
     }
 
     public void trackEvent(String eventName) {
-        mFirebaseAnalytics.logEvent(eventName, null);
+        if (mFirebaseAnalytics != null) {
+            mFirebaseAnalytics.logEvent(eventName, null);
+        }
     }
 
 }
