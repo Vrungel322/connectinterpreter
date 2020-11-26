@@ -86,17 +86,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                style="@style/Text_default"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="Some big text Some big text Some big textSome big text Some big text Some big textSome big text Some big text Some big textSome big text Some big text Some big text" />
-
-
             <EditText
                 android:id="@+id/et_name"
                 style="@style/EditText_rounded"
