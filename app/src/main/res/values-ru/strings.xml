@@ -46,13 +46,13 @@
     <string name="error_outside_working_time">К сожалению, вы звоните в нерабочее время</string>
     <string name="error_in_call">Вы уже общаетесь на другом устройстве</string>
     <string name="error_no_right">У вас нет прав на совершение данного действия</string>
-    <string name="login_accept"><![CDATA[Я прочитал(-а) и согласен(-а) с <b>условиями использования</b> и <b>политикой конфиденциальности</b>]]></string>
+    <string name="login_accept"><![CDATA[Я прочитал(-ла) и согласен(-на) с <b>условиями использования</b> и <b>политикой конфиденциальности</b>]]></string>
     <string name="login_tos">условиями использования</string>
     <string name="login_privacy_policy">политикой конфиденциальности</string>
     <string name="main_active_till">Безлимитные звонки до</string>
     <string name="date_format">dd.MM.yy</string>
     <string name="buy_unlim_btn">Купить безлимит</string>
-    <string name="not_available_desc_utog">Бесплатно позвонить можете\nзавтра. Или можете купить еще\nминут, нажав кнопку "+" рядом\n с полем доступных минут</string>
+    <string name="not_available_desc_utog">Вы можете купить минуты,\nнажав кнопку “+” рядом с\nполем доступных минут,\nлибо бесплатно позвонить завтра.</string>
     <string name="not_available_desc">Вы можете купить еще минут нажав кнопку ниже</string>
     <string name="tariff_pattern">%s - %s</string>
     <string name="permission_rationale_liqpay">Необходимо предоставить доступ к звонкам для завершения процесса покупки</string>
@@ -69,7 +69,7 @@
     <string name="confirmation_desc">СМС с кодом подтверждения было\nотправлено на номер %s</string>
     <string name="wrong_number">Неправильный номер?</string>
     <string name="whats_new">Что нового</string>
-    <string name="confirmation_wait">Если вы его еще не получили, подождите немного.\nЭто может занять несколько минут!</string>
+    <string name="confirmation_wait">Если вы ничего не получили, пожалуйста, подождите.\nЭто может занять несколько минут!</string>
     <string name="confirmation_title">Вы получили\nкод подтверждения?</string>
     <string name="drawer_unlim">Купить безлимит</string>
     <string name="drawer_utog">Я - член УТОГ</string>
@@ -109,8 +109,7 @@
     <string name="media_image_camera">Снять фото</string>
     <string name="media_selector_title">Выбрать изображение</string>
     <string name="file_uploading">Загрузка файла. Подождите</string>
-    <string name="no_requests_desc">Вы можете попросить наших переводчиков обьяснить с помощью ЖЯ непонятный вам документ. Сфотографируйте его или выберите с устройства</string>
-    <!--Вы можете попросить наших переводчиков обьяснить на РЖЯ документ или перевести ваше видео на РЖЯ в текст для слышаших-->
+    <string name="no_requests_desc">Попросите наших переводчиков объяснить непонятный вам документ на жестовом языке.\nСфотографируйте его или выберите в галерее устройства</string>
     <string name="no_requests_title">У вас еще нет заявок</string>
     <string name="status_new">Новый</string>
     <string name="status_assigned">Принят в обработку</string>
@@ -178,7 +177,7 @@
     <string name="tariff_name_stub">Название тарифа</string>
     <string name="compensation_step_fullname">Укажите свое ФИО, чтобы мы знали на кого оформлять компенсацию</string>
     <string name="date_of_birth">Дата рождения</string>
-    <string name="compensation_step_date_of_birth">Также, пожалуйста, укажите вашу дату рождения</string>
+    <string name="compensation_step_date_of_birth">Укажите дату рождения</string>
     <string name="enter_passport_serial_code">Введите серию паспорта</string>
     <string name="enter_passport_serial_number">Введите номер паспорта</string>
     <string name="compensation_step_passport_data">Предоставьте данные паспорта, чтобы мы могли идентифицировать вас</string>
