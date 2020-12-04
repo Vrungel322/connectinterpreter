@@ -2,6 +2,7 @@ package com.getbewarned.connectinterpreter.presenters;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.getbewarned.connectinterpreter.YandexKassaDataHolder;
 import com.getbewarned.connectinterpreter.adapters.TariffsAdapter;
@@ -90,6 +91,8 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
     }
 
     public void sendPaymentToken(String token, final String tariffId) {
+        Log.d("YK", "payment token: " + token);
+        Log.d("YK", "tariff: " + tariffId);
         Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_PLAN + tariffId);
         networkManager.buyYandexKassa(token, tariffId, new YandexKassaPaymentReceived() {
             @Override

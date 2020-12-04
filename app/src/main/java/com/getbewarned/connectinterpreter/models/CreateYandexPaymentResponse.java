@@ -6,18 +6,39 @@ import com.google.gson.annotations.Expose;
  * Created by artycake on 1/17/18.
  */
 
-public class CreateYandexPaymentResponse extends ApiResponseBase {
+public class CreateYandexPaymentResponse {
+
     @Expose
-    String confirmation;
+    Boolean status;
     @Expose
-    String id;
+    Response response;
 
     public String getConfirmation() {
-        return confirmation;
+        return response.confirmation;
     }
 
     public String getId() {
-        return id;
+        return response.id;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    static class Response {
+
+        @Expose
+        String confirmation;
+        @Expose
+        String id;
+
+        public String getConfirmation() {
+            return confirmation;
+        }
+
+        public String getId() {
+            return id;
+        }
     }
 }
 

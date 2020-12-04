@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,11 +29,11 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 import pub.devrel.easypermissions.EasyPermissions;
-import ru.yandex.money.android.sdk.Amount;
-import ru.yandex.money.android.sdk.Checkout;
-import ru.yandex.money.android.sdk.PaymentParameters;
-import ru.yandex.money.android.sdk.SavePaymentMethod;
-import ru.yandex.money.android.sdk.TokenizationResult;
+import ru.yoo.sdk.kassa.payments.Amount;
+import ru.yoo.sdk.kassa.payments.Checkout;
+import ru.yoo.sdk.kassa.payments.PaymentParameters;
+import ru.yoo.sdk.kassa.payments.SavePaymentMethod;
+import ru.yoo.sdk.kassa.payments.TokenizationResult;
 
 public class PurchaseActivity extends NoStatusBarActivity implements PurchaseView {
 

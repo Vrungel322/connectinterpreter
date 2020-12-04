@@ -66,11 +66,14 @@ dependencies {
     implementation 'com.github.nkzawa:socket.io-client:0.3.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'com.daimajia.androidanimations:library:2.0@aar'
-    implementation 'com.yandex.money:checkout:4.0.0'
+//    implementation 'com.yandex.money:checkout:4.0.0'
+    implementation 'ru.yoo.sdk.kassa.payments:yookassa-android-sdk:5.0.1'
 
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
+
+//    implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
 }
 
 

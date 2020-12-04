@@ -2,6 +2,7 @@ package com.getbewarned.connectinterpreter.managers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.getbewarned.connectinterpreter.R;
 import com.getbewarned.connectinterpreter.interfaces.ApiService;
@@ -470,10 +471,8 @@ public class NetworkManager {
             @Override
             public void onResponse(Call<CreateYandexPaymentResponse> call, Response<CreateYandexPaymentResponse> response) {
                 if (response.isSuccessful()) {
-                    if (response.body().isSuccess()) {
+                    if (response.body().getStatus()) {
                         buyReceived.onPaymentReceived(response.body());
-                    } else {
-                        buyReceived.onErrorReceived(getErrorByCode(response.body().getCode()));
                     }
                 } else {
                     buyReceived.onErrorReceived(getErrorFromResponse(response.errorBody()));

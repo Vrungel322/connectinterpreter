@@ -122,12 +122,14 @@ public interface ApiService {
                                          @Query("lang") String language);
 
     @POST("/api/v3/payment/create")
+    @FormUrlEncoded
     Call<CreateYandexPaymentResponse> createYandexPayment(@Header("X-Interpreter-Client-Token") String authorization,
                                                           @Field("token") String token,
                                                           @Field("tariff_id") String id,
                                                           @Query("lang") String language);
 
-    @GET("/api/v3/payment/approve")
+    @POST("/api/v3/payment/approve")
+    @FormUrlEncoded
     Call<ApiResponseBase> approveYandexPayment(@Header("X-Interpreter-Client-Token") String authorization,
                                                           @Field("payment_id") String id,
                                                           @Query("lang") String language);

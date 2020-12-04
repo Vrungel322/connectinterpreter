@@ -2,8 +2,7 @@ package com.getbewarned.connectinterpreter;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import ru.yandex.money.android.sdk.PaymentMethodType;
+import ru.yoo.sdk.kassa.payments.PaymentMethodType;
 
 public class YandexKassaDataHolder {
 
@@ -31,7 +30,6 @@ public class YandexKassaDataHolder {
         methods.add(PaymentMethodType.BANK_CARD);
         methods.add(PaymentMethodType.SBERBANK);
         methods.add(PaymentMethodType.GOOGLE_PAY);
-        methods.add(PaymentMethodType.YOO_MONEY);
         return methods;
     }
 }
