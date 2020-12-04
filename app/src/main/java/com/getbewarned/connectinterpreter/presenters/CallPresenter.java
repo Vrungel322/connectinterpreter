@@ -136,7 +136,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     @Override
     public void onConnected(Session session) {
         publisher = new Publisher.Builder(view.getContext()).build();
-        publisher.getRenderer().setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FILL);
+        publisher.getRenderer().setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FIT);
         publisher.setPublisherListener(CallPresenter.this);
         view.showSelfView(publisher.getView());
 
@@ -153,7 +153,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     public void onStreamReceived(Session session, Stream stream) {
         if (subscriber == null) {
             subscriber = new Subscriber.Builder(view.getContext(), stream).build();
-            subscriber.getRenderer().setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FILL);
+            subscriber.getRenderer().setStyle(BaseVideoRenderer.STYLE_VIDEO_SCALE, BaseVideoRenderer.STYLE_VIDEO_FIT);
             session.subscribe(subscriber);
             view.showInterpreterView(subscriber.getView());
             connectionEstablished();

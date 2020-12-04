@@ -127,7 +127,7 @@
     <string name="need_help">Didn\'t receive code?</string>
     <string name="drawer_share">Tell a friend</string>
     <string name="action_share">Tell\na friend</string>
-    <string name="share_text">I advise you to install a SL Interpreter. It helps me to solve problems. I like it. https://interpreter.getbw.me</string>
+    <string name="share_text" translatable="false">Install \'Мой РЖЯ\'. There is 24/7 access to interpreters. I already use it. https://play.google.com/store/apps/details?id=com.interpreter_android.ru</string>
     <string name="drawer_requests">Text-Video Interpretation</string>
     <string name="action_requests">Text-Video\nInterpretation</string>
     <string name="request_send_photo">Send file</string>

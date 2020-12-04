@@ -27,12 +27,14 @@
         app:srcCompat="@drawable/ic_profile_white" />
 
     <TextView
+        android:gravity="center"
         android:id="@+id/tv_avaliavle_minutes_label"
         style="@style/Text_default"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="135dp"
         android:text="@string/available_minutes"
+        app:layout_constraintEnd_toEndOf="@+id/i_timer"
         app:layout_constraintStart_toStartOf="@+id/i_timer"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,6 +57,7 @@
         android:layout_marginTop="8dp"
         android:text="to 07.08.2020"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/i_timer"
         app:layout_constraintStart_toStartOf="@+id/i_timer"
         app:layout_constraintTop_toBottomOf="@+id/i_timer"
         tools:visibility="visible" />

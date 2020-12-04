@@ -102,7 +102,7 @@
     <string name="need_help">Не получили код?</string>
     <string name="drawer_share">Рассказать другу</string>
     <string name="action_share">Рассказать\nдругу</string>
-    <string name="share_text">Советую установить Переводчик ЖЯ. Помогает мне решать проблемы. Мне очень нравится. https://interpreter.getbw.me</string>
+    <string name="share_text">Установи \'Мой РЖЯ\". Там круглосуточный доступ к переводчикам. Я уже пользуюсь. https://play.google.com/store/apps/details?id=com.interpreter_android.ru</string>
     <string name="drawer_requests">Текст-Видео Перевод</string>
     <string name="request_send_photo">Загрузить файл</string>
     <string name="media_image_gallery">Выбрать фото</string>
