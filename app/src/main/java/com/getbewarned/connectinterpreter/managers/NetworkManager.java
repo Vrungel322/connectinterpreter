@@ -57,7 +57,9 @@ import com.google.gson.GsonBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -71,6 +73,7 @@ import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Header;
 
 /**
  * Created by artycake on 10/11/17.
@@ -188,7 +191,7 @@ public class NetworkManager {
     }
 
     public void updateName(String name, final NameChanged nameChanged) {
-        Call<NameResponse> call = api.updateName(this.authToken, name, getLanguage());
+        Call<NameResponse> call = api.updateName(getHeaders(), name, getLanguage());
         call.enqueue(new Callback<NameResponse>() {
             @Override
             public void onResponse(Call<NameResponse> call, Response<NameResponse> response) {
@@ -217,7 +220,7 @@ public class NetworkManager {
 
     public void updateProfile(String firstName, String lastName, String patronymic,
                               String country, String city, final ProfileReceived profileReceived) {
-        Call<ProfileResponse> call = api.updateProfile(this.authToken, firstName, lastName, patronymic, country, city, getLanguage());
+        Call<ProfileResponse> call = api.updateProfile(getHeaders(), firstName, lastName, patronymic, country, city, getLanguage());
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
@@ -245,7 +248,7 @@ public class NetworkManager {
     }
 
     public void getProfile(final ProfileReceived profileReceived) {
-        Call<ProfileResponse> call = api.getProfile(this.authToken, getLanguage());
+        Call<ProfileResponse> call = api.getProfile(getHeaders(), getLanguage());
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
@@ -276,7 +279,7 @@ public class NetworkManager {
                                        String birthday, String passport, String itn, String inila,
                                        String city, String street, String number, String apartment,
                                        String postcode, final BaseRequestCompleted requestCompleted) {
-        Call<ApiResponseBase> call = api.updateCompensationInfo(this.authToken, firstName, lastName, patronymic, birthday, passport, itn, inila, city, street, number, apartment, postcode);
+        Call<ApiResponseBase> call = api.updateCompensationInfo(getHeaders(), firstName, lastName, patronymic, birthday, passport, itn, inila, city, street, number, apartment, postcode);
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -304,7 +307,7 @@ public class NetworkManager {
     }
 
     public void updateAvailability(final AvailabilityReceived millisecondsReceived) {
-        Call<AvailabilityResponse> call = api.updateAvailability(this.authToken, getLanguage());
+        Call<AvailabilityResponse> call = api.updateAvailability(getHeaders(), getLanguage());
         call.enqueue(new Callback<AvailabilityResponse>() {
             @Override
             public void onResponse(Call<AvailabilityResponse> call, Response<AvailabilityResponse> response) {
@@ -333,7 +336,7 @@ public class NetworkManager {
     }
 
     public void logout(final BaseRequestCompleted baseRequestCompleted) {
-        Call<ApiResponseBase> call = api.logout(this.authToken, getLanguage());
+        Call<ApiResponseBase> call = api.logout(getHeaders(), getLanguage());
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -362,7 +365,7 @@ public class NetworkManager {
 
 
     public void makeCall(String reason, final TokenReceived tokenReceived) {
-        Call<TokenResponse> call = api.makeCall(this.authToken, reason, getLanguage());
+        Call<TokenResponse> call = api.makeCall(getHeaders(), reason, getLanguage());
         call.enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
@@ -390,7 +393,7 @@ public class NetworkManager {
     }
 
     public void sendMessage(String sessionId, String message, final MessageSent messageSent) {
-        Call<ApiResponseBase> call = api.sendMessage(this.authToken, sessionId, message, getLanguage());
+        Call<ApiResponseBase> call = api.sendMessage(getHeaders(), sessionId, message, getLanguage());
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -418,7 +421,7 @@ public class NetworkManager {
     }
 
     public void getTariffs(final TariffsReceived tariffsReceived) {
-        Call<TariffsResponse> call = api.getTariffs(authToken, getLanguage());
+        Call<TariffsResponse> call = api.getTariffs(getHeaders(), getLanguage());
         call.enqueue(new Callback<TariffsResponse>() {
             @Override
             public void onResponse(Call<TariffsResponse> call, Response<TariffsResponse> response) {
@@ -442,7 +445,7 @@ public class NetworkManager {
     }
 
     public void getTariffsV2(final TariffsReceivedV2 tariffsReceived) {
-        Call<TariffsResponseV2> call = api.getTariffsV2(authToken, getLanguage());
+        Call<TariffsResponseV2> call = api.getTariffsV2(getHeaders(), getLanguage());
         call.enqueue(new Callback<TariffsResponseV2>() {
             @Override
             public void onResponse(Call<TariffsResponseV2> call, Response<TariffsResponseV2> response) {
@@ -466,7 +469,7 @@ public class NetworkManager {
     }
 
     public void buyYandexKassa(String token, String tariffId, final YandexKassaPaymentReceived buyReceived) {
-        Call<CreateYandexPaymentResponse> call = api.createYandexPayment(authToken, token, tariffId, getLanguage());
+        Call<CreateYandexPaymentResponse> call = api.createYandexPayment(getHeaders(), token, tariffId, getLanguage());
         call.enqueue(new Callback<CreateYandexPaymentResponse>() {
             @Override
             public void onResponse(Call<CreateYandexPaymentResponse> call, Response<CreateYandexPaymentResponse> response) {
@@ -488,7 +491,7 @@ public class NetworkManager {
     }
 
     public void approveYandexPayment(String paymentId, final YandexPaymentApprove yandexPaymentApprove) {
-        Call<ApiResponseBase> call = api.approveYandexPayment(this.authToken, paymentId, getLanguage());
+        Call<ApiResponseBase> call = api.approveYandexPayment(getHeaders(), paymentId, getLanguage());
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -516,7 +519,7 @@ public class NetworkManager {
     }
 
     public void buyUnlim(String tariff, final LiqPayDataReceived dataReceived) {
-        Call<LiqPayResponse> call = api.buyUnlim(this.authToken, tariff, getLanguage());
+        Call<LiqPayResponse> call = api.buyUnlim(getHeaders(), tariff, getLanguage());
         call.enqueue(new Callback<LiqPayResponse>() {
             @Override
             public void onResponse(Call<LiqPayResponse> call, Response<LiqPayResponse> response) {
@@ -540,7 +543,7 @@ public class NetworkManager {
     }
 
     public void sendNotificationToken(String token) {
-        Call<ApiResponseBase> call = api.sendNotificationToken(this.authToken, token);
+        Call<ApiResponseBase> call = api.sendNotificationToken(getHeaders(), token);
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -579,7 +582,7 @@ public class NetworkManager {
     }
 
     public void sendUtogInfo(String firstName, String lastName, String patronymic, String memberId, final UtogResponseReceived utogResponseReceived) {
-        Call<UtogResponse> call = api.sendUtogInfo(this.authToken, firstName, lastName, patronymic, memberId, getLanguage());
+        Call<UtogResponse> call = api.sendUtogInfo(getHeaders(), firstName, lastName, patronymic, memberId, getLanguage());
         call.enqueue(new Callback<UtogResponse>() {
             @Override
             public void onResponse(Call<UtogResponse> call, Response<UtogResponse> response) {
@@ -651,7 +654,7 @@ public class NetworkManager {
     }
 
     public void leaveReview(String sessionId, int rate, String review) {
-        Call<ApiResponseBase> call = api.leaveReview(authToken, sessionId, rate, review);
+        Call<ApiResponseBase> call = api.leaveReview(getHeaders(), sessionId, rate, review);
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -690,7 +693,7 @@ public class NetworkManager {
     }
 
     public void loadRequests(final RequestsReceived requestsReceived) {
-        Call<RequestsResponse> call = api.getRequests(authToken);
+        Call<RequestsResponse> call = api.getRequests(getHeaders());
         call.enqueue(new Callback<RequestsResponse>() {
             @Override
             public void onResponse(Call<RequestsResponse> call, Response<RequestsResponse> response) {
@@ -719,7 +722,7 @@ public class NetworkManager {
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), byteArray);
         MultipartBody.Part part = MultipartBody.Part.createFormData("media", "image", reqFile);
 
-        Call<NewRequestResponse> call = api.newRequest(authToken, part);
+        Call<NewRequestResponse> call = api.newRequest(getHeaders(), part);
         call.enqueue(new Callback<NewRequestResponse>() {
             @Override
             public void onResponse(Call<NewRequestResponse> call, Response<NewRequestResponse> response) {
@@ -742,7 +745,7 @@ public class NetworkManager {
     }
 
     public void loadRequestMessages(Request request, final RequestMessagesReceived messagesReceived) {
-        Call<MessagesResponse> call = api.getRequestMessages(authToken, request.getId());
+        Call<MessagesResponse> call = api.getRequestMessages(getHeaders(), request.getId());
         call.enqueue(new Callback<MessagesResponse>() {
             @Override
             public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
@@ -771,7 +774,7 @@ public class NetworkManager {
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), byteArray);
         MultipartBody.Part part = MultipartBody.Part.createFormData("media", "image", reqFile);
         RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "media");
-        Call<NewMessageResponse> call = api.newRequestMessage(authToken, request.getId(), part, type);
+        Call<NewMessageResponse> call = api.newRequestMessage(getHeaders(), request.getId(), part, type);
         call.enqueue(new Callback<NewMessageResponse>() {
             @Override
             public void onResponse(Call<NewMessageResponse> call, Response<NewMessageResponse> response) {
@@ -794,7 +797,7 @@ public class NetworkManager {
     }
 
     public void connectToGroupSession(String sessionId, final GroupSessionReceived received) {
-        Call<GroupSessionResponse> call = api.connectToGroupSession(authToken, sessionId);
+        Call<GroupSessionResponse> call = api.connectToGroupSession(getHeaders(), sessionId);
         call.enqueue(new Callback<GroupSessionResponse>() {
             @Override
             public void onResponse(Call<GroupSessionResponse> call, Response<GroupSessionResponse> response) {
@@ -817,7 +820,7 @@ public class NetworkManager {
     }
 
     public void askQuestion(String sessionId, final BaseRequestCompleted baseRequestCompleted) {
-        Call<ApiResponseBase> call = api.askQuestion(authToken, sessionId);
+        Call<ApiResponseBase> call = api.askQuestion(getHeaders(), sessionId);
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -840,7 +843,7 @@ public class NetworkManager {
     }
 
     public void stopAsking(String sessionId, final BaseRequestCompleted baseRequestCompleted) {
-        Call<ApiResponseBase> call = api.stopAsking(authToken, sessionId);
+        Call<ApiResponseBase> call = api.stopAsking(getHeaders(), sessionId);
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -863,7 +866,7 @@ public class NetworkManager {
     }
 
     public void getNews(final NewsReceived newsReceived) {
-        Call<NewsResponse> call = api.getNews(authToken, getLanguage());
+        Call<NewsResponse> call = api.getNews(getHeaders(), getLanguage());
         call.enqueue(new Callback<NewsResponse>() {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
@@ -883,8 +886,15 @@ public class NetworkManager {
                 newsReceived.onErrorReceived(new Error(t));
             }
         });
+
     }
 
+    private Map<String, String> getHeaders() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("X-Interpreter-Client-Token", authToken);
+        hashMap.put("X-Interpreter-Region", "ru");
+        return hashMap;
+    }
 
     private Error getErrorFromResponse(ResponseBody errorBody) {
         Converter<ResponseBody, ApiResponseBase> converter = retrofit.responseBodyConverter(ApiResponseBase.class, new Annotation[0]);

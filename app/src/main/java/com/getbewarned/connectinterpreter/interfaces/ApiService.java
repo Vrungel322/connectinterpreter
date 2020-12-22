@@ -21,6 +21,8 @@ import com.getbewarned.connectinterpreter.models.TariffsResponseV2;
 import com.getbewarned.connectinterpreter.models.TokenResponse;
 import com.getbewarned.connectinterpreter.models.UtogResponse;
 
+import java.util.Map;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -29,6 +31,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -57,13 +60,13 @@ public interface ApiService {
 
     @POST("api/client/update_name")
     @FormUrlEncoded
-    Call<NameResponse> updateName(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<NameResponse> updateName(@HeaderMap Map<String, String> headers,
                                   @Field("name") String name,
                                   @Query("lang") String language);
 
     @PUT("api/v3/profile")
     @FormUrlEncoded
-    Call<ProfileResponse> updateProfile(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ProfileResponse> updateProfile(@HeaderMap Map<String, String> headers,
                                         @Field("first_name") String firstName,
                                         @Field("last_name") String lastName,
                                         @Field("patronymic") String patronymic,
@@ -72,12 +75,12 @@ public interface ApiService {
                                         @Query("lang") String language);
 
     @GET("api/v3/profile")
-    Call<ProfileResponse> getProfile(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ProfileResponse> getProfile(@HeaderMap Map<String, String> headers,
                                      @Query("lang") String language);
 
     @POST("api/v3/compensation")
     @FormUrlEncoded
-    Call<ApiResponseBase> updateCompensationInfo(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> updateCompensationInfo(@HeaderMap Map<String, String> headers,
                                                  @Field("first_name") String firstName,
                                                  @Field("last_name") String lastName,
                                                  @Field("patronymic") String patronymic,
@@ -92,62 +95,62 @@ public interface ApiService {
                                                  @Field("postcode") String postcode);
 
     @GET("api/client/availability")
-    Call<AvailabilityResponse> updateAvailability(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<AvailabilityResponse> updateAvailability(@HeaderMap Map<String, String> headers,
                                                   @Query("lang") String language);
 
     @POST("/api/client/logout")
-    Call<ApiResponseBase> logout(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> logout(@HeaderMap Map<String, String> headers,
                                  @Query("lang") String language);
 
     @POST("/api/client/make_call")
     @FormUrlEncoded
-    Call<TokenResponse> makeCall(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<TokenResponse> makeCall(@HeaderMap Map<String, String> headers,
                                  @Field("reason") String reason,
                                  @Query("lang") String language);
 
     @POST("/api/client/send_message")
     @FormUrlEncoded
-    Call<ApiResponseBase> sendMessage(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> sendMessage(@HeaderMap Map<String, String> headers,
                                       @Field("session_id") String sessionId,
                                       @Field("message") String message,
                                       @Query("lang") String language);
 
 
     @GET("/api/client/unlim_list")
-    Call<TariffsResponse> getTariffs(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<TariffsResponse> getTariffs(@HeaderMap Map<String, String> headers,
                                      @Query("lang") String language);
 
     @GET("/api/v3/tariffs")
-    Call<TariffsResponseV2> getTariffsV2(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<TariffsResponseV2> getTariffsV2(@HeaderMap Map<String, String> headers,
                                          @Query("lang") String language);
 
     @POST("/api/v3/payment/create")
     @FormUrlEncoded
-    Call<CreateYandexPaymentResponse> createYandexPayment(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<CreateYandexPaymentResponse> createYandexPayment(@HeaderMap Map<String, String> headers,
                                                           @Field("token") String token,
                                                           @Field("tariff_id") String id,
                                                           @Query("lang") String language);
 
     @POST("/api/v3/payment/approve")
     @FormUrlEncoded
-    Call<ApiResponseBase> approveYandexPayment(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> approveYandexPayment(@HeaderMap Map<String, String> headers,
                                                           @Field("payment_id") String id,
                                                           @Query("lang") String language);
 
     @POST("/api/client/buy_unlim")
     @FormUrlEncoded
-    Call<LiqPayResponse> buyUnlim(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<LiqPayResponse> buyUnlim(@HeaderMap Map<String, String> headers,
                                   @Field("tariff") String tariff,
                                   @Query("lang") String language);
 
     @POST("/api/client/notification_token")
     @FormUrlEncoded
-    Call<ApiResponseBase> sendNotificationToken(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> sendNotificationToken(@HeaderMap Map<String, String> headers,
                                                 @Field("token") String token);
 
     @POST("/api/client/send_message")
     @FormUrlEncoded
-    Call<ApiResponseBase> sendMessageToCall(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> sendMessageToCall(@HeaderMap Map<String, String> headers,
                                             @Field("session_id") String sessionId,
                                             @Field("message") String message);
 
@@ -157,7 +160,7 @@ public interface ApiService {
 
     @POST("/api/client/utog_info")
     @FormUrlEncoded
-    Call<UtogResponse> sendUtogInfo(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<UtogResponse> sendUtogInfo(@HeaderMap Map<String, String> headers,
                                     @Field("first_name") String firstName,
                                     @Field("last_name") String lastName,
                                     @Field("patronymic") String patronymic,
@@ -172,7 +175,7 @@ public interface ApiService {
 
     @POST("/api/client/call_review")
     @FormUrlEncoded
-    Call<ApiResponseBase> leaveReview(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> leaveReview(@HeaderMap Map<String, String> headers,
                                       @Field("session_id") String sessionId,
                                       @Field("rate") int rate,
                                       @Field("review") String review);
@@ -183,38 +186,38 @@ public interface ApiService {
     Call<ApiResponseBase> loginHelp(@Field("phone") String phone);
 
     @GET("/api/client/requests")
-    Call<RequestsResponse> getRequests(@Header("X-Interpreter-Client-Token") String authorization);
+    Call<RequestsResponse> getRequests(@HeaderMap Map<String, String> headers);
 
     @POST("/api/client/requests")
     @Multipart
-    Call<NewRequestResponse> newRequest(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<NewRequestResponse> newRequest(@HeaderMap Map<String, String> headers,
                                         @Part MultipartBody.Part media);
 
     @GET("/api/client/requests/{request}")
-    Call<MessagesResponse> getRequestMessages(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<MessagesResponse> getRequestMessages(@HeaderMap Map<String, String> headers,
                                               @Path("request") long requestId);
 
     @POST("/api/client/requests/{request}")
     @Multipart
-    Call<NewMessageResponse> newRequestMessage(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<NewMessageResponse> newRequestMessage(@HeaderMap Map<String, String> headers,
                                                @Path("request") long requestId,
                                                @Part MultipartBody.Part media,
                                                @Part("type") RequestBody type);
 
     @GET("/api/client/group/{session}")
-    Call<GroupSessionResponse> connectToGroupSession(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<GroupSessionResponse> connectToGroupSession(@HeaderMap Map<String, String> headers,
                                                      @Path("session") String sessionId);
 
     @POST("/api/client/group/{session}/askers")
-    Call<ApiResponseBase> askQuestion(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> askQuestion(@HeaderMap Map<String, String> headers,
                                       @Path("session") String sessionId);
 
     @DELETE("/api/client/group/{session}/askers")
-    Call<ApiResponseBase> stopAsking(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<ApiResponseBase> stopAsking(@HeaderMap Map<String, String> headers,
                                      @Path("session") String sessionId);
 
     @GET("/api/client/news")
-    Call<NewsResponse> getNews(@Header("X-Interpreter-Client-Token") String authorization,
+    Call<NewsResponse> getNews(@HeaderMap Map<String, String> headers,
                                @Query("lang") String language);
 
 }
