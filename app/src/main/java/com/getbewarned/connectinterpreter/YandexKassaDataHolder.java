@@ -13,7 +13,7 @@ public class YandexKassaDataHolder {
     public static String yandexPurchaseId;
 
     public static String getClientApplicationKey() {
-        return DEBUG_KEY;
+        return PROD_KEY;
     }
 
     public static String getShopId() {
