@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/toolbar_top_margin"
-        android:padding="16dp"
         android:elevation="1dp"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_new_ui" />
@@ -45,8 +45,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,12 +55,26 @@
             android:id="@+id/b_choose_tariff"
             style="@style/Button_fab_activatable"
             android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:elevation="@dimen/default_elevation"
             android:text="@string/choose"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_sign"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sign"
+            style="@style/Text_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="* This price with super puper discount" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tariffs"

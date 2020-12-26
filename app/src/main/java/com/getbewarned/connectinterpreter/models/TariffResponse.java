@@ -10,6 +10,8 @@ public class TariffResponse {
     @Expose
     String price;
     @Expose
+    String discountPrice;
+    @Expose
     int minutes;
     @Expose
     String currency_sign;
@@ -27,6 +29,10 @@ public class TariffResponse {
 
     public String getPrice() {
         return price;
+    }
+
+    public String getDiscountPrice() {
+        return discountPrice;
     }
 
     public int getMinutes() {

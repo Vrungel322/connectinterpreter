@@ -12,4 +12,6 @@ public interface PurchaseView {
     void start3DSecure(String confirmationUrl);
 
     void paymentSuccess();
+
+    void setSignText(String sign);
 }

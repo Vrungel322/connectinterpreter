@@ -30,7 +30,6 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -47,7 +46,8 @@ public interface ApiService {
 
     @POST("api/client/get_code")
     @FormUrlEncoded
-    Call<ApiResponseBase> getCode(@Field("phone") String phone);
+    Call<ApiResponseBase> getCode(@HeaderMap Map<String, String> headers,
+                                  @Field("phone") String phone);
 
     @POST("api/client/login")
     @FormUrlEncoded
@@ -134,8 +134,8 @@ public interface ApiService {
     @POST("/api/v3/payment/approve")
     @FormUrlEncoded
     Call<ApiResponseBase> approveYandexPayment(@HeaderMap Map<String, String> headers,
-                                                          @Field("payment_id") String id,
-                                                          @Query("lang") String language);
+                                               @Field("payment_id") String id,
+                                               @Query("lang") String language);
 
     @POST("/api/client/buy_unlim")
     @FormUrlEncoded

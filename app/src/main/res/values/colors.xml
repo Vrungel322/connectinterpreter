@@ -28,6 +28,7 @@
 <!--    opacity-->
     <color name="white_30">#4DFFFFFF</color>
     <color name="blue_new_ui_40">#66004BDB</color>
+    <color name="unselected_tariff">#86a5e7</color>
     <color name="colorRed_30">#4DC91518</color>
 
 

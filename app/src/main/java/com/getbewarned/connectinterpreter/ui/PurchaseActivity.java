@@ -43,6 +43,7 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
 
     private VideoView videoView;
     private ImageView ivPlayingVideo;
+    private TextView signText;
     private Button bChooseTariff;
     private RecyclerView rvTariffs;
 
@@ -74,6 +75,8 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         rvTariffs.setLayoutManager(new LinearLayoutManager(this));
         rvTariffs.setAdapter(presenter.getAdapter());
 
+        signText = findViewById(R.id.tv_sign);
+
         // done
         bChooseTariff = findViewById(R.id.b_choose_tariff);
         bChooseTariff.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +90,15 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
         });
 
         Analytics.getInstance().trackEvent(Events.EVENT_PURCHASE_OPENED);
+    }
+
+    @Override
+    public void setSignText(String sign) {
+        if (sign != null && !sign.isEmpty()) {
+            signText.setText(sign);
+        } else {
+            signText.setVisibility(View.GONE);
+        }
     }
 
     private void checkout() {

@@ -142,7 +142,7 @@
 
     <style name="Text_tariff_price" parent="Text_user_info_block_title">
         <item name="android:textColor">@color/blue_new_ui_text</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">28sp</item>
     </style>
 
     <style name="Text_tariff_minutes" parent="Text_tariff_price">

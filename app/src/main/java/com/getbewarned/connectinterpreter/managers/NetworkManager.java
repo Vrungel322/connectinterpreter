@@ -137,7 +137,7 @@ public class NetworkManager {
     }
 
     public void getCode(String phone, final CodeReceived codeReceived) {
-        Call<ApiResponseBase> call = api.getCode(phone);
+        Call<ApiResponseBase> call = api.getCode(getBasicHeaders(), phone);
         call.enqueue(new Callback<ApiResponseBase>() {
             @Override
             public void onResponse(Call<ApiResponseBase> call, Response<ApiResponseBase> response) {
@@ -892,6 +892,12 @@ public class NetworkManager {
     private Map<String, String> getHeaders() {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("X-Interpreter-Client-Token", authToken);
+        hashMap.put("X-Interpreter-Region", "ru");
+        return hashMap;
+    }
+
+    private Map<String, String> getBasicHeaders() {
+        HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("X-Interpreter-Region", "ru");
         return hashMap;
     }

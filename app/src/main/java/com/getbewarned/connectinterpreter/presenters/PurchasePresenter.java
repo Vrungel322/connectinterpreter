@@ -51,9 +51,11 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
         networkManager.getTariffsV2(new TariffsReceivedV2() {
             @Override
             public void onTariffsReceived(TariffsResponseV2 response) {
+                adapter.setHasDiscount(response.isHasDiscount());
+                view.setSignText(response.getSign());
                 final List<TariffItem> items = new ArrayList<>();
                 for (TariffResponse item : response.getTariffs()) {
-                    items.add(new TariffItem(item.getName(), item.getPrice(), item.getMinutes(), item.getId(), item.getCurrencySign(), item.getCurrency()));
+                    items.add(new TariffItem(item.getName(), item.getPrice(), item.getDiscountPrice(), item.getMinutes(), item.getId(), item.getCurrencySign(), item.getCurrency()));
                 }
                 adapter.setItems(items);
             }
