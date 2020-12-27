@@ -31,6 +31,7 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
     NetworkManager networkManager;
     private final TariffsAdapter adapter;
     private final Context context;
+    private boolean hasDiscount;
 
     public PurchasePresenter(final PurchaseView view, Context context) {
         this.view = view;
@@ -51,6 +52,7 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
         networkManager.getTariffsV2(new TariffsReceivedV2() {
             @Override
             public void onTariffsReceived(TariffsResponseV2 response) {
+                hasDiscount = response.isHasDiscount();
                 adapter.setHasDiscount(response.isHasDiscount());
                 view.setSignText(response.getSign());
                 final List<TariffItem> items = new ArrayList<>();
@@ -86,6 +88,10 @@ public class PurchasePresenter implements Presenter, TariffClickListener {
     @Override
     public void onDestroy() {
 
+    }
+
+    public boolean isHasDiscount() {
+        return hasDiscount;
     }
 
     public TariffItem getSelectedTariff() {

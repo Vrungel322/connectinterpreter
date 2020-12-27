@@ -104,7 +104,13 @@ public class PurchaseActivity extends NoStatusBarActivity implements PurchaseVie
     private void checkout() {
         YandexKassaDataHolder.initDefault();
         TariffItem selectedTariff = presenter.getSelectedTariff();
-        continueCheckoutYandexKassa(selectedTariff.getTariffId(), selectedTariff.getTariffName(), selectedTariff.getTariffName(), Float.valueOf(selectedTariff.getTariffPrice()), selectedTariff.getCurrency());
+        String tariffPrice;
+        if (presenter.isHasDiscount()) {
+            tariffPrice = selectedTariff.getDiscountPrice();
+        } else {
+            tariffPrice = selectedTariff.getTariffPrice();
+        }
+        continueCheckoutYandexKassa(selectedTariff.getTariffId(), selectedTariff.getTariffName(), selectedTariff.getTariffName(), Float.valueOf(tariffPrice), selectedTariff.getCurrency());
     }
 
     @Override
