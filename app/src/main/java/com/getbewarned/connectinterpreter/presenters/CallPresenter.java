@@ -33,7 +33,7 @@ public class CallPresenter implements Presenter, Session.SessionListener, Publis
     public static final String KEY_EXTRA = "CallPresenter.api_key";
     public static final String SECONDS_EXTRA = "CallPresenter.max_seconds";
 
-    public static final Long PLEASE_WAITE_VIDEO_DELAY_MILLIS = 61 * 1000L;
+    public static final Long PLEASE_WAITE_VIDEO_DELAY_MILLIS = 5 * 60 * 1000L;
 
     private final CallView view;
     private final UserManager userManager;
