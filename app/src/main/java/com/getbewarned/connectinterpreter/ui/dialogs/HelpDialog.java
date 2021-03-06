@@ -22,6 +22,9 @@ import com.getbewarned.connectinterpreter.analytics.Analytics;
 import com.getbewarned.connectinterpreter.analytics.Events;
 
 public class HelpDialog extends NoBackgroundDialog {
+
+    private static final String SUPPORT_NUMBER = "79998070637";
+    private static final String SUPPORT_TG = "79998070637";
     public static final String TAG = "HelpDialog";
 
     @Nullable
@@ -71,29 +74,30 @@ public class HelpDialog extends NoBackgroundDialog {
         videoView.start();
     }
 
-    void telegram() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=Serg1906"));
+    private void telegram() {
+        String tgKey = "Moi_Rzhya";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=" + tgKey));
         intent.setPackage("org.telegram.messenger");
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Serg1906")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/" + tgKey)));
         }
     }
 
-    void viber() {
+    private void viber() {
         // viber opens with delay
         try {
-            String viberNumber = "79031140903"; // no need "+" sign
+            String viberNumber = "79998070637"; // no need "+" sign
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("viber://contact?number=" + viberNumber)));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this.getContext(), "Viber not installed", Toast.LENGTH_SHORT).show();
         }
     }
 
-    void whatsApp() {
+    private void whatsApp() {
         try {
-            String whatsAppNumber = "+79031140903";
+            String whatsAppNumber = "+" + SUPPORT_NUMBER;
             Intent intentWhatsapp = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=" + whatsAppNumber));
             intentWhatsapp.setPackage("com.whatsapp");
             startActivity(intentWhatsapp);
